@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderCComponent } from './components/client/header-c/header-c.component';
-import { FooterCComponent } from './components/client/footer-c/footer-c.component';
-import { MainCComponent } from './components/client/main-c/main-c.component';
-import {AuthModule} from "./pages/client/auth/auth.module";
-import {UserModule} from "./pages/client/user/user.module";
+import { HeaderCComponent } from './client/components/header-c/header-c.component';
+import { FooterCComponent } from './client/components/footer-c/footer-c.component';
+import { MainCComponent } from './client/components/main-c/main-c.component';
+import {ClientModule} from "./client/client.module";
+import {AdminModule} from "./admin/admin.module";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import {UserModule} from "./pages/client/user/user.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule,
-    UserModule
+    ClientModule,
+    AdminModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
