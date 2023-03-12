@@ -206,20 +206,21 @@
                 <div class="col-md-6" style="background-size: cover;">
                   <div class="field-set" style="background-size: cover;">
                     <label>Image:</label>
-                    <input type="password" name="image" id="image" class="form-control"
-                           formControlName="image">
+                    <input type="file" name="images" id="images" class="form-control" (change)="onImageSelected($event)"
+                           formControlName="images">
                     <div
                       class="message-invalid"
-                      *ngIf="image.touched && confirmPassword.hasError('required')"
+                      *ngIf="images.touched && confirmPassword.hasError('required')"
                     >
                       Image is required!
                     </div>
                     <!--success message-->
-                    <div class="message-valid" *ngIf="image.touched && !image.errors">
+                    <div class="message-valid" *ngIf="images.touched && !images.errors">
                       Valid!
                     </div>
                   </div>
                 </div>
+
                 <div class="col-md-12" style="background-size: cover; margin-top: 30px">
                   <div id="submit" class="pull-left" style="background-size: cover;">
                     <input type="submit" id="send_message" value="Register Now" class="btn btn-main color-2 ripple-surface"
