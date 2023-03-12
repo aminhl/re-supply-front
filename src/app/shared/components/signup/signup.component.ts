@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService} from '../../services/auth.service';
 import {Router} from "@angular/router";
-import {isEmailPresent, regexValid, validatePassword} from "../../../core/validators/signup.validator";
+import {emailExistsValidator, regexValid, validatePassword} from "../../../core/validators/signup.validator";
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +32,8 @@ export class SignupComponent implements OnInit {
   initForm(): void {
     this.firstName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
     this.lastName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
-    this.email = new FormControl('', [Validators.required], [isEmailPresent()]);
+    this.email = new FormControl('', [Validators.required],
+      [emailExistsValidator(this.authService)]);
     this.phoneNumber = new FormControl('', [Validators.required, regexValid(/[a-zA-Z]/g)]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.confirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);

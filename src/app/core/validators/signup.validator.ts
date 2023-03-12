@@ -1,8 +1,8 @@
 import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {delay, map, Observable} from "rxjs";
+import  {environment as env} from "../../../environments/environment";
 import {ajax} from "rxjs/internal/ajax/ajax";
 import {AuthService} from "../../shared/services/auth.service";
-import {environment as env} from "../../../environments/environment";
 
 export function regexValid(regExp: RegExp): ValidatorFn{
   return (control: AbstractControl): { [key: string]: boolean } | null =>{
@@ -21,15 +21,20 @@ export function validatePassword(primaryControl: string, secondaryControl: strin
   }
 }
 
-export function isEmailPresent(): AsyncValidatorFn{
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    return checkEmailPresence().pipe(map(res => {
-      return res.response.email === control.value ? {emailExists: true} : null
-    }))
-  }
-  function checkEmailPresence(): Observable<any>{
-    return ajax.get("https://jsonplaceholder.typicode.com/users/1").pipe(delay(1000));
-  }
+export function emailExistsValidator(userService: AuthService) {
+  return (control: AbstractControl): Promise<ValidationErrors | null> => {
+    const email = control.value;
+
+    return userService.checkEmail(email)
+      .pipe(
+        map(res => {
+          // @ts-ignore
+          if (res.exists) return { emailExists: true };
+          else return {};
+        })
+      )
+      .toPromise();
+  };
 }
 
 

@@ -96,16 +96,22 @@
                     <div class="load"></div>
                     <div
                       class="message-invalid"
-                      *ngIf="lastName.touched && lastName.hasError('required')"
+                      *ngIf="email.touched && email.hasError('required')"
                     >
                       Email is required!
                     </div>
                     <div
                       class="message-invalid"
-                      *ngIf="lastName.touched && lastName.hasError('email')"
+                      *ngIf="email.touched && email.hasError('email')"
                     >
                       Please enter a valid email address!
                     </div>
+                     <div
+                       class="message-invalid"
+                       *ngIf="email.touched && email.hasError('emailExists')"
+                     >
+                       Email already exists!
+                     </div>
                     <!--success message-->
                     <div class="message-valid" *ngIf="email.touched && !email.errors">
                       Valid!

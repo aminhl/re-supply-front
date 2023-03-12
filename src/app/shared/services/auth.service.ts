@@ -17,4 +17,8 @@ export class AuthService {
     return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true})
   }
 
+  checkEmail(email: string): any {
+    const url = `${env.apiRoot}users/checkEmail`;
+    return this.http.post<{ exists: boolean }>(url, { email });
+  }
 }
