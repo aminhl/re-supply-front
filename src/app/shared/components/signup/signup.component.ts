@@ -9,6 +9,7 @@ import {emailExistsValidator, regexValid, validatePassword} from "../../../core/
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
+
 export class SignupComponent implements OnInit {
 
   // Form controls
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   password !: FormControl;
   confirmPassword !: FormControl;
   phoneNumber !: FormControl;
-  image !: FormControl;
+  images !: FormControl;
 
   constructor(private authService: AuthService, private router: Router) {
     this.initForm();
@@ -37,7 +38,7 @@ export class SignupComponent implements OnInit {
     this.phoneNumber = new FormControl('', [Validators.required, regexValid(/[a-zA-Z]/g)]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.confirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
-    this.image = new FormControl(null, [Validators.required]);
+    this.images = new FormControl(null, [Validators.required]);
   }
 
   createForm(): void{
@@ -48,12 +49,31 @@ export class SignupComponent implements OnInit {
       phoneNumber: this.phoneNumber,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      image: this.image
+      images: this.images
     }, validatePassword('password', 'confirmPassword') as ValidatorFn)
   }
+
   onSubmit() {
-     this.authService.signup("users/signup", this.signupForm.value)
-       .subscribe((user) => this.router.navigate(['/login']));
+    const formData = new FormData();
+    formData.append('firstName', this.signupForm.value.firstName);
+    formData.append('lastName', this.signupForm.value.lastName);
+    formData.append('email', this.signupForm.value.email);
+    formData.append('phoneNumber', this.signupForm.value.phoneNumber);
+    formData.append('password', this.signupForm.value.password);
+    formData.append('confirmPassword', this.signupForm.value.confirmPassword);
+
+    const images = this.signupForm.get('images');
+    if (images && images.valid) {
+      formData.append('images', images.value, images.value.name);
+    }
+
+    this.authService.signup("users/signup", formData)
+      .subscribe((user) => this.router.navigate(['/login']));
   }
 
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    this.images.setValue(file);
+    this.images.markAsTouched();
+  }
 }

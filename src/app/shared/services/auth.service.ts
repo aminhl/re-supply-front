@@ -9,7 +9,7 @@ import {User} from "../../core/models/User";
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  signup(target: string, requestBody: User){
+  signup(target: string, requestBody: FormData){
     return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true});
   }
 
