@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService} from '../../services/auth.service';
 import {Router} from "@angular/router";
 import {emailExistsValidator, regexValid, validatePassword} from "../../../core/validators/signup.validator";
+import {CookieService} from "ngx-cookie-service"
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,11 @@ export class SignupComponent implements OnInit {
   phoneNumber !: FormControl;
   images !: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) {
+  token !: string;
+
+  constructor(private authService: AuthService,
+              private cookieService: CookieService,
+              private router: Router) {
     this.initForm();
     this.createForm();
   }
@@ -68,7 +73,7 @@ export class SignupComponent implements OnInit {
     }
 
     this.authService.signup("users/signup", formData)
-      .subscribe((user) => this.router.navigate(['/login']));
+      .subscribe((response: any) => this.router.navigate(['/login']));
   }
 
   onImageSelected(event: Event) {

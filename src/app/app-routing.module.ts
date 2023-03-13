@@ -5,13 +5,15 @@ import {SignupComponent} from "./shared/components/signup/signup.component";
 import {MyProfileComponent} from "./client/components/my-profile/my-profile.component";
 import {EditProfileComponent} from "./client/components/edit-profile/edit-profile.component";
 import {MainCComponent} from "./client/components/main-c/main-c.component";
+import {AuthGuard} from "./shared/authguard/auth.guard";
+import {RoleGuard} from "./shared/roleguard/role.guard";
 
 
 const routes : Routes = [
-  { path: '', component: MainCComponent },
+  { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'profile', component: MyProfileComponent},
+  { path: 'profile', component: MyProfileComponent, canActivate: [RoleGuard]},
   { path: 'editProfile', component: EditProfileComponent},
 ]
 
