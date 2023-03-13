@@ -26,10 +26,11 @@
               <li class="menu-item"><a href="#">Community</a></li>
               <li class="menu-item"><a href="#">Knowledge</a></li>
             </ul>
-            <div class="menu_side_area" style="background-size: cover;">
+            <a *ngIf="!authService.isLoggedIn()" [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signin</span></a>
+            <div *ngIf="authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
 
               <div class="de-login-menu" style="background-size: cover;">
-                <a [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signup</span></a>
+
                 <span id="de-click-menu-notification" class="de-menu-notification">
                                             <span class="d-count">8</span>
                                             <i class="fa fa-bell"></i>
@@ -117,7 +118,7 @@
 
                     <li><a [routerLink]="'/profile'"><i class="fa fa-user"></i> My profile</a></li>
                     <li><a [routerLink]="'/editProfile'"><i class="fa fa-pencil"></i> Edit profile</a></li>
-                    <li><a href="#"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                    <li><a href="#" (click)="authService.logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
                   </ul>
                 </div>
                 <span id="menu-btn"></span>
