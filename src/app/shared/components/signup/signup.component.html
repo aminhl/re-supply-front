@@ -210,7 +210,7 @@
                            formControlName="images">
                     <div
                       class="message-invalid"
-                      *ngIf="images.touched && confirmPassword.hasError('required')"
+                      *ngIf="images.dirty && images.hasError('required')"
                     >
                       Image is required!
                     </div>
