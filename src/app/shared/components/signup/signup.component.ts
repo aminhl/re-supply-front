@@ -61,7 +61,6 @@ export class SignupComponent implements OnInit {
     formData.append('phoneNumber', this.signupForm.value.phoneNumber);
     formData.append('password', this.signupForm.value.password);
     formData.append('confirmPassword', this.signupForm.value.confirmPassword);
-
     const images = this.signupForm.get('images');
     if (images && images.valid) {
       formData.append('images', images.value, images.value.name);

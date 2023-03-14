@@ -21,4 +21,10 @@ export class AuthService {
     const url = `${env.apiRoot}users/checkEmail`;
     return this.http.post<{ exists: boolean }>(url, { email });
   }
+  forgetPassword(target: string,requestBody: { email: string}){
+    return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true})
+  }
+  ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
+    return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
+  }
 }

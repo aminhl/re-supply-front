@@ -5,6 +5,8 @@ import {SignupComponent} from "./shared/components/signup/signup.component";
 import {MyProfileComponent} from "./client/components/my-profile/my-profile.component";
 import {EditProfileComponent} from "./client/components/edit-profile/edit-profile.component";
 import {MainCComponent} from "./client/components/main-c/main-c.component";
+import { ForgetPasswordComponent } from './shared/components/forget-password/forget-password.component';
+import { ChangePasswordAfterSubmitEmailComponent } from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 
 
 const routes : Routes = [
@@ -13,6 +15,8 @@ const routes : Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'profile', component: MyProfileComponent},
   { path: 'editProfile', component: EditProfileComponent},
+  { path: 'forgetPassword', component: ForgetPasswordComponent},
+  { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
 ]
 
 @NgModule({

@@ -6,12 +6,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SignupComponent} from "./components/signup/signup.component";
 import {LoginComponent} from "./components/login/login.component";
 import {HttpClientModule} from "@angular/common/http";
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
+
 
 
 @NgModule({
   declarations: [
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetPasswordComponent,
+    ChangePasswordAfterSubmitEmailComponent,
   ],
   imports: [
     CommonModule,
