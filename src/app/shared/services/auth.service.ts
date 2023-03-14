@@ -48,7 +48,7 @@ export class AuthService {
     let token = localStorage.getItem("jwt");
     const payload = token?.split('.')[1];
     // @ts-ignore
-    const decodedPayload: any = atob(payload);
+    const decodedPayload: any = JSON.parse(atob(payload));
     if (decodedPayload.role === "admin") return true;
     else {
       alert("You don't have access!!")
@@ -57,6 +57,7 @@ export class AuthService {
   }
 
   logout(){
+    alert("Your token has expired!")
     localStorage.removeItem("jwt");
     this.router.navigate(['/login']);
   }

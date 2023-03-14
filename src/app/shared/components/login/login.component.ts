@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   email!: FormControl;
   password!: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.initControls();
     this.createForm();
   }
