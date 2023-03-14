@@ -23,6 +23,7 @@ export class AuthService {
     return this.http.post<{ exists: boolean }>(url, { email });
   }
 
+
   getUsers() {
     return this.http.get(env.apiRoot + "users");
   }
@@ -60,4 +61,9 @@ export class AuthService {
     localStorage.removeItem("jwt");
     this.router.navigate(['/login']);
   }
+  forgetPassword(target: string,requestBody: { email: string}){
+    return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true})
+  }
+  ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
+    return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
 }
