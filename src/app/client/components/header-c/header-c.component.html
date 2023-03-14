@@ -9,7 +9,7 @@
               <div id="logo" style="background-size: cover;">
                 <a href="../../../../index.html">
                   <img alt="" class="logo" src="../../../../assets/client/images/logo-light.png">
-                  <img alt="" class="logo-2" src="../../../../assets/client/images/logo.png">
+                  <img alt="" class="logo-2" src="../../../../assets/client/images/logo.svg">
                 </a>
               </div>
               <!-- logo close -->
@@ -26,7 +26,7 @@
               <li class="menu-item"><a href="#">Community</a></li>
               <li class="menu-item"><a href="#">Knowledge</a></li>
             </ul>
-            <a *ngIf="!authService.isLoggedIn()" [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signin</span></a>
+            <a *ngIf="!authService.isLoggedIn()" [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signup</span></a>
             <div *ngIf="authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
 
               <div class="de-login-menu" style="background-size: cover;">
