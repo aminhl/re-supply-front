@@ -67,3 +67,4 @@ export class AuthService {
   ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
     return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
 }
+}
