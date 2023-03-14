@@ -58,7 +58,6 @@ export class AuthService {
   }
 
   logout(){
-    alert("Your token has expired!")
     localStorage.removeItem("jwt");
     this.router.navigate(['/login']);
   }
