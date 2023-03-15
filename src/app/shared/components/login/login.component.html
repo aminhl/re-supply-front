@@ -15,7 +15,7 @@
             <div class="col-lg-4 offset-lg-2 wow fadeIn animated" data-wow-delay=".5s" style="background-size: cover; visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
               <div class="box-rounded padding40" data-bgcolor="#ffffff" style="background-color: rgb(255, 255, 255); background-size: cover;">
                 <h3 class="mb10">Sign In</h3>
-                <p>Login using an existing account or create a new account <a href="register.html">here<span></span></a>.</p>
+                <p>Login using an existing account or create a new account <a [routerLink]="['/signup']">here<span></span></a>.</p>
                 <form name="contactForm" id="contact_form" class="form-border" method="post"
                       [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 

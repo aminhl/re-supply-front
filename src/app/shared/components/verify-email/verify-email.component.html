@@ -13,10 +13,10 @@
             </div>
             <div class="clearfix" style="background-size: cover;"></div>
           </div>
-          <p *ngIf="(authService.checkEmailVerification() | async)?.verified; else notVerified">
+          <p *ngIf="isVerified; else notVerified">
             Email validated successfully.
           </p>
-
+          <input type="submit" id="gotologin" value="Go to Login" class="btn btn-main color-2 ripple-surface" (click)="gotologin()">
           <ng-template #notVerified>
             <p>Please check your email.</p>
           </ng-template>

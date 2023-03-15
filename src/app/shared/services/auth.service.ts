@@ -82,8 +82,12 @@ export class AuthService {
   ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
     return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
 }
-
+/*
   verifyEmail(token: string): Observable<any> {
     return this.http.get(`/users/verifyEmail/${token}`);
-  }
+  }*/
+  
+  verifyemail(target: string,requestBody: string){
+    return this.http.get(env.apiRoot+target)
+}
 }
