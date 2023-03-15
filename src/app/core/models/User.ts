@@ -8,6 +8,7 @@ export interface User {
   confirmPassword: string
   role: string,
   active: boolean,
+  verified: boolean,
   joinedAt: Date,
   passwordChangedAt: Date
 }

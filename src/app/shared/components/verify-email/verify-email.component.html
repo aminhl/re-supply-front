@@ -1,0 +1,29 @@
+<div id="wrapper">
+  <div class="no-bottom no-top" id="content" style="background-size: cover;">
+    <div id="top" style="background-size: cover;"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light" data-bgimage="url(assets/client/images/background/subheader.jpg) top" style="background: url('../../../../assets/client/images/background/subheader.jpg') center top / cover;">
+      <div class="center-y relative text-center" style="background-size: cover;">
+        <div class="container" style="background-size: cover;">
+          <div class="row" style="background-size: cover;">
+
+            <div class="col-md-12 text-center" style="background-size: cover;">
+              <h1>Checking Email verification</h1>
+            </div>
+            <div class="clearfix" style="background-size: cover;"></div>
+          </div>
+          <p *ngIf="(authService.checkEmailVerification() | async)?.verified; else notVerified">
+            Email validated successfully.
+          </p>
+
+          <ng-template #notVerified>
+            <p>Please check your email.</p>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+

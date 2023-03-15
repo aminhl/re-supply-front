@@ -8,6 +8,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {HttpClientModule} from "@angular/common/http";
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 
 
@@ -17,6 +18,7 @@ import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-pas
     LoginComponent,
     ForgetPasswordComponent,
     ChangePasswordAfterSubmitEmailComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     CommonModule,
@@ -24,9 +26,10 @@ import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-pas
     ReactiveFormsModule,
     HttpClientModule
   ],
-  exports: [
-    SignupComponent,
-    LoginComponent
-  ]
+    exports: [
+        SignupComponent,
+        LoginComponent,
+        VerifyEmailComponent
+    ]
 })
 export class SharedModule { }
