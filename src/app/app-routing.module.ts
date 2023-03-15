@@ -21,7 +21,7 @@ const routes : Routes = [
   { path: 'editProfile', component: EditProfileComponent},
   { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
-  { path: 'verifyEmail', component: VerifyEmailComponent, canActivate: [AuthGuard]}
+  { path: 'verifyEmail', component: VerifyEmailComponent}
 ]
 
 @NgModule({
