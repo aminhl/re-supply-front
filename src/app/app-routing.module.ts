@@ -10,19 +10,20 @@ import {
   ChangePasswordAfterSubmitEmailComponent
 } from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
+import { AuthGuard } from './shared/authguard/auth.guard';
 
 
 const routes : Routes = [
-  { path: '', component: MainCComponent },
+  { path: '', component: MainCComponent, canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'profile', component: MyProfileComponent},
-  { path: 'editProfile', component: EditProfileComponent},
+  { path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard]  },
   { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
 
   { path: 'verifyEmail', component: VerifyEmailComponent},
-  { path: 'myProfile', component:MyProfileComponent }
+  { path: 'myProfile', component:MyProfileComponent , canActivate: [AuthGuard]  },
 
 ]
 
