@@ -28,7 +28,9 @@
                     <input type="password" name="password" id="password" class="form-control" placeholder="password"
                     formControlName="password">
                   </div>
-
+                  <div class="message-invalid" style="margin-bottom: 15px" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
                   <div class="field-set" style="background-size: cover;">
                     <input type="submit" id="send_message" value="Submit" class="btn btn-main btn-fullwidth color-2">
                   </div>
@@ -38,13 +40,11 @@
                     </ul>
                   </div>
                   <div class="clearfix" style="background-size: cover;"></div>
-
                   <div class="spacer-single" style="background-size: cover;"></div>
-
                   <!-- social icons -->
                   <ul class="list s3">
                     <li>Login with:</li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#" (click)="signinWithFacebook($event)">Facebook</a></li>
                     <li><a href="#">Google</a></li>
                   </ul>
                   <!-- social icons close -->
