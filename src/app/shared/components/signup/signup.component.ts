@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   initForm(): void {
     this.firstName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
     this.lastName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
-    this.email = new FormControl('', [Validators.required],
+    this.email = new FormControl('', [Validators.required, Validators.email],
       [emailExistsValidator(this.authService)]);
     this.phoneNumber = new FormControl('', [Validators.required, regexValid(/[a-zA-Z]/g)]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);

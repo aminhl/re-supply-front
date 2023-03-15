@@ -17,7 +17,7 @@ const routes : Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'profile', component: MyProfileComponent, canActivate: [RoleGuard]},
+  { path: 'profile', component: MyProfileComponent},
   { path: 'editProfile', component: EditProfileComponent},
   { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},

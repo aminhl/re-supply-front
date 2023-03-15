@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   token!: string;
+  errorMessage!: string;
 
   loginForm!: FormGroup;
   email!: FormControl;
@@ -41,13 +42,20 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     return this.authService.login("users/login", this.loginForm.value)
       .subscribe((response: any) => {
-        console.log(response);
         if (response !== null){
           this.token = response.token;
           localStorage.setItem("jwt", this.token);
           // if (response.data.user.role === "member")
             this.router.navigate([""])
         }
-      });
+      },
+        error => {
+          this.errorMessage = 'Invalid username or password.';
+        });
+  }
+
+  signinWithFacebook(event: Event){
+    event.preventDefault();
+    return this.authService.passportOAuth2("users/auth/facebook").subscribe(response => console.log(response));
   }
 }
