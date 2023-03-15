@@ -28,6 +28,12 @@ export class AuthService {
   getUsers() {
     return this.http.get(env.apiRoot + "users");
   }
+
+
+  getUser(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + "users/user");
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
