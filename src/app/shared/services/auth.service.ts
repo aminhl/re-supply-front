@@ -28,6 +28,12 @@ export class AuthService {
   getUsers() {
     return this.http.get(env.apiRoot + "users");
   }
+
+
+  getUser(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + "users/user");
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
@@ -76,13 +82,14 @@ export class AuthService {
   ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
     return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
   }
-
+  
+}
+/*
   verifyEmail(token: string): Observable<any> {
     return this.http.get(`/users/verifyEmail/${token}`);
-  }
-
-  passportOAuth2(target: string){
-    return this.http.get(env.apiRoot + target)
-  }
-
+  }*/
+  
+  verifyemail(target: string,requestBody: string){
+    return this.http.get(env.apiRoot+target)
+}
 }
