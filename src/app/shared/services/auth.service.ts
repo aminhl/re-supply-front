@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment as env} from "../../../environments/environment";
 import {User} from "../../core/models/User";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,14 @@ export class AuthService {
     }
   }
 
+  checkEmailVerification() {
+    const user = this.getConnectedUserData();
+    if (user) {
+      return this.http.get<{ status: string; verified: boolean }>(`/api/users/email-verification/${user.id}`);
+    }
+    return null;
+  }
+
   haveAccess(){
     let token = localStorage.getItem("jwt");
     const payload = token?.split('.')[1];
@@ -67,4 +76,8 @@ export class AuthService {
   ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
     return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
 }
+
+  verifyEmail(token: string): Observable<any> {
+    return this.http.get(`/users/verifyEmail/${token}`);
+  }
 }

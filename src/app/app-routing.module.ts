@@ -9,6 +9,7 @@ import {AuthGuard} from "./shared/authguard/auth.guard";
 import {RoleGuard} from "./shared/roleguard/role.guard";
 import { ForgetPasswordComponent } from './shared/components/forget-password/forget-password.component';
 import { ChangePasswordAfterSubmitEmailComponent } from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
+import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
 
 
 
@@ -20,6 +21,7 @@ const routes : Routes = [
   { path: 'editProfile', component: EditProfileComponent},
   { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
+  { path: 'verifyEmail', component: VerifyEmailComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
