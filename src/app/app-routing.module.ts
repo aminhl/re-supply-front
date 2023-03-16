@@ -11,11 +11,13 @@ import {
 } from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
 import { AuthGuard } from './shared/authguard/auth.guard';
+import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
 
 
 const routes : Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent},
+  { path: 'twoFactor', component: TwoFactorComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]  },
   { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard]  },

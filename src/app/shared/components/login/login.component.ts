@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = 'Invalid username or password.';
         });
   }
+  
 
   signinWithFacebook(event: Event){
     event.preventDefault();

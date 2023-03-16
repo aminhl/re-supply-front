@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { TwoFactorComponent } from './components/login/two-factor/two-factor.component';
 
 
 
@@ -19,6 +20,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     ForgetPasswordComponent,
     ChangePasswordAfterSubmitEmailComponent,
     VerifyEmailComponent,
+    TwoFactorComponent
   ],
   imports: [
     CommonModule,
