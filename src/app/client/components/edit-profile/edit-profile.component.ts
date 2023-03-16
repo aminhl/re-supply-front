@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../../shared/services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,9 +12,9 @@ import {AuthService} from "../../../shared/services/auth.service";
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user:any;
+  userImage!:string;
 
-
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.updateForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -38,12 +39,15 @@ export class EditProfileComponent implements OnInit {
 
     this.http.patch('http://localhost:3000/api/v1/users/update', formData).subscribe(response => {
       console.log(response);
+      this.router.navigate(['myProfile'])
       // handle response
     });
   }
 
   ngOnInit(): void {
     // this.authService.getUsers().subscribe(res => console.log(res))
-    this.authService.getUser().subscribe((req)=>{this.user=req.data.user; console.log(this.user)});
+    this.authService.getUser().subscribe((req)=>{
+      this.user=req.data.user; this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3]
+    });
   }
 }
