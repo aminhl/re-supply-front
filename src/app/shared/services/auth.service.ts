@@ -95,4 +95,8 @@ export class AuthService {
   verifyemail(target: string,requestBody: string){
     return this.http.get(env.apiRoot+target)
 }
+
+  updateProfile(target: string, requestBody: FormData){
+    return this.http.patch(env.apiRoot + target,{ withCredentials: true});
+  }
 }

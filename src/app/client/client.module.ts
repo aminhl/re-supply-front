@@ -7,6 +7,7 @@ import {MyProfileComponent} from "./components/my-profile/my-profile.component";
 import {HeaderCComponent} from "./components/header-c/header-c.component";
 import {FooterCComponent} from "./components/footer-c/footer-c.component";
 import {MainCComponent} from "./components/main-c/main-c.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import {MainCComponent} from "./components/main-c/main-c.component";
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MyProfileComponent,
