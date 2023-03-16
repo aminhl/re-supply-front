@@ -7,11 +7,16 @@ import {AuthService} from "../../../shared/services/auth.service";
   styleUrls: ['./header-c.component.css']
 })
 export class HeaderCComponent implements OnInit {
+  user:any;
+  userImage!: string;
 
   constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.getUser().subscribe((req)=>{
+      this.user=req.data.user; this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3]
+    });
   }
 
 }
