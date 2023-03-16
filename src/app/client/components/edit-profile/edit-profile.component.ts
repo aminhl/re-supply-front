@@ -11,6 +11,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user:any;
+  userImage!: string;
 
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private http: HttpClient) {
@@ -44,6 +45,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // this.authService.getUsers().subscribe(res => console.log(res))
-    this.authService.getUser().subscribe((req)=>{this.user=req.data.user; console.log(this.user)});
+    this.authService.getUser().subscribe((req)=>{this.user=req.data.user;
+      this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3]});
   }
 }
