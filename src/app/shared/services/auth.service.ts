@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment as env} from "../../../environments/environment";
 import {User} from "../../core/models/User";
 import {Router} from "@angular/router";
@@ -83,8 +83,15 @@ export class AuthService {
     return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
   }
 
+
   passportOAuth2(target: string){
-    return this.http.get(env.apiRoot + target, { withCredentials: true });
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200/',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    });
+    return this.http.get(env.apiRoot + target,  {headers});
   }
 
 /*

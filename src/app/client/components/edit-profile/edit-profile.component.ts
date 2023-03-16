@@ -12,7 +12,11 @@ import {Router} from "@angular/router";
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user:any;
+
   userImage!:string;
+
+  userImage!: string;
+
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.updateForm = this.formBuilder.group({
@@ -46,8 +50,10 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // this.authService.getUsers().subscribe(res => console.log(res))
+
     this.authService.getUser().subscribe((req)=>{
       this.user=req.data.user; this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3]
     });
+
   }
 }
