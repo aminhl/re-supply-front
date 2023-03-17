@@ -15,7 +15,7 @@ export class EditProfileComponent implements OnInit {
 
   userImage!:string;
 
-  userImage!: string;
+
 
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
