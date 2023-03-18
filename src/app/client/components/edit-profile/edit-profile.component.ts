@@ -12,8 +12,7 @@ import {Router} from "@angular/router";
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user:any;
-
-  userImage!:string;
+  userImageUrl!: string;
 
 
 
@@ -49,11 +48,12 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.authService.getUsers().subscribe(res => console.log(res))
-
     this.authService.getUser().subscribe((req)=>{
-      this.user=req.data.user; this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3]
+      this.user = req.data.user;
+      if (this.user.images.length > 0) {
+        this.userImageUrl = this.user.images[0];
+      }
     });
-
   }
+
 }

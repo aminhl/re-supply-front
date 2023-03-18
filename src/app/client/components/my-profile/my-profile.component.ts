@@ -21,7 +21,6 @@ export class MyProfileComponent implements OnInit {
       this.user = req.data.user;
       if (this.user.images.length > 0) {
         this.userImageUrl = this.user.images[0];
-        console.log(this.userImageUrl)
       }
       this.active = req.data.user.verified;
     });
