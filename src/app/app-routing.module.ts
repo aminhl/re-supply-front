@@ -11,6 +11,7 @@ import {
 } from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
 import { AuthGuard } from './shared/authguard/auth.guard';
+import {DonationComponent} from "./client/components/donation/donation.component";
 
 
 const routes : Routes = [
@@ -23,6 +24,7 @@ const routes : Routes = [
   { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
   { path: 'verifyEmail', component: VerifyEmailComponent},
   { path: 'myProfile', component:MyProfileComponent , canActivate: [AuthGuard]  },
+  { path: 'donation', component:DonationComponent , canActivate: [AuthGuard]  },
 
 ]
 

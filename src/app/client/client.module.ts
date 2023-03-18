@@ -8,6 +8,7 @@ import {HeaderCComponent} from "./components/header-c/header-c.component";
 import {FooterCComponent} from "./components/footer-c/footer-c.component";
 import {MainCComponent} from "./components/main-c/main-c.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { DonationComponent } from './components/donation/donation.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     EditProfileComponent,
     HeaderCComponent,
     MainCComponent,
-    FooterCComponent
+    FooterCComponent,
+    DonationComponent
   ],
   imports: [
     CommonModule,

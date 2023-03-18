@@ -10,7 +10,6 @@ export class MyProfileComponent implements OnInit {
 
   user:any;
   userImageUrl!: string;
-
   active!: boolean;
 
 
