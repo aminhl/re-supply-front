@@ -12,10 +12,9 @@ import { environment as env } from '../../../../environments/environment';
 })
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
-  user: any;
   isTwoFactorAuthEnabled!: boolean;
-
-  userImage!: string;
+  user:any;
+  userImageUrl!: string;
 
   constructor(
     private authService: AuthService,
@@ -55,13 +54,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.authService.getUsers().subscribe(res => console.log(res))
-
-    this.authService.getUser().subscribe((req) => {
+    this.authService.getUser().subscribe((req)=>{
       this.user = req.data.user;
-      this.userImage =
-        '../../../../assets/client/images/' + this.user.images[0].split('/')[3];
+      if (this.user.images.length > 0) {
+        this.userImageUrl = this.user.images[0];
+      }
     });
+    
     const twoFactorAuthEnabled = localStorage.getItem('twoFactorAuthEnabled');
     const checkboxElement = document.getElementById(
       'twoFactorAuth'
@@ -71,7 +70,7 @@ export class EditProfileComponent implements OnInit {
       checkboxElement.setAttribute('disabled', 'true'); // disable checkbox
       checkboxElement.checked = true;
     }
-  }
+   }
   onTwoFactorAuthChange(event: any) {
     const checkbox = event.target as HTMLInputElement;
     const checkboxElement = document.getElementById(
@@ -92,4 +91,5 @@ export class EditProfileComponent implements OnInit {
       );
     }
   }
+
 }

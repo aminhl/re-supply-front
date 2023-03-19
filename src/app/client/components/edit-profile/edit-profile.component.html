@@ -71,7 +71,7 @@
                     <div id="sidebar" class="col-lg-4" style="background-size: cover;">
                       <h5>Profile image <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Recommend 400 x 400. Max size: 50MB. Click the image to upload." aria-label="Recommend 400 x 400. Max size: 50MB. Click the image to upload."></i></h5>
 
-                      <img [src]="userImage" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
+                      <img *ngIf="userImageUrl" [src]="userImageUrl" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
                       <input type="file" id="upload_profile_img">
 
                       <div class="spacer-30" style="background-size: cover;"></div>

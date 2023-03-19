@@ -7,7 +7,7 @@
             <div class="de-flex-col" style="background-size: cover;">
               <!-- logo begin -->
               <div id="logo" style="background-size: cover;">
-                <a href="../../../../index.html">
+                <a [routerLink]="''">
                   <img alt="" class="logo" src="../../../../assets/client/images/logo-light.png">
                   <img alt="" class="logo-2" src="../../../../assets/client/images/logo.svg">
                 </a>
@@ -22,7 +22,7 @@
             <!-- mainmenu begin -->
             <ul id="mainmenu">
               <li class="menu-item"><a href="#">Products</a></li>
-              <li class="menu-item"><a href="#">Donations</a></li>
+              <li class="menu-item"><a [routerLink]="'/donation'">Donations</a></li>
               <li class="menu-item"><a href="#">Community</a></li>
               <li class="menu-item"><a href="#">Knowledge</a></li>
             </ul>
@@ -38,7 +38,7 @@
 
                 <span id="de-click-menu-profile" class="de-menu-profile">
 
-                                            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132084.png" class="img-fluid" alt="">
+                                            <img src="./assets/client/images/settings.png"  alt="">
 
                                         </span>
 

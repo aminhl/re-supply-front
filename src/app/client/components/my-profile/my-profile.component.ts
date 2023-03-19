@@ -9,21 +9,19 @@ import {AuthService} from "../../../shared/services/auth.service";
 export class MyProfileComponent implements OnInit {
 
   user:any;
-  userImage!: string;
-
+  userImageUrl!: string;
   active!: boolean;
 
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-   // this.authService.getUsers().subscribe(res => console.log(res))
     this.authService.getUser().subscribe((req)=>{
-
-      this.user=req.data.user;
-      this.userImage = '../../../../assets/client/images/' +this.user.images[0].split('/')[3];
+      this.user = req.data.user;
+      if (this.user.images.length > 0) {
+        this.userImageUrl = this.user.images[0];
+      }
       this.active = req.data.user.verified;
-
     });
   }
 
