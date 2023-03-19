@@ -1,19 +1,6 @@
 <div id="wrapper">
     <div class="no-bottom no-top" id="content" style="background-size: cover;">
       <div id="top" style="background-size: cover;"></div>
-        <section aria-label="section" style="background-size: cover;">
-        <div class="container" style="background-size: cover;">
-          <div class="row" style="background-size: cover;">
-            <div class="col-md-8 offset-md-2" style="background-size: cover;">
-              <div class="spacer-10" style="background-size: cover;"></div>
-              <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-                <i class="bi-check-circle-fill"></i>
-                <strong class="mx-2">Check Your Verification Code!</strong> Please check your phone for instructions to proceed further..
-            </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <!-- section begin -->
       <section id="subheader" class="text-light" data-bgimage="url(assets/client/images/background/subheader.jpg) top" style="background: url('../../../../assets/client/images/background/subheader.jpg') center top / cover;">
         <div class="center-y relative text-center" style="background-size: cover;">
@@ -34,6 +21,19 @@
         <div class="container" style="background-size: cover;">
           <div class="row" style="background-size: cover;">
             <div class="col-md-8 offset-md-2" style="background-size: cover;">
+              <div aria-label="section" style="background-size: cover;">
+                <div class="container" style="background-size: cover;">
+                  <div class="row" style="background-size: cover;">
+                    <div class="col-md-8 offset-md-2" style="background-size: cover;">
+                      <div class="spacer-10" style="background-size: cover;"></div>
+                      <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+                        <i class="bi-check-circle-fill"></i>
+                        <strong class="mx-2">Check Your Verification Code!</strong> Please check your phone for instructions to proceed further..
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="spacer-10" style="background-size: cover;"></div>
               <form name="contactForm" id="contact_form" class="form-border" method="post"
                 [formGroup]="codeForm" (ngSubmit)="onSubmit()">
