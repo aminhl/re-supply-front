@@ -4,58 +4,85 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from "@angular/router";
 import {emailExistsValidator, regexValid, validatePassword} from "../../../core/validators/signup.validator";
 import {CookieService} from "ngx-cookie-service"
-
+import {
+  SearchCountryField,
+  CountryISO,
+  PhoneNumberFormat,
+} from 'ngx-intl-tel-input';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
-
 export class SignupComponent implements OnInit {
-
   // Form controls
-  signupForm !: FormGroup;
-  firstName !: FormControl;
+  signupForm!: FormGroup;
+  firstName!: FormControl;
   lastName!: FormControl;
-  email !: FormControl;
-  password !: FormControl;
-  confirmPassword !: FormControl;
-  phoneNumber !: FormControl;
-  images !: FormControl;
+  email!: FormControl;
+  password!: FormControl;
+  confirmPassword!: FormControl;
+  phoneNumber!: FormControl;
+  images!: FormControl;
+  token!: string;
 
-  token !: string;
-
-  constructor(private authService: AuthService,
-              private cookieService: CookieService,
-              private router: Router) {
+  SearchCountryField = SearchCountryField;
+  PhoneNumberFormat = PhoneNumberFormat;
+  CountryISO = CountryISO;
+  
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService,
+    private router: Router
+  ) {
     this.initForm();
     this.createForm();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   initForm(): void {
-    this.firstName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
-    this.lastName = new FormControl('', [Validators.required, regexValid(/[0-9]/g)]);
-    this.email = new FormControl('', [Validators.required, Validators.email],
-      [emailExistsValidator(this.authService)]);
-    this.phoneNumber = new FormControl('', [Validators.required, regexValid(/[a-zA-Z]/g)]);
-    this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
-    this.confirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
+    this.firstName = new FormControl('', [
+      Validators.required,
+      regexValid(/[0-9]/g),
+    ]);
+    this.lastName = new FormControl('', [
+      Validators.required,
+      regexValid(/[0-9]/g),
+    ]);
+    this.email = new FormControl(
+      '',
+      [Validators.required, Validators.email],
+      [emailExistsValidator(this.authService)]
+    );
+    this.phoneNumber = new FormControl('', [
+      Validators.required,
+      regexValid(/[a-zA-Z]/g),
+    ]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]);
+    this.confirmPassword = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]);
     this.images = new FormControl(null, [Validators.required]);
   }
 
-  createForm(): void{
-    this.signupForm = new FormGroup({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      phoneNumber: this.phoneNumber,
-      password: this.password,
-      confirmPassword: this.confirmPassword,
-      images: this.images
-    }, validatePassword('password', 'confirmPassword') as ValidatorFn)
+  createForm(): void {
+    this.signupForm = new FormGroup(
+      {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+        images: this.images,
+      },
+      validatePassword('password', 'confirmPassword') as ValidatorFn
+    );
   }
 
   onSubmit() {
@@ -71,7 +98,8 @@ export class SignupComponent implements OnInit {
       formData.append('images', images.value, images.value.name);
     }
 
-    this.authService.signup("users/signup", formData)
+    this.authService
+      .signup('users/signup', formData)
       .subscribe((response: any) => this.router.navigate(['/login']));
   }
 
