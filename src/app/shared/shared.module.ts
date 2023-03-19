@@ -10,7 +10,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { ChangePasswordAfterSubmitEmailComponent } from './components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { TwoFactorComponent } from './components/login/two-factor/two-factor.component';
-
+import { AuthService } from './services/auth.service';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 @NgModule({
@@ -20,18 +21,15 @@ import { TwoFactorComponent } from './components/login/two-factor/two-factor.com
     ForgetPasswordComponent,
     ChangePasswordAfterSubmitEmailComponent,
     VerifyEmailComponent,
-    TwoFactorComponent
+    TwoFactorComponent,
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxIntlTelInputModule
   ],
-    exports: [
-        SignupComponent,
-        LoginComponent,
-        VerifyEmailComponent
-    ]
+  exports: [SignupComponent, LoginComponent, VerifyEmailComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

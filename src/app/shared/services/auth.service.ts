@@ -1,22 +1,43 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment as env} from "../../../environments/environment";
-import {User} from "../../core/models/User";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment as env } from '../../../environments/environment';
+import { User } from '../../core/models/User';
+import { Router } from '@angular/router';
+
+import {
+  catchError,
+  finalize,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) { }
+  token!: string;
+  errorMessage!: string;
+  email!: string;
+  password!: string;
+  constructor(
+    public http: HttpClient,
+    private router: Router,
+    private injector: Injector
+  ) {}
 
-  signup(target: string, requestBody: FormData){
-    return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true});
+  signup(target: string, requestBody: FormData) {
+    return this.http.post(env.apiRoot + target, requestBody, {
+      withCredentials: true,
+    });
   }
-
-  login(target: string, requestBody: { email: string, password: string}){
-    return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true})
+  login(target: string, requestBody: { email: string | null; password: string| null;  code?: number}) {
+    return this.http.post(env.apiRoot + target, requestBody, {
+      withCredentials: true,
+    });
   }
 
   checkEmail(email: string): any {
@@ -24,14 +45,12 @@ export class AuthService {
     return this.http.post<{ exists: boolean }>(url, { email });
   }
 
-
   getUsers() {
-    return this.http.get(env.apiRoot + "users");
+    return this.http.get(env.apiRoot + 'users');
   }
 
-
   getUser(): Observable<any> {
-    return this.http.get<any>(env.apiRoot + "users/user");
+    return this.http.get<any>(env.apiRoot + 'users/user');
   }
 
   isLoggedIn(): boolean {
@@ -39,12 +58,12 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem("jwt");
+    return localStorage.getItem('jwt');
   }
 
-  getConnectedUserData(){
-    if(localStorage.getItem("jwt") !== null){
-      let token = localStorage.getItem("jwt");
+  getConnectedUserData() {
+    if (localStorage.getItem('jwt') !== null) {
+      let token = localStorage.getItem('jwt');
       const payload = token?.split('.')[1];
       // @ts-ignore
       const decodedPayload: any = atob(payload);
@@ -55,55 +74,64 @@ export class AuthService {
   checkEmailVerification() {
     const user = this.getConnectedUserData();
     if (user) {
-      return this.http.get<{ status: string; verified: boolean }>(`/api/users/email-verification/${user.id}`);
+      return this.http.get<{ status: string; verified: boolean }>(
+        `/api/users/email-verification/${user.id}`
+      );
     }
     return null;
   }
 
-  haveAccess(){
-    let token = localStorage.getItem("jwt");
+  haveAccess() {
+    let token = localStorage.getItem('jwt');
     const payload = token?.split('.')[1];
     // @ts-ignore
     const decodedPayload: any = JSON.parse(atob(payload));
-    if (decodedPayload.role === "admin") return true;
+    if (decodedPayload.role === 'admin') return true;
     else {
-      alert("You don't have access!!")
+      alert("You don't have access!!");
       return false;
     }
   }
 
-  logout(){
-    localStorage.removeItem("jwt");
+  logout() {
+     localStorage.clear();
     this.router.navigate(['/login']);
   }
-  forgetPassword(target: string,requestBody: { email: string}){
-    return this.http.post(env.apiRoot + target, requestBody, { withCredentials: true})
+  forgetPassword(target: string, requestBody: { email: string }) {
+    return this.http.post(env.apiRoot + target, requestBody, {
+      withCredentials: true,
+    });
   }
-  ResetPasswordAfterSubmit(target: string,requestBody: {password : string,confirmPassword : string}){
-    return this.http.patch(env.apiRoot+target,requestBody, { withCredentials: true})
+  ResetPasswordAfterSubmit(
+    target: string,
+    requestBody: { password: string; confirmPassword: string }
+  ) {
+    return this.http.patch(env.apiRoot + target, requestBody, {
+      withCredentials: true,
+    });
   }
 
-
-  passportOAuth2(target: string){
+  passportOAuth2(target: string) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': 'http://localhost:4200/',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
     });
-    return this.http.get(env.apiRoot + target,  {headers});
+    return this.http.get(env.apiRoot + target, { headers });
   }
 
-/*
+  /*
   verifyEmail(token: string): Observable<any> {
     return this.http.get(`/users/verifyEmail/${token}`);
   }*/
 
-  verifyemail(target: string,requestBody: string){
-    return this.http.get(env.apiRoot+target)
-}
+  verifyemail(target: string, requestBody: string) {
+    return this.http.get(env.apiRoot + target);
+  }
 
-  updateProfile(target: string, requestBody: FormData){
-    return this.http.patch(env.apiRoot + target,{ withCredentials: true});
+  updateProfile(target: string, requestBody: FormData) {
+    return this.http.patch(env.apiRoot + target, { withCredentials: true });
   }
 }
