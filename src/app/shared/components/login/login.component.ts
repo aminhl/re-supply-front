@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
         ) {
-          localStorage.setItem('jwt', response.token);
           localStorage.setItem('email', loginData.email);
           localStorage.setItem('password', loginData.password);
           this.router.navigate(['twoFactor']);

@@ -2,7 +2,8 @@
   <div id="top" style="background-size: cover;"></div>
 
   <!-- section begin -->
-  <section id="subheader" class="text-light" data-bgimage="url(assets/client/images/background/subheader.jpg) top" style="background: url('../../../../assets/client/images/background/subheader.jpg') center top / cover;">
+  <section id="subheader" class="text-light" data-bgimage="url(assets/client/images/background/subheader.jpg) top"
+           style="background: url('../../../../assets/client/images/background/subheader.jpg') center top / cover;">
     <div class="center-y relative text-center" style="background-size: cover;">
       <div class="container" style="background-size: cover;">
         <div class="row" style="background-size: cover;">
@@ -22,7 +23,7 @@
     <div class="container" style="background-size: cover;">
       <div class="row" style="background-size: cover;">
         <div class="col-lg-8 offset-lg-2" style="background-size: cover;">
-          <form [formGroup]="updateForm" (submit)="onSubmit()" id="form-create-item" class="form-border" >
+          <form [formGroup]="updateForm" (submit)="onSubmit()" id="form-create-item" class="form-border">
             <div class="de_tab tab_simple" style="background-size: cover;">
 
               <ul class="de_nav">
@@ -32,35 +33,40 @@
 
               <div class="de_tab_content" style="background-size: cover;">
                 <div class="tab-1" style="background-size: cover;">
-                  <div class="row wow fadeIn animated" style="background-size: cover; visibility: visible; animation-name: fadeIn;">
+                  <div class="row wow fadeIn animated"
+                       style="background-size: cover; visibility: visible; animation-name: fadeIn;">
                     <div class="col-lg-8 mb-sm-20" style="background-size: cover;">
                       <div class="field-set" style="background-size: cover;">
                         <h5>First Name</h5>
-                        <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" placeholder="{{user.firstName}}">
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                               formControlName="firstName" placeholder="{{user.firstName}}">
 
                         <div class="spacer-20" style="background-size: cover;"></div>
 
                         <h5>Last Name</h5>
-                        <input type="text" name="Last Name" id="Last Name" class="form-control" formControlName="lastName" placeholder="{{user.lastName}}">
+                        <input type="text" name="Last Name" id="Last Name" class="form-control"
+                               formControlName="lastName" placeholder="{{user.lastName}}">
 
                         <div class="spacer-20" style="background-size: cover;"></div>
 
                         <h5>Phone Number</h5>
-                        <textarea name="PhoneNumber" id="PhoneNumber" class="form-control" formControlName="phoneNumber" placeholder="{{user.phoneNumber}}"></textarea>
+                        <textarea name="PhoneNumber" id="PhoneNumber" class="form-control" formControlName="phoneNumber"
+                                  placeholder="{{user.phoneNumber}}"></textarea>
 
                         <div class="spacer-20" style="background-size: cover;"></div>
 
                         <h5>Email</h5>
-                        <input type="text" name="email" id="email" class="form-control" formControlName="email" placeholder="{{user.email}}">
+                        <input type="text" name="email" id="email" class="form-control" formControlName="email"
+                               placeholder="{{user.email}}">
 
 
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" id="twoFactorAuth" (change)="onTwoFactorAuthChange($event)">
-  <label class="form-check-label" for="twoFactorAuth">
-    Enable 2FA
-  </label>
-</div>
-
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="twoFactorAuth"
+                                 (change)="onTwoFactorAuthChange($event)">
+                          <label class="form-check-label" for="twoFactorAuth">
+                            Enable 2FA
+                          </label>
+                        </div>
 
 
                         <div class="spacer-20" style="background-size: cover;"></div>
@@ -69,9 +75,14 @@
                     </div>
 
                     <div id="sidebar" class="col-lg-4" style="background-size: cover;">
-                      <h5>Profile image <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Recommend 400 x 400. Max size: 50MB. Click the image to upload." aria-label="Recommend 400 x 400. Max size: 50MB. Click the image to upload."></i></h5>
+                      <h5>Profile image <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" title=""
+                                           data-bs-original-title="Recommend 400 x 400. Max size: 50MB. Click the image to upload."
+                                           aria-label="Recommend 400 x 400. Max size: 50MB. Click the image to upload."></i>
+                      </h5>
 
-                      <img *ngIf="userImageUrl" [src]="userImageUrl" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
+                      <img *ngIf="userImageUrl" [src]="userImageUrl" id="click_profile_img"
+                           class="d-profile-img-edit img-fluid" alt="">
                       <input type="file" id="upload_profile_img">
 
                       <div class="spacer-30" style="background-size: cover;"></div>
