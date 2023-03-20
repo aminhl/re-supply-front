@@ -53,8 +53,10 @@ export class TwoFactorComponent implements OnInit {
             this.router.navigate(['']);
           } else {
             this.attemptCount++;
-            if (this.attemptCount == 2) {
-              localStorage.clear();
+            if (this.attemptCount >= 3) {
+              localStorage.removeItem('email');
+              localStorage.removeItem('password');
+              localStorage.removeItem('jwt');
               this.router.navigate(['login']);
             } else {
               this.errorMessage = 'Verification code is incorrect';

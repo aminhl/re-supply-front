@@ -1,9 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {AuthService} from '../../services/auth.service';
-import {Router} from "@angular/router";
-import {emailExistsValidator, regexValid, validatePassword} from "../../../core/validators/signup.validator";
-import {CookieService} from "ngx-cookie-service"
+import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import {
+  emailExistsValidator,
+  regexValid,
+  validatePassword,
+} from '../../../core/validators/signup.validator';
+import { CookieService } from 'ngx-cookie-service';
 import {
   SearchCountryField,
   CountryISO,
@@ -29,7 +38,7 @@ export class SignupComponent implements OnInit {
   SearchCountryField = SearchCountryField;
   PhoneNumberFormat = PhoneNumberFormat;
   CountryISO = CountryISO;
-  
+
   constructor(
     private authService: AuthService,
     private cookieService: CookieService,
@@ -99,7 +108,7 @@ export class SignupComponent implements OnInit {
     }
 
     this.authService
-      .signup('users/signup', formData)
+      .signup('users/signup', this.signupForm.value)
       .subscribe((response: any) => this.router.navigate(['/login']));
   }
 
