@@ -12,6 +12,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { TwoFactorComponent } from './components/login/two-factor/two-factor.component';
 import { AuthService } from './services/auth.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     SharedRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    BrowserAnimationsModule,
   ],
   exports: [SignupComponent, LoginComponent, VerifyEmailComponent],
 })

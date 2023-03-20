@@ -94,7 +94,9 @@ export class AuthService {
   }
 
   logout() {
-     localStorage.clear();
+     localStorage.removeItem('email');
+     localStorage.removeItem('password');
+     localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
   }
   forgetPassword(target: string, requestBody: { email: string }) {
