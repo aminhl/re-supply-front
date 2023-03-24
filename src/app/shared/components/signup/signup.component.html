@@ -182,27 +182,43 @@
                   </div>
                 </div>
 
-                <div class="col-md-6" style="background-size: cover;">
-                  <div class="field-set" style="background-size: cover;">
+                 <div class="col-md-6" style="background-size: cover">
+                  <div class="field-set" style="background-size: cover">
                     <label>Phone:</label>
-                    <input type="text" name="phone" id="phone" class="form-control" formControlName="phoneNumber"
-                           [ngClass]="{
-                    'input-invalid': phoneNumber.invalid  && (phoneNumber.dirty || phoneNumber.touched),
-                    'input-valid': phoneNumber.valid && (phoneNumber.dirty || phoneNumber.touched) }">
-                    <div
-                      class="message-invalid"
-                      *ngIf="phoneNumber.touched && phoneNumber.hasError('required')"
+
+                    <ngx-intl-tel-input
+                      [enableAutoCountrySelect]="true"
+                      [enablePlaceholder]="true"
+                      [searchCountryFlag]="true"
+                      [separateDialCode]="true"
+                      [searchCountryField]="[
+                        SearchCountryField.Iso2,
+                        SearchCountryField.Name
+                      ]"
+                      [selectFirstCountry]="false"
+                      [selectedCountryISO]="CountryISO.UnitedStates"
+                      [phoneValidation]="true"
+                      [numberFormat]="PhoneNumberFormat.International"
+                      name="phone"
+                      id="phone"
+                      class="form-control"
+                      formControlName="phoneNumber"
                     >
-                      PhoneNumber is required!
-                    </div>
+                    </ngx-intl-tel-input>
                     <div
                       class="message-invalid"
-                      *ngIf="phoneNumber.touched && phoneNumber.hasError('invalidData')"
+                      *ngIf="
+                        phoneNumber.touched &&
+                        phoneNumber.hasError('invalidData')
+                      "
                     >
                       PhoneNumber must not contain letters!
                     </div>
                     <!--success message-->
-                    <div class="message-valid" *ngIf="phoneNumber.touched && !phoneNumber.errors">
+                    <div
+                      class="message-valid"
+                      *ngIf="phoneNumber.touched && !phoneNumber.errors"
+                    >
                       Valid!
                     </div>
                   </div>
