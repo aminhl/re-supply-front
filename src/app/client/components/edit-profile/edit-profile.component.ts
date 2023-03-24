@@ -12,9 +12,9 @@ import { environment as env } from '../../../../environments/environment';
 })
 export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
-  isTwoFactorAuthEnabled!: boolean;
-  user:any;
+  user: any;
   userImageUrl!: string;
+  twoFactorAuth! : Boolean
 
   constructor(
     private authService: AuthService,
@@ -54,42 +54,22 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe((req)=>{
+    this.authService.getUser().subscribe((req) => {
       this.user = req.data.user;
       if (this.user.images.length > 0) {
         this.userImageUrl = this.user.images[0];
       }
+      this.twoFactorAuth = this.user.twoFactorAuth;
     });
-    
-    const twoFactorAuthEnabled = localStorage.getItem('twoFactorAuthEnabled');
-    const checkboxElement = document.getElementById(
-      'twoFactorAuth'
-    ) as HTMLInputElement;
-
-    if (twoFactorAuthEnabled) {
-      checkboxElement.setAttribute('disabled', 'true'); // disable checkbox
-      checkboxElement.checked = true;
-    }
-   }
-  onTwoFactorAuthChange(event: any) {
-    const checkbox = event.target as HTMLInputElement;
-    const checkboxElement = document.getElementById(
-      'twoFactorAuth'
-    ) as HTMLInputElement;
-
-    if (checkbox.checked) {
-      localStorage.setItem('twoFactorAuthEnabled', 'true');
-      checkboxElement.setAttribute('disabled', 'true'); // disable checkbox
-
-      this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
   }
-
+  onTwoFactorAuthChange() {
+    this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 }

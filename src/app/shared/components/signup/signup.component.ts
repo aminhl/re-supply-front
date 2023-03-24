@@ -99,7 +99,7 @@ export class SignupComponent implements OnInit {
     formData.append('firstName', this.signupForm.value.firstName);
     formData.append('lastName', this.signupForm.value.lastName);
     formData.append('email', this.signupForm.value.email);
-    formData.append('phoneNumber', this.signupForm.value.phoneNumber);
+    formData.append('phoneNumber', this.signupForm.value.phoneNumber.internationalNumber);
     formData.append('password', this.signupForm.value.password);
     formData.append('confirmPassword', this.signupForm.value.confirmPassword);
     const images = this.signupForm.get('images');
@@ -118,5 +118,5 @@ export class SignupComponent implements OnInit {
     this.images.markAsTouched();
   }
 
-  
+
 }
