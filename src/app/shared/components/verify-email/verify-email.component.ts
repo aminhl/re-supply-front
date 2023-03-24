@@ -47,7 +47,7 @@ Verif()
         this.router.navigateByUrl('/login');
       }
     )
-  }, 10000);
+  }, 2000);
  
 }
 

@@ -108,7 +108,7 @@ export class SignupComponent implements OnInit {
     }
 
     this.authService
-      .signup('users/signup', this.signupForm.value)
+      .signup('users/signup', formData)
       .subscribe((response: any) => this.router.navigate(['/login']));
   }
 
@@ -117,4 +117,6 @@ export class SignupComponent implements OnInit {
     this.images.setValue(file);
     this.images.markAsTouched();
   }
+
+  
 }

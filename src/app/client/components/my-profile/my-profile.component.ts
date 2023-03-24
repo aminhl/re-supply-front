@@ -17,7 +17,9 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
+      
       this.user = req.data.user;
+      console.log(this.user)
       if (this.user.images.length > 0) {
         this.userImageUrl = this.user.images[0];
       }
