@@ -40,11 +40,7 @@
             class="form-border"
           >
             <div class="de_tab tab_simple" style="background-size: cover">
-              <ul class="de_nav">
-                <li class="active">
-                  <span><i class="fa fa-user"></i>Profile</span>
-                </li>
-              </ul>
+
 
               <div class="de_tab_content" style="background-size: cover">
                 <div class="tab-1" style="background-size: cover">
@@ -119,6 +115,7 @@
                           (click)="onTwoFactorAuthChange()"
                           [disabled]="twoFactorAuth"
                           class="btn-main"
+                          [ngClass]="{'enableBtnOff':twoFactorAuth}"
                         >
                           Enable 2FA
                         </button>

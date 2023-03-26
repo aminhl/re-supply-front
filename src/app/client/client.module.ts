@@ -9,6 +9,8 @@ import {FooterCComponent} from "./components/footer-c/footer-c.component";
 import {MainCComponent} from "./components/main-c/main-c.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DonationComponent } from './components/donation/donation.component';
+import { AddRequestComponent } from './components/donation/add-request/add-request.component';
+import { CreateRequestComponent } from './components/donation/create-request/create-request.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { DonationComponent } from './components/donation/donation.component';
     HeaderCComponent,
     MainCComponent,
     FooterCComponent,
-    DonationComponent
+    DonationComponent,
+    AddRequestComponent,
+    CreateRequestComponent
   ],
   imports: [
     CommonModule,
