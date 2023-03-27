@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RequestService} from "../../../shared/services/request.service";
 
 @Component({
   selector: 'app-donation',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonationComponent implements OnInit {
 
-  constructor() { }
+  donationList: any = [];
+  constructor(private  service: RequestService   ) { }
 
   ngOnInit(): void {
-  }
+    this.service.getRequestList().subscribe( (res) => {
+      this.donationList = res;
+      console.log(res);
+    } );
+
+    }
+
 
 }
