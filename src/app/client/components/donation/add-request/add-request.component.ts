@@ -75,7 +75,7 @@ export class AddRequestComponent implements OnInit {
     }
 
     this.requestService
-      .addRequest('requests/', formData)
+      .addRequest(formData)
       .subscribe();
   }
 
