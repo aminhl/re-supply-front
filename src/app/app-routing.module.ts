@@ -14,6 +14,9 @@ import { AuthGuard } from './shared/authguard/auth.guard';
 import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
 import {DonationComponent} from "./client/components/donation/donation.component";
 import {ProductsComponent} from "./client/components/products/products.component";
+import {AddRequestComponent} from "./client/components/donation/add-request/add-request.component";
+import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
+
 
 
 const routes : Routes = [
@@ -29,7 +32,7 @@ const routes : Routes = [
   { path: 'myProfile', component:MyProfileComponent , canActivate: [AuthGuard]  },
   { path: 'donation', component:DonationComponent , canActivate: [AuthGuard]  },
   { path: 'products', component:ProductsComponent , canActivate: [AuthGuard]  },
-
+  { path: 'createRequest', component:CreateRequestComponent , canActivate: [AuthGuard]  },
 ]
 
 @NgModule({

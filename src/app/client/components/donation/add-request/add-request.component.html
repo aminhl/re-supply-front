@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Form</title>
+</head>
+<body>
+<form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+  <label>
+    Requester ID:
+    <input type="text" formControlName="requester_id">
+  </label>
+  <br>
+  <label>
+    Type:
+    <input type="text" formControlName="type">
+  </label>
+  <br>
+  <label>
+    Target Value:
+    <input type="text" formControlName="targetValue">
+  </label>
+  <br>
+  <label>
+    Current Value:
+    <input type="text" formControlName="currentValue">
+  </label>
+  <br>
+  <label>
+    Request Image:
+    <input type="file" formControlName="requestImage">
+  </label>
+  <br>
+  <label>
+    Notes:
+    <textarea formControlName="notes"></textarea>
+  </label>
+  <br>
+  <button type="submit" [disabled]="!requestForm.valid">Submit</button>
+</form>
+</body>
+</html>
