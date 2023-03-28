@@ -70,4 +70,11 @@ export class LoginComponent implements OnInit {
       .passportOAuth2('users/auth/facebook')
       .subscribe((response) => console.log(response));
   }
+
+  signinWithGoogle(event: Event) {
+    event.preventDefault();
+    return this.authService
+      .passportOAuth2('users/auth/google')
+      .subscribe((response) => console.log(response));
+  }
 }

@@ -13,6 +13,7 @@ import {VerifyEmailComponent} from "./shared/components/verify-email/verify-emai
 import { AuthGuard } from './shared/authguard/auth.guard';
 import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
 import {DonationComponent} from "./client/components/donation/donation.component";
+import {ProductsComponent} from "./client/components/products/products.component";
 
 
 const routes : Routes = [
@@ -27,6 +28,7 @@ const routes : Routes = [
   { path: 'verifyEmail', component: VerifyEmailComponent},
   { path: 'myProfile', component:MyProfileComponent , canActivate: [AuthGuard]  },
   { path: 'donation', component:DonationComponent , canActivate: [AuthGuard]  },
+  { path: 'products', component:ProductsComponent , canActivate: [AuthGuard]  },
 
 ]
 
