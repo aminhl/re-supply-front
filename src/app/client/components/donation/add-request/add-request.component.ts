@@ -63,10 +63,9 @@ export class AddRequestComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('requester_id', this.requestForm.value.requester_id);
     formData.append('type', this.requestForm.value.type);
-    formData.append('targetValue', this.requestForm.value.email);
-    formData.append('currentValue', this.requestForm.value.phoneNumber.currentValue);
+    formData.append('targetValue', this.requestForm.value.targetValue );
+    formData.append('currentValue', this.requestForm.value.currentValue);
     formData.append('requestImage', this.requestForm.value.requestImage);
     formData.append('notes', this.requestForm.value.notes);
     const requestImage = this.requestForm.get('requestImage');

@@ -1,47 +1,68 @@
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <div style="margin: 10px" id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000"  >
-      <div class="carousel-inner"style="max-height: 300px;">
-        <div class="carousel-item active" >
-          <img src="https://images.unsplash.com/photo-1548102249-acdce64fffbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" class="d-block w-100"  style="max-height: 300px;" alt="...">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<div style="margin: 10px" id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"
+     data-bs-interval="4000">
+  <div class="carousel-inner" style="max-height: 300px;">
+    <div class="carousel-item active">
+      <img
+        src="https://images.unsplash.com/photo-1548102249-acdce64fffbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+        class="d-block w-100" style="max-height: 300px;" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://media.istockphoto.com/id/1353332258/photo/donation-concept-the-volunteer-giving-a-donate-box-to-the-recipient-standing-against-the-wall.jpg?b=1&s=170667a&w=0&k=20&c=D53dy4HPlfLi9yCO8ouowIn9HqIWfkjEx4-C05B8TYU="
+        class="d-block w-100" style="max-height: 350px;" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+        class="d-block w-100" style="max-height: 350px;" alt="...">
+    </div>
+  </div>
+</div>
+
+<div class="container" style="background-size: cover; ">
+  <button [routerLink]="['/createRequest']" class="btn-main"> Request Donation</button>
+  <div class="row" style="margin-top: 30px">
+    <div class="col-md-4" *ngFor="let donation of donationList">
+      <div class="profile-card-4 text-center">
+        <img style="height: 300px"
+             src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+             class="img img-responsive">
+        <div class="profile-content">
+          <div style="font-size: 30px" class="profile-name"><span
+            style="font-size: 17px"> Donate to  </span>{{donation.requester_id.firstName}}
+            <p>
+              <i class="fa fa-dollar"></i>{{donation.targetValue}}</p>
+          </div>
+          <div style=" overflow: hidden;white-space: nowrap;" class="profile-description">{{donation.notes}}</div>
+          <div style="font-size: 25px">GOAL :
+            <p>
+              <i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
         </div>
-        <div class="carousel-item">
-          <img src="https://media.istockphoto.com/id/1353332258/photo/donation-concept-the-volunteer-giving-a-donate-box-to-the-recipient-standing-against-the-wall.jpg?b=1&s=170667a&w=0&k=20&c=D53dy4HPlfLi9yCO8ouowIn9HqIWfkjEx4-C05B8TYU=" class="d-block w-100"  style="max-height: 350px;"alt="...">
+        <div style="margin: 10px" class="progress" *ngIf="donation.type==='Currency'">
+          <div class="progress-bar" role="progressbar" style.width="{{donation.percentage}}%" style=""
+               aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            {{donation.percentage}}%
+          </div>
         </div>
-        <div class="carousel-item">
-          <img src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" class="d-block w-100"  style="max-height: 350px;" alt="...">
+        <div class="row" style="margin:10px">
+          <div class="col-xl-2">
+            <button class="btn-main">Donate</button>
+          </div>
+
         </div>
       </div>
+
     </div>
 
-        <div class="container" style="background-size: cover;">
-          <button [routerLink]="['/createRequest']" class="btn-main"> Request Donation</button>
-          <div class="row" style="margin-top: 30px">
 
-            <div class="col-md-4">
-              <div class="card text-bg-dark" style="max-width: 400px">
-                <img src="https://media.istockphoto.com/id/1353332258/photo/donation-concept-the-volunteer-giving-a-donate-box-to-the-recipient-standing-against-the-wall.jpg?b=1&s=170667a&w=0&k=20&c=D53dy4HPlfLi9yCO8ouowIn9HqIWfkjEx4-C05B8TYU=" class="card-img" alt="...">
-                <div class="card-img-overlay">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4" *ngFor="let donation of donationList">
-              <div class="card text-bg-dark" style="max-width: 400px">
-                <img src="https://media.istockphoto.com/id/1353332258/photo/donation-concept-the-volunteer-giving-a-donate-box-to-the-recipient-standing-against-the-wall.jpg?b=1&s=170667a&w=0&k=20&c=D53dy4HPlfLi9yCO8ouowIn9HqIWfkjEx4-C05B8TYU=" class="card-img" alt="...">
-                <div class="card-img-overlay">
-                  <h5 class="card-title">{{donation.type}}</h5>
-                  <p class="card-text">{{donation.notes}}</p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-
-              </div>
-            </div>
+  </div>
+</div>
 
 
 
