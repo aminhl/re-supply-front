@@ -133,7 +133,7 @@ export class AuthService {
     return this.http.get(env.apiRoot + target);
   }
 
-  updateProfile(target: string, requestBody: FormData) {
-    return this.http.patch(env.apiRoot + target, { withCredentials: true });
+  getProducts(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products');
   }
 }

@@ -12027,7 +12027,7 @@ section.bg-grey {
 }
 
 .wow {
-  visibility: hidden;
+  visibility: visible;
 }
 
 #back-to-top {
@@ -14112,9 +14112,7 @@ a.read_more i {
   box-shadow: 2px 2px 30px 0px rgba(20, 20, 20, 0.1);
 }
 
-img.nft__item_preview {
-  display: none;
-}
+
 
 .nft__item:hover img.nft__item_preview {
   transform: scale(1.03);
