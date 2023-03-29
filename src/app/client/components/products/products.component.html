@@ -28,14 +28,18 @@
                 <li><span>Utility</span></li>
               </ul>
             </div>
+            <a [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+              Add Product
+            </a>
           </div>
+
         </div>
         <!-- nft item begin -->
         <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products">
           <div class="nft__item">
             <div class="author_list_pp">
-              <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: Monica Lucas">
-                <img class="lazy" src="../../../../assets/client/images/author/author-1.jpg" alt="">
+              <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{ product.owner.lastName }} {{ product.owner.firstName }}">
+                <img class="lazy" src="{{ product.owner.images[0] }}" alt="">
                 <i class="fa fa-check"></i>
               </a>
             </div>
@@ -58,7 +62,9 @@
               </div>
             </div>
           </div>
+
         </div>
+
       </div>
     </div>
   </section>
