@@ -1,0 +1,230 @@
+<div class="no-bottom no-top" id="content">
+  <div id="top"></div>
+
+  <!-- section begin -->
+  <section
+    id="subheader"
+    class="text-light"
+    data-bgimage="url(../../../../assets/client/images/background/subheader.jpg) top"
+  >
+    <div class="center-y relative text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1>Create Single Product</h1>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- section close -->
+
+  <!-- section begin -->
+  <section aria-label="section">
+    <div class="container">
+      <div class="row wow fadeIn">
+        <div class="col-lg-7 offset-lg-1">
+          <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+            <div class="field-set">
+              <h5>Upload file</h5>
+
+              <div class="d-create-file">
+                <p id="file_name">
+                  {{
+                    images.value
+                      ? images.value.name
+                      : "PNG, JPG, GIF, WEBP or MP4. Max 200mb."
+                  }}
+                </p>
+                <input
+                  type="button"
+                  id="get_file"
+                  class="btn-main"
+                  value="Browse"
+                />
+                <input
+                  type="file"
+                  id="upload_file"
+                  (change)="onImageSelected($event)"
+                />
+              </div>
+              <div class="spacer-20"></div>
+              <div class="spacer-20"></div>
+              <div class="spacer-20"></div>
+
+              <h5>Title</h5>
+              <div>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                placeholder="e.g. 'Crypto Funk'"
+                id="name"
+                [ngClass]="{
+                        'input-invalid':
+                          name.invalid &&
+                          (name.dirty || name.touched),
+                        'input-valid':
+                          name.valid && (name.dirty || name.touched)
+                      }"
+              />
+                <div
+                  class="message-invalid"
+                  *ngIf="name.touched && name.hasError('required')"
+                >
+                  Product name is required!
+                </div>
+                <div
+                  class="message-invalid"
+                  *ngIf="
+                        name.touched && name.hasError('invalidData')
+                      "
+                >
+                  Product name must contains only letters!
+                </div>
+                <!--success message-->
+                <div
+                  class="message-valid"
+                  *ngIf="name.touched && !name.errors"
+                >
+                  Valid!
+                </div>
+              </div>
+              <div class="spacer-20"></div>
+
+              <h5>Description</h5>
+              <div>
+              <textarea
+                data-autoresize
+                formControlName="description"
+                class="form-control"
+                placeholder="e.g. 'This is very limited item'"
+                id="description"
+                [ngClass]="{
+                        'input-invalid':
+                          description.invalid &&
+                          (description.dirty || description.touched),
+                        'input-valid':
+                          description.valid && (description.dirty || description.touched)
+                      }"
+              ></textarea>
+                <div
+                  class="message-invalid"
+                  *ngIf="description.touched && description.hasError('required')"
+                >
+                  Description of the product is required!
+                </div>
+                <!--success message-->
+                <div
+                  class="message-valid"
+                  *ngIf="description.touched && !description.errors"
+                >
+                  Valid!
+                </div>
+              </div>
+              <div class="spacer-20"></div>
+
+              <h5>Price</h5>
+              <div>
+              <input
+                type="text"
+                formControlName="price"
+                class="form-control"
+                placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%"
+                id="price"
+                [ngClass]="{
+                        'input-invalid':
+                          price.invalid &&
+                          (price.dirty || price.touched),
+                        'input-valid':
+                          price.valid && (price.dirty || price.touched)
+                      }"
+              />
+                <div
+                  class="message-invalid"
+                  *ngIf="price.touched && price.hasError('required')"
+                >
+                  Product price is required!
+                </div>
+                <div
+                  class="message-invalid"
+                  *ngIf="
+                        price.touched && price.hasError('invalidData')
+                      "
+                >
+                  Product price must contains only numbers!
+                </div>
+                <!--success message-->
+                <div
+                  class="message-valid"
+                  *ngIf="price.touched && !price.errors"
+                >
+                  Valid!
+                </div>
+              </div>
+              <div class="spacer-single"></div>
+
+              <div
+                id="submit"
+                class="pull-left"
+                style="background-size: cover"
+              >
+                <input
+                  type="submit"
+                  id="send_message"
+                  value="Add Product"
+                  class="btn btn-main color-2 ripple-surface"
+                  [disabled]="addProductForm.invalid"
+                />
+              </div>
+              <div class="spacer-single"></div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <h5>Preview item</h5>
+          <div class="nft__item">
+            <div class="author_list_pp">
+              <a href="#">
+                <img
+                  class="lazy"
+                  src="../../../../assets/client/images/author/author-1.jpg"
+                  alt=""
+                />
+                <i class="fa fa-check"></i>
+              </a>
+            </div>
+            <div class="nft__item_wrap">
+              <a href="#">
+                <img
+                  src="../../../../assets/client/images/collections/coll-item-3.jpg"
+                  id="get_file_2"
+                  class="lazy nft__item_preview"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="nft__item_info">
+              <a href="#">
+                <h4>Pinky Ocean</h4>
+              </a>
+              <div class="nft__item_click">
+                <span></span>
+              </div>
+              <div class="nft__item_price">0.08 ETH<span>1/20</span></div>
+              <div class="nft__item_action">
+                <a href="#">Place a bid</a>
+              </div>
+              <div class="nft__item_like">
+                <i class="fa fa-heart"></i><span>50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- content close -->

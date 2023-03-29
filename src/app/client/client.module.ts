@@ -12,6 +12,7 @@ import { DonationComponent } from './components/donation/donation.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AddRequestComponent } from './components/donation/add-request/add-request.component';
 import { CreateRequestComponent } from './components/donation/create-request/create-request.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component';
 
 
 
@@ -25,7 +26,8 @@ import { CreateRequestComponent } from './components/donation/create-request/cre
     DonationComponent,
     ProductsComponent,
     AddRequestComponent,
-    CreateRequestComponent
+    CreateRequestComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,

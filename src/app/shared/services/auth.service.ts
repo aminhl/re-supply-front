@@ -133,7 +133,5 @@ export class AuthService {
     return this.http.get(env.apiRoot + target);
   }
 
-  getProducts(): Observable<any> {
-    return this.http.get<any>(env.apiRoot + 'products');
-  }
+
 }
