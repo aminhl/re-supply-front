@@ -15,6 +15,7 @@ export class RequestService {
 
 
 addRequest(data: FormData): Observable<any> {
+    console.log("in service ")
     return this.http.post(`${this.baseUrl}`, data,{
       withCredentials: true,
   });

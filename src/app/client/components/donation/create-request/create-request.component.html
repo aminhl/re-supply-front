@@ -24,8 +24,14 @@
     </div>
     <div class="form-group">
       <label for="requestImage">Request Image</label>
-      <input type="file" id="requestImage" formControlName="requestImage" class="form-control" accept="image/*">
+      <input type="file"
+             id="requestImage"
+             formControlName="requestImage"
+             class="form-control"
+             (change)="onImageSelected($event)" >
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid || submitting">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
   </form>
 </div>
+
+
