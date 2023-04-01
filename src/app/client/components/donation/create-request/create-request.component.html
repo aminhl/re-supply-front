@@ -3,20 +3,15 @@
   <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="type">Type</label>
-      <select id="type" formControlName="type" class="form-control">
+      <select  id="type" formControlName="type" class="form-control" #select>
         <option value="Item">Item</option>
         <option value="Currency">Currency</option>
       </select>
 
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="select.value==='Currency'">
       <label for="targetValue">Target Value</label>
       <input type="number" id="targetValue" formControlName="targetValue" class="form-control">
-
-    </div>
-    <div class="form-group">
-      <label for="currentValue">Current Value</label>
-      <input type="number" id="currentValue" formControlName="currentValue" class="form-control">
     </div>
     <div class="form-group">
       <label for="notes">Notes</label>

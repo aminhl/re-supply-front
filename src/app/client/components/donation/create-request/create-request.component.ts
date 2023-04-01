@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RequestService} from '../../../../shared/services/request.service';
 import {HttpClient} from '@angular/common/http';
 import {regexValid} from "../../../../core/validators/signup.validator";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-request',
@@ -21,7 +22,8 @@ export class CreateRequestComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private service: RequestService
+    private service: RequestService,
+    private router :Router
   ) {
   }
 
@@ -31,10 +33,10 @@ export class CreateRequestComponent implements OnInit {
   }
 
   initform(): void {
-    this.type = new FormControl('' );
-    this.targetValue = new FormControl('' );
-    this.currentValue = new FormControl('' );
-    this.notes = new FormControl('');
+    this.type = new FormControl('',[Validators.required] );
+    this.targetValue = new FormControl('',[Validators.min(0)] );
+    this.currentValue = new FormControl('',[Validators.min(0)] );
+    this.notes = new FormControl('',[Validators.required]);
     this.requestImage = new FormControl();
   }
 
@@ -56,10 +58,10 @@ export class CreateRequestComponent implements OnInit {
     formData.append('notes', this.requestForm.value.notes);
     const requestImage = this.requestForm.get('requestImage');
     if (requestImage && requestImage.value) {
-      formData.append('requestImage', this.requestForm.value.requestImage[0]);
+      formData.append('requestImage', requestImage.value,requestImage.value.name);
     }
     this.service.addRequest(formData).subscribe((res) => {
-      console.log(res);
+      this.router.navigate(['/donation']);
     });
   }
 
@@ -69,4 +71,9 @@ export class CreateRequestComponent implements OnInit {
     this.requestImage.setValue(file);
     this.requestImage.markAsTouched();
   }
+
+
+
+
+
 }
