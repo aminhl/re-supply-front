@@ -31,7 +31,7 @@
     <div class="col-md-4" *ngFor="let donation of donationList">
       <div class="profile-card-4 text-center" style="border-radius:15px ; ">
         <img style="height: 300px"
-             src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+             src="{{donation.requestImage[0]}}"
              class="img img-responsive">
         <div class="profile-content">
           <div style="font-size: 30px" class="profile-name"><span
@@ -52,7 +52,9 @@
         </div>
         <div class="row" style="margin:10px">
           <div class="col-xl-2">
-            <button class="btn-main">Donate</button>
+
+            <button [ngClass]="{'closed':donation.close}" [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed</button>
+            <button class="btn-main"*ngIf="!donation.close"> Donate</button>
           </div>
 
         </div>

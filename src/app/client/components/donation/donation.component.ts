@@ -23,6 +23,9 @@ export class DonationComponent implements OnInit {
 getPercentage(){
     for(let d of this.donationList){
       d.percentage= ((d.currentValue/d.targetValue)*100).toFixed(1);
+      if (d.percentage>=100){
+        d.close=true;
+      }
     }
 }
 }

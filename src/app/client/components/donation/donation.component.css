@@ -69,19 +69,25 @@ body {
   background-color: #F1F2F3;
 }
 
+.closed{
+  cursor: not-allowed !important;
+  background-color: rgb(229, 229, 229)!important;
+  color: #9b9999!important;
+  border: none !important;
+}
+
 
 .container-fluid,
 .container {
   max-width: 1200px;
 }
 
+
 .btn-main:hover{
   color: #8364E2;
   background-color: #FFFFFF;
   border: 1px solid #8364E2;
 }
-
-
 
 .profile-card-4 {
   max-width: 300px;
