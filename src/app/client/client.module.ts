@@ -13,6 +13,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { AddRequestComponent } from './components/donation/add-request/add-request.component';
 import { CreateRequestComponent } from './components/donation/create-request/create-request.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 
 
@@ -33,7 +34,8 @@ import { AddProductComponent } from './components/products/add-product/add-produ
     CommonModule,
     ClientRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   exports: [
     MyProfileComponent,

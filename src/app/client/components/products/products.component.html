@@ -9,7 +9,7 @@
           <div class="items_filter">
             <form action="https://gigaland.io/blank.php" class="row form-dark" id="form_quick_search" method="post" name="form_quick_search">
               <div class="col text-center">
-                <input class="form-control" id="name_1" name="name_1" placeholder="search item here..." type="text" /> <a href="#" id="btn-submit"><i class="fa fa-search bg-color-secondary"></i></a>
+                <input class="form-control" id="name_1" name="name_1" placeholder="search item here..." type="text" [(ngModel)]="products.name" /> <a href="#" id="btn-submit"><i class="fa fa-search bg-color-secondary"></i></a>
                 <div class="clearfix"></div>
               </div>
             </form>
@@ -35,7 +35,7 @@
 
         </div>
         <!-- nft item begin -->
-        <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products">
+        <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products | filter: products.name">
           <div class="nft__item">
             <div class="author_list_pp">
               <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{ product.owner.lastName }} {{ product.owner.firstName }}">
@@ -55,7 +55,7 @@
               </a>
 
               <div class="nft__item_price">
-                {{product.price}} $
+                {{product.price | currency:'USD':true:'1.2-2'}}
               </div>
               <div class="nft__item_action">
                 <a href="#">Add to cart</a>

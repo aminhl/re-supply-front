@@ -8,6 +8,7 @@ import {AdminModule} from "./admin/admin.module";
 import {SharedModule} from "./shared/shared.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {TokenInterceptorService} from "./shared/services/token-interceptor.servi
     AppRoutingModule,
     ClientModule,
     AdminModule,
-    SharedModule
+    SharedModule,
+    Ng2SearchPipeModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
