@@ -27,32 +27,8 @@
         <div class="col-lg-7 offset-lg-1">
           <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
             <div class="field-set">
-              <h5>Upload file</h5>
 
-              <div class="d-create-file">
-                <p id="file_name">
-                  {{
-                    images.value
-                      ? images.value.name
-                      : "PNG, JPG, GIF, WEBP or MP4. Max 200mb."
-                  }}
-                </p>
-                <input
-                  type="button"
-                  id="get_file"
-                  class="btn-main"
-                  value="Browse"
-                />
-                <input
-                  type="file"
-                  id="upload_file"
-                  (change)="onImageSelected($event)"
-                />
-              </div>
               <div class="spacer-20"></div>
-              <div class="spacer-20"></div>
-              <div class="spacer-20"></div>
-
               <h5>Title</h5>
               <div>
               <input
@@ -61,6 +37,7 @@
                 class="form-control"
                 placeholder="e.g. 'Crypto Funk'"
                 id="name"
+                [ngModel]="name.value"
                 [ngClass]="{
                         'input-invalid':
                           name.invalid &&
@@ -68,6 +45,7 @@
                         'input-valid':
                           name.valid && (name.dirty || name.touched)
                       }"
+
               />
                 <div
                   class="message-invalid"
@@ -131,8 +109,9 @@
                 type="text"
                 formControlName="price"
                 class="form-control"
-                placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%"
+                placeholder="Select your price"
                 id="price"
+                [ngModel]="price.value"
                 [ngClass]="{
                         'input-invalid':
                           price.invalid &&
@@ -165,6 +144,33 @@
               </div>
               <div class="spacer-single"></div>
 
+              <h5>Upload image</h5>
+
+              <div class="col-md-6" style="background-size: cover">
+                <div class="field-set" style="background-size: cover">
+                  <input type="file"
+                         name="images"
+                         id="images"
+                         class="form-control"
+                         (change)="onImageSelected($event)"
+                         formControlName="images"
+                  />
+                  <div
+                    class="message-invalid"
+                    *ngIf="images.dirty && images.hasError('required')"
+                  >
+                    Image is required!
+                  </div>
+                  <!--success message-->
+                  <div
+                    class="message-valid"
+                    *ngIf="images.touched && !images.errors"
+                  >
+                    Valid!
+                  </div>
+                </div>
+              </div>
+              <div class="spacer-single"></div>
               <div
                 id="submit"
                 class="pull-left"
@@ -208,17 +214,25 @@
             </div>
             <div class="nft__item_info">
               <a href="#">
-                <h4>Pinky Ocean</h4>
+                <h4>              <div class="nft__item_price">
+                  <ng-container *ngIf="name.value == ''; else dynamicName">
+                    {{'Product name'}}
+                  </ng-container>
+                  <ng-template #dynamicName>
+                    {{name.value}}
+                  </ng-template>
+                </div></h4>
               </a>
-              <div class="nft__item_click">
-                <span></span>
+              <div class="nft__item_price">
+                <ng-container *ngIf="price.value == ''; else dynamicPrice">
+                  {{'Ex:  $23.00'}}
+                </ng-container>
+                <ng-template #dynamicPrice>
+                  {{price.value | currency}}
+                </ng-template>
               </div>
-              <div class="nft__item_price">0.08 ETH<span>1/20</span></div>
               <div class="nft__item_action">
-                <a href="#">Place a bid</a>
-              </div>
-              <div class="nft__item_like">
-                <i class="fa fa-heart"></i><span>50</span>
+                <a href="#">Add to cart</a>
               </div>
             </div>
           </div>

@@ -18,6 +18,7 @@ export class AddProductComponent implements OnInit {
   images!: FormControl;
 
 
+
   constructor(private productService: ProductService,private router: Router) {
     this.initform();
     this.createForm();
