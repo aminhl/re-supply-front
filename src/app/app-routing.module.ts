@@ -17,25 +17,46 @@ import {ProductsComponent} from "./client/components/products/products.component
 import {AddRequestComponent} from "./client/components/donation/add-request/add-request.component";
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
+import { BlogComponent } from './client/components/blog/blog.component';
 
 
 
-const routes : Routes = [
-  { path: '', component: MainCComponent, canActivate: [AuthGuard]  },
-  { path: 'login', component: LoginComponent},
-  { path: 'twoFactor', component: TwoFactorComponent},
-  { path: 'signup', component: SignupComponent},
-  { path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]  },
-  { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard]  },
-  { path: 'forgetPassword', component: ForgetPasswordComponent},
-  { path: 'resetPasswordAfterSubmit', component: ChangePasswordAfterSubmitEmailComponent},
-  { path: 'verifyEmail', component: VerifyEmailComponent},
-  { path: 'myProfile', component:MyProfileComponent , canActivate: [AuthGuard]  },
-  { path: 'donation', component:DonationComponent , canActivate: [AuthGuard]  },
-  { path: 'products', component:ProductsComponent , canActivate: [AuthGuard]  },
-  { path: 'createRequest', component:CreateRequestComponent , canActivate: [AuthGuard]  },
-  { path: 'addProduct', component: AddProductComponent , canActivate: [AuthGuard]  },
-]
+const routes: Routes = [
+  { path: '', component: MainCComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'twoFactor', component: TwoFactorComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'editProfile',
+    component: EditProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'forgetPassword', component: ForgetPasswordComponent },
+  {
+    path: 'resetPasswordAfterSubmit',
+    component: ChangePasswordAfterSubmitEmailComponent,
+  },
+  { path: 'verifyEmail', component: VerifyEmailComponent },
+  {
+    path: 'myProfile',
+    component: MyProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'donation', component: DonationComponent, canActivate: [AuthGuard] },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'createRequest',
+    component: CreateRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'addProduct',
+    component: AddProductComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
