@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   email!: FormControl;
   password!: FormControl;
+  recaptcha!: FormControl;
   code?: number;
+  captchaSiteKey: string = env.CAPTCHA_SITE_KEY
+  submitted: boolean = false;
 
   constructor(public authService: AuthService, private router: Router) {
     this.initControls();
@@ -30,38 +33,43 @@ export class LoginComponent implements OnInit {
   initControls(): void {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [Validators.required]);
+    this.recaptcha = new FormControl('', [Validators.required]);
   }
 
   createForm(): void {
     this.loginForm = new FormGroup({
       email: this.email,
       password: this.password,
+      recaptcha: this.recaptcha
     });
   }
 
   onSubmit() {
+    this.submitted = true;
     const loginData = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
 
-    this.authService.login('users/login', loginData).subscribe(
-      (response: any) => {
-        if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
-        ) {
-          localStorage.setItem('email', loginData.email);
-          localStorage.setItem('password', loginData.password);
-          this.router.navigate(['twoFactor']);
-        } else {
-          localStorage.setItem('jwt', response.token);
-          this.router.navigate(['']);
+    if(this.recaptcha.value !== ""){
+      this.authService.login('users/login', loginData).subscribe(
+        (response: any) => {
+          if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
+          ) {
+            localStorage.setItem('email', loginData.email);
+            localStorage.setItem('password', loginData.password);
+            this.router.navigate(['twoFactor']);
+          } else {
+            localStorage.setItem('jwt', response.token);
+            this.router.navigate(['']);
+          }
+        },
+        () => {
+          this.errorMessage = 'Invalid username or password.';
+          this.router.navigate(['login']);
         }
-      },
-      () => {
-        this.errorMessage = 'Invalid username or password.';
-        this.router.navigate(['login']);
-      }
-    );
+      );
+    }
   }
 
   signinWithFacebook(event: Event) {

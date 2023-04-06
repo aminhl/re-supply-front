@@ -13,6 +13,7 @@ import { TwoFactorComponent } from './components/login/two-factor/two-factor.com
 import { AuthService } from './services/auth.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxCaptchaModule } from "ngx-captcha";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgxIntlTelInputModule,
     BrowserAnimationsModule,
+    NgxCaptchaModule
   ],
   exports: [SignupComponent, LoginComponent, VerifyEmailComponent],
 })
