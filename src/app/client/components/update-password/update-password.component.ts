@@ -42,9 +42,20 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  errorMessage!: string;
+
   onSubmit() {
-    this.authService.updatePassword("users/updatePassword", this.updatePasswordForm.value)
-      .subscribe((response) => console.log(response));
+    if (this.password.dirty && this.confirmPassword.dirty){
+      if(this.confirmPassword.value === this.password.value)
+        this.authService.updatePassword("users/updatePassword", this.updatePasswordForm.value)
+          .subscribe((response: any) => console.log("data"), (err) => {
+            if (err.error.message === "Your current password is wrong.")
+              this.errorMessage = "Current Password is wrong!";
+          });
+      else this.errorMessage = "Passwords are not the same!";
+    }
+
+
   }
 
 }
