@@ -18,6 +18,7 @@ import {AddRequestComponent} from "./client/components/donation/add-request/add-
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
 import { BlogComponent } from './client/components/blog/blog.component';
+import { UpdatePasswordComponent } from "./client/components/update-password/update-password.component";
 
 
 
@@ -56,6 +57,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
