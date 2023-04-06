@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,8 @@ export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user: any;
   userImageUrl!: string;
-  twoFactorAuth! : Boolean
+  twoFactorAuth! : Boolean;
+  images!: FormControl;
 
   constructor(
     private authService: AuthService,
@@ -22,35 +23,15 @@ export class EditProfileComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
+    this.images = new FormControl('', [Validators.required]);
+
     this.updateForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
       phoneNumber: '',
       email: ['', Validators.email],
-      images: [''],
+      images: this.images,
     });
-  }
-
-  onSubmit(): void {
-    const formData: FormData = new FormData();
-    // @ts-ignore
-    formData.append('firstName', this.updateForm.get('firstName').value);
-    // @ts-ignore
-    formData.append('lastName', this.updateForm.get('lastName').value);
-    // @ts-ignore
-    formData.append('phoneNumber', this.updateForm.get('phoneNumber').value);
-    // @ts-ignore
-    formData.append('email', this.updateForm.get('email').value);
-    // @ts-ignore
-    formData.append('images', this.updateForm.get('images').value);
-
-    this.http
-      .patch('http://localhost:3000/api/v1/users/update', formData)
-      .subscribe((response) => {
-        console.log(response);
-        this.router.navigate(['myProfile']);
-        // handle response
-      });
   }
 
   ngOnInit(): void {
@@ -62,6 +43,24 @@ export class EditProfileComponent implements OnInit {
       this.twoFactorAuth = this.user.twoFactorAuth;
     });
   }
+
+  onSubmit(): void {
+    const formData: FormData = new FormData();
+    formData.append('firstName', this.updateForm.get('firstName')!.value);
+    formData.append('lastName', this.updateForm.get('lastName')!.value);
+    formData.append('phoneNumber', this.updateForm.get('phoneNumber')!.value);
+    formData.append('email', this.updateForm.get('email')!.value);
+    const images = this.updateForm.get('images');
+    if (images && images.valid && images.value instanceof File && images.value.type.startsWith('image/')) {
+      formData.append('images', images.value, images.value.name);
+    }
+
+    this.http.patch('http://localhost:3000/api/v1/users/update', formData).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['myProfile']);
+    });
+  }
+
   onTwoFactorAuthChange() {
     this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(
       (response) => {
@@ -72,4 +71,11 @@ export class EditProfileComponent implements OnInit {
       }
     );
   }
+
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    this.images.setValue(file);
+    this.images.markAsTouched();
+  }
 }
+
