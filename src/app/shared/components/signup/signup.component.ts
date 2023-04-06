@@ -66,7 +66,6 @@ export class SignupComponent implements OnInit {
     );
     this.phoneNumber = new FormControl('', [
       Validators.required,
-      regexValid(/[a-zA-Z]/g),
     ]);
     this.password = new FormControl('', [
       Validators.required,
