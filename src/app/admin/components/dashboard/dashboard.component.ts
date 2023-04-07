@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../shared/services/auth.service";
+import { AdminService } from "../../services/admin.service";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +11,7 @@ import { AuthService } from "../../../shared/services/auth.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -20,6 +23,12 @@ export class DashboardComponent implements OnInit {
     return this.authService.getUsers().subscribe((response: any) => {
       this.users = response.data.users;
     })
+  }
+
+  deleteUser(userId: string) {
+    this.http.delete(`${environment.apiRoot}users/delete/${userId}`).subscribe(() => {
+      this.users = this.users.filter((user) => user._id !== userId);
+    });
   }
 
 }

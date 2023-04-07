@@ -4,9 +4,15 @@
   display: inline-block;
   background-color: rgba(var(--secondary-color-rgb), 0.1);
   text-align: center;
-  line-height: 30px;
+  line-height: 33px;
   border-radius: 50%;
   margin: 0 10px;
+  cursor: pointer;
+}
+
+.action-wrapper:hover{
+  background-color: rgba(212, 193, 236, 1);
+  color: #000000;
 }
 
 .sr-wrapper{
