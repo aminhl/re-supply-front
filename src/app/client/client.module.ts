@@ -15,6 +15,7 @@ import { CreateRequestComponent } from './components/donation/create-request/cre
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import { BlogComponent } from './components/blog/blog.component';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 
@@ -33,6 +34,7 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     CreateRequestComponent,
     AddProductComponent,
     BlogComponent,
+    AddBlogComponent
     UpdatePasswordComponent,
   ],
   imports: [
