@@ -139,11 +139,8 @@
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
                           title=""
-                          data-bs-original-title="Recommend 400 x 400. Max size: 50MB. Click the image to upload."
-                          aria-label="Recommend 400 x 400. Max size: 50MB. Click the image to upload."
                         ></i>
                       </h5>
-
                       <img
                         *ngIf="userImageUrl"
                         [src]="userImageUrl"
@@ -151,7 +148,17 @@
                         class="d-profile-img-edit img-fluid"
                         alt=""
                       />
-                      <input type="file" id="upload_profile_img" />
+
+                        <div class="field-set" style="background-size: cover">
+                          <input type="file"
+                                 name="images"
+                                 id="images"
+                                 class="form-control"
+                                 (change)="onImageSelected($event)"
+                                 formControlName="images"
+                          />
+                        </div>
+
 
                       <div
                         class="spacer-30"

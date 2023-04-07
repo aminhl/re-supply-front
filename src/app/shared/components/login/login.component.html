@@ -31,7 +31,18 @@
                   <div class="message-invalid" style="margin-bottom: 15px" *ngIf="errorMessage">
                     {{ errorMessage }}
                   </div>
-                  <div class="field-set" style="background-size: cover;">
+                  <div style="display: flex; justify-content: center">
+                    <ngx-recaptcha2 #captchaElem
+                                    [siteKey]="captchaSiteKey"
+                                    formControlName="recaptcha">
+                    </ngx-recaptcha2>
+                  </div>
+                  <div class="message-invalid" style="margin-bottom: 15px" *ngIf="
+                  submitted &&
+                  recaptcha.hasError('required')">
+                    Please verify that you are not a robot
+                  </div>
+                  <div class="field-set" style="background-size: cover; margin-top: 15px">
                     <input type="submit" id="send_message" value="Submit" class="btn btn-main btn-fullwidth color-2">
                   </div>
                   <div class="field-set" style="background-size: cover;">

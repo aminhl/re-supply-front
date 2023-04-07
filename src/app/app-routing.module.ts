@@ -18,6 +18,9 @@ import {AddRequestComponent} from "./client/components/donation/add-request/add-
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
 import { BlogComponent } from './client/components/blog/blog.component';
+import { UpdatePasswordComponent } from "./client/components/update-password/update-password.component";
+import { DashboardComponent } from "./admin/components/dashboard/dashboard.component";
+import { RoleGuard } from "./shared/roleguard/role.guard";
 
 
 
@@ -56,6 +59,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, RoleGuard] },
 ];
 
 @NgModule({

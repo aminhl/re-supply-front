@@ -13,9 +13,8 @@
                 <div class="col-md-4 gradient-custom text-center text-white"
                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
 
-                  <img *ngIf="userImageUrl" [src]="userImageUrl"  alt="Avatar" class="img-fluid my-5" style="width: 120px;">
-
-
+                  <img *ngIf="userImageUrl" [src]="userImageUrl"  alt="Avatar" class="img-fluid my-5"
+                       style="width: 120px; border-radius: 50%">
                   <h3>{{ user.firstName }} {{user.lastName | uppercase}}</h3>
                   <p>{{ user.role |uppercase}}</p>
                 </div>
@@ -36,9 +35,7 @@
                       </div>
                     </div>
                     <hr class="mt-0 mb-2">
-                    <button class="btn btn-dark" [routerLink]="['/editProfile']">
-                      Edit Profile
-                    </button>
+                    <button class="btn-main" [routerLink]="['/editProfile']">Edit Profile</button>
                   </div>
                 </div>
               </div>

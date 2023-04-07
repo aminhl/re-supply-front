@@ -133,5 +133,9 @@ export class AuthService {
     return this.http.get(env.apiRoot + target);
   }
 
+  updatePassword(target: string, requestBody: string){
+    return this.http.patch(env.apiRoot + target, requestBody);
+  }
+
 
 }

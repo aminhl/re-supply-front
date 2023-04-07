@@ -16,6 +16,8 @@ import { AddProductComponent } from './components/products/add-product/add-produ
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import { BlogComponent } from './components/blog/blog.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+
 
 
 
@@ -33,6 +35,7 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
     AddProductComponent,
     BlogComponent,
     AddBlogComponent
+    UpdatePasswordComponent,
   ],
   imports: [
     CommonModule,
