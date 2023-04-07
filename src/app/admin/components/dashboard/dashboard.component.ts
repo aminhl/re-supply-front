@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../shared/services/auth.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
+import { AdminService } from "../../services/admin.service";
+import Swal from 'sweetalert2';
 import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
@@ -11,7 +13,8 @@ import {ProductService} from "../../../shared/services/product.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService, private http: HttpClient,private productService: ProductService) { }
+
+  constructor(private authService: AuthService, private adminService: AdminService,private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -29,8 +32,20 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteUser(userId: string) {
-    this.http.delete(`${environment.apiRoot}users/delete/${userId}`).subscribe(() => {
-      this.users = this.users.filter((user) => user._id !== userId);
+    Swal.fire({
+      title: 'Are you sure you want to delete this user?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.deleteUser(userId).subscribe(() => {
+          this.users = this.users.filter((user) => user._id !== userId);
+          Swal.fire('User deleted', '', 'success');
+        });
+      }
     });
   }
 
