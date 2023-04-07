@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../shared/services/auth.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,16 @@ import { environment } from "../../../../environments/environment";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient,private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllProducts();
+
   }
 
   users: any;
+  products: any;
 
   getAllUsers(){
     return this.authService.getUsers().subscribe((response: any) => {
@@ -27,6 +31,19 @@ export class DashboardComponent implements OnInit {
   deleteUser(userId: string) {
     this.http.delete(`${environment.apiRoot}users/delete/${userId}`).subscribe(() => {
       this.users = this.users.filter((user) => user._id !== userId);
+    });
+  }
+
+  getAllProducts() {
+    return this.productService.getAllProducts().subscribe((response: any) => {
+      this.products = response.data.products.map((product: any) => {
+        if (product.status === 'pending') {
+          product.color = '#ffe6e6';
+        } else if (product.status === 'accepted') {
+          product.color = '#e6ffed';
+        }
+        return product;
+      });
     });
   }
 
