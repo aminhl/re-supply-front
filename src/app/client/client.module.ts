@@ -15,6 +15,7 @@ import { CreateRequestComponent } from './components/donation/create-request/cre
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import { BlogComponent } from './components/blog/blog.component';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
 
 
 
@@ -30,7 +31,8 @@ import { BlogComponent } from './components/blog/blog.component';
     AddRequestComponent,
     CreateRequestComponent,
     AddProductComponent,
-    BlogComponent
+    BlogComponent,
+    AddBlogComponent
   ],
   imports: [
     CommonModule,
