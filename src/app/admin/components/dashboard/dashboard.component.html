@@ -131,10 +131,10 @@
                     <a href="#" class="btn-selector">All categories</a>
                     <ul>
                       <li class="active"><span>All categories</span></li>
-                      <li><span>Art</span></li>
-                      <li><span>Music</span></li>
-                      <li><span>Domain Names</span></li>
-                      <li><span>Virtual World</span></li>
+                      <li><span>Admin</span></li>
+                      <li><span>Client</span></li>
+                      <li><span>Active</span></li>
+                      <li><span>Not Active</span></li>
                     </ul>
                   </div>
                 </div>
@@ -155,7 +155,7 @@
                   <tr>
                     <th scope="row">
                       <div class="coll_list_pp">
-                        <img class="lazy" src="/assets/client/images/author/author-1.jpg" alt="">
+                        <img class="lazy" src="{{ user.images[0] }}" alt="">
                         <i class="fa fa-check"></i>
                       </div>
                       {{ user.firstName + " " + user.lastName}}</th>
@@ -174,8 +174,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.joinedAt | date  }}</td>
                     <td>
-                      <a href="" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
-                      <a href="" class="action-wrapper"><span aria-hidden="true" class="icon_pencil-edit"></span></a>
+                      <a (click)="deleteUser(user._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
                     </td>
                   </tr>
                   </tbody>
