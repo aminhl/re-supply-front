@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../shared/services/auth.service";
-import { AdminService } from "../../services/admin.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
 

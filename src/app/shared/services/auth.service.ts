@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment as env } from '../../../environments/environment';
 import { User } from '../../core/models/User';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import {
   catchError,
@@ -88,7 +89,7 @@ export class AuthService {
     const decodedPayload: any = JSON.parse(atob(payload));
     if (decodedPayload.role === 'admin') return true;
     else {
-      alert("You don't have access!!");
+      this.showNotAuthorizedAlert();
       return false;
     }
   }
@@ -136,6 +137,16 @@ export class AuthService {
   updatePassword(target: string, requestBody: string){
     return this.http.patch(env.apiRoot + target, requestBody);
   }
+
+  showNotAuthorizedAlert() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Not Authorized',
+      text: 'Sorry, you are not authorized to access this page',
+      confirmButtonText: 'Ok'
+    });
+  }
+
 
 
 }

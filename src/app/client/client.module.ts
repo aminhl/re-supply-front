@@ -34,7 +34,7 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     CreateRequestComponent,
     AddProductComponent,
     BlogComponent,
-    AddBlogComponent
+    AddBlogComponent,
     UpdatePasswordComponent,
   ],
   imports: [
