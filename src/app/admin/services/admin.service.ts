@@ -21,4 +21,5 @@ export class AdminService {
       this.users = this.users.filter((user) => user._id !== userId);
     });
   }
+  
 }
