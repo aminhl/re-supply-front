@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
   products: any;
   productImageUrl!: string;
   owner: any;
+  searchTerm = '';
 
   constructor(private productService: ProductService) { }
 
