@@ -1,3 +1,4 @@
+
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -14,13 +15,25 @@
     </div>
   </div>
 </div>
+  <div class="request" style="padding: 100px; margin-left:15px;background-color: rgba(93,153,241,0.15)">
+    <div class="row">
+      <div class="col-md-6">
 
-  <div class="row">
+        <h1 style="margin: 0px 0px 5px ;font-size: 60px;font-family: sans-serif; color: #120f7c">You Need Help!!<br>Don't Hesitate Ask For It </h1>
+
+      </div>
+      <div class="col-md-6">
+        <button style="margin-top: 30px; margin-left: 150px; font-size: 35px" class="btn-main" [routerLink]="['/createRequest']" >Ask For Donation</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 30px">
     <div class="col-lg-4 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngFor="let donation of donationList">
       <div class="card">
-
         <!--Card image-->
         <div class="view overlay hm-white-slight">
+          <div class="wrapper">
           <img  *ngIf="!donation.requestImage[0];else image" src="https://mdbootstrap.com/img/Photos/Others/portrait.jpg" class="img-fluid" alt="photo">
           <a href="#!">
             <div class="mask"></div>
@@ -29,12 +42,13 @@
             <img src="{{donation.requestImage[0]}}" class="img-fluid" alt="photo"
                  style="height: 292px ; width: 560px">
           </ng-template>
+          </div>
         </div>
 
         <!--Card content-->
         <div class="card-body">
             <h3 style="text-align:center;font-family: sans-serif; color: #16457c "><span>Help</span> {{donation.requester_id.firstName | uppercase}}</h3>
-          <p class="card-text" style="width: 467px;height: 104px; overflow: hidden; margin-top: 15px" > {{donation.notes}}</p>
+          <p class="card-text" style="height: 104px;overflow: overlay; margin-top: 15px" > {{donation.notes}}</p>
          <div class="row">
            <div class="col-md-6">
              <div style="font-size: 25px ;">Raised
