@@ -33,8 +33,7 @@ export class DashboardComponent implements OnInit {
     private productService: ProductService,
     private http: HttpClient,
     private cdr: ChangeDetectorRef
-  ) { }
-
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -42,31 +41,24 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllUsers() {
-
     return this.authService.getUsers(this.verified, this.role).subscribe(
       (response: any) => {
         this.users = response.data.users;
         this.filteredUsers = this.users;
         console.log(this.users);
-
       },
       (error) => console.error(error)
-
     );
-
   }
 
   getUsersbyStatus(status: boolean) {
-
-
-      this.verified = status;
-      console.log(this.verified);
-      this.getAllUsers();
-      this.verified = undefined;
+    this.verified = status;
+    console.log(this.verified);
+    this.getAllUsers();
+    this.verified = undefined;
   }
 
   getUserByRole(role: string) {
-
     this.role = role;
     console.log(this.role);
     this.getAllUsers();
@@ -135,8 +127,20 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteUser(userId: string) {
-    this.http.delete(`${env.apiRoot}users/delete/${userId}`).subscribe(() => {
-      this.users = this.users.filter((user) => user._id !== userId);
+    Swal.fire({
+      title: 'Are you sure you want to delete this user?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.deleteUser(userId).subscribe(() => {
+          this.users = this.users.filter((user) => user._id !== userId);
+          Swal.fire('User deleted', '', 'success');
+        });
+      }
     });
   }
 
