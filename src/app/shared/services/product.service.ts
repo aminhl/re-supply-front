@@ -11,19 +11,16 @@ export class ProductService {
 
   constructor(public http: HttpClient,private router: Router) { }
 
-  getProducts(): Observable<any> {
-    return this.http.get<any>(env.apiRoot + 'products');
+  getAcceptedProducts(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products/accepted');
   }
   addProduct(target: string, requestBody: FormData){
     return this.http.post(env.apiRoot + target, requestBody, {
       withCredentials: true,
     });
   }
-  getOwnerDetails(id: string): Observable<any> {
-    return this.http.get<any>(`${env.apiRoot}products/ownerDetails/${id}`, {
-      withCredentials: true,
-    });
+  getAllProducts(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products');
   }
-
 
 }

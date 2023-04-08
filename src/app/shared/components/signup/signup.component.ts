@@ -18,6 +18,7 @@ import {
   CountryISO,
   PhoneNumberFormat,
 } from 'ngx-intl-tel-input';
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -111,7 +112,16 @@ export class SignupComponent implements OnInit {
 
     this.authService
       .signup('users/signup', formData)
-      .subscribe((response: any) => this.router.navigate(['/login']));
+      .subscribe((response: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Welcome to ReSupply!',
+          text: 'Thank you for joining us. We hope you have a great experience.',
+          confirmButtonText: 'Get started',
+        });
+
+        this.router.navigate(["/login"]);
+      });
   }
 
   onImageSelected(event: Event) {

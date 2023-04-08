@@ -13,11 +13,12 @@ export class ProductsComponent implements OnInit {
   products: any;
   productImageUrl!: string;
   owner: any;
+  searchTerm = '';
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((req)=>{
+    this.productService.getAcceptedProducts().subscribe((req)=>{
       this.products = req.data.products;
       this.owner = req.data.owner;
       console.log(this.products)

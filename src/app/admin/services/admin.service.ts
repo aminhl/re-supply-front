@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment as env } from "../../../environments/environment";
+import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
@@ -10,16 +11,10 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any>(env.apiRoot + 'users').subscribe((users) => {
-      this.users = users;
-    });
   }
 
-  deleteUser(userId: string) {
-    this.http.delete(`users/delete/${userId}`).subscribe(() => {
-      // Remove the deleted user from the list of users
-      this.users = this.users.filter((user) => user._id !== userId);
-    });
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${env.apiRoot}users/delete/${userId}`);
   }
   
 }

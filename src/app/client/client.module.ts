@@ -17,6 +17,8 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
 import { BlogComponent } from './components/blog/blog.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { ProductSubmissionComponent } from './components/products/product-submission/product-submission.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -36,14 +38,16 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     BlogComponent,
     AddBlogComponent,
     UpdatePasswordComponent,
+    ProductSubmissionComponent,
   ],
-  imports: [
-    CommonModule,
-    ClientRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    Ng2SearchPipeModule
-  ],
+    imports: [
+        CommonModule,
+        ClientRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        Ng2SearchPipeModule,
+        SharedModule
+    ],
   exports: [
     MyProfileComponent,
     EditProfileComponent,

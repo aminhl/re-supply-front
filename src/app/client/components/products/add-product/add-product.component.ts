@@ -50,7 +50,7 @@ export class AddProductComponent implements OnInit {
       formData.append('images', images.value, images.value.name);
     }
 
-    this.productService.addProduct('products/', formData).subscribe((response: any) => this.router.navigate(['/products']));
+    this.productService.addProduct('products/', formData).subscribe((response: any) => this.router.navigate(['/productSubmission']));
   }
 
   onImageSelected(event: Event) {

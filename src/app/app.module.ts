@@ -9,6 +9,7 @@ import {SharedModule} from "./shared/shared.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
     AdminModule,
     SharedModule,
     Ng2SearchPipeModule,
+    OrderModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
