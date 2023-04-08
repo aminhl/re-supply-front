@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { AdminRoutingModule } from './admin-routing.module';
+import { CommonModule } from '@angular/common';import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 import {OrderModule} from "ngx-order-pipe";
-
 
 @NgModule({
   declarations: [
@@ -13,7 +11,8 @@ import {OrderModule} from "ngx-order-pipe";
     imports: [
         CommonModule,
         AdminRoutingModule,
-        OrderModule
+        OrderModule,
+        FormsModule
     ]
 })
-export class AdminModule { }
+export class AdminModule {}

@@ -7,6 +7,8 @@ import {AuthService} from "../../../shared/services/auth.service";
   styleUrls: ['./main-c.component.css']
 })
 export class MainCComponent implements OnInit {
+  verified: any;
+  role: any;
 
   constructor(private authService:AuthService) { }
 
@@ -14,7 +16,7 @@ export class MainCComponent implements OnInit {
   }
 
   showUsers(){
-    this.authService.getUsers().subscribe(response => console.log(response));
+    this.authService.getUsers(this.verified, this.role).subscribe(response => console.log(response));
   }
 
 }

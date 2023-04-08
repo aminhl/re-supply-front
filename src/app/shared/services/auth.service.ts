@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment as env } from '../../../environments/environment';
 import { User } from '../../core/models/User';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ export class AuthService {
   errorMessage!: string;
   email!: string;
   password!: string;
+
   constructor(
     public http: HttpClient,
     private router: Router,
@@ -35,7 +36,14 @@ export class AuthService {
       withCredentials: true,
     });
   }
-  login(target: string, requestBody: { email: string | null; password: string| null;  code?: number}) {
+  login(
+    target: string,
+    requestBody: {
+      email: string | null;
+      password: string | null;
+      code?: number;
+    }
+  ) {
     return this.http.post(env.apiRoot + target, requestBody, {
       withCredentials: true,
     });
@@ -46,13 +54,26 @@ export class AuthService {
     return this.http.post<{ exists: boolean }>(url, { email });
   }
 
-  getUsers() {
-    return this.http.get(env.apiRoot + 'users');
+
+
+  getUsers(status:any, role : any) {
+    let params = new HttpParams();
+    if (status !== undefined ) {
+      params = params.append('verified', status);
+    }
+
+    if (role !== undefined ) {
+      params = params.append('role', role);
+    }
+    console.log(params);
+    return this.http.get(env.apiRoot + 'users', { params: params });
   }
+
 
   getUser(): Observable<any> {
     return this.http.get<any>(env.apiRoot + 'users/user');
   }
+
 
   isLoggedIn(): boolean {
     return this.getToken() !== null;
@@ -95,9 +116,9 @@ export class AuthService {
   }
 
   logout() {
-     localStorage.removeItem('email');
-     localStorage.removeItem('password');
-     localStorage.removeItem('jwt');
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
   }
   forgetPassword(target: string, requestBody: { email: string }) {
@@ -134,7 +155,7 @@ export class AuthService {
     return this.http.get(env.apiRoot + target);
   }
 
-  updatePassword(target: string, requestBody: string){
+  updatePassword(target: string, requestBody: string) {
     return this.http.patch(env.apiRoot + target, requestBody);
   }
 
@@ -143,10 +164,7 @@ export class AuthService {
       icon: 'error',
       title: 'Not Authorized',
       text: 'Sorry, you are not authorized to access this page',
-      confirmButtonText: 'Ok'
+      confirmButtonText: 'Ok',
     });
   }
-
-
-
 }
