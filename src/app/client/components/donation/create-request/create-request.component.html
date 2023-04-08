@@ -1,32 +1,58 @@
-<div class="container">
-  <h1>Add Request</h1>
-  <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="type">Type</label>
-      <select  id="type" formControlName="type" class="form-control" #select>
-        <option value="Item">Item</option>
-        <option value="Currency">Currency</option>
-      </select>
 
+<section aria-label="section">
+  <div class="container">
+    <div class="row wow fadeIn">
+      <div class="col-lg-7 offset-lg-1">
+        <div> <h1 style="margin: 0px 0px 5px ;font-size:36px;font-family: sans-serif; color: #120f7c">Add Donation Request
+        </h1></div>
+          <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text"
+                     id="title"
+                     formControlName="requestTitle"
+                     class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select  id="type" formControlName="type" class="form-control" #select>
+                <option value="Item">Item</option>
+                <option value="Currency">Currency</option>
+              </select>
+
+            </div>
+            <div class="form-group" *ngIf="select.value==='Currency'">
+              <label for="targetValue">Target Value</label>
+              <input type="number"
+                     id="targetValue"
+                     formControlName="targetValue"
+                     class="form-control">
+            </div>
+            <div class="form-group" *ngIf="select.value==='Item'">
+              <label for="typeItem">Type Item </label>
+              <input type="text"
+                     id="typeItem"
+                     formControlName="itemType"
+                     class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes</label>
+              <textarea id="notes" formControlName="notes" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="requestImage">Request Image</label>
+              <input type="file"
+                     id="requestImage"
+                     formControlName="requestImage"
+                     class="form-control"
+                     (change)="onImageSelected($event)" >
+            </div>
+            <button style="margin-top: 15px; align-self: center" type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
+          </form>
+      </div>
     </div>
-    <div class="form-group" *ngIf="select.value==='Currency'">
-      <label for="targetValue">Target Value</label>
-      <input type="number" id="targetValue" formControlName="targetValue" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="notes">Notes</label>
-      <textarea id="notes" formControlName="notes" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="requestImage">Request Image</label>
-      <input type="file"
-             id="requestImage"
-             formControlName="requestImage"
-             class="form-control"
-             (change)="onImageSelected($event)" >
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
-  </form>
-</div>
+  </div>
+</section>
+
 
 

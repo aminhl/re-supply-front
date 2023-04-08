@@ -17,6 +17,8 @@ export class CreateRequestComponent implements OnInit {
   targetValue!: FormControl;
   currentValue!: FormControl;
   notes!: FormControl;
+  itemType!: FormControl;
+  requestTitle!: FormControl;
   requestImage!: FormControl;
 
   constructor(
@@ -37,6 +39,8 @@ export class CreateRequestComponent implements OnInit {
     this.targetValue = new FormControl('',[Validators.min(0)] );
     this.currentValue = new FormControl('',[Validators.min(0)] );
     this.notes = new FormControl('',[Validators.required]);
+    this.itemType = new FormControl('',[Validators.required]);
+    this.requestTitle = new FormControl('',[Validators.required]);
     this.requestImage = new FormControl();
   }
 
@@ -46,6 +50,8 @@ export class CreateRequestComponent implements OnInit {
       targetValue: this.targetValue,
       currentValue: this.currentValue,
       notes: this.notes,
+      itemType:this.itemType,
+      requestTitle:this.requestTitle,
       requestImage: this.requestImage,
     });
   }
@@ -56,6 +62,8 @@ export class CreateRequestComponent implements OnInit {
     formData.append('targetValue', this.requestForm.value.targetValue);
     formData.append('currentValue', this.requestForm.value.currentValue);
     formData.append('notes', this.requestForm.value.notes);
+    formData.append('itemType', this.requestForm.value.itemType);
+    formData.append('requestTitle', this.requestForm.value.requestTitle);
     const requestImage = this.requestForm.get('requestImage');
     if (requestImage && requestImage.value) {
       formData.append('requestImage', requestImage.value,requestImage.value.name);
