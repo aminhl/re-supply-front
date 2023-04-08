@@ -13,8 +13,8 @@ export class AdminService {
   ngOnInit() {
   }
 
-  deleteUser(userId: string): Observable<any> {
-    return this.http.delete(`${env.apiRoot}users/delete/${userId}`);
-  }
-  
+  // deleteUser(userId: string): Observable<any> {
+  //   return this.http.delete(`${env.apiRoot}users/delete/${userId}`);
+  // }
+
 }

@@ -15,51 +15,62 @@ import {ProductService} from "../../../shared/services/product.service";
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  role: string;
+  role: String;
   sevenDaysUsers: any;
-  constructor(
-    private authService: AuthService,
-    private http: HttpClient,
-    private cdr: ChangeDetectorRef
-  ) {}
-
   originalUsers: any;
   filteredUsers: any;
   searchTerm: String;
   inactiveUsers: any;
   users: any;
-  verified?: any;
+  verified: Boolean;
+  products: any;
+  order: string = 'status';
+  reverse: boolean = false;
 
-  constructor(private authService: AuthService, private adminService: AdminService,private productService: ProductService,private http: HttpClient) { }
+  constructor(
+    private authService: AuthService,
+    private adminService: AdminService,
+    private productService: ProductService,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
+  ) { }
 
 
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllProducts();
-
   }
 
   getAllUsers() {
+
     return this.authService.getUsers(this.verified, this.role).subscribe(
       (response: any) => {
         this.users = response.data.users;
         this.filteredUsers = this.users;
         console.log(this.users);
+
       },
       (error) => console.error(error)
+
     );
+
   }
 
   getUsersbyStatus(status: boolean) {
-    this.verified = status;
-    console.log(this.verified);
-    this.getAllUsers();
+
+
+      this.verified = status;
+      console.log(this.verified);
+      this.getAllUsers();
+      this.verified = undefined;
   }
 
   getUserByRole(role: string) {
+
     this.role = role;
     console.log(this.role);
     this.getAllUsers();
+    this.role = undefined;
   }
 
   getUsersByWeek() {
@@ -86,19 +97,11 @@ export class DashboardComponent implements OnInit {
     );
     console.log('filteredUsers:', this.filteredUsers);
   }
-  
 
   onInputChange(event: any) {
     this.searchTerm = event.target.value;
     this.searchUsers();
   }
-
-  
-  products: any;
-  order: string = 'status';
-  reverse: boolean = false;
-
-
 
   searchUsers() {
     if (this.searchTerm) {
@@ -132,26 +135,8 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteUser(userId: string) {
-
     this.http.delete(`${env.apiRoot}users/delete/${userId}`).subscribe(() => {
       this.users = this.users.filter((user) => user._id !== userId);
-    });
-  }
-
-    Swal.fire({
-      title: 'Are you sure you want to delete this user?',
-      text: 'This action cannot be undone',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.adminService.deleteUser(userId).subscribe(() => {
-          this.users = this.users.filter((user) => user._id !== userId);
-          Swal.fire('User deleted', '', 'success');
-        });
-      }
     });
   }
 
@@ -162,13 +147,17 @@ export class DashboardComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.delete(`${environment.apiRoot}products/${productId}`).subscribe(() => {
-          this.products = this.products.filter((product) => product._id !== productId);
-          Swal.fire('Product deleted', '', 'success');
-        });
+        this.http
+          .delete(`${env.apiRoot}products/${productId}`)
+          .subscribe(() => {
+            this.products = this.products.filter(
+              (product) => product._id !== productId
+            );
+            Swal.fire('Product deleted', '', 'success');
+          });
       }
     });
   }
@@ -185,17 +174,18 @@ export class DashboardComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, accept it!',
-      cancelButtonText: 'Cancel'
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.patch(`${environment.apiRoot}products/accept/${productId}`, {}).subscribe(() => {
-          this.getAllProducts();
-          Swal.fire('Product accepted', '', 'success');
-        });
+        this.http
+          .patch(`${env.apiRoot}products/accept/${productId}`, {})
+          .subscribe(() => {
+            this.getAllProducts();
+            Swal.fire('Product accepted', '', 'success');
+          });
       }
     });
   }
-
 
   getAllProducts() {
     return this.productService.getAllProducts().subscribe((response: any) => {
@@ -218,3 +208,5 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
+
+
