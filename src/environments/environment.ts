@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiRoot: "http://localhost:3000/api/v1/",
   CAPTCHA_SITE_KEY: "6Lefy2QlAAAAAJZ_s6doN9wNM5kQo-X94N9FkkOE",
-  CAPTCHA_SECRET_KEY: "6Lefy2QlAAAAALqsuW56UlKpAZFG66iYY2vDnbn7"
+  CAPTCHA_SECRET_KEY: "6Lefy2QlAAAAALqsuW56UlKpAZFG66iYY2vDnbn7",
+  PasswordGoogleGenerator:"5hwCqy(oFKsUxwG$tc9uBPpOc*4auM+40r#Kyf!MSLw^Gz0UjP4Tb0oX))HzMi7U"
 };
 
 /*

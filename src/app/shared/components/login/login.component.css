@@ -1,0 +1,94 @@
+.google-btn {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  width: 150px;
+  height: 50px;
+}
+
+.google-btn:hover {
+  border: 1px solid #aaa;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.google-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.google-icon i {
+  font-size: 18px;
+  color: #4285f4;
+}
+
+
+.facebook-btn {
+  background-color: #3b5998;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  width: 150px;
+  height: 50px;
+}
+
+.facebook-btn:hover {
+  background-color: #2d4373;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.facebook-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.facebook-icon i {
+  font-size: 18px;
+  color: #fff;
+}
+
+.btn-text {
+  margin-left: 2px;
+}
+.button-container {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
