@@ -44,7 +44,7 @@
               </a>
             </div>
             <div class="nft__item_wrap">
-              <a href="item-details.html">
+              <a [routerLink]="['/productDetails', product._id]">
                 <div class="d-placeholder"></div>
                 <img src="{{ product.images[0] }}" class="nft__item_preview" alt="">
               </a>

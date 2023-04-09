@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img [src]="productImageUrl" class="image-autosize img-fluid img-rounded mb-sm-30" alt="">
+    </div>
+    <div class="col-md-6" style="margin-top: 2rem">
+      <h2>{{ product.name }}</h2>
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>Description:</td>
+          <td><p>{{ product.description }}</p></td>
+        </tr>
+        <tr>
+          <td>Price:</td>
+          <td><strong>{{ product.price | currency:'USD':true:'1.2-2' }}</strong></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="spacer-20"></div>
+      <h3>Contact the owner</h3>
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>Full name:</td>
+          <td>{{ product.owner.firstName }} {{ product.owner.lastName }}</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>{{ product.owner.email }}</td>
+        </tbody>
+      </table>
+      <div class="spacer-30"></div>
+      <a href="#" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#buy_now">
+        Buy Now
+      </a>
+    </div>
+  </div>
+</div>
