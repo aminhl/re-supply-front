@@ -22,5 +22,8 @@ export class ProductService {
   getAllProducts(): Observable<any> {
     return this.http.get<any>(env.apiRoot + 'products');
   }
+  getProduct(id: string): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products/get/' + id);
+  }
 
 }

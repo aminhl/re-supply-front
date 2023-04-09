@@ -138,7 +138,32 @@ export class DashboardComponent implements OnInit {
       if (result.isConfirmed) {
         this.adminService.deleteUser(userId).subscribe(() => {
           this.users = this.users.filter((user) => user._id !== userId);
+          this.getAllUsers();
           Swal.fire('User deleted', '', 'success');
+        });
+      }
+    });
+  }
+
+  upgradeToAdmin(userId: string) {
+    const user = this.users.find((u: any) => u._id === userId);
+    if (user.role === 'admin') {
+      Swal.fire('User is already an admin', '', 'info');
+      return;
+    }
+    Swal.fire({
+      title: 'Are you sure you want to upgrade this user to admin?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, upgrade!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.upgradeToAdmin(userId).subscribe(() => {
+          this.users = this.users.filter((user) => user._id !== userId);
+          this.getAllUsers();
+          Swal.fire('User upgraded to admin', '', 'success');
         });
       }
     });

@@ -19,6 +19,7 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { ProductSubmissionComponent } from './components/products/product-submission/product-submission.component';
 import {SharedModule} from "../shared/shared.module";
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 
 
 
@@ -39,6 +40,7 @@ import {SharedModule} from "../shared/shared.module";
     AddBlogComponent,
     UpdatePasswordComponent,
     ProductSubmissionComponent,
+    ProductDetailsComponent,
   ],
     imports: [
         CommonModule,
