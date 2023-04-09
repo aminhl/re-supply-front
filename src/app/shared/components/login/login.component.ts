@@ -3,13 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { environment as env } from '../../../../environments/environment';
 import { Router } from '@angular/router';
-import {
-
-  SocialAuthService,
-  SocialUser
-} from "@abacritt/angularx-social-login";
+import { saveAs } from 'file-saver';
+import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, Observable } from "rxjs";
+
 import Swal from "sweetalert2";
 declare var FB: any;
 
@@ -87,8 +85,8 @@ export class LoginComponent implements OnInit {
               formData.append('lastName',profile.getFamilyName() );
               formData.append('email',profile.getEmail());
               formData.append('phoneNumber', "00000000");
-              formData.append('password',env.PasswordGoogleGenerator );
-              formData.append('confirmPassword',env.PasswordGoogleGenerator );
+              formData.append('password',env.PasswordGoogleGenerator);
+              formData.append('confirmPassword',env.PasswordGoogleGenerator);
               this.createImageFile(this.imageProxyUrl(profile.getImageUrl()),profile.getGivenName()+profile.getFamilyName()).subscribe(result => {
                 const imageFileValue = result.value;
                 const imageFileName = result.name;
@@ -177,6 +175,81 @@ export class LoginComponent implements OnInit {
       if (response.authResponse) {
         FB.api('/me?fields=name,email,picture', (response) => {
           this.userProfile = response;
+          const nameArr = this.userProfile.name.split(' ');
+          const firstName = nameArr[0];
+          const lastName = nameArr[nameArr.length - 1];
+          this.authService.checkEmail(this.userProfile.email).subscribe(  (response)=>
+          {
+            if (response.exists==false)
+            {
+              this.createImageFile(this.imageProxyUrl(this.userProfile.picture.data.url),this.userProfile.name+this.userProfile.name).subscribe(result => {
+                const imageFileValue = result.value;
+                const imageFileName = result.name;
+                const formData = new FormData();
+                formData.append('firstName',firstName );
+                formData.append('lastName',lastName );
+                formData.append('email',this.userProfile.email);
+                formData.append('phoneNumber', "00000000");
+                formData.append('password',env.PasswordFacebookGenerator );
+                formData.append('confirmPassword',env.PasswordFacebookGenerator );
+                formData.append('images',imageFileValue,imageFileName );
+                this.authService.signup('users/signup', formData).subscribe((responsesingup: any) =>
+                {
+                  const loginData = {
+                    email: this.userProfile.email,
+                    password: env.PasswordFacebookGenerator,
+                  };
+                  this.authService.login('users/login', loginData).subscribe(
+                    (response: any) => {
+                      if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
+                      ) {
+                        localStorage.setItem('email', loginData.email);
+                        localStorage.setItem('password', loginData.password);
+                        this.router.navigate(['twoFactor']);
+                      } else {
+                        localStorage.setItem('jwt', response.token);
+                        this.ngZone.run(() => {
+                          this.router.navigate(['']);
+                        });
+                      }
+                    },
+                  );
+                });
+              })
+            }
+            else
+            {
+              const loginData = {
+                email: this.userProfile.email,
+                password: env.PasswordFacebookGenerator,
+              };
+              this.authService.login('users/login', loginData).subscribe(
+                (response: any) => {
+                  if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
+                  ) {
+                    localStorage.setItem('email', loginData.email);
+                    localStorage.setItem('password', loginData.password);
+                    this.router.navigate(['twoFactor']);
+                  } else {
+                    localStorage.setItem('jwt', response.token);
+                    this.ngZone.run(() => {
+                      // Perform navigation code here
+                      this.router.navigate(['']);
+                    });
+                  }
+                },
+              );
+            }
+          });
+
+
+
+
+
+
+
+
+
         });
       } else {
         console.log('User cancelled login or did not fully authorize.');
@@ -241,7 +314,11 @@ export class LoginComponent implements OnInit {
       })
     );
   }
-
+  downloadPhoto(photoUrl: string) {
+    this.http.get(photoUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
+      saveAs(blob, 'photo.jpg');
+    });
+  }
   imageProxyUrl(url: string): string {
     const proxyUrl = 'http://localhost:8080/';
     return proxyUrl + url;
