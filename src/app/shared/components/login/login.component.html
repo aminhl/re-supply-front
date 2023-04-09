@@ -1,3 +1,6 @@
+<head>
+
+</head>
 <div class="no-bottom no-top" id="content" style="background-size: cover;">
   <div id="top" style="background-size: cover;"></div>
 
@@ -55,11 +58,24 @@
                   <!-- social icons -->
                   <ul class="list s3">
                     <li>Login with:</li>
-                    <li><a href="#" (click)="signinWithFacebook($event)">Facebook</a></li>
-                    <li><a href="#" (click)="signinWithGoogle($event)">Google</a></li>
                   </ul>
+                  <div class="spacer-10"></div>
+                  <div class="button-container">
+                    <button (click)="loginWithFacebook()" class="facebook-btn">
+                      <span class="facebook-icon"><i class="fab fa-facebook"></i></span>
+                      <span class="btn-text">Facebook</span>
+                    </button>
+                    <button #loginref class="google-btn">
+                      <span class="google-icon"><i class="fab fa-google"></i></span>
+                      <span class="btn-text">Google</span>
+                    </button>
+                  </div>
+
+
+
                   <!-- social icons close -->
                 </form>
+
               </div>
             </div>
           </div>
@@ -69,3 +85,6 @@
   </section>
 
 </div>
+
+
+
