@@ -14,7 +14,6 @@ import { AuthGuard } from './shared/authguard/auth.guard';
 import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
 import {DonationComponent} from "./client/components/donation/donation.component";
 import {ProductsComponent} from "./client/components/products/products.component";
-import {AddRequestComponent} from "./client/components/donation/add-request/add-request.component";
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
 import { BlogComponent } from './client/components/blog/blog.component';
