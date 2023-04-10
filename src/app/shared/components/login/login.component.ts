@@ -90,9 +90,8 @@ export class LoginComponent implements OnInit {
               this.createImageFile(this.imageProxyUrl(profile.getImageUrl()),profile.getGivenName()+profile.getFamilyName()).subscribe(result => {
                 const imageFileValue = result.value;
                 const imageFileName = result.name;
-
                 formData.append('images',imageFileValue,imageFileName );
-                this.authService.signup('users/signup', formData).subscribe((responsesingup: any) =>
+                this.authService.signup('users/signupoAuth', formData).subscribe((responsesingup: any) =>
                 {
                   const loginData = {
                     email: profile.getEmail(),
@@ -193,25 +192,18 @@ export class LoginComponent implements OnInit {
                 formData.append('password',env.PasswordFacebookGenerator );
                 formData.append('confirmPassword',env.PasswordFacebookGenerator );
                 formData.append('images',imageFileValue,imageFileName );
-                this.authService.signup('users/signup', formData).subscribe((responsesingup: any) =>
+                this.authService.signup('users/signupoAuth', formData).subscribe(responsesingup =>
                 {
                   const loginData = {
                     email: this.userProfile.email,
                     password: env.PasswordFacebookGenerator,
-                  };
+                  }
                   this.authService.login('users/login', loginData).subscribe(
                     (response: any) => {
-                      if ( response != null &&((response.data != null &&response.data.user != null &&response.data.usertwoFactorAuth===true) ||(response.user != null && response.user.twoFactorAuth === true))
-                      ) {
-                        localStorage.setItem('email', loginData.email);
-                        localStorage.setItem('password', loginData.password);
-                        this.router.navigate(['twoFactor']);
-                      } else {
                         localStorage.setItem('jwt', response.token);
                         this.ngZone.run(() => {
                           this.router.navigate(['']);
                         });
-                      }
                     },
                   );
                 });
@@ -241,14 +233,6 @@ export class LoginComponent implements OnInit {
               );
             }
           });
-
-
-
-
-
-
-
-
 
         });
       } else {
@@ -301,11 +285,7 @@ export class LoginComponent implements OnInit {
   createImageFile(photoUrl: string, fileName: string): Observable<{ value: File, name: string }> {
     // Make a GET request for the image and convert it to a blob
     return this.http.get(photoUrl, {
-      responseType: 'blob',
-      headers: new HttpHeaders({
-        'Origin': 'https://api.allorigins.win/',
-        'X-Requested-With': 'XMLHttpRequest'// Or replace with the required header
-      })
+      responseType: 'blob'
     }).pipe(
       map(blob => {
         // Create a new File object using the blob and the file name
@@ -314,17 +294,11 @@ export class LoginComponent implements OnInit {
       })
     );
   }
-  downloadPhoto(photoUrl: string) {
-    this.http.get(photoUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
-      saveAs(blob, 'photo.jpg');
-    });
-  }
+
   imageProxyUrl(url: string): string {
     const proxyUrl = 'http://localhost:8080/';
     return proxyUrl + url;
   }
-
-
 }
 
 
