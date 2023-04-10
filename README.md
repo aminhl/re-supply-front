@@ -1,5 +1,5 @@
 
-# ReSuplly by NextHope
+# ReSupply by NextHope
 
 ReSupply is a web 3 and AI-powered platform designed to help African students meet their needs for educational supplies and enhance their studies. The platform offers a range of features including donation management, shop and exchange, sharing knowledge, and community sections. This document aims to provide an overview of the project and its key features.
 
