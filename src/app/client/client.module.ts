@@ -10,7 +10,6 @@ import {MainCComponent} from "./components/main-c/main-c.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DonationComponent } from './components/donation/donation.component';
 import { ProductsComponent } from './components/products/products.component';
-import { AddRequestComponent } from './components/donation/add-request/add-request.component';
 import { CreateRequestComponent } from './components/donation/create-request/create-request.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
@@ -33,7 +32,6 @@ import { ProductDetailsComponent } from './components/products/product-details/p
     FooterCComponent,
     DonationComponent,
     ProductsComponent,
-    AddRequestComponent,
     CreateRequestComponent,
     AddProductComponent,
     BlogComponent,
