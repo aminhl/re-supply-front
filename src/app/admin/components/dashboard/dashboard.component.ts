@@ -236,6 +236,12 @@ export class DashboardComponent implements OnInit {
       this.reverse = false;
     }
   }
+  getPhoneNumber(user: any) {
+    if (user.phoneNumber === '00000000') {
+      return 'Not provided';
+    }
+    return user.phoneNumber;
+  }
 }
 
 
