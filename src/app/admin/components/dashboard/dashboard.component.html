@@ -230,7 +230,7 @@
                             {{ user.verified ? "Active" : "Not Active" }}
                           </span>
                         </td>
-                        <td class="">{{ user.phoneNumber }}</td>
+                        <td class="">{{ getPhoneNumber(user) }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.joinedAt | date }}</td>
                         <td>
