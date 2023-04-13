@@ -85,7 +85,7 @@
 
   <div class="row" style="margin-left: 15px;margin-right: 15px">
     <div class="col-lg-4 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngFor="let donation of donationList">
-      <div class="card">
+      <div class="card" *ngIf="donation.isApproved">
         <!--Card image-->
         <div class="view overlay hm-white-slight">
           <div class="wrapper">

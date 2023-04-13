@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';import { AdminRoutingModule } fro
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import {OrderModule} from "ngx-order-pipe";
+import {DonationManagementComponent} from "./components/dashboard/donation-management/donation-management.component";
+
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    DonationManagementComponent
+
   ],
     imports: [
         CommonModule,
