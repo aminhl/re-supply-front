@@ -8,6 +8,7 @@ import { catchError, EMPTY, tap } from 'rxjs';
 import { AdminService } from "../../services/admin.service";
 import Swal from 'sweetalert2';
 import {ProductService} from "../../../shared/services/product.service";
+import {RequestService} from "../../../shared/services/request.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,11 +27,13 @@ export class DashboardComponent implements OnInit {
   products: any;
   order: string = 'status';
   reverse: boolean = false;
+   donations: any;
 
   constructor(
     private authService: AuthService,
     private adminService: AdminService,
     private productService: ProductService,
+    private donationService: RequestService,
     private http: HttpClient,
     private cdr: ChangeDetectorRef
   ) {}
@@ -38,7 +41,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllProducts();
+
   }
+
+
 
   getAllUsers() {
     return this.authService.getUsers(this.verified, this.role).subscribe(

@@ -1,6 +1,6 @@
 
 <section aria-label="section">
-  <div class="container">
+  <div class="container" id="add"style="background-color: whitesmoke; padding:30px;border-radius: 15px">
     <div class="row wow fadeIn">
       <div class="col-lg-7 offset-lg-1">
         <div> <h1 style="margin: 0px 0px 5px ;font-size:36px;font-family: sans-serif; color: #120f7c">Add Donation Request
@@ -11,30 +11,94 @@
               <input type="text"
                      id="title"
                      formControlName="requestTitle"
-                     class="form-control">
-            </div>
+                     class="form-control"
+                     [ngModel]="requestTitle.value"
+                     [ngClass]="{
+                        'input-invalid':
+                          requestTitle.invalid &&
+                          (requestTitle.dirty || requestTitle.touched),
+                        'input-valid':
+                          requestTitle.valid && (requestTitle.dirty || requestTitle.touched)
+                      }"
+              >
+              <div
+                class="message-invalid"
+                *ngIf="requestTitle.touched && requestTitle.hasError('required')"
+              >
+                Title  is required!
+              </div>
+              <div
+                class="message-invalid"
+                *ngIf="
+                        requestTitle.touched && requestTitle.hasError('invalidData')
+                      "
+              >
+                Title contains only letters!
+              </div>
+              <!--success message-->
+              <div
+                class="message-valid"
+                *ngIf="requestTitle.touched && !requestTitle.errors"
+              >
+                Valid!
+              </div>
+
+
+
             <div class="form-group">
               <label for="type">Type</label>
-              <select  id="type" formControlName="type" class="form-control" #select>
+              <select  id="type"
+                       formControlName="type"
+                       class="form-control"
+                       #select
+                       [ngModel]="type.value"
+                       [ngClass]="{
+                        'input-invalid':
+                          type.invalid &&
+                          (type.dirty || type.touched),
+                        'input-valid':
+                          type.valid && (type.dirty || type.touched)
+                      }"
+              >
                 <option value="Item">Item</option>
                 <option value="Currency">Currency</option>
               </select>
+              <div
+                class="message-invalid"
+                *ngIf="type.touched && type.hasError('required')"
+              >
+                Type is required!
+              </div>
+
+              <!--success message-->
+              <div
+                class="message-valid"
+                *ngIf="type.touched && !type.errors"
+              >
+                Valid!
+              </div>
 
             </div>
-            <div class="form-group" *ngIf="select.value==='Currency'">
+            <div class="form-group" *ngIf="select.value==='Currency';else item" >
               <label for="targetValue">Target Value</label>
               <input type="number"
                      id="targetValue"
                      formControlName="targetValue"
-                     class="form-control">
+                     class="form-control"
+                  >
+
             </div>
-            <div class="form-group" *ngIf="select.value==='Item'">
+          <ng-template #item>
+            <div class="form-group" >
               <label for="typeItem">Type Item </label>
               <input type="text"
                      id="typeItem"
                      formControlName="itemType"
+                     [required]="select.value==='Item'"
                      class="form-control">
             </div>
+          </ng-template>
+
             <div class="form-group">
               <label for="notes">Notes</label>
               <textarea id="notes" formControlName="notes" class="form-control"></textarea>
@@ -47,8 +111,18 @@
                      class="form-control"
                      (change)="onImageSelected($event)" >
             </div>
-            <button style="margin-top: 15px; align-self: center" type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
+              <div class="row">
+                <div class="col-md-6">
+                  <button style="margin-top: 15px; align-self: center" type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
+                </div>
+                <div class="col-md-6">
+                  <button style="margin-top: 15px; align-self: center" type="button" [routerLink]="['/donation']" class="btn btn-danger" >Cancel</button>
+                </div>
+              </div>
+
+            </div>
           </form>
+
       </div>
     </div>
   </div>

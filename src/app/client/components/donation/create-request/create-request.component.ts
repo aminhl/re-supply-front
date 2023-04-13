@@ -4,6 +4,7 @@ import {RequestService} from '../../../../shared/services/request.service';
 import {HttpClient} from '@angular/common/http';
 import {regexValid} from "../../../../core/validators/signup.validator";
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-request',
@@ -39,7 +40,7 @@ export class CreateRequestComponent implements OnInit {
     this.targetValue = new FormControl('',[Validators.min(0)] );
     this.currentValue = new FormControl('',[Validators.min(0)] );
     this.notes = new FormControl('',[Validators.required]);
-    this.itemType = new FormControl('',[Validators.required]);
+    this.itemType = new FormControl('',);
     this.requestTitle = new FormControl('',[Validators.required]);
     this.requestImage = new FormControl();
   }
@@ -59,9 +60,10 @@ export class CreateRequestComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('type', this.requestForm.value.type);
-    formData.append('targetValue', this.requestForm.value.targetValue);
-    formData.append('currentValue', this.requestForm.value.currentValue);
     formData.append('notes', this.requestForm.value.notes);
+      this.requestForm.value.currentValue=0;
+    formData.append('currentValue', this.requestForm.value.currentValue);
+    formData.append('targetValue', this.requestForm.value.targetValue);
     formData.append('itemType', this.requestForm.value.itemType);
     formData.append('requestTitle', this.requestForm.value.requestTitle);
     const requestImage = this.requestForm.get('requestImage');
@@ -69,6 +71,12 @@ export class CreateRequestComponent implements OnInit {
       formData.append('requestImage', requestImage.value,requestImage.value.name);
     }
     this.service.addRequest(formData).subscribe((res) => {
+      Swal.fire({
+        icon: 'info',
+        title: 'Request Under Review!',
+        text: 'Thank you for using our service, we will review your request and get back to you soon',
+        confirmButtonText: 'Ok',
+      });
       this.router.navigate(['/donation']);
     });
   }
