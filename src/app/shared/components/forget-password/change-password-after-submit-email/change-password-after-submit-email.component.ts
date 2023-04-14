@@ -16,9 +16,9 @@ export class ChangePasswordAfterSubmitEmailComponent implements OnInit {
   confirmPassword !: FormControl;
   token !:any;
   notAllowed !:boolean;
-  constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) 
+  constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute)
   {
-    
+
     this.route.queryParams.subscribe((queryParam)=>
     {this.token=queryParam;})
     if (this.token.key==null) {

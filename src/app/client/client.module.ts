@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgImageSliderModule } from 'ng-image-slider';
 import { ClientRoutingModule } from './client-routing.module';
 import {EditProfileComponent} from "./components/edit-profile/edit-profile.component";
 import {MyProfileComponent} from "./components/my-profile/my-profile.component";
@@ -18,9 +18,20 @@ import { BlogComponent } from './components/blog/blog.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { ProductSubmissionComponent } from './components/products/product-submission/product-submission.component';
-import {SharedModule} from "../shared/shared.module";
-
-
+import { SharedModule } from "../shared/shared.module";
+import { AccordionModule } from 'primeng/accordion';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MenuModule } from 'primeng/menu';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { DialogModule } from 'primeng/dialog';
+import { EditorModule } from 'primeng/editor';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CarouselModule } from 'primeng/carousel';
+import { GalleriaModule } from 'primeng/galleria';
 
 
 @NgModule({
@@ -40,20 +51,33 @@ import {SharedModule} from "../shared/shared.module";
     UpdatePasswordComponent,
     ProductSubmissionComponent,
   ],
-    imports: [
-        CommonModule,
-        ClientRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        Ng2SearchPipeModule,
-        SharedModule
-    ],
+  imports: [
+    CommonModule,GalleriaModule,
+    ClientRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Ng2SearchPipeModule,
+    SharedModule,
+    AccordionModule,
+    SpeedDialModule,
+    MenuModule,
+    SplitButtonModule,
+    DialogModule,
+    EditorModule,
+    ConfirmDialogModule,
+    InputTextModule,
+    ButtonModule,
+    FileUploadModule,
+    ToggleButtonModule,
+    NgImageSliderModule,
+    CarouselModule,
+  ],
   exports: [
     MyProfileComponent,
     EditProfileComponent,
     HeaderCComponent,
     MainCComponent,
-    FooterCComponent
-  ]
+    FooterCComponent,
+  ],
 })
-export class ClientModule { }
+export class ClientModule {}
