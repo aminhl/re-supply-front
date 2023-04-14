@@ -14,6 +14,9 @@ export class ProductsComponent implements OnInit {
   productImageUrl!: string;
   owner: any;
   searchTerm = '';
+  selectedFilter = 'name'; // default selected filter option
+  selectedOrder = 'asc'; // default selected order
+
 
   constructor(private productService: ProductService) { }
 
@@ -27,5 +30,23 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+  sortProducts() {
+    this.products.sort((a: any, b: any) => {
+      let comparison = 0;
+      switch (this.selectedFilter) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case 'price':
+          comparison = a.price - b.price;
+          break;
+        case 'date':
+          comparison = new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime();
+          break;
+      }
+      return this.selectedOrder === 'asc' ? comparison : -comparison;
+    });
+  }
+
 
 }
