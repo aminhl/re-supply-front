@@ -1,0 +1,18 @@
+
+label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  appearance: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+

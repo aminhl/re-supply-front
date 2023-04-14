@@ -13,7 +13,7 @@
             <p class="wow fadeInUp lead animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
               An eco-friendly platform for African students to collect reused school supplies effectively.</p>
             <div class="spacer-10" style="background-size: cover;"></div>
-            <a href="explore.html" class="btn-main wow fadeInUp lead animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.25s; animation-name: fadeInUp;">Explore</a>
+            <a [routerLink]="['/products']" class="btn-main wow fadeInUp lead animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.25s; animation-name: fadeInUp;">Explore</a>
             <div class="mb-sm-30" style="background-size: cover;"></div>
           </div>
           <div class="col-md-6 xs-hide" style="background-size: cover;">
@@ -30,19 +30,19 @@
       <div class="row" style="background-size: cover;">
         <div class="col-lg-4 col-md-6 mb-sm-30" style="background-size: cover;">
           <div class="feature-box f-boxed style-3" style="background-size: cover;">
-            <i class="wow fadeInUp bg-color-2 i-boxed icon_wallet animated" style="visibility: visible; animation-name: fadeInUp;"></i>
+            <i [routerLink]="['/products']" class="wow fadeInUp bg-color-2 i-boxed icon_wallet animated" style="visibility: visible; animation-name: fadeInUp; cursor: pointer"></i>
             <div class="text" style="background-size: cover;">
-              <h4 class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">Explore school supplies</h4>
-              <p class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Explore our collection of school supplies and other educational items that have been donated by people just like you.</p>
+              <h4 [routerLink]="['/products']" class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp; cursor: pointer">Explore school supplies</h4>
+              <p  class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Explore our collection of school supplies and other educational items that have been donated by people just like you.</p>
             </div>
             <i class="wm icon_wallet"></i>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-sm-30" style="background-size: cover;">
           <div class="feature-box f-boxed style-3" style="background-size: cover;">
-            <i class="wow fadeInUp bg-color-2 i-boxed icon_cloud-upload_alt animated" style="visibility: visible; animation-name: fadeInUp;"></i>
+            <i [routerLink]="['/donation']" class="wow fadeInUp bg-color-2 i-boxed icon_cloud-upload_alt animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer"></i>
             <div class="text" style="background-size: cover;">
-              <h4 class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">Make a donation</h4>
+              <h4 [routerLink]="['/donation']" class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer">Make a donation</h4>
               <p class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Contribute financially to our cause to help us collect and distribute even more supplies.</p>
             </div>
             <i class="wm icon_cloud-upload_alt"></i>
