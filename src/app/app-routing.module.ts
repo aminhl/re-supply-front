@@ -14,7 +14,6 @@ import { AuthGuard } from './shared/authguard/auth.guard';
 import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
 import {DonationComponent} from "./client/components/donation/donation.component";
 import {ProductsComponent} from "./client/components/products/products.component";
-import {AddRequestComponent} from "./client/components/donation/add-request/add-request.component";
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
 import { BlogComponent } from './client/components/blog/blog.component';
@@ -22,6 +21,7 @@ import { UpdatePasswordComponent } from "./client/components/update-password/upd
 import { DashboardComponent } from "./admin/components/dashboard/dashboard.component";
 import { RoleGuard } from "./shared/roleguard/role.guard";
 import {ProductSubmissionComponent} from "./client/components/products/product-submission/product-submission.component";
+import {ProductDetailsComponent} from "./client/components/products/product-details/product-details.component";
 
 
 
@@ -63,6 +63,7 @@ const routes: Routes = [
   { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, RoleGuard] },
   { path: 'productSubmission', component: ProductSubmissionComponent, canActivate: [AuthGuard] },
+  { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

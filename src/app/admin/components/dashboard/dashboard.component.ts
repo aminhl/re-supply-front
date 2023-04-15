@@ -8,6 +8,7 @@ import { catchError, EMPTY, tap } from 'rxjs';
 import { AdminService } from "../../services/admin.service";
 import Swal from 'sweetalert2';
 import {ProductService} from "../../../shared/services/product.service";
+import {RequestService} from "../../../shared/services/request.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,11 +27,13 @@ export class DashboardComponent implements OnInit {
   products: any;
   order: string = 'status';
   reverse: boolean = false;
+   donations: any;
 
   constructor(
     private authService: AuthService,
     private adminService: AdminService,
     private productService: ProductService,
+    private donationService: RequestService,
     private http: HttpClient,
     private cdr: ChangeDetectorRef
   ) {}
@@ -38,7 +41,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllProducts();
+
   }
+
+
 
   getAllUsers() {
     return this.authService.getUsers(this.verified, this.role).subscribe(
@@ -138,7 +144,32 @@ export class DashboardComponent implements OnInit {
       if (result.isConfirmed) {
         this.adminService.deleteUser(userId).subscribe(() => {
           this.users = this.users.filter((user) => user._id !== userId);
+          this.getAllUsers();
           Swal.fire('User deleted', '', 'success');
+        });
+      }
+    });
+  }
+
+  upgradeToAdmin(userId: string) {
+    const user = this.users.find((u: any) => u._id === userId);
+    if (user.role === 'admin') {
+      Swal.fire('User is already an admin', '', 'info');
+      return;
+    }
+    Swal.fire({
+      title: 'Are you sure you want to upgrade this user to admin?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, upgrade!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.upgradeToAdmin(userId).subscribe(() => {
+          this.users = this.users.filter((user) => user._id !== userId);
+          this.getAllUsers();
+          Swal.fire('User upgraded to admin', '', 'success');
         });
       }
     });
@@ -210,6 +241,12 @@ export class DashboardComponent implements OnInit {
       this.order = column;
       this.reverse = false;
     }
+  }
+  getPhoneNumber(user: any) {
+    if (user.phoneNumber === '00000000') {
+      return 'Not provided';
+    }
+    return user.phoneNumber;
   }
 }
 

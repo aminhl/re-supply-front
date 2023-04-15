@@ -1,0 +1,22 @@
+label {
+  margin: 0px 0px 5px ;
+  font-size:16px;font-family:
+  sans-serif;
+  font-weight: bold;
+  color: #120f7c
+}
+#add{
+  box-shadow: 1px 3px 5px rgba(0.1,0.1,0.1,0.3);
+}
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #1f57b6;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+

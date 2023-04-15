@@ -13,21 +13,25 @@
                 <div class="clearfix"></div>
               </div>
             </form>
+            <div class="spacer-20"></div>
 
-            <div id="item_category" class="dropdown">
-              <a href="#" class="btn-selector">All categories</a>
-              <ul>
-                <li class="active"><span>All categories</span></li>
-                <li><span>Art</span></li>
-                <li><span>Music</span></li>
-                <li><span>Domain Names</span></li>
-                <li><span>Virtual World</span></li>
-                <li><span>Trading Cards</span></li>
-                <li><span>Collectibles</span></li>
-                <li><span>Sports</span></li>
-                <li><span>Utility</span></li>
-              </ul>
+            <div>
+              <label>Sort by:</label>
+              <select [(ngModel)]="selectedFilter" (change)="sortProducts()">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+                <option value="date">Latest Posted</option>
+              </select>
             </div>
+            <div class="spacer-10"></div>
+            <div>
+              <label>Order:</label>
+              <select [(ngModel)]="selectedOrder" (change)="sortProducts()">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
+            <div class="spacer-20"></div>
             <a [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
               Add Product
             </a>
@@ -44,7 +48,7 @@
               </a>
             </div>
             <div class="nft__item_wrap">
-              <a href="item-details.html">
+              <a [routerLink]="['/productDetails', product._id]">
                 <div class="d-placeholder"></div>
                 <img src="{{ product.images[0] }}" class="nft__item_preview" alt="">
               </a>

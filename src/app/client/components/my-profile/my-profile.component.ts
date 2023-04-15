@@ -17,7 +17,7 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
-      
+
       this.user = req.data.user;
       console.log(this.user)
       if (this.user.images.length > 0) {
@@ -25,6 +25,12 @@ export class MyProfileComponent implements OnInit {
       }
       this.active = req.data.user.verified;
     });
+  }
+  getPhoneNumber(user: any) {
+    if (user.phoneNumber === '00000000') {
+      return 'Not provided';
+    }
+    return user.phoneNumber;
   }
 
 }

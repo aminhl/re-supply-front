@@ -16,5 +16,8 @@ export class AdminService {
   deleteUser(userId: string): Observable<any> {
     return this.http.delete(`${env.apiRoot}users/delete/${userId}`);
   }
+  upgradeToAdmin(userId: string): Observable<any> {
+    return this.http.patch(`${env.apiRoot}users/upgrade/${userId}`, {});
+  }
 
 }

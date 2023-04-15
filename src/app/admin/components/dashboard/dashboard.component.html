@@ -230,7 +230,7 @@
                             {{ user.verified ? "Active" : "Not Active" }}
                           </span>
                         </td>
-                        <td class="">{{ user.phoneNumber }}</td>
+                        <td class="">{{ getPhoneNumber(user) }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.joinedAt | date }}</td>
                         <td>
@@ -240,6 +240,14 @@
                             ><span
                               aria-hidden="true"
                               class="icon_trash_alt"
+                            ></span
+                          ></a>
+                          <a
+                            (click)="upgradeToAdmin(user._id)"
+                            class="action-wrapper"
+                            ><span
+                              aria-hidden="true"
+                              class="icon_plus_alt"
                             ></span
                           ></a>
                         </td>
