@@ -16,7 +16,6 @@ import {
 import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-blog',
@@ -156,5 +155,5 @@ export class BlogComponent implements OnInit {
       }
     });
   }
-  
+
 }

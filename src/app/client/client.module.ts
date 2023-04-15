@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { ClientRoutingModule } from './client-routing.module';
 import {EditProfileComponent} from "./components/edit-profile/edit-profile.component";
 import {MyProfileComponent} from "./components/my-profile/my-profile.component";
@@ -69,7 +68,6 @@ import { GalleriaModule } from 'primeng/galleria';
     ButtonModule,
     FileUploadModule,
     ToggleButtonModule,
-    NgImageSliderModule,
     CarouselModule,
   ],
   exports: [

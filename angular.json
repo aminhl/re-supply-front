@@ -33,7 +33,6 @@
               "./node_modules/primeng/resources/primeng.min.css",
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.snow.css",
-
               "src/styles.css"
             ],
             "scripts": [
