@@ -9,6 +9,7 @@ import {environment as env} from "../../../environments/environment";
 })
 export class ProductService {
 
+
   constructor(public http: HttpClient,private router: Router) { }
 
   getAcceptedProducts(): Observable<any> {
@@ -24,6 +25,19 @@ export class ProductService {
   }
   getProduct(id: string): Observable<any> {
     return this.http.get<any>(env.apiRoot + 'products/get/' + id);
+  }
+  // Get wishlist
+  getWishlist(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'wishlists');
+  }
+
+  addProductToWishlist(productId: string): Observable<any> {
+    return this.http.post<any>(`${env.apiRoot}wishlists/`, { productId });
+  }
+
+  // Delete product from wishlist
+  deleteProductFromWishlist(productId: string): Observable<any> {
+    return this.http.delete(env.apiRoot + `wishlists/${productId}`);
   }
 
 }

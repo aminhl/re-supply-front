@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
 import {ActivatedRoute} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-products',
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit {
   searchTerm = '';
   selectedFilter = 'name'; // default selected filter option
   selectedOrder = 'asc'; // default selected order
+  wishlist: any;
 
 
   constructor(private productService: ProductService) { }
@@ -47,6 +49,36 @@ export class ProductsComponent implements OnInit {
       return this.selectedOrder === 'asc' ? comparison : -comparison;
     });
   }
+
+  addProductToWishlist(product: any) {
+    this.productService.addProductToWishlist(product._id).subscribe(
+      res => {
+        this.wishlist = res.data.wishlist;
+        setTimeout(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Product added to the wishList!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }, 1000);
+      },
+      error => {
+        if (error.status === 400 && error.error.message === 'Product already in wishlist') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Product already in wishlist',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        } else {
+          console.log(error);
+        }
+      }
+    );
+  }
+
+
 
 
 }

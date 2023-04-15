@@ -62,7 +62,7 @@
                 {{product.price | currency:'USD':true:'1.2-2'}}
               </div>
               <div class="nft__item_action">
-                <a href="#">Add to cart</a>
+                <a (click)="addProductToWishlist(product)" style="color: #0a53be;cursor: pointer;">Add to Wishlist</a>
               </div>
             </div>
           </div>

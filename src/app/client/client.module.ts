@@ -19,6 +19,7 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
 import { ProductSubmissionComponent } from './components/products/product-submission/product-submission.component';
 import {SharedModule} from "../shared/shared.module";
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 
@@ -39,6 +40,7 @@ import { ProductDetailsComponent } from './components/products/product-details/p
     UpdatePasswordComponent,
     ProductSubmissionComponent,
     ProductDetailsComponent,
+    WishlistComponent,
   ],
     imports: [
         CommonModule,
