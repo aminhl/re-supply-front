@@ -33,10 +33,11 @@
 
                 <div class="de-login-menu" style="background-size: cover;">
 
-                <span id="de-click-menu-notification" class="de-menu-notification">
-                                            <span class="d-count">8</span>
-                                            <i class="fa fa-bell"></i>
-                                        </span>
+                <span id="de-click-menu-notification" class="de-menu-notification" [routerLink]="'/wishlist'">
+  <span class="d-count" *ngIf="wishlist.length > 0">{{ wishlist.length }}</span>
+  <i class="fa fa-heart"></i>
+</span>
+
 
                   <span id="de-click-menu-profile" class="de-menu-profile">
 
@@ -44,60 +45,7 @@
 
                                         </span>
 
-                  <div id="de-submenu-notification" class="de-submenu" style="display: none; background-size: cover;">
-                    <div class="de-flex" style="background-size: cover;">
-                      <div style="background-size: cover;"><h4>Notifications</h4></div>
-                      <a href="#">Show all</a>
-                    </div>
 
-                    <ul>
-                      <li>
-                        <a href="#">
-                          <img class="lazy" src="../../../../assets/client/images/author/author-2.jpg" alt="">
-                          <div class="d-desc" style="background-size: cover;">
-                            <span class="d-name"><b>Mamie Barnett</b> started following you</span>
-                            <span class="d-time">1 hour ago</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <img class="lazy" src="../../../../assets/client/images/author/author-3.jpg" alt="">
-                          <div class="d-desc" style="background-size: cover;">
-                            <span class="d-name"><b>Nicholas Daniels</b> liked your item</span>
-                            <span class="d-time">2 hours ago</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <img class="lazy" src="../../../../assets/client/images/author/author-4.jpg" alt="">
-                          <div class="d-desc" style="background-size: cover;">
-                            <span class="d-name"><b>Lori Hart</b> started following you</span>
-                            <span class="d-time">18 hours ago</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <img class="lazy" src="../../../../assets/client/images/author/author-5.jpg" alt="">
-                          <div class="d-desc" style="background-size: cover;">
-                            <span class="d-name"><b>Jimmy Wright</b> liked your item</span>
-                            <span class="d-time">1 day ago</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <img class="lazy" src="../../../../assets/client/images/author/author-6.jpg" alt="">
-                          <div class="d-desc" style="background-size: cover;">
-                            <span class="d-name"><b>Karla Sharp</b> started following you</span>
-                            <span class="d-time">3 days ago</span>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
 
                   <div id="de-submenu-profile" class="de-submenu" style="display: none; background-size: cover;">
                     <ul class="de-submenu-profile">

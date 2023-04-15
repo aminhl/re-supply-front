@@ -1,0 +1,44 @@
+<h2>My Wishlist</h2>
+
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ng-container *ngIf="wishlist && wishlist.length > 0; else emptyWishlist">
+          <table class="table de-table table-rank">
+            <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Posted</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let product of wishlist ">
+            <tr>
+              <th scope="row">
+                <div class="coll_list_pp">
+                  <div class="image-wrapper">
+                    <img class="lazy" src="{{ product.images[0] }}" alt="">
+                  </div>
+                </div>
+                {{ product.name}}
+              </th>
+              <td>{{ product.price | currency }}</td>
+              <td>{{ product.postedAt | date  }}</td>
+              <td>
+                <a (click)="deleteProductFromWishlist(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+
+        <ng-template #emptyWishlist>
+          <p>Your wishlist is empty.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -31,6 +31,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ProductDetailsComponent } from './components/products/product-details/p
     UpdatePasswordComponent,
     ProductSubmissionComponent,
     ProductDetailsComponent,
+    WishlistComponent,
   ],
   imports: [
     CommonModule,GalleriaModule,
