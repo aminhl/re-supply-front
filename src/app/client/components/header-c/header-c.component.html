@@ -34,7 +34,7 @@
                 <div class="de-login-menu" style="background-size: cover;">
 
                 <span id="de-click-menu-notification" class="de-menu-notification" [routerLink]="'/wishlist'">
-  <span class="d-count" *ngIf="wishlist.length > 0">{{ wishlist.length }}</span>
+  <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
   <i class="fa fa-heart"></i>
 </span>
 
