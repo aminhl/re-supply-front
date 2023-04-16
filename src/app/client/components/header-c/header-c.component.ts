@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
 })
 export class HeaderCComponent implements OnInit {
   wishlistCount = 0;
-  wishlist: any;
+  wishlist: any[] = [];
   wishlistSubscription: Subscription;
 
   constructor(public authService: AuthService,private productService: ProductService) {
