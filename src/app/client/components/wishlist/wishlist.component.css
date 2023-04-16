@@ -1,6 +1,13 @@
-h2 {
-  margin-left: 2rem;
-  margin-top: 2rem ;
+.wishlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.icon_heart_alt {
+  font-size: 48px;
 }
 .action-wrapper{
   width: 30px;
@@ -37,4 +44,10 @@ h2 {
   transition: transform 0.2s;
   max-width: 100%;
   height: auto;
+}
+a{
+  color : #000000;
+}
+a:hover {
+  color: purple;
 }
