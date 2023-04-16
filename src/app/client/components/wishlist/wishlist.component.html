@@ -1,5 +1,8 @@
+<div class="wishlist">
+<i class="icon_heart_alt"></i>
+  <div class="spacer-20"></div>
 <h2>My Wishlist</h2>
-
+</div>
 <section aria-label="section">
   <div class="container">
     <div class="row">
@@ -22,7 +25,7 @@
                     <img class="lazy" src="{{ product.images[0] }}" alt="">
                   </div>
                 </div>
-                {{ product.name}}
+                <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
               </th>
               <td>{{ product.price | currency }}</td>
               <td>{{ product.postedAt | date  }}</td>

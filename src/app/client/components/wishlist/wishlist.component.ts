@@ -30,11 +30,11 @@ export class WishlistComponent implements OnInit {
 
   deleteProductFromWishlist(productId: string) {
     Swal.fire({
-      title: 'Are you sure you want to remove this product from your wishlist?',
+      title: 'Are you sure you want to delete this product from the wishList?',
       text: 'This action cannot be undone.',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, remove it!',
+      confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -46,20 +46,20 @@ export class WishlistComponent implements OnInit {
               // If the product is found, remove it from the wishlist array
               this.wishlist.splice(index, 1);
               Swal.fire({
-                title: 'Product removed from wishlist',
+                title: 'Success!',
+                text: 'Product has been removed from your wishlist.',
                 icon: 'success',
-                showConfirmButton: false,
-                timer: 1500
               });
+              // Emit the updated wishlist
+              // @ts-ignore
+              this.productService.wishlistUpdated.next();
             }
           },
           error => {
             Swal.fire({
-              title: 'Error',
-              text: 'Unable to remove product from wishlist. Please try again later.',
+              title: 'Error!',
+              text: 'Unable to remove product from wishlist.',
               icon: 'error',
-              showConfirmButton: false,
-              timer: 1500
             });
             console.log(error);
           }
@@ -67,6 +67,7 @@ export class WishlistComponent implements OnInit {
       }
     });
   }
+
 
 
 }

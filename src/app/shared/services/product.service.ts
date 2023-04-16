@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {environment as env} from "../../../environments/environment";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  wishlistUpdated = new Subject<any>();
 
 
   constructor(public http: HttpClient,private router: Router) { }
@@ -32,7 +34,14 @@ export class ProductService {
   }
 
   addProductToWishlist(productId: string): Observable<any> {
-    return this.http.post<any>(`${env.apiRoot}wishlists/`, { productId });
+    return this.http.post<any>(`${env.apiRoot}wishlists/`, { productId })
+      .pipe(
+        tap(() => {
+          // Emit the updated wishlist
+          // @ts-ignore
+          this.wishlistUpdated.next();
+        })
+      );
   }
 
   // Delete product from wishlist

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-header-c',
@@ -10,6 +11,7 @@ import {ProductService} from "../../../shared/services/product.service";
 export class HeaderCComponent implements OnInit {
   wishlistCount = 0;
   wishlist: any;
+  wishlistSubscription: Subscription;
 
   constructor(public authService: AuthService,private productService: ProductService) {
 
@@ -17,7 +19,17 @@ export class HeaderCComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWishlist();
+    // Subscribe to the wishlistUpdated subject to update the wishlist count
+    this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+      this.loadWishlist();
+    });
   }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from the wishlistSubscription to prevent memory leaks
+    this.wishlistSubscription.unsubscribe();
+  }
+
   loadWishlist() {
     this.productService.getWishlist().subscribe(
       res => {

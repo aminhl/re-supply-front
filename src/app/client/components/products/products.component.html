@@ -14,7 +14,7 @@
               </div>
             </form>
             <div class="spacer-20"></div>
-
+            <div class="sorting" style="display: flex;justify-content: end">
             <div>
               <label>Sort by:</label>
               <select [(ngModel)]="selectedFilter" (change)="sortProducts()">
@@ -30,6 +30,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
               </select>
+            </div>
             </div>
             <div class="spacer-20"></div>
             <a [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
