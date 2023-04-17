@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-my-profile',
@@ -11,9 +12,12 @@ export class MyProfileComponent implements OnInit {
   user:any;
   userImageUrl!: string;
   active!: boolean;
+  products: any;
+  productImageUrl!: string;
+  owner: any;
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
@@ -24,6 +28,14 @@ export class MyProfileComponent implements OnInit {
         this.userImageUrl = this.user.images[0];
       }
       this.active = req.data.user.verified;
+    });
+    this.productService.getProductsByOwner().subscribe((req)=>{
+      this.products = req.data.products;
+      this.owner = req.data.owner;
+      console.log(this.products)
+      if (this.products.images && this.products.images.length > 0) {
+        this.productImageUrl = this.products.images[0];
+      }
     });
   }
   getPhoneNumber(user: any) {

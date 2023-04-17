@@ -1,10 +1,6 @@
-
-  <div id="top" style="background-size: cover;"></div>
-
+ <div id="top" style="background-size: cover;"></div>
   <!-- section begin -->
-  <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url(assets/client/images/author_single/author_banner.jpg) top" style="background: url('../../../../assets/client/images/author_single/author_banner.jpg') center top / cover;">
-  </section>
-    <section class="vh-100" style="background-color: #f4f5f7;">
+    <section class="vh-100" style="background-color: #f4f5f7;height: 200px">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-12 mb-4 mb-lg-0">
@@ -44,3 +40,39 @@
         </div>
       </div>
     </section>
+  <section aria-label="section">
+        <div class="container">
+          <div class="row wow fadeIn">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="text-center my-5">My Products</h1>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products">
+                <div class="nft__item">
+                  <div class="author_list_pp">
+                    <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{ product.owner.lastName }} {{ product.owner.firstName }}">
+                      <img class="lazy" src="{{ product.owner.images[0] }}" alt="">
+                      <i class="fa fa-check"></i>
+                    </a>
+                  </div>
+                  <div class="nft__item_wrap">
+                    <a [routerLink]="['/productDetails', product._id]">
+                      <div class="d-placeholder"></div>
+                      <img src="{{ product.images[0] }}" class="nft__item_preview" alt="">
+                    </a>
+                  </div>
+                  <div class="nft__item_info">
+                    <a href="item-details.html">
+                      <h4>{{product.name}}</h4>
+                    </a>
+
+                    <div class="nft__item_price">
+                      {{product.price | currency:'USD':true:'1.2-2'}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </section>

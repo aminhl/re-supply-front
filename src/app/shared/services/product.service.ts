@@ -48,5 +48,11 @@ export class ProductService {
   deleteProductFromWishlist(productId: string): Observable<any> {
     return this.http.delete(env.apiRoot + `wishlists/${productId}`);
   }
+  // Get products by owner
+  getProductsByOwner(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products/owner-products', {
+      withCredentials: true,
+    });
+  }
 
 }
