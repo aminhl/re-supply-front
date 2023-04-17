@@ -44,9 +44,11 @@ export class AuthService {
       code?: number;
     }
   ) {
-    return this.http.post(env.apiRoot + target, requestBody, {
+    return (
+      this.http.post(env.apiRoot + target, requestBody, {
       withCredentials: true,
-    });
+    }
+    ))
   }
 
   checkEmail(email: string): any {
