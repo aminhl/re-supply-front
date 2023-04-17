@@ -6,34 +6,35 @@
           <div class="col col-lg-12 mb-4 mb-lg-0">
             <div class="card mb-3" style="border-radius: .5rem;">
               <div class="row g-0">
-                <div class="col-md-4 gradient-custom text-center text-white"
-                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-
-                  <img *ngIf="userImageUrl" [src]="userImageUrl"  alt="Avatar" class="img-fluid my-5"
-                       style="width: 120px; border-radius: 50%">
-                  <h3>{{ user.firstName }} {{user.lastName | uppercase}}</h3>
-                  <p>{{ user.role |uppercase}}</p>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body p-4">
-                    <h6>Information</h6>
-                    <h4 style="color: #00b74a" *ngIf="active">Active</h4>
-                    <h4 style="color: #ff0042" *ngIf="!active">Not Active</h4>
-                    <hr class="mt-0 mb-4">
-                    <div class="row pt-1">
-                      <div class="col-6 mb-3">
-                        <h6>Email</h6>
-                        <p class="text-muted">{{ user.email }}</p>
-                      </div>
-                      <div class="col-6 mb-3">
-                        <h6>Phone</h6>
-                        <p class="text-muted">{{ getPhoneNumber(user) }}</p>
-                      </div>
-                    </div>
-                    <hr class="mt-0 mb-2">
-                    <button class="btn-main" [routerLink]="['/editProfile']">Edit Profile</button>
+                <ng-container *ngIf="user">
+                  <div class="col-md-4 gradient-custom text-center text-white"
+                       style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <img *ngIf="userImageUrl" [src]="userImageUrl"  alt="Avatar" class="img-fluid my-5"
+                         style="width: 120px; border-radius: 50%">
+                    <h3>{{ user.firstName }} {{user.lastName | uppercase}}</h3>
+                    <p>{{ user.role |uppercase}}</p>
                   </div>
-                </div>
+                  <div class="col-md-8">
+                    <div class="card-body p-4">
+                      <h6>Information</h6>
+                      <h4 style="color: #00b74a" *ngIf="active">Active</h4>
+                      <h4 style="color: #ff0042" *ngIf="!active">Not Active</h4>
+                      <hr class="mt-0 mb-4">
+                      <div class="row pt-1">
+                        <div class="col-6 mb-3">
+                          <h6>Email</h6>
+                          <p class="text-muted">{{ user.email }}</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                          <h6>Phone</h6>
+                          <p class="text-muted">{{ getPhoneNumber(user) }}</p>
+                        </div>
+                      </div>
+                      <hr class="mt-0 mb-2">
+                      <button class="btn-main" [routerLink]="['/editProfile']">Edit Profile</button>
+                    </div>
+                  </div>
+                </ng-container>
               </div>
             </div>
           </div>
