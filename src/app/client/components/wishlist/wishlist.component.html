@@ -38,7 +38,17 @@
         </ng-container>
 
         <ng-template #emptyWishlist>
-          <p>Your wishlist is empty.</p>
+          <div class="container" *ngIf="!wishlist || wishlist.length === 0">
+            <div class="row wow fadeIn">
+              <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading">Your WishList is empty!</h4>
+                <p>You don't have any products added to your wishList yet.</p>
+                <a [routerLink]="['/products']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                  Explore Products
+                </a>
+              </div>
+            </div>
+          </div>
         </ng-template>
       </div>
     </div>
