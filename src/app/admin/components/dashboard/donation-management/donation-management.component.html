@@ -1,14 +1,59 @@
-
 <section aria-label="section">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <table class="table de-table table-rank">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Status</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col" >Price</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let donation of donations ">
+          <tr>
+            <th scope="row">
+              <div class="coll_list_pp">
+                <div class="image-wrapper">
+                  <img class="lazy" src="{{ donation.requestImage[0] }}" alt="">
+                </div>
+              </div>
+              {{donation.requester_id.firstName}} </th>
+            <td>
+
+              <span *ngIf="!donation.isApproved" style="color:red" class="icon_error-triangle"></span>
+              <span *ngIf="donation.isApproved" style="color:green" class="icon_check"></span>
+            </td>
+            <td class="">{{ donation.requestTitle}}</td>
+            <td class="">{{ donation.type}}</td>
+            <td *ngIf="donation.type==='Currency';else noTotal">${{donation.targetValue}} </td>
+             <ng-template #noTotal>
+               <td>--</td>
+             </ng-template>
+            <td>{{donation.postedAt | date}}</td>
+            <td>
+              <div class="row">
+                <div class="col-md-6"> <a *ngIf="!donation.isApproved" (click)="acceptRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a></div>
+                <div class="col-md-6"> <a (click)="deleteRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a></div>
+              </div>
 
 
-      <div *ngFor="let donation of donations">
-        <h1>{{donation.type}}</h1>
-      </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
+        <div class="spacer-double"></div>
+
+        <ul class="pagination justify-content-center">
+          <li class="active"><a href="#">1 - 20</a></li>
+          <li><a href="#">21 - 40</a></li>
+          <li><a href="#">41 - 60</a></li>
+        </ul>
       </div>
     </div>
   </div>
