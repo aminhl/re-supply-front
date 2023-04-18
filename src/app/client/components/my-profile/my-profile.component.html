@@ -70,9 +70,23 @@
                     <div class="nft__item_price">
                       {{product.price | currency:'USD':true:'1.2-2'}}
                     </div>
+                    <div class="nft__item_action">
+                      <a (click)="deleteProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container" *ngIf="!products || products.length === 0">
+          <div class="row wow fadeIn">
+            <div class="alert alert-primary" role="alert">
+              <h4 class="alert-heading">Quick notice!</h4>
+              <p>You don't have any products in our store yet.</p>
+              <a [routerLink]="['/addProduct']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                Add Product
+              </a>
             </div>
           </div>
         </div>
