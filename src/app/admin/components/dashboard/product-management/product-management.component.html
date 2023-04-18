@@ -1,0 +1,51 @@
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table de-table table-rank">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" (click)="sort('status')" style="cursor: pointer">Status</th>
+            <th scope="col">Owner</th>
+            <th scope="col" (click)="sort('price')" style="cursor: pointer">Price</th>
+            <th scope="col">Posted</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let product of products | orderBy: order: reverse">
+          <tr>
+            <th scope="row">
+              <div class="coll_list_pp">
+                <div class="image-wrapper">
+                  <img class="lazy" src="{{ product.images[0] }}" alt="">
+                </div>
+              </div>
+              {{ product.name}}</th>
+            <td>
+                      <span class="sr-wrapper" [ngStyle]="{ 'backgroundColor': product.color }">
+                        {{ product.status }}
+                      </span>
+            </td>
+            <td class="">{{ product.owner.firstName + " " + product.owner.lastName}}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>{{ product.postedAt | date  }}</td>
+            <td>
+              <a (click)="deleteProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
+              <a (click)="acceptProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="spacer-double"></div>
+
+        <ul class="pagination justify-content-center">
+          <li class="active"><a href="#">1 - 20</a></li>
+          <li><a href="#">21 - 40</a></li>
+          <li><a href="#">41 - 60</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
