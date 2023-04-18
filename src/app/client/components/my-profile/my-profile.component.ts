@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
+import Swal from "sweetalert2";
+import { environment as env } from "../../../../environments/environment";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,7 +20,7 @@ export class MyProfileComponent implements OnInit {
   owner: any;
 
 
-  constructor(private authService: AuthService, private productService: ProductService) { }
+  constructor(private authService: AuthService, private productService: ProductService, private http: HttpClient,) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
@@ -41,6 +44,27 @@ export class MyProfileComponent implements OnInit {
       return 'Not provided';
     }
     return user.phoneNumber;
+  }
+  deleteProduct(productId: string) {
+    Swal.fire({
+      title: 'Are you sure you want to delete this product?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http
+          .delete(`${env.apiRoot}products/${productId}`)
+          .subscribe(() => {
+            this.products = this.products.filter(
+              (product) => product._id !== productId
+            );
+            Swal.fire('Product deleted', '', 'success');
+          });
+      }
+    });
   }
 
 }
