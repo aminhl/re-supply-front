@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../../../environments/environment';
@@ -19,8 +19,13 @@ export class BlogService {
   deleteBlog(id: any): Observable<any> {
     return this.http.delete(`${env.apiRoot}${id}`);
   }
-  getBlogs(): Observable<any> {
-    return this.http.get(`${env.apiRoot}articles`);
+  getBlogs(userId: any) {
+    let params = new HttpParams();
+    if (userId !== null || userId !== undefined) {
+      params = params.append('authorId', userId);
+      console.log(params);
+    }
+    return this.http.get(`${env.apiRoot}articles`, { params: params });
   }
-  
+
 }

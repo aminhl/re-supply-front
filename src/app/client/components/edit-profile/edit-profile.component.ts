@@ -14,8 +14,9 @@ export class EditProfileComponent implements OnInit {
   updateForm: FormGroup;
   user: any;
   userImageUrl!: string;
-  twoFactorAuth! : Boolean;
+  twoFactorAuth!: Boolean;
   images!: FormControl;
+  isDisabled: boolean;
 
   constructor(
     private authService: AuthService,
@@ -51,25 +52,48 @@ export class EditProfileComponent implements OnInit {
     formData.append('phoneNumber', this.updateForm.get('phoneNumber')!.value);
     formData.append('email', this.updateForm.get('email')!.value);
     const images = this.updateForm.get('images');
-    if (images && images.valid && images.value instanceof File && images.value.type.startsWith('image/')) {
+    if (
+      images &&
+      images.valid &&
+      images.value instanceof File &&
+      images.value.type.startsWith('image/')
+    ) {
       formData.append('images', images.value, images.value.name);
     }
 
-    this.http.patch('http://localhost:3000/api/v1/users/update', formData).subscribe((response) => {
-      console.log(response);
-      this.router.navigate(['myProfile']);
-    });
-  }
-
-  onTwoFactorAuthChange() {
-    this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(
-      (response) => {
+    this.http
+      .patch('http://localhost:3000/api/v1/users/update', formData)
+      .subscribe((response) => {
         console.log(response);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+        this.router.navigate(['myProfile']);
+      });
+  }
+  handleChange(e) {
+    let isChecked = e.checked;
+  }
+  onTwoFactorAuthChange() {
+    if (!this.twoFactorAuth) {
+      this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(
+        (response) => {
+          console.log(response);
+this.twoFactorAuth = true;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      this.http.post(`${env.apiRoot}users/disable2FA`, {}).subscribe(
+        (response) => {
+          console.log(response);
+          this.twoFactorAuth = false;
+
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 
   onImageSelected(event: Event) {

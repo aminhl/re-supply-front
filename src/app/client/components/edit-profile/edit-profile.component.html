@@ -110,15 +110,15 @@
                           formControlName="email"
                           placeholder="{{ user.email }}"
                         />
+<div class="toggle-container">
+  <!-- Custom Input Switch Component -->
+  <input type="checkbox" [(ngModel)]="twoFactorAuth" [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()">
+  <label class="toggle-label">
+    Two-Factor Authentication
+    <span class="toggle-status"> {{ twoFactorAuth ? 'Enabled' : 'Disabled' }}</span>
+  </label>
+</div>
 
-                        <button
-                          (click)="onTwoFactorAuthChange()"
-                          [disabled]="twoFactorAuth"
-                          class="btn-main"
-                          [ngClass]="{'enableBtnOff':twoFactorAuth}"
-                        >
-                          Enable 2FA
-                        </button>
 
                         <div
                           class="spacer-20"

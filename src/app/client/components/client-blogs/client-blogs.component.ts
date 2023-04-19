@@ -1,28 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
+  FormControl,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import {
-  ConfirmationService,
-  ConfirmEventType,
-  MenuItem,
-  MessageService,
-} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { Observable, throwError } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { map, catchError, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css', './blog.component.scss'],
+  selector: 'app-client-blogs',
+  templateUrl: './client-blogs.component.html',
+  styleUrls: ['./client-blogs.component.css'],
 })
-export class BlogComponent implements OnInit {
+export class ClientBlogsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private blogService: BlogService,
@@ -30,30 +25,6 @@ export class BlogComponent implements OnInit {
   ) {
     this.createForm();
   }
-  ngOnInit() {
-    this.getBlogs();
-       this.authService.getUser().subscribe((res) => {
-         this.connectedUser = res.data.user;
-         console.log(this.connectedUser);
-       });
-
-  }
-  getBlogs() {
-    return this.blogService.getBlogs(this.userId).subscribe((res:any) => {
-      {
-        try {
-          this.blogs = res.data.articles;
-        } catch (error) {
-          console.log('Error occurred while parsing response data', error);
-        }
-      }
-      (error) => {
-        console.log('Error occurred while fetching blogs', error);
-      };
-    });
-  }
-
-
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
@@ -65,6 +36,39 @@ export class BlogComponent implements OnInit {
   images: FormControl[];
   uploadedFiles: any[] = [];
   userId: any;
+
+  ngOnInit() {
+    this.getBlogs();
+  }
+
+  getBlogs() {
+    try {
+      this.authService.getUser().subscribe(
+        (userRes:any) => {
+          this.userId = userRes.data.user._id; // Store userId
+          console.log('User ID:', this.userId);
+
+          this.blogService.getBlogs(this.userId).subscribe(
+            (blogsRes:any) => {
+              this.blogs = blogsRes.data.articles; // Store blogs
+              console.log('Blogs:', this.blogs);
+
+              // Proceed with the rest of the logic
+              // ...
+            },
+            (error) => {
+              console.log('Error occurred while fetching blogs', error);
+            }
+          );
+        },
+        (error) => {
+          console.log('Error occurred while fetching user', error);
+        }
+      );
+    } catch (error) {
+      console.log('Error occurred while fetching blogs', error);
+    }
+  }
 
   responsiveOptions: any[] = [
     {

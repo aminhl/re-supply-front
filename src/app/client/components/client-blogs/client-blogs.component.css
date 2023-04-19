@@ -1,0 +1,134 @@
+.bg-gray {
+  background-color: #f0f2f5;
+}
+.fs-0 {
+  font-size: 4rem;
+}
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+/* dropdown */
+.dropdown-item:active {
+  background-color: #d5d5d5 !important;
+}
+/* chat box */
+.modal-content:hover .fa-phone-alt {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-video {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-file-image {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-plus-circle {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-portrait {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-adjust {
+  color: #0d6efd !important;
+}
+.modal-content:hover .fa-thumbs-up {
+  color: #0d6efd !important;
+}
+/* edit */
+.edit-button {
+  opacity: 0;
+}
+.edit-button:hover {
+  opacity: 1;
+}
+.edit-heading:hover .edit-button {
+  opacity: 1;
+}
+/* scrollbar */
+.scrollbar:hover {
+  overflow: auto !important;
+}
+/* sponsor */
+.sponsor-icon {
+  opacity: 0;
+}
+.dropdown-item:hover .sponsor-icon {
+  opacity: 1;
+}
+/* popover */
+.pop-avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.chat-box {
+  border: 0 !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+/* comment */
+.post__comment .accordion-button::after {
+  margin-left: 0 !important;
+  display: none !important;
+}
+.post__comment .accordion-button:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+.post__comment .accordion-button:not(.collapsed) {
+  background: transparent !important;
+}
+.post__comment .accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+
+#article-thoughts {
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f2f0f7;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#article-thoughts a {
+  color: #9b4dca; /* updated link color */
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.add-blog-button, .custom-file-upload{
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+.custom-file-upload {
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  bottom: 20px
+
+;
+
+}
+
+
+
