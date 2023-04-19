@@ -22,7 +22,7 @@ export class BlogService {
   getBlogs(userId: any) {
     let params = new HttpParams();
     if (userId !== null || userId !== undefined) {
-      params = params.append('owner', userId);
+      params = params.append('authorId', userId);
       console.log(params);
     }
     return this.http.get(`${env.apiRoot}articles`, { params: params });
