@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {environment as env} from "../../../environments/environment";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  wishlistUpdated = new Subject<any>();
+
 
   constructor(public http: HttpClient,private router: Router) { }
 
@@ -24,6 +27,32 @@ export class ProductService {
   }
   getProduct(id: string): Observable<any> {
     return this.http.get<any>(env.apiRoot + 'products/get/' + id);
+  }
+  // Get wishlist
+  getWishlist(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'wishlists');
+  }
+
+  addProductToWishlist(productId: string): Observable<any> {
+    return this.http.post<any>(`${env.apiRoot}wishlists/`, { productId })
+      .pipe(
+        tap(() => {
+          // Emit the updated wishlist
+          // @ts-ignore
+          this.wishlistUpdated.next();
+        })
+      );
+  }
+
+  // Delete product from wishlist
+  deleteProductFromWishlist(productId: string): Observable<any> {
+    return this.http.delete(env.apiRoot + `wishlists/${productId}`);
+  }
+  // Get products by owner
+  getProductsByOwner(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'products/owner-products', {
+      withCredentials: true,
+    });
   }
 
 }

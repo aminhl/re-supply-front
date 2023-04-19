@@ -12,29 +12,41 @@
                 <input class="form-control" id="name_1" name="name_1" placeholder="search item here..." type="text" [(ngModel)]="searchTerm" /> <a href="#" id="btn-submit"><i class="fa fa-search bg-color-secondary"></i></a>
                 <div class="clearfix"></div>
               </div>
-            </form>
-            <div class="spacer-20"></div>
+            </form>      <div class="spacer-30"></div>
 
-            <div>
-              <label>Sort by:</label>
-              <select [(ngModel)]="selectedFilter" (change)="sortProducts()">
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="date">Latest Posted</option>
-              </select>
+            <div class="sorting">
+              <div class="row" >
+                <div class="col-md-3 col-sm-3">
+                  <div>
+                    <label>Sort by:</label>
+                    <select [(ngModel)]="selectedFilter" (change)="sortProducts()">
+                      <option value="name">Name</option>
+                      <option value="price">Price</option>
+                      <option value="date">Latest Posted</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                  <div>
+                    <label>Order:</label>
+                    <select [(ngModel)]="selectedOrder" (change)="sortProducts()">
+                      <option value="asc">Ascending</option>
+                      <option value="desc">Descending</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-3"  >
+                  <div>
+                  <a style="margin-left: 60%;" [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light " data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                    Add Product
+                  </a>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            <div class="spacer-10"></div>
-            <div>
-              <label>Order:</label>
-              <select [(ngModel)]="selectedOrder" (change)="sortProducts()">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-            </div>
-            <div class="spacer-20"></div>
-            <a [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
-              Add Product
-            </a>
+
+
           </div>
 
         </div>
@@ -62,7 +74,7 @@
                 {{product.price | currency:'USD':true:'1.2-2'}}
               </div>
               <div class="nft__item_action">
-                <a href="#">Add to cart</a>
+                <a (click)="addProductToWishlist(product)" style="color: #0a53be;cursor: pointer;">Add to Wishlist</a>
               </div>
             </div>
           </div>

@@ -30,8 +30,12 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+
 import { ClientBlogsComponent } from './components/client-blogs/client-blogs.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     UpdatePasswordComponent,
     ProductSubmissionComponent,
     ProductDetailsComponent,
+
     ClientBlogsComponent,
+
+    WishlistComponent,
+
   ],
   imports: [
     CommonModule,GalleriaModule,

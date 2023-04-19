@@ -1,0 +1,57 @@
+<div class="wishlist">
+<i class="icon_heart_alt"></i>
+  <div class="spacer-20"></div>
+<h2>My Wishlist</h2>
+</div>
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ng-container *ngIf="wishlist && wishlist.length > 0; else emptyWishlist">
+          <table class="table de-table table-rank">
+            <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Posted</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let product of wishlist ">
+            <tr>
+              <th scope="row">
+                <div class="coll_list_pp">
+                  <div class="image-wrapper">
+                    <img class="lazy" src="{{ product.images[0] }}" alt="">
+                  </div>
+                </div>
+                <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
+              </th>
+              <td>{{ product.price | currency }}</td>
+              <td>{{ product.postedAt | date  }}</td>
+              <td>
+                <a (click)="deleteProductFromWishlist(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+
+        <ng-template #emptyWishlist>
+          <div class="container" *ngIf="!wishlist || wishlist.length === 0">
+            <div class="row wow fadeIn">
+              <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading">Your WishList is empty!</h4>
+                <p>You don't have any products added to your wishList yet.</p>
+                <a [routerLink]="['/products']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                  Explore Products
+                </a>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>
+

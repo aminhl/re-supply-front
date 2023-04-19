@@ -1,326 +1,38 @@
 <div id="wrapper">
-  <div class="no-bottom no-top" id="content">
-    <div class="container">
-      <div class="row wow fadeIn">
-        <section aria-label="section" style="background-size: cover">
-          <div class="container" style="background-size: cover">
-            <div class="row" style="background-size: cover">
-              <div class="col-md-8" style="background-size: cover">
-                <ul class="activity-list">
-                  <li class="act_follow" style="">
-                    <img
-                      class="lazy"
-                      src="/assets/client/images/author/author-1.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Monica Lucas</h4>
-                      started following <a href="#">Gayle Hicks</a>
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_sale" style="">
-                    <img
-                      src="/assets/client/images/items/thumbnail-2.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Deep Sea Phantasy</h4>
-                      1 edition purchased by <a href="#">Stacy Long</a> for
-                      0.001 ETH
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_like" style="">
-                    <img
-                      src="/assets/client/images/items/thumbnail-7.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Cute Astronout</h4>
-                      liked by <a href="#">Nicholas Daniels</a>
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_follow" style="">
-                    <img
-                      class="lazy"
-                      src="/assets/client/images/author/author-2.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Mamie Barnett</h4>
-                      started following <a href="#">Claude Banks</a>
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_offer" style="">
-                    <img
-                      src="/assets/client/images/items/thumbnail-5.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Purple Planet</h4>
-                      <a href="#">Franklin Greer</a> offered 0.002 ETH
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_follow" style="">
-                    <img
-                      class="lazy"
-                      src="/assets/client/images/author/author-3.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Nicholas Daniels</h4>
-                      started following <a href="#">Franklin Greer</a>
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_sale" style="">
-                    <img
-                      src="/assets/client/images/items/thumbnail-4.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Two Tigers</h4>
-                      1 edition purchased by <a href="#">Jimmy Wright</a> for
-                      0.02 ETH
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                  <li class="act_like" style="">
-                    <img
-                      src="/assets/client/images/items/thumbnail-6.jpg"
-                      alt=""
-                    />
-                    <div class="act_list_text" style="background-size: cover">
-                      <h4>Cute Astronout</h4>
-                      liked by <a href="#">Karla Sharp</a>
-                      <span class="act_list_date"> 10/07/2021, 12:40 </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+  <ul class="nav nav-tabs   ">
+    <li class="nav-item">
+      <a class="nav-link  " (click)="selectedComponent='user'"
+         [ngClass]="{'active':selectedComponent==='user'}"
+      >User Management</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="selectedComponent='product'"
+         [ngClass]="{' active':selectedComponent==='product'}"
+      >Product Management</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="selectedComponent='donation'"
+         [ngClass]="{' active':selectedComponent==='donation'}"
+      >Donation Management</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " (click)="selectedComponent='blog'"
+         [ngClass]="{' active':selectedComponent==='blog'}"
+      >Blog Management</a>
+    </li>
+  </ul>
+</div>
 
-              <div class="col-md-4" style="background-size: cover">
-                <span class="filter__l">Filter</span>
-                <span class="filter__r">Reset</span>
-                <div class="spacer-half" style="background-size: cover"></div>
-                <div class="clearfix" style="background-size: cover"></div>
-                <ul class="activity-filter">
-                  <li class="filter_by_sales">
-                    <i class="fa fa-shopping-basket"></i>Sales
-                  </li>
-                  <li class="filter_by_likes">
-                    <i class="fa fa-heart"></i>Likes
-                  </li>
-                  <li class="filter_by_offers">
-                    <i class="fa fa-gavel"></i>Offers
-                  </li>
-                  <li class="filter_by_followings">
-                    <i class="fa fa-check"></i>Followings
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- section begin -->
-        <section aria-label="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="items_filter text-center">
-                  <div id="filter_by_duration" class="dropdown">
-                    <a href="#" class="btn-selector">Last 7 days</a>
-                    <ul>
-                      <li (click)="getUsersByOneDay()"><span>Last 24 hours</span></li>
-                      <li (click)="getUsersByWeek()" ><span>Last 7 days</span></li>
-                      <li (click)="getUsersByMonth()"><span>Last 30 days</span></li>
-                      <li (click)="getAllUsers()" class="active"><span>All time</span></li>
-                    </ul>
-                  </div>
-
-                  <div id="filter_by_category" class="dropdown">
-                    <a href="#" class="btn-selector">All categories</a>
-                    <ul>
-                      <li (click)="getAllUsers()" class="active"><span>All categories</span></li>
-                      <li (click)="getUserByRole('admin')"><span>Admin</span></li>
-
-                      <li (click)="getUserByRole('member')"><span>Member</span></li>
-
-                      <li (click)="getUsersbyStatus(true)"><span>Active</span></li>
-                      <li (click)="getUsersbyStatus(false)">
-                        <span>Not Active</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <form
-                  action="https://gigaland.io/blank.php"
-                  class="row form-dark"
-                  id="form_quick_search"
-                  method="post"
-                  name="form_quick_search"
-                >
-                  <div class="col text-center">
-                    <input
-                      class="form-control"
-                      [(ngModel)]="searchTerm"
-                      (input)="onInputChange($event)"
-                      name=""
-                      id=""
-                      placeholder="search user here..."
-                      type="text"
-                    />
-                    <a id="btn-submit"
-                      ><i class="fa fa-search bg-color-secondary"></i
-                    ></a>
-                    <div class="clearfix"></div>
-                  </div>
-                </form>
-
-                <table class="table de-table table-rank">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Role</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Phone Number</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Joined</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                    <tbody *ngFor="let user of filteredUsers; index as i">
-                      <tr>
-                        <th scope="row">
-                          <div class="coll_list_pp">
-                            <img
-                              class="lazy"
-                              src="{{ user.images[0] }}"
-                              alt=""
-                            />
-                            <i class="fa fa-check"></i>
-                          </div>
-                          {{ user.firstName + " " + user.lastName }}
-                        </th>
-                        <td>
-                          <span
-                            class="sr-wrapper"
-                            [ngStyle]="{
-                              backgroundColor:
-                                user.role === 'admin' ? '#d4c1ec' : '#fff9db'
-                            }"
-                          >
-                            {{ user.role }}
-                          </span>
-                        </td>
-                        <td>
-                          <span
-                            class="sr-wrapper"
-                            [ngStyle]="{
-                              backgroundColor: user.verified
-                                ? '#e6ffed'
-                                : '#ffe6e6'
-                            }"
-                          >
-                            {{ user.verified ? "Active" : "Not Active" }}
-                          </span>
-                        </td>
-                        <td class="">{{ getPhoneNumber(user) }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.joinedAt | date }}</td>
-                        <td>
-                          <a
-                            (click)="deleteUser(user._id)"
-                            class="action-wrapper"
-                            ><span
-                              aria-hidden="true"
-                              class="icon_trash_alt"
-                            ></span
-                          ></a>
-                          <a
-                            (click)="upgradeToAdmin(user._id)"
-                            class="action-wrapper"
-                            ><span
-                              aria-hidden="true"
-                              class="icon_plus_alt"
-                            ></span
-                          ></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                </table>
-
-                <div class="spacer-double"></div>
-
-                <ul class="pagination justify-content-center">
-                  <li class="active"><a href="#">1 - 20</a></li>
-                  <li><a href="#">21 - 40</a></li>
-                  <li><a href="#">41 - 60</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section aria-label="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table de-table table-rank">
-                  <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" (click)="sort('status')" style="cursor: pointer">Status</th>
-                    <th scope="col">Owner</th>
-                    <th scope="col" (click)="sort('price')" style="cursor: pointer">Price</th>
-                    <th scope="col">Posted</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                  </thead>
-                  <tbody *ngFor="let product of products | orderBy: order: reverse">
-                  <tr>
-                    <th scope="row">
-                      <div class="coll_list_pp">
-                        <div class="image-wrapper">
-                          <img class="lazy" src="{{ product.images[0] }}" alt="">
-                        </div>
-                      </div>
-                      {{ product.name}}</th>
-                    <td>
-                      <span class="sr-wrapper" [ngStyle]="{ 'backgroundColor': product.color }">
-                        {{ product.status }}
-                      </span>
-                    </td>
-                    <td class="">{{ product.owner.firstName + " " + product.owner.lastName}}</td>
-                    <td>{{ product.price | currency }}</td>
-                    <td>{{ product.postedAt | date  }}</td>
-                    <td>
-                      <a (click)="deleteProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
-                      <a (click)="acceptProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-
-                <div class="spacer-double"></div>
-
-                <ul class="pagination justify-content-center">
-                  <li class="active"><a href="#">1 - 20</a></li>
-                  <li><a href="#">21 - 40</a></li>
-                  <li><a href="#">41 - 60</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- content close -->
-      <a href="#" id="back-to-top" class="show"></a>
+<div class="no-bottom no-top" id="content">
+  <div class="container">
+    <div class="row wow fadeIn">
+      <!-- section begin -->
+      <app-user-management *ngIf="selectedComponent==='user'"></app-user-management>
+      <app-product-management *ngIf="selectedComponent==='product'"></app-product-management>
+      <app-donation-management *ngIf="selectedComponent==='donation'"></app-donation-management>
     </div>
+    <!-- content close -->
+    <a href="#" id="back-to-top" class="show"></a>
   </div>
 </div>
+

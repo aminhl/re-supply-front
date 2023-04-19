@@ -101,5 +101,11 @@ this.twoFactorAuth = true;
     this.images.setValue(file);
     this.images.markAsTouched();
   }
+  getPhoneNumber(user: any) {
+    if (user.phoneNumber === '00000000') {
+      return 'Not provided';
+    }
+    return user.phoneNumber;
+  }
 }
 

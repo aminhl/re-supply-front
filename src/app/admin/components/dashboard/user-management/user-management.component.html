@@ -1,0 +1,140 @@
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="items_filter text-center">
+          <div id="filter_by_duration" class="dropdown">
+            <a href="#" class="btn-selector">Last 7 days</a>
+            <ul>
+              <li (click)="getUsersByOneDay()"><span>Last 24 hours</span></li>
+              <li (click)="getUsersByWeek()" ><span>Last 7 days</span></li>
+              <li (click)="getUsersByMonth()"><span>Last 30 days</span></li>
+              <li (click)="getAllUsers()" class="active"><span>All time</span></li>
+            </ul>
+          </div>
+
+          <div id="filter_by_category" class="dropdown">
+            <a href="#" class="btn-selector">All categories</a>
+            <ul>
+              <li (click)="getAllUsers()" class="active"><span>All categories</span></li>
+              <li (click)="getUserByRole('admin')"><span>Admin</span></li>
+
+              <li (click)="getUserByRole('member')"><span>Member</span></li>
+
+              <li (click)="getUsersbyStatus(true)"><span>Active</span></li>
+              <li (click)="getUsersbyStatus(false)">
+                <span>Not Active</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <form
+          action="https://gigaland.io/blank.php"
+          class="row form-dark"
+          id="form_quick_search"
+          method="post"
+          name="form_quick_search"
+        >
+          <div class="col text-center">
+            <input
+              class="form-control"
+              [(ngModel)]="searchTerm"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="onInputChange($event)"
+              name=""
+              id=""
+              placeholder="search user here..."
+              type="text"
+            />
+            <a id="btn-submit"
+            ><i class="fa fa-search bg-color-secondary"></i
+            ></a>
+            <div class="clearfix"></div>
+          </div>
+        </form>
+
+        <table class="table de-table table-rank">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Role</th>
+            <th scope="col">Status</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Joined</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let user of filteredUsers; index as i">
+          <tr>
+            <th scope="row">
+              <div class="coll_list_pp">
+                <img
+                  class="lazy"
+                  src="{{ user.images[0] }}"
+                  alt=""
+                />
+                <i class="fa fa-check"></i>
+              </div>
+              {{ user.firstName + " " + user.lastName }}
+            </th>
+            <td>
+                          <span
+                            class="sr-wrapper"
+                            [ngStyle]="{
+                              backgroundColor:
+                                user.role === 'admin' ? '#d4c1ec' : '#fff9db'
+                            }"
+                          >
+                            {{ user.role }}
+                          </span>
+            </td>
+            <td>
+                          <span
+                            class="sr-wrapper"
+                            [ngStyle]="{
+                              backgroundColor: user.verified
+                                ? '#e6ffed'
+                                : '#ffe6e6'
+                            }"
+                          >
+                            {{ user.verified ? "Active" : "Not Active" }}
+                          </span>
+            </td>
+            <td class="">{{ getPhoneNumber(user) }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.joinedAt | date }}</td>
+            <td>
+              <a
+                (click)="deleteUser(user._id)"
+                class="action-wrapper"
+              ><span
+                aria-hidden="true"
+                class="icon_trash_alt"
+              ></span
+              ></a>
+              <a
+                (click)="upgradeToAdmin(user._id)"
+                class="action-wrapper"
+              ><span
+                aria-hidden="true"
+                class="icon_plus_alt"
+              ></span
+              ></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="spacer-double"></div>
+
+        <ul class="pagination justify-content-center">
+          <li class="active"><a href="#">1 - 20</a></li>
+          <li><a href="#">21 - 40</a></li>
+          <li><a href="#">41 - 60</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

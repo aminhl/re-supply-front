@@ -6,4 +6,8 @@
 
   background: linear-gradient(to right bottom, rgba(155, 14, 252, 1), rgba(253, 160, 133, 1))
 }
-
+.alert-primary {
+  background-image: linear-gradient(to bottom right, #6f42c1, #9b59b6);
+  color: #fff;
+  border-color: #6f42c1;
+}
