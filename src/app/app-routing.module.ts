@@ -22,6 +22,7 @@ import { DashboardComponent } from "./admin/components/dashboard/dashboard.compo
 import { RoleGuard } from "./shared/roleguard/role.guard";
 import {ProductSubmissionComponent} from "./client/components/products/product-submission/product-submission.component";
 import {ProductDetailsComponent} from "./client/components/products/product-details/product-details.component";
+import { ClientBlogsComponent } from './client/components/client-blogs/client-blogs.component';
 
 
 
@@ -60,10 +61,27 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
-  { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, RoleGuard] },
-  { path: 'productSubmission', component: ProductSubmissionComponent, canActivate: [AuthGuard] },
-  { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'myBlogs', component: ClientBlogsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'updatePassword',
+    component: UpdatePasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'productSubmission',
+    component: ProductSubmissionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'productDetails/:id',
+    component: ProductDetailsComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

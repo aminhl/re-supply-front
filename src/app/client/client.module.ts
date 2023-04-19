@@ -13,7 +13,6 @@ import { CreateRequestComponent } from './components/donation/create-request/cre
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import { BlogComponent } from './components/blog/blog.component';
-import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { ProductSubmissionComponent } from './components/products/product-submission/product-submission.component';
 import { SharedModule } from "../shared/shared.module";
@@ -31,6 +30,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { ClientBlogsComponent } from './components/client-blogs/client-blogs.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
@@ -45,14 +46,14 @@ import { ProductDetailsComponent } from './components/products/product-details/p
     CreateRequestComponent,
     AddProductComponent,
     BlogComponent,
-    AddBlogComponent,
     UpdatePasswordComponent,
     ProductSubmissionComponent,
     ProductDetailsComponent,
+    ClientBlogsComponent,
   ],
   imports: [
     CommonModule,GalleriaModule,
-    ClientRoutingModule,
+    ClientRoutingModule,InputSwitchModule,
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
