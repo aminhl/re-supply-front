@@ -36,12 +36,8 @@
              </ng-template>
             <td>{{donation.postedAt | date}}</td>
             <td>
-              <div class="row">
-                <div class="col-md-6"> <a *ngIf="!donation.isApproved" (click)="acceptRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a></div>
-                <div class="col-md-6"> <a (click)="deleteRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a></div>
-              </div>
-
-
+                <a *ngIf="!donation.isApproved" (click)="acceptRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a>
+                <a (click)="deleteRequest(donation._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
             </td>
           </tr>
           </tbody>

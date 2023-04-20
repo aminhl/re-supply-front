@@ -42,11 +42,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllProducts();
-
   }
-
-
-
 
   getAllUsers() {
     return this.authService.getUsers(this.verified, this.role).subscribe(
