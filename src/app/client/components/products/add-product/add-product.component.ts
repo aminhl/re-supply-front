@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {ProductService} from "../../../../shared/services/product.service";
 import {Router} from "@angular/router";
 import {regexValid} from "../../../../core/validators/signup.validator";
+import { AuthService } from "../../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-add-product',
@@ -16,15 +17,24 @@ export class AddProductComponent implements OnInit {
   description!: FormControl;
   price!: FormControl;
   images!: FormControl;
+  user:any;
+  userImageUrl!: string;
 
 
 
-  constructor(private productService: ProductService,private router: Router) {
+  constructor(private authService: AuthService, private productService: ProductService,private router: Router) {
     this.initform();
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.authService.getUser().subscribe((req)=>{
+
+      this.user = req.data.user;
+      if (this.user.images.length > 0) {
+        this.userImageUrl = this.user.images[0];
+      }
+    });
   }
   initform(): void {
     this.name = new FormControl('', [Validators.required,regexValid(/[0-9]/g)]);
