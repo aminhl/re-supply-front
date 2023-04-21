@@ -1,6 +1,6 @@
  <div id="top" style="background-size: cover;"></div>
   <!-- section begin -->
-    <section class="vh-100" style="background-color: #f4f5f7;height: 200px">
+    <section class="vh-100" style="background-color: #f4f5f7;margin-bottom: 0;">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-12 mb-4 mb-lg-0">
@@ -33,7 +33,8 @@
                     </div>
 
                     <hr class="mt-0 mb-2" >
-                    <div class="d-flex justify-content-between ">
+                    <div class="spacer-10"></div>
+                    <div class="d-flex justify-content-evenly ">
   <button class="btn-main" [routerLink]="['/editProfile']">Edit Profile</button>
   <button class="btn-main" [routerLink]="['/myBlogs']">My Blogs</button>
 </div>
@@ -46,7 +47,7 @@
         </div>
       </div>
     </section>
-  <section aria-label="section">
+  <section aria-label="section" style="padding-top: 0;">
         <div class="container">
           <div class="row wow fadeIn">
             <div class="row">
@@ -76,7 +77,9 @@
                       {{product.price | currency:'USD':true:'1.2-2'}}
                     </div>
                     <div class="nft__item_action">
-                      <a (click)="deleteProduct(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
+                      <a (click)="deleteProduct(product._id)" style="color: #8c66e8;cursor: pointer;display: flex;justify-content: right" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete the product">
+                        <i class="fa fa-trash"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
