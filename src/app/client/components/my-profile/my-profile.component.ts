@@ -4,6 +4,7 @@ import {ProductService} from "../../../shared/services/product.service";
 import Swal from "sweetalert2";
 import { environment as env } from "../../../../environments/environment";
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-my-profile',
@@ -20,7 +21,7 @@ export class MyProfileComponent implements OnInit {
   owner: any;
 
 
-  constructor(private authService: AuthService, private productService: ProductService, private http: HttpClient,) { }
+  constructor(private authService: AuthService, private productService: ProductService, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
@@ -65,6 +66,25 @@ export class MyProfileComponent implements OnInit {
           });
       }
     });
+  }
+
+  deleteAccount(): any{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete your account without verification.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.deleteAccount().subscribe(res => console.log(res));
+        localStorage.removeItem("jwt");
+        this.router.navigate(['/login'])
+      }
+    })
   }
 
 }

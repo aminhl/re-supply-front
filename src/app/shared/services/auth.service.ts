@@ -169,4 +169,8 @@ export class AuthService {
       confirmButtonText: 'Ok',
     });
   }
+
+  deleteAccount(): any{
+    return this.http.delete(env.apiRoot + "users/deactivateAccount");
+  }
 }
