@@ -15,7 +15,7 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-client-blogs',
   templateUrl: './client-blogs.component.html',
-  styleUrls: ['./client-blogs.component.css'],
+  styleUrls: ['./client-blogs.component.css', './client-blog.component.scss'],
 })
 export class ClientBlogsComponent implements OnInit {
   constructor(
@@ -44,14 +44,14 @@ export class ClientBlogsComponent implements OnInit {
   getBlogs() {
     try {
       this.authService.getUser().subscribe(
-        (userRes:any) => {
+        (userRes: any) => {
           this.userId = userRes.data.user._id; // Store userId
           console.log('User ID:', this.userId);
 
           this.blogService.getBlogs(this.userId).subscribe(
-            (blogsRes:any) => {
+            (blogsRes: any) => {
               this.blogs = blogsRes.data.articles; // Store blogs
-              console.log('Blogs:', this.blogs);
+              this.alertInfo();
 
               // Proceed with the rest of the logic
               // ...
@@ -120,7 +120,27 @@ export class ClientBlogsComponent implements OnInit {
       }
     );
   }
+  onSubmitEdit() {
+    const formData = new FormData();
 
+    formData.append('title', this.blogForm.get('title').value);
+    formData.append('description', this.blogForm.get('description').value);
+
+    for (let img of this.uploadedFiles) {
+      formData.append('images', img);
+    }
+
+    console.log('Form data:', formData);
+
+    this.blogService.editBlog(formData, this.connectedUser._id).subscribe(
+      (data) => {
+        console.log('Response:', data);
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
   get f() {
     return this.blogForm.controls;
   }
@@ -162,6 +182,18 @@ export class ClientBlogsComponent implements OnInit {
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
+      }
+    });
+  }
+  alertInfo() {
+    Swal.fire({
+      title: "You Don't Have any Blogs Yet, Feel Free to add One",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Okay, Got It!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('confirmed', '', 'success');
       }
     });
   }
