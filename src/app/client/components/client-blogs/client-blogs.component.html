@@ -2,15 +2,16 @@
   <div class="row justify-content-center">
 
     <div class="position-relative">
-      <div style="position: absolute; top: 13px; right: 24%">
-        <div class="add-blog-wrapper" (click)="showMaximizableDialog()">
-          <button class="add-blog-button">Add Blog</button>
-          <span class="add-blog-icon"
-            ><i class="fas fa-plus" (click)="showMaximizableDialog()"></i
-          ></span>
-        </div>
-      </div>
+  <div style="position: absolute; top: 13px; right: 24%">
+    <div class="add-blog-wrapper" (click)="showMaximizableDialog()">
+      <button class="add-blog-button">Add Blog</button>
+      <span class="add-blog-icon"
+        ><i class="fas fa-plus fa-plus" (click)="showMaximizableDialog()"></i
+      ></span>
     </div>
+  </div>
+</div>
+
 
     <div class="col-lg-4 col-md-10 col-sm-12">
       <div *ngFor="let blog of blogs">
@@ -48,7 +49,7 @@
               aria-labelledby="post1Menu"
             >
               <li class="d-flex align-items-center">
-                <a
+                <a (click)="showMaximizableDialog()"
                   class="dropdown-item d-flex justify-content-around align-items-center fs-7"
                   href="#"
                 >
@@ -282,17 +283,24 @@
         <label for="float-input">Title</label>
       </span>
 
-      <div class="container position-relative">
-        <label for="file-upload" class="custom-file-upload">Select Files</label>
-        <input
-          type="file"
-          name="images"
-          id="file-upload"
-          [multiple]="true"
-          (change)="selectMultipleImage($event)"
-          style="display: none"
-        />
-      </div>
+<div class="container position-relative">
+  <label for="file-upload" class="custom-file-upload">Select Images</label>
+  <input
+    type="file"
+    name="images"
+    id="file-upload"
+    [multiple]="true"
+    (change)="selectMultipleImage($event)"
+    style="display: none"
+  />
+  <div id="selected-files-list">
+    <span id="selected-files-msg">Selected Images:</span>
+    <span id="selected-files-count">0</span>
+  </div>
+</div>
+
+
+
 
       <p-editor
         formControlName="description"
@@ -315,4 +323,74 @@
       ></p-button>
     </ng-template>
   </p-dialog>
+
+  <p-dialog
+    class="myMax-dialog"
+    header="Article"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [maximizable]="true"
+    [draggable]="true"
+    [resizable]="true"
+  >
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmitEdit()">
+      <p id="article-thoughts">
+        Share your thoughts, ideas, and experiences with the world. Be sure to
+        read our <a href="#">Community Guidelines</a> before posting.
+      </p>
+      <span
+        class="p-float-label custom-input"
+        style="margin: 20px 20px; margin-left: 0"
+      >
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          formControlName="title"
+        />
+        <label for="float-input">Title</label>
+      </span>
+
+<div class="container position-relative">
+  <label for="file-upload" class="custom-file-upload">Select Images</label>
+  <input
+    type="file"
+    name="images"
+    id="file-upload"
+    [multiple]="true"
+    (change)="selectMultipleImage($event)"
+    style="display: none"
+  />
+  <div id="selected-files-list">
+    <span id="selected-files-msg">Selected Images:</span>
+    <span id="selected-files-count">0</span>
+  </div>
+</div>
+
+
+
+
+      <p-editor
+        formControlName="description"
+        [style]="{ height: '480px' }"
+        rejectButtonStyleClass="p-button-text"
+      ></p-editor>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        (click)="confirm2(); displayMaximizable = false"
+        icon="pi pi-times"
+        label="Cancel"
+      ></p-button>
+      <p-button
+        (click)="confirm1(); displayMaximizable = false"
+        icon="pi pi-check"
+        label="Create"
+        styleClass="mr-2"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+  
 </div>

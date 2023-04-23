@@ -23,37 +23,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./blog.component.css', './blog.component.scss'],
 })
 export class BlogComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private blogService: BlogService,
-    private formBuilder: FormBuilder
-  ) {
-    this.createForm();
-  }
-  ngOnInit() {
-    this.getBlogs();
-       this.authService.getUser().subscribe((res) => {
-         this.connectedUser = res.data.user;
-         console.log(this.connectedUser);
-       });
-
-  }
-  getBlogs() {
-    return this.blogService.getBlogs(this.userId).subscribe((res:any) => {
-      {
-        try {
-          this.blogs = res.data.articles;
-        } catch (error) {
-          console.log('Error occurred while parsing response data', error);
-        }
-      }
-      (error) => {
-        console.log('Error occurred while fetching blogs', error);
-      };
-    });
-  }
-
-
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
@@ -65,6 +34,34 @@ export class BlogComponent implements OnInit {
   images: FormControl[];
   uploadedFiles: any[] = [];
   userId: any;
+
+  constructor(
+    private authService: AuthService,
+    private blogService: BlogService,
+    private formBuilder: FormBuilder
+  ) {
+    this.createForm();
+    this.getBlogs();
+  }
+  ngOnInit() {}
+
+  getBlogs() {
+    return this.blogService.getBlogs(this.userId).subscribe((res: any) => {
+      try {
+        this.blogs = res.data.articles;
+        if (this.blogs.length === 0) {
+          this.alertInfo()
+        }
+        console.log(this.blogs);
+      } catch (error) {
+        console.log('Error occurred while parsing response data', error);
+      }
+
+      (error) => {
+        console.log('Error occurred while fetching blogs', error);
+      };
+    });
+  }
 
   responsiveOptions: any[] = [
     {
@@ -158,6 +155,18 @@ export class BlogComponent implements OnInit {
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
+      }
+    });
+  }
+  alertInfo() {
+    Swal.fire({
+      title: "No Blogs Found, Feel Free To Create One",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Okay, Got It!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('confirmed', '', 'success');
       }
     });
   }

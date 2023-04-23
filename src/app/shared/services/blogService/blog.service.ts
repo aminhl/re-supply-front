@@ -14,15 +14,18 @@ export class BlogService {
     return this.http.post(`${env.apiRoot}articles/`+userId, data);
   }
   editBlog(id: any, data: any): Observable<any> {
-    return this.http.patch(`${env.apiRoot}articles${id}`, data);
+    return this.http.patch(`${env.apiRoot}articles/${id}`, data);
+  }
+  getBlogById(id: any): Observable<any> {
+    return this.http.get(`${env.apiRoot}articles/${id}`);
   }
   deleteBlog(id: any): Observable<any> {
-    return this.http.delete(`${env.apiRoot}${id}`);
+    return this.http.delete(`${env.apiRoot}articles/${id}`);
   }
   getBlogs(userId: any) {
     let params = new HttpParams();
-    if (userId !== null || userId !== undefined) {
-      params = params.append('authorId', userId);
+    if (userId !== undefined) {
+      params = params.append('owner', userId);
       console.log(params);
     }
     return this.http.get(`${env.apiRoot}articles`, { params: params });
