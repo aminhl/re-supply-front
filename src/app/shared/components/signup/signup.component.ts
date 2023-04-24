@@ -114,7 +114,7 @@ export class SignupComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: 'Welcome to ReSupply!',
-          text: 'Thank you for joining us. We hope you have a great experience.',
+          text: 'Thank you for joining us. We\'ve sent a confirmation email. Please verify your account.',
           confirmButtonText: 'Get started',
         });
 

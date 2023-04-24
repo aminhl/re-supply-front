@@ -51,7 +51,7 @@
               <div class="row" style="background-size: cover">
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>FirstName:</label>
+                    <label>FirstName <span style="color: red" class="required">*</span> :</label>
                     <input
                       type="text"
                       name="name"
@@ -95,7 +95,7 @@
 
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>LastName:</label>
+                    <label>LastName <span style="color: red" class="required">*</span> :</label>
                     <input
                       type="text"
                       name="name"
@@ -139,7 +139,7 @@
                     class="field-set"
                     style="background-size: cover; position: relative"
                   >
-                    <label>Email Address:</label>
+                    <label>Email Address <span style="color: red" class="required">*</span> :</label>
                     <input
                       type="text"
                       name="email"
@@ -184,7 +184,7 @@
 
                  <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>Phone:</label>
+                    <label>Phone <span style="color: red" class="required">*</span> :</label>
 
                     <ngx-intl-tel-input
                       style="width: 300px"
@@ -227,7 +227,7 @@
 
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>Password:</label>
+                    <label>Password <span style="color: red" class="required">*</span> :</label>
                     <input
                       type="password"
                       name="password"
@@ -266,7 +266,7 @@
 
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>Re-enter Password:</label>
+                    <label>Re-enter Password <span style="color: red" class="required">*</span> :</label>
                     <input
                       type="password"
                       name="re-password"
@@ -321,7 +321,7 @@
 
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
-                    <label>Image:</label>
+                    <label>Image <span  style="color: red" class="required">*</span> :</label>
                     <input type="file"
                       name="images"
                       id="images"
@@ -329,6 +329,8 @@
                       (change)="onImageSelected($event)"
                       formControlName="images"
                     />
+                    <div class="spacer-10"></div>
+                    <span style="color: red;font-weight: lighter">(*)</span><span style="font-weight: lighter">The indicated fields are mandatory.</span>
                     <div
                       class="message-invalid"
                       *ngIf="images.dirty && images.hasError('required')"
