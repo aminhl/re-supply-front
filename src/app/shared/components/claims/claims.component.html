@@ -1,0 +1,14 @@
+<div class="widget" style="background-size: cover;">
+  <h5>Submit a Feedback</h5>
+  <p>Submit your feedback to help us improve our platform.</p>
+  <form class="row form-dark" [formGroup]="claimForm" (ngSubmit)="onSubmit()">
+    <div class="col text-center" style="background-size: cover;">
+      <input class="form-control" formControlName="title" name="title" placeholder="enter the feedback title" type="text">
+      <div class="spacer-10"></div>
+      <textarea class="form-control" formControlName="message" name="message" placeholder="enter your feedback"></textarea>
+      <div class="spacer-10"></div>
+      <input type="submit" id="send_message" value="Submit feedback" class="btn btn-main btn-fullwidth color-2">
+    </div>
+  </form>
+  <div class="spacer-10" style="background-size: cover;"></div>
+</div>
