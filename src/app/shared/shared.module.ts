@@ -15,6 +15,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxCaptchaModule } from "ngx-captcha";
 import { FilterByNamePipe } from './pipes/filterByName.pipe';
+import { ClaimsComponent } from './components/claims/claims.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FilterByNamePipe } from './pipes/filterByName.pipe';
     VerifyEmailComponent,
     TwoFactorComponent,
     FilterByNamePipe,
+    ClaimsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,6 @@ import { FilterByNamePipe } from './pipes/filterByName.pipe';
     BrowserAnimationsModule,
     NgxCaptchaModule
   ],
-  exports: [SignupComponent, LoginComponent, VerifyEmailComponent, FilterByNamePipe],
+  exports: [SignupComponent, LoginComponent, VerifyEmailComponent, FilterByNamePipe, ClaimsComponent]
 })
 export class SharedModule {}
