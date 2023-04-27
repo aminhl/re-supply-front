@@ -35,6 +35,8 @@ import { ClientBlogsComponent } from './components/client-blogs/client-blogs.com
 import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ProfileInfoComponent } from './components/my-profile/profile-info/profile-info.component';
+import { ProfileProductsComponent } from './components/my-profile/profile-products/profile-products.component';
 
 
 
@@ -57,6 +59,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     ClientBlogsComponent,
 
     WishlistComponent,
+      ProfileInfoComponent,
+      ProfileProductsComponent,
 
   ],
   imports: [
