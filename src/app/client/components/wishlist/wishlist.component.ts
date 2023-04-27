@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../../../shared/services/product.service";
 import Swal from "sweetalert2";
+import { AuthService } from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-wishlist',
@@ -11,10 +12,13 @@ export class WishlistComponent implements OnInit {
 
   wishlist: any;
 
-  constructor(private productService: ProductService) { }
+  constructor(private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
-    // this.loadWishlist();
+
+    if (this.authService.isLoggedIn()) {
+      this.loadWishlist();
+    }
   }
 
   loadWishlist() {

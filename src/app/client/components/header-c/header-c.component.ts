@@ -18,17 +18,15 @@ export class HeaderCComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.loadWishlist();
-    // // Subscribe to the wishlistUpdated subject to update the wishlist count
-    // this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
-    //   this.loadWishlist();
-    // });
+    if (this.authService.isLoggedIn()){
+      this.loadWishlist();
+      // Subscribe to the wishlistUpdated subject to update the wishlist count
+      this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+        this.loadWishlist();
+      });
+    }
   }
 
-  ngOnDestroy(): void {
-    // Unsubscribe from the wishlistSubscription to prevent memory leaks
-    this.wishlistSubscription.unsubscribe();
-  }
 
   loadWishlist() {
     this.productService.getWishlist().subscribe(
