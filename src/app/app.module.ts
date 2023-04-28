@@ -10,12 +10,22 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {OrderModule} from "ngx-order-pipe";
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from "@abacritt/angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig } from "@abacritt/angularx-social-login";
 import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
+import { KnowledgeComponent } from './client/components/knowledge/knowledge.component';
+
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { JitsiComponentComponent } from './client/components/knowledge/jitsi-component/jitsi-component.component';
+import { FormsModule } from "@angular/forms";
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCredentials: true } };
 
 @NgModule({
   declarations: [
     AppComponent,
+    KnowledgeComponent,
+
+    JitsiComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +35,9 @@ import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
     SharedModule,
     Ng2SearchPipeModule,
     OrderModule,
-    SocialLoginModule
+    SocialLoginModule,
+    SocketIoModule.forRoot(config),
+    FormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {

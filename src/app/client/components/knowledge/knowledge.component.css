@@ -1,0 +1,10 @@
+#jitsi-iframe {
+  width: 1400px; /* Set the width of the iframe */
+  margin: 0 auto; /* Center the iframe horizontally */
+}
+#jitsi-iframe .watermark {
+  display: none !important;
+}
+#jitsi-iframe .watermark-placeholder {
+  display: none !important;
+}

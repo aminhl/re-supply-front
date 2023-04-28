@@ -26,8 +26,8 @@ import {ProductDetailsComponent} from "./client/components/products/product-deta
 import { ClientBlogsComponent } from './client/components/client-blogs/client-blogs.component';
 
 import {WishlistComponent} from "./client/components/wishlist/wishlist.component";
-
-
+import { KnowledgeComponent } from "./client/components/knowledge/knowledge.component";
+import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-component/jitsi-component.component";
 
 
 const routes: Routes = [
@@ -93,6 +93,10 @@ const routes: Routes = [
   { path: 'productSubmission', component: ProductSubmissionComponent, canActivate: [AuthGuard] },
   { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+
+
+  { path: 'knowledge', component: KnowledgeComponent , canActivate: [AuthGuard]},
+  { path: 'knowledge/jitsi/:id', component:JitsiComponentComponent , canActivate: [AuthGuard] },
 
 ];
 
