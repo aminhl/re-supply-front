@@ -26,6 +26,7 @@ import {ProductDetailsComponent} from "./client/components/products/product-deta
 import { ClientBlogsComponent } from './client/components/client-blogs/client-blogs.component';
 
 import {WishlistComponent} from "./client/components/wishlist/wishlist.component";
+import { CartComponent } from "./client/components/cart/cart.component";
 
 
 
@@ -93,7 +94,7 @@ const routes: Routes = [
   { path: 'productSubmission', component: ProductSubmissionComponent, canActivate: [AuthGuard] },
   { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
