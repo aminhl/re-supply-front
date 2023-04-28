@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class ProductService {
   wishlistUpdated = new Subject<any>();
+  cartUpdated = new Subject<any>();
 
 
   constructor(public http: HttpClient,private router: Router) { }
@@ -53,6 +54,30 @@ export class ProductService {
     return this.http.get<any>(env.apiRoot + 'products/owner-products', {
       withCredentials: true,
     });
+  }
+
+  getCart(): Observable<any> {
+    return this.http.get<any>(env.apiRoot + 'carts');
+  }
+
+  addProductToCart(productId: string): Observable<any> {
+    return this.http.post<any>(`${env.apiRoot}carts/`, { productId })
+      .pipe(
+        tap(() => {
+          // Emit the updated wishlist
+          // @ts-ignore
+          this.wishlistUpdated.next();
+        })
+      );
+  }
+
+  // Delete product from wishlist
+  deleteProductFromCart(productId: string): Observable<any> {
+    return this.http.delete(env.apiRoot + `carts/${productId}`);
+  }
+
+  createOrder(requestBody: any): Observable<any>{
+    return this.http.post<any>(env.apiRoot + "orders", requestBody);
   }
 
 }
