@@ -16,20 +16,20 @@
               <th scope="col">Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let product of cart">
             <tr>
               <th scope="row">
                 <div class="coll_list_pp">
                   <div class="image-wrapper">
-<!--                    <img class="lazy" src="{{ product.images[0] }}" alt="">-->
+                    <img class="lazy" src="{{ product.images[0] }}" alt="">
                   </div>
                 </div>
-<!--                <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>-->
+                <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
               </th>
-<!--              <td>{{ product.price | currency }}</td>-->
-<!--              <td>{{ product.postedAt | date  }}</td>-->
+              <td>{{ product.price | currency }}</td>
+              <td>OWNER HERE!</td>
               <td>
-<!--                <a (click)="deleteProductFromWishlist(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>-->
+                <a (click)="deleteProductFromCart(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
               </td>
             </tr>
             </tbody>
@@ -41,9 +41,9 @@
               <div class="alert alert-primary" role="alert">
                 <h4 class="alert-heading">Your Cart is empty!</h4>
                 <p>You don't have any products added to your cart yet.</p>
-<!--                <a [routerLink]="['/products']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">-->
-<!--                  Explore Products-->
-<!--                </a>-->
+                <a [routerLink]="['/products']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                  Explore Products
+                </a>
               </div>
             </div>
           </div>
