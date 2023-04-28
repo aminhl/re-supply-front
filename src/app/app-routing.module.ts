@@ -27,6 +27,7 @@ import { ClientBlogsComponent } from './client/components/client-blogs/client-bl
 
 import {WishlistComponent} from "./client/components/wishlist/wishlist.component";
 import { CartComponent } from "./client/components/cart/cart.component";
+import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
 
 
 
@@ -95,6 +96,7 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'orderSuccess', component: OrderSuccessComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -38,6 +38,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProfileInfoComponent } from './components/my-profile/profile-info/profile-info.component';
 import { ProfileProductsComponent } from './components/my-profile/profile-products/profile-products.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderSuccessComponent } from './components/cart/order-success/order-success.component';
 
 
 
@@ -63,6 +64,7 @@ import { CartComponent } from './components/cart/cart.component';
       ProfileInfoComponent,
       ProfileProductsComponent,
       CartComponent,
+      OrderSuccessComponent,
 
   ],
   imports: [

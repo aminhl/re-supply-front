@@ -70,4 +70,9 @@ export class CartComponent implements OnInit {
       }
     });
   }
+
+  createOrder(product): any{
+    return this.productService.createOrder({ "products" : [ { "product": product._id} ] })
+      .subscribe(response => window.location.href = response.data.session_url)
+  }
 }

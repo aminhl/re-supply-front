@@ -76,5 +76,8 @@ export class ProductService {
     return this.http.delete(env.apiRoot + `carts/${productId}`);
   }
 
+  createOrder(requestBody: any): Observable<any>{
+    return this.http.post<any>(env.apiRoot + "orders", requestBody);
+  }
 
 }

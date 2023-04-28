@@ -32,9 +32,11 @@
                 <a (click)="deleteProductFromCart(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
               </td>
             </tr>
+            <button class="btn-main" style="display: block; margin-left: auto; margin-top: 20px; margin-bottom: 10px;" (click)="createOrder(product)">
+              Proceed To Checkout
+            </button>
             </tbody>
           </table>
-
         <ng-template>
           <div class="container">
             <div class="row wow fadeIn">
