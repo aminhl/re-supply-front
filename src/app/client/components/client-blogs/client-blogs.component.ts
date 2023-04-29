@@ -12,6 +12,7 @@ import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommentsService } from 'src/app/shared/services/commentsService/comments.service';
 
 @Component({
   selector: 'app-client-blogs',
@@ -24,9 +25,11 @@ export class ClientBlogsComponent implements OnInit {
     private blogService: BlogService,
     private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private commentService: CommentsService
   ) {
     this.createForm();
+    this.createCommentForm();
   }
   updateBlogForm = this.formBuilder.group({
     title: '',
@@ -38,10 +41,12 @@ export class ClientBlogsComponent implements OnInit {
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
+  commentsForm: FormGroup;
   description: FormControl;
   id: FormControl;
   title: FormControl;
   blogs: any[];
+  comments: any[];
   displayMaximizable1: boolean;
   displayMaximizable2: boolean;
   items: MenuItem[];
@@ -49,14 +54,105 @@ export class ClientBlogsComponent implements OnInit {
   uploadedFiles: any[] = [];
   userId: any;
   targetCount: number;
-
+  isEditMode = false;
+  updateCommentsForm = this.formBuilder.group({
+    content: '',
+    id: '',
+  });
   ngOnInit() {
     this.getBlogs();
     this.authService.getUser().subscribe((res) => {
       this.connectedUser = res.data.user;
     });
+    this.commentService.getComments().subscribe((res) => {
+      this.comments = res['data']['comments'];
+    });
+  }
+  getDataComment(content: any, id: any) {
+    this.updateCommentsForm.patchValue({
+      content: content,
+      id: id,
+    });
+    this.isEditMode = true;
+    console.log('updateCommentsForm', this.updateCommentsForm.value);
+  }
+  onEditComment() {
+    const content = this.updateCommentsForm.get('content').value;
+    const cmtId = this.updateCommentsForm.get('id').value;
+    this.commentService.editComment(cmtId, content).subscribe({
+      next: (res) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been Updated',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+
+        this.isEditMode = false;
+      },
+      error: (err) => {
+        console.error('Error editing comment:', err);
+      },
+    });
   }
 
+  deleteComment(id: any, i: any) {
+    Swal.fire({
+      title: 'Are You Sure You Want To Delete This Comment?',
+      text: 'This action cannot be undone',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Do it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.commentService.deleteComment(id).subscribe((res) => {
+          this.comments.splice(i, 1);
+        });
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been Deleted',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    });
+  }
+
+  addComment(blogId: any, commenterId: any) {
+    const a = this.commentsForm.get('content').value;
+    this.commentService.addComment(blogId, commenterId, a).subscribe({
+      next: (res) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been added',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      },
+      error: (err) => {
+        console.error('Error adding comment:', err);
+      },
+    });
+  }
+
+  createCommentForm() {
+    this.commentsForm = this.formBuilder.group({
+      content: new FormControl('', [Validators.required]),
+    });
+  }
   getBlogs() {
     try {
       this.authService.getUser().subscribe(
@@ -81,6 +177,14 @@ export class ClientBlogsComponent implements OnInit {
     } catch (error) {
       console.log('Error occurred while fetching blogs', error);
     }
+  }
+  getCommentsByArticle(articleId: any) {
+    return this.commentService.getCommentsByArticle(articleId).subscribe({
+      next: (res) => {},
+      error: (err) => {
+        console.error('Error adding comment:', err);
+      },
+    });
   }
   getData(title: any, description: any, images: any, id: any) {
     this.updateBlogForm.patchValue({
@@ -138,8 +242,8 @@ export class ClientBlogsComponent implements OnInit {
       (error) => {
         console.error('Error:', error);
       }
-      );
-      window.location.reload();
+    );
+    window.location.reload();
   }
   onSubmitEdit() {
     const formData = new FormData();
@@ -156,23 +260,20 @@ export class ClientBlogsComponent implements OnInit {
     }
     this.blogService.editBlog(blogId, formData).subscribe(
       (data) => {
-        let index = this.blogs.findIndex((blog) => blog._id == this.updateBlogForm.get('id').value);
+        let index = this.blogs.findIndex(
+          (blog) => blog._id == this.updateBlogForm.get('id').value
+        );
         this.blogs[index].title = this.updateBlogForm.get('title').value;
-        this.blogs[index].description = this.updateBlogForm.get('description').value;
+        this.blogs[index].description =
+          this.updateBlogForm.get('description').value;
         this.blogs[index].images = this.updateBlogForm.get('images').value;
-
       },
       (error) => {
         console.error('Error:', error);
       }
     );
   }
-  deleteBLog(id :any, i :any) {
-     this.blogService.deleteBlog(id).subscribe((res) => {
-      this.blogs.splice(i, 1);
-    });
 
-  }
   showMaximizableDialog() {
     this.displayMaximizable1 = true;
   }
@@ -218,14 +319,10 @@ export class ClientBlogsComponent implements OnInit {
   }
   alertInfo() {
     Swal.fire({
-      title: "You Don't Have any Blogs Yet, Feel Free to add One",
+      position: 'center',
       icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Okay, Got It!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('confirmed', '', 'success');
-      }
+      title: "You Don't Have Any Blogs Yet Feel Free To Add Some",
+      showConfirmButton: true,
     });
   }
   confirm3() {
@@ -238,8 +335,13 @@ export class ClientBlogsComponent implements OnInit {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.onSubmit();
-        Swal.fire('Blog Created', '', 'success');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "Blog Created!",
+          showConfirmButton: false,
+        });
+          this.onSubmit();
 
       }
       if (result.isDenied) {
@@ -262,6 +364,30 @@ export class ClientBlogsComponent implements OnInit {
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
+      }
+    });
+  }
+  deleteBlog(id: any) {
+    Swal.fire({
+      title: 'Are you sure you want to delete this blog?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.blogService.deleteBlog(id).subscribe((res) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Blog Deleted!',
+            showConfirmButton: false,
+          });
+          setTimeout((handler) => {
+            window.location.reload();
+          },1000)
+        });
       }
     });
   }

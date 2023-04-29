@@ -57,7 +57,7 @@
                 >
               </li>
               <li class="d-flex align-items-center">
-                <a (click)="deleteBLog(blog._id,i)"
+                <a (click)="deleteBlog(blog._id)"
                   class="dropdown-item d-flex justify-content-around align-items-center fs-7"
 
                 >
@@ -138,7 +138,10 @@
                         aria-expanded="false"
                         aria-controls="collapsePost1"
                       >
-                        <i class="fas fa-comment-alt me-3"></i>
+                        <i
+                          class="fas fa-comment-alt me-3"
+                          (click)="getCommentsByArticle(blog._id)"
+                        ></i>
                         <p class="m-0">Comment</p>
                       </div>
                     </div>
@@ -152,10 +155,13 @@
                       <hr />
                       <div class="accordion-body">
                         <!-- comment 1 -->
-                        <div class="d-flex align-items-center my-1">
+                        <div
+                          class="d-flex align-items-center my-1"
+                          *ngFor="let comment of blog['comments']; index as j"
+                        >
                           <!-- avatar -->
                           <img
-                            src="https://source.unsplash.com/collection/happy-people"
+                            [src]="comment.commenterId.images"
                             alt="avatar"
                             class="rounded-circle me-2"
                             style="width: 38px; height: 38px; object-fit: cover"
@@ -178,53 +184,73 @@
                               >
                                 <li class="d-flex align-items-center">
                                   <a
+                                    *ngIf="
+                                      connectedUser._id ===
+                                      comment.commenterId._id
+                                    "
+                                    (click)="
+                                      getDataComment(comment.content, comment._id)
+                                    "
                                     class="dropdown-item d-flex justify-content-around align-items-center fs-7"
-                                    href="#"
                                   >
-                                    Edit Comment</a
+                                    Edit Comment
+                                  </a>
+                                  <a
+                                    *ngIf="
+                                      connectedUser._id !==
+                                      comment.commenterId._id
+                                    "
+                                    class="dropdown-item d-flex justify-content-around align-items-center fs-7 disabled"
                                   >
+                                    Edit Comment
+                                  </a>
                                 </li>
+
                                 <li class="d-flex align-items-center">
                                   <a
+                                    *ngIf="
+                                      connectedUser._id ===
+                                      comment.commenterId._id
+                                    "
+                                    (click)="deleteComment(comment._id,j)"
                                     class="dropdown-item d-flex justify-content-around align-items-center fs-7"
-                                    href="#"
                                   >
-                                    Delete Comment</a
+                                    Delete Comment
+                                  </a>
+                                  <a
+                                    *ngIf="
+                                      connectedUser._id !==
+                                      comment.commenterId._id
+                                    "
+                                    class="dropdown-item d-flex justify-content-around align-items-center fs-7 disabled"
                                   >
+                                    Delete Comment
+                                  </a>
                                 </li>
                               </ul>
                             </div>
-                            <p class="fw-bold m-0">John</p>
+                            <p class="fw-bold m-0">
+                              {{ comment.commenterId.firstName }}
+                              {{ comment.commenterId.lastName }}
+                            </p>
                             <p class="m-0 fs-7 bg-gray p-2 rounded">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit.
+                              {{ comment.content }}
                             </p>
                           </div>
                         </div>
-                        <!-- comment 2 -->
-                        <div class="d-flex align-items-center my-1">
-                          <!-- avatar -->
-                          <img
-                            src="https://source.unsplash.com/random/2"
-                            alt="avatar"
-                            class="rounded-circle me-2"
-                            style="width: 38px; height: 38px; object-fit: cover"
-                          />
-                          <!-- comment text -->
-                          <div class="p-3 rounded comment__input w-100">
-                            <p class="fw-bold m-0">Jerry</p>
-                            <p class="m-0 fs-7 bg-gray p-2 rounded">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit.
-                            </p>
-                          </div>
-                        </div>
+
                         <!-- create comment -->
-                        <form class="d-flex my-1">
+                        <form
+
+                          *ngIf="!isEditMode"
+                          class="d-flex my-1 position-relative"
+                          [formGroup]="commentsForm"
+                          (ngSubmit)="addComment(blog._id, connectedUser._id)"
+                        >
                           <!-- avatar -->
                           <div>
                             <img
-                              src="https://source.unsplash.com/collection/happy-people"
+                              [src]="connectedUser.images"
                               alt="avatar"
                               class="rounded-circle me-2"
                               style="
@@ -237,9 +263,65 @@
                           <!-- input -->
                           <input
                             type="text"
-                            class="form-control border-0 rounded-pill bg-gray"
+                            class="form-control border-0 rounded-pill bg-gray w-75"
                             placeholder="Write a comment"
+                            formControlName="content"
                           />
+                          <i
+                            type="submit"
+                            class="pi pi-send"
+                            style="
+                              font-size: 25px;
+                              color: purple;
+                              position: absolute;
+                              right: 18%;
+                              top: 9px;
+                            "
+                            (click)="addComment(blog._id, connectedUser._id)"
+                          ></i>
+                        </form>
+
+                        <form
+
+                          *ngIf="isEditMode"
+                          class="d-flex my-1 position-relative"
+                          [formGroup]="updateCommentsForm"
+                          (ngSubmit)="
+                            onEditComment()
+                          "
+                        >
+                          <!-- avatar -->
+                          <div>
+                            <img
+                              [src]="connectedUser.images"
+                              alt="avatar"
+                              class="rounded-circle me-2"
+                              style="
+                                width: 38px;
+                                height: 38px;
+                                object-fit: cover;
+                              "
+                            />
+                          </div>
+                          <!-- input -->
+                          <input
+                            type="text"
+                            class="form-control border-0 rounded-pill bg-gray w-75"
+                            placeholder="Write a comment"
+                            formControlName="content"
+                          />
+                          <i
+                            type="submit"
+                            class="pi pi-send"
+                            style="
+                              font-size: 25px;
+                              color: purple;
+                              position: absolute;
+                              right: 18%;
+                              top: 9px;
+                            "
+                            (click)="onEditComment()"
+                          ></i>
                         </form>
                         <!-- end -->
                       </div>
