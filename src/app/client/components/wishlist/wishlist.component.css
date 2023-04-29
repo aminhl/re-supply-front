@@ -51,3 +51,8 @@ a{
 a:hover {
   color: purple;
 }
+@media screen and (max-width: 767px) {
+  .table-rank td:last-child {
+    display: table-cell;
+  }
+}
