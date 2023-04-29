@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
 
     <div class="position-relative">
-  <div style="position: absolute; top: 13px; right: 24%">
+  <div style="position: absolute; top: 20px; right: 13%">
     <div class="add-blog-wrapper" (click)="showMaximizableDialog()">
       <button class="add-blog-button">Add Blog</button>
       <span class="add-blog-icon"
@@ -13,8 +13,8 @@
 </div>
 
 
-    <div class="col-lg-4 col-md-10 col-sm-12">
-      <div *ngFor="let blog of blogs">
+    <div class="col-lg-7 col-md-6 col-sm-12">
+      <div *ngFor="let blog of blogs ; index as i">
         <div class="bg-white p-4 rounded shadow mt-3">
           <!-- author -->
           <div class="d-flex justify-content-between">
@@ -28,7 +28,7 @@
               />
               <div>
                 <p class="m-0 fw-bold">
-                  {{ blog.owner.firstName }} {{ blog.owner.lastName }}
+                  {{ blog.owner.firstName }}{{ blog.owner.lastName }}
                 </p>
                 <span class="text-muted fs-7">{{
                   blog.createdAt | date : "M/d/yy, h:mm a"
@@ -49,17 +49,17 @@
               aria-labelledby="post1Menu"
             >
               <li class="d-flex align-items-center">
-                <a (click)="showMaximizableDialog()"
+                <a (click)="showMaximizableDialog1(); getData(blog.title,blog.description,blog.images, blog._id)"
                   class="dropdown-item d-flex justify-content-around align-items-center fs-7"
-                  href="#"
+
                 >
                   Edit Post</a
                 >
               </li>
               <li class="d-flex align-items-center">
-                <a
+                <a (click)="deleteBLog(blog._id,i)"
                   class="dropdown-item d-flex justify-content-around align-items-center fs-7"
-                  href="#"
+
                 >
                   Delete Post</a
                 >
@@ -70,12 +70,14 @@
           <div class="mt-3">
             <!-- content -->
             <div>
-              <p [innerHTML]="blog.description"></p>
+              <h2>{{blog.title}}</h2>
+              <p [innerHTML]="sanitizer.bypassSecurityTrustHtml(blog.description)"></p>
+
 
               <p-galleria
                 [value]="blog.images"
                 [responsiveOptions]="responsiveOptions"
-                [containerStyle]="{ 'max-width': '640px' }"
+                [containerStyle]="{ 'max-width': '100%' }"
                 [numVisible]="5"
                 [circular]="true"
                 [showItemNavigators]="true"
@@ -258,7 +260,7 @@
   <p-dialog
     class="myMax-dialog"
     header="Article"
-    [(visible)]="displayMaximizable"
+    [(visible)]="displayMaximizable1"
     [modal]="true"
     [style]="{ width: '50vw' }"
     [maximizable]="true"
@@ -293,13 +295,12 @@
     (change)="selectMultipleImage($event)"
     style="display: none"
   />
+
   <div id="selected-files-list">
     <span id="selected-files-msg">Selected Images:</span>
-    <span id="selected-files-count">0</span>
+    <span id="selected-files-count">{{targetCount || 0}}</span>
   </div>
 </div>
-
-
 
 
       <p-editor
@@ -311,12 +312,12 @@
 
     <ng-template pTemplate="footer">
       <p-button
-        (click)="confirm2(); displayMaximizable = false"
+        (click)="confirm4(); displayMaximizable1 = false"
         icon="pi pi-times"
         label="Cancel"
       ></p-button>
       <p-button
-        (click)="confirm1(); displayMaximizable = false"
+        (click)="confirm3(); displayMaximizable1 = false"
         icon="pi pi-check"
         label="Create"
         styleClass="mr-2"
@@ -324,17 +325,17 @@
     </ng-template>
   </p-dialog>
 
-  <p-dialog
+<p-dialog
     class="myMax-dialog"
     header="Article"
-    [(visible)]="displayMaximizable"
+    [(visible)]="displayMaximizable2"
     [modal]="true"
     [style]="{ width: '50vw' }"
     [maximizable]="true"
     [draggable]="true"
     [resizable]="true"
   >
-    <form [formGroup]="blogForm" (ngSubmit)="onSubmitEdit()">
+    <form [formGroup]="updateBlogForm" (ngSubmit)="onSubmitEdit()">
       <p id="article-thoughts">
         Share your thoughts, ideas, and experiences with the world. Be sure to
         read our <a href="#">Community Guidelines</a> before posting.
@@ -362,14 +363,12 @@
     (change)="selectMultipleImage($event)"
     style="display: none"
   />
+
   <div id="selected-files-list">
     <span id="selected-files-msg">Selected Images:</span>
-    <span id="selected-files-count">0</span>
+    <span id="selected-files-count">{{targetCount || 0}}</span>
   </div>
 </div>
-
-
-
 
       <p-editor
         formControlName="description"
@@ -380,17 +379,16 @@
 
     <ng-template pTemplate="footer">
       <p-button
-        (click)="confirm2(); displayMaximizable = false"
+        (click)="confirm2(); displayMaximizable2 = false"
         icon="pi pi-times"
         label="Cancel"
       ></p-button>
       <p-button
-        (click)="confirm1(); displayMaximizable = false"
+        (click)="confirm1(); displayMaximizable2 = false"
         icon="pi pi-check"
-        label="Create"
+        label="Update"
         styleClass="mr-2"
       ></p-button>
     </ng-template>
   </p-dialog>
-  
 </div>

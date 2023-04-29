@@ -16,7 +16,6 @@ export class EditProfileComponent implements OnInit {
   userImageUrl!: string;
   twoFactorAuth!: Boolean;
   images!: FormControl;
-  isDisabled: boolean;
 
   constructor(
     private authService: AuthService,
@@ -68,9 +67,7 @@ export class EditProfileComponent implements OnInit {
         this.router.navigate(['myProfile']);
       });
   }
-  handleChange(e) {
-    let isChecked = e.checked;
-  }
+
   onTwoFactorAuthChange() {
     if (!this.twoFactorAuth) {
       this.http.post(`${env.apiRoot}users/enable2FA`, {}).subscribe(

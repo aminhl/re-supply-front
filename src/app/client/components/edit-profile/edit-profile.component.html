@@ -33,6 +33,7 @@
     <div class="container" style="background-size: cover">
       <div class="row" style="background-size: cover">
         <div class="col-lg-8 offset-lg-2" style="background-size: cover">
+          
           <form
             [formGroup]="updateForm"
             (submit)="onSubmit()"
@@ -112,7 +113,7 @@
                         />
 <div class="toggle-container">
   <!-- Custom Input Switch Component -->
-  <input type="checkbox" [(ngModel)]="twoFactorAuth" [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()">
+  <input type="checkbox"  [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()">
   <label class="toggle-label">
     Two-Factor Authentication
     <span class="toggle-status"> {{ twoFactorAuth ? 'Enabled' : 'Disabled' }}</span>

@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -16,43 +23,65 @@ import {
 import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CommentsService } from 'src/app/shared/services/commentsService/comments.service';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css', './blog.component.scss'],
+  styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
+  @ViewChild('myForm') formRef: ElementRef;
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
+  commentsForm: FormGroup;
+  content: FormControl;
   description: FormControl;
   title: FormControl;
   blogs: any[];
+  comments: any[];
   displayMaximizable: boolean;
   items: MenuItem[];
   images: FormControl[];
   uploadedFiles: any[] = [];
   userId: any;
+  commentsByArticle: any[];
+  targetCount: number;
+  isEditMode = false;
 
+  updateCommentsForm = this.formBuilder.group({
+    content: '',
+    id: '',
+  });
   constructor(
     private authService: AuthService,
     private blogService: BlogService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private commentService: CommentsService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.createForm();
+    this.createCommentForm();
     this.getBlogs();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getUser().subscribe((res) => {
+      this.connectedUser = res.data.user;
+      console.log(this.connectedUser);
+    });
+    this.commentService.getComments().subscribe((res) => {
+      this.comments = res['data']['comments'];
+    });
+  }
 
   getBlogs() {
     return this.blogService.getBlogs(this.userId).subscribe((res: any) => {
       try {
         this.blogs = res.data.articles;
         if (this.blogs.length === 0) {
-          this.alertInfo()
+          this.alertInfo();
         }
-        console.log(this.blogs);
       } catch (error) {
         console.log('Error occurred while parsing response data', error);
       }
@@ -60,6 +89,14 @@ export class BlogComponent implements OnInit {
       (error) => {
         console.log('Error occurred while fetching blogs', error);
       };
+    });
+  }
+  getCommentsByArticle(articleId: any) {
+    return this.commentService.getCommentsByArticle(articleId).subscribe({
+      next: (res) => {},
+      error: (err) => {
+        console.error('Error adding comment:', err);
+      },
     });
   }
 
@@ -86,12 +123,105 @@ export class BlogComponent implements OnInit {
     });
   }
 
+  getData(content: any, id: any) {
+    this.updateCommentsForm.patchValue({
+      content: content,
+      id: id,
+    });
+    this.isEditMode = true;
+    console.log('updateCommentsForm', this.updateCommentsForm.value);
+  }
+
+  onEditComment() {
+    const content = this.updateCommentsForm.get('content').value;
+    const cmtId = this.updateCommentsForm.get('id').value;
+    this.commentService.editComment(cmtId, content).subscribe({
+      next: (res) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been Updated',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+
+        this.isEditMode = false;
+      },
+      error: (err) => {
+        console.error('Error editing comment:', err);
+      },
+    });
+  }
+
+  deleteComment(id: any, i: any) {
+    Swal.fire({
+      title: 'Are You Sure You Want To Delete This Comment?',
+      text: 'This action cannot be undone',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Do it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.commentService.deleteComment(id).subscribe((res) => {
+          this.comments.splice(i, 1);
+        });
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been Deleted',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    });
+  }
+
+  addComment(blogId: any, commenterId: any) {
+    const a = this.commentsForm.get('content').value;
+    this.commentService.addComment(blogId, commenterId, a).subscribe({
+      next: (res) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Comment Has Been added',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      },
+      error: (err) => {
+        console.error('Error adding comment:', err);
+      },
+    });
+  }
+
+  createCommentForm() {
+    this.commentsForm = this.formBuilder.group({
+      content: new FormControl('', [Validators.required]),
+    });
+  }
   selectMultipleImage(event: any) {
     if (event.target.files.length > 0) {
       this.uploadedFiles = event.target.files;
+      this.targetCount = this.uploadedFiles.length;
     }
   }
+  get f() {
+    return this.blogForm.controls;
+  }
 
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+  }
   onSubmit() {
     const formData = new FormData();
 
@@ -113,15 +243,6 @@ export class BlogComponent implements OnInit {
       }
     );
   }
-
-  get f() {
-    return this.blogForm.controls;
-  }
-
-  showMaximizableDialog() {
-    this.displayMaximizable = true;
-  }
-
   confirm1() {
     Swal.fire({
       title: 'Are you sure you want to publish this article?',
@@ -160,7 +281,7 @@ export class BlogComponent implements OnInit {
   }
   alertInfo() {
     Swal.fire({
-      title: "No Blogs Found, Feel Free To Create One",
+      title: 'No Blogs Found, Feel Free To Create One',
       icon: 'info',
       showCancelButton: true,
       confirmButtonText: 'Okay, Got It!',

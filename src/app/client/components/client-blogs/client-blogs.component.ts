@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,34 +11,50 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
 import { map, catchError, switchMap } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-client-blogs',
   templateUrl: './client-blogs.component.html',
-  styleUrls: ['./client-blogs.component.css', './client-blog.component.scss'],
+  styleUrls: ['./client-blogs.component.css'],
 })
 export class ClientBlogsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private blogService: BlogService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ) {
     this.createForm();
   }
+  updateBlogForm = this.formBuilder.group({
+    title: '',
+    description: '',
+    images: [],
+    id: '',
+  });
+
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
   description: FormControl;
+  id: FormControl;
   title: FormControl;
   blogs: any[];
-  displayMaximizable: boolean;
+  displayMaximizable1: boolean;
+  displayMaximizable2: boolean;
   items: MenuItem[];
   images: FormControl[];
   uploadedFiles: any[] = [];
   userId: any;
+  targetCount: number;
 
   ngOnInit() {
     this.getBlogs();
+    this.authService.getUser().subscribe((res) => {
+      this.connectedUser = res.data.user;
+    });
   }
 
   getBlogs() {
@@ -51,10 +67,7 @@ export class ClientBlogsComponent implements OnInit {
           this.blogService.getBlogs(this.userId).subscribe(
             (blogsRes: any) => {
               this.blogs = blogsRes.data.articles; // Store blogs
-              this.alertInfo();
-
-              // Proceed with the rest of the logic
-              // ...
+              if (this.blogs.length == 0) this.alertInfo();
             },
             (error) => {
               console.log('Error occurred while fetching blogs', error);
@@ -68,6 +81,15 @@ export class ClientBlogsComponent implements OnInit {
     } catch (error) {
       console.log('Error occurred while fetching blogs', error);
     }
+  }
+  getData(title: any, description: any, images: any, id: any) {
+    this.updateBlogForm.patchValue({
+      title: title,
+      description: description,
+      images: images,
+      id: id,
+    });
+    console.log(this.updateBlogForm.value);
   }
 
   responsiveOptions: any[] = [
@@ -96,6 +118,7 @@ export class ClientBlogsComponent implements OnInit {
   selectMultipleImage(event: any) {
     if (event.target.files.length > 0) {
       this.uploadedFiles = event.target.files;
+      this.targetCount = this.uploadedFiles.length;
     }
   }
 
@@ -108,9 +131,6 @@ export class ClientBlogsComponent implements OnInit {
     for (let img of this.uploadedFiles) {
       formData.append('images', img);
     }
-
-    console.log('Form data:', formData);
-
     this.blogService.addBlog(formData, this.connectedUser._id).subscribe(
       (data) => {
         console.log('Response:', data);
@@ -118,40 +138,51 @@ export class ClientBlogsComponent implements OnInit {
       (error) => {
         console.error('Error:', error);
       }
-    );
+      );
+      window.location.reload();
   }
   onSubmitEdit() {
     const formData = new FormData();
 
-    formData.append('title', this.blogForm.get('title').value);
-    formData.append('description', this.blogForm.get('description').value);
-
+    formData.append('title', this.updateBlogForm.get('title').value);
+    formData.append(
+      'description',
+      this.updateBlogForm.get('description').value
+    );
+    formData.append('id', this.updateBlogForm.get('id').value);
+    const blogId = this.updateBlogForm.get('id').value;
     for (let img of this.uploadedFiles) {
       formData.append('images', img);
     }
-
-    console.log('Form data:', formData);
-
-    this.blogService.editBlog(formData, this.connectedUser._id).subscribe(
+    this.blogService.editBlog(blogId, formData).subscribe(
       (data) => {
-        console.log('Response:', data);
+        let index = this.blogs.findIndex((blog) => blog._id == this.updateBlogForm.get('id').value);
+        this.blogs[index].title = this.updateBlogForm.get('title').value;
+        this.blogs[index].description = this.updateBlogForm.get('description').value;
+        this.blogs[index].images = this.updateBlogForm.get('images').value;
+
       },
       (error) => {
         console.error('Error:', error);
       }
     );
   }
-  get f() {
-    return this.blogForm.controls;
-  }
+  deleteBLog(id :any, i :any) {
+     this.blogService.deleteBlog(id).subscribe((res) => {
+      this.blogs.splice(i, 1);
+    });
 
+  }
   showMaximizableDialog() {
-    this.displayMaximizable = true;
+    this.displayMaximizable1 = true;
+  }
+  showMaximizableDialog1() {
+    this.displayMaximizable2 = true;
   }
 
   confirm1() {
     Swal.fire({
-      title: 'Are you sure you want to publish this article?',
+      title: 'Are you sure you want to Update this article?',
       text: 'This action cannot be undone',
       icon: 'info',
       showCancelButton: true,
@@ -159,8 +190,8 @@ export class ClientBlogsComponent implements OnInit {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.onSubmit();
-        Swal.fire('Blog Created', '', 'success');
+        this.onSubmitEdit();
+        Swal.fire('Blog Updated', '', 'success');
       }
       if (result.isDenied) {
         this.confirm2();
@@ -174,11 +205,11 @@ export class ClientBlogsComponent implements OnInit {
       text: 'This action cannot be undone',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, Discard It!',
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Blog Deleted', '', 'success');
+        Swal.fire('No Modifications', '', 'success');
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
@@ -194,6 +225,43 @@ export class ClientBlogsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('confirmed', '', 'success');
+      }
+    });
+  }
+  confirm3() {
+    Swal.fire({
+      title: 'Are you sure you want to publish this article?',
+      text: 'This action cannot be undone',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Do it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onSubmit();
+        Swal.fire('Blog Created', '', 'success');
+
+      }
+      if (result.isDenied) {
+        this.confirm2();
+      }
+    });
+  }
+
+  confirm4() {
+    Swal.fire({
+      title: 'Are you sure you want to cancel your work?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Discard',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Blog Deleted', '', 'success');
+      }
+      if (!result.isConfirmed) {
+        this.showMaximizableDialog();
       }
     });
   }
