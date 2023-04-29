@@ -10,11 +10,14 @@ import { environment as env } from '../../../../environments/environment';
 export class BlogService {
   constructor(private http: HttpClient) {}
 
-  addBlog(data: any,userId : any): Observable<any> {
-    return this.http.post(`${env.apiRoot}articles/`+userId, data);
+  addBlog(data: any, userId: any): Observable<any> {
+    return this.http.post(`${env.apiRoot}articles/` + userId, data);
   }
   editBlog(id: any, data: any): Observable<any> {
     return this.http.patch(`${env.apiRoot}articles/${id}`, data);
+  }
+  approveBlog(id: any): Observable<any> {
+    return this.http.put(`${env.apiRoot}articles/${id}`, {});
   }
   getBlogById(id: any): Observable<any> {
     return this.http.get(`${env.apiRoot}articles/${id}`);
@@ -30,5 +33,4 @@ export class BlogService {
     }
     return this.http.get(`${env.apiRoot}articles`, { params: params });
   }
-
 }

@@ -18,13 +18,13 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { JitsiComponentComponent } from './client/components/knowledge/jitsi-component/jitsi-component.component';
 import { FormsModule } from "@angular/forms";
 
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCredentials: true } };
 
 @NgModule({
   declarations: [
     AppComponent,
     KnowledgeComponent,
-
     JitsiComponentComponent,
   ],
   imports: [

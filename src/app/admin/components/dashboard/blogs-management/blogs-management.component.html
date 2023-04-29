@@ -1,0 +1,57 @@
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table de-table table-rank">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Status</th>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Owner Name</th>
+            <th scope="col">Posted at</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let blog of blogs| paginate: { itemsPerPage: 3, currentPage: currentPage }; index as i">
+          <tr>
+            <th scope="row">
+              <div class="coll_list_pp">
+                <div class="image-wrapper">
+                  <img class="lazy" [src]="blog.images[0]" alt="">
+                </div>
+              </div>
+              </th>
+            <td>
+              <span *ngIf="!blog.isApproved" style="color:red" class="icon_error-triangle"></span>
+              <span *ngIf="blog.isApproved" style="color:green" class="icon_check"></span>
+            </td>
+            <td class="">{{ blog.title}}</td>
+            <td class="">{{ blog.owner.lastName}} {{ blog.owner.firstName}}</td>
+
+             <ng-template #noTotal>
+               <td>--</td>
+             </ng-template>
+            <td>{{blog.createdAt | date}}</td>
+            <td>
+                <a *ngIf="!blog.isApproved" (click)="acceptBlog(blog._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a>
+                <a (click)="deleteBlog(blog._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="7">
+              <div class="d-flex justify-content-center">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+              </div>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</section>

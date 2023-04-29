@@ -9,6 +9,7 @@ import {ProductManagementComponent} from "./components/dashboard/product-managem
 import { ClaimsManagementComponent } from './components/dashboard/claims-management/claims-management.component';
 import { ResourcesManagementComponent } from './components/dashboard/resources-management/resources-management.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BlogsManagementComponent } from './components/dashboard/blogs-management/blogs-management.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UserManagementComponent,
     ProductManagementComponent,
     ClaimsManagementComponent,
-    ResourcesManagementComponent
+    ResourcesManagementComponent,
+    BlogsManagementComponent
 
   ],
     imports: [

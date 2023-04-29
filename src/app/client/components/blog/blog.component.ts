@@ -281,14 +281,10 @@ export class BlogComponent implements OnInit {
   }
   alertInfo() {
     Swal.fire({
-      title: 'No Blogs Found, Feel Free To Create One',
+      position: 'center',
       icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Okay, Got It!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('confirmed', '', 'success');
-      }
+      title: "You Don't Have Any Blogs Yet Feel Free To Add Some",
+      showConfirmButton: true,
     });
   }
 }

@@ -16,8 +16,8 @@
       >Donation Management</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " (click)="selectedComponent='blog'"
-         [ngClass]="{' active':selectedComponent==='blog'}"
+      <a class="nav-link " (click)="selectedComponent='community'"
+         [ngClass]="{' active':selectedComponent==='community'}"
       >Community Management</a>
     </li>
     <li class="nav-item">
@@ -42,6 +42,7 @@
       <app-donation-management *ngIf="selectedComponent==='donation'"></app-donation-management>
       <app-claims-management *ngIf="selectedComponent==='claims'"></app-claims-management>
       <app-resources-management *ngIf="selectedComponent==='resources'"></app-resources-management>
+      <app-blogs-management *ngIf="selectedComponent==='community'"></app-blogs-management>
     </div>
     <!-- content close -->
     <a href="#" id="back-to-top" class="show"></a>
