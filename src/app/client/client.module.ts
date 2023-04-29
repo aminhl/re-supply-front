@@ -30,11 +30,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
-
 import { ClientBlogsComponent } from './components/client-blogs/client-blogs.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
-
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 
@@ -53,10 +52,9 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     UpdatePasswordComponent,
     ProductSubmissionComponent,
     ProductDetailsComponent,
-
     ClientBlogsComponent,
-
     WishlistComponent,
+    CommentsComponent,
 
   ],
   imports: [
