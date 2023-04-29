@@ -38,8 +38,8 @@
                 <i class="fa fa-heart"></i>
                </span>
                 <span id="de-click-menu-cart" class="de-menu-notification" [routerLink]="'/cart'">
-                <span class="d-count"></span>
-                <span aria-hidden="true" class="icon_cart"></span>
+                <span class="d-count" *ngIf="cart && cart.length > 0">{{cart.length}}</span>
+                <span class="icon_cart"></span>
                </span>
                   <span id="de-click-menu-profile" class="de-menu-profile">
 

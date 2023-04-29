@@ -66,7 +66,7 @@ export class ProductService {
         tap(() => {
           // Emit the updated wishlist
           // @ts-ignore
-          this.wishlistUpdated.next();
+          this.cartUpdated.next();
         })
       );
   }
