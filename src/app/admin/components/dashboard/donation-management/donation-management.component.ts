@@ -12,7 +12,7 @@ import {HttpClient} from "@angular/common/http";
 export class DonationManagementComponent implements OnInit {
 
   donations: any;
-
+  currentPage = 1;
   constructor(private donationService: RequestService,
               private http: HttpClient,) {
   }

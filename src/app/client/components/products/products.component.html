@@ -71,7 +71,7 @@
 
         </div>
         <!-- nft item begin -->
-        <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products | filterByName: searchTerm">
+        <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products | filterByName: searchTerm| paginate: { itemsPerPage: 8, currentPage: currentPage }; index as i">
           <div class="nft__item">
             <div class="author_list_pp">
               <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{ product.owner.lastName }} {{ product.owner.firstName }}">
@@ -93,19 +93,22 @@
               <div class="nft__item_price">
                 {{product.price | currency:'USD':true:'1.2-2'}}
               </div>
-              <div class="nft__item_action">
+              <div class="spacer-10"></div>
+              <div class="nft__item_action d-flex justify-content-between">
                 <a (click)="addProductToWishlist(product)" style="color: #8c66e8;display: flex;justify-content: right" >
                   <i class="fa fa-heart " data-bs-toggle="tooltip" data-bs-placement="top" title="Add to WishList" style="cursor: pointer"></i>
                 </a>
                 <a (click)="addProductToCart(product)" style="color: #8c66e8;display: flex;justify-content: right" >
-                  <i class="fa fa-shopping-cart " data-bs-toggle="tooltip" data-bs-placement="top" title="Add to WishList" style="cursor: pointer"></i>
+                  <i class="fa fa-shopping-cart " data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart" style="cursor: pointer"></i>
                 </a>
               </div>
             </div>
           </div>
 
         </div>
-
+        <div class="d-flex justify-content-center">
+          <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+        </div>
       </div>
     </div>
   </section>

@@ -39,6 +39,7 @@ import { ProfileInfoComponent } from './components/my-profile/profile-info/profi
 import { ProfileProductsComponent } from './components/my-profile/profile-products/profile-products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrderSuccessComponent } from './components/cart/order-success/order-success.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -86,6 +87,7 @@ import { OrderSuccessComponent } from './components/cart/order-success/order-suc
     FileUploadModule,
     ToggleButtonModule,
     CarouselModule,
+    NgxPaginationModule
   ],
   exports: [
     MyProfileComponent,
