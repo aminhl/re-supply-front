@@ -63,11 +63,9 @@ export class AuthService {
     if (status !== undefined ) {
       params = params.append('verified', status);
     }
-
     if (role !== undefined ) {
       params = params.append('role', role);
     }
-    console.log(params);
     return this.http.get(env.apiRoot + 'users', { params: params });
   }
 
@@ -172,5 +170,23 @@ export class AuthService {
 
   deleteAccount(): any{
     return this.http.delete(env.apiRoot + "users/deactivateAccount");
+  }
+
+  getUsersnoadmin(status:any, role : any) {
+    let params = new HttpParams();
+    if (status !== undefined ) {
+      params = params.append('verified', status);
+    }
+    if (role !== undefined ) {
+      params = params.append('role', role);
+    }
+    return this.http.get(env.apiRoot + 'getAllUsersNoadmin', { params: params });
+  }
+  sendemail(target: string,url:string,email:string) {
+    const requestBody = {
+      url,
+      email
+    };
+    return this.http.post(env.apiRoot + target,requestBody);
   }
 }

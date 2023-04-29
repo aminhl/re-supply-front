@@ -12,24 +12,39 @@ export class HeaderCComponent implements OnInit {
   wishlistCount = 0;
   wishlist: any[] = [];
   wishlistSubscription: Subscription;
+  cartCount = 0;
+  cart: any[] = [];
+  cartSubscription: Subscription;
 
   constructor(public authService: AuthService,private productService: ProductService) {
 
   }
 
   ngOnInit(): void {
-    // this.loadWishlist();
-    // // Subscribe to the wishlistUpdated subject to update the wishlist count
-    // this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
-    //   this.loadWishlist();
-    // });
+    if (this.authService.isLoggedIn()){
+      this.loadWishlist();
+      this.loadCart();
+      // Subscribe to the wishlistUpdated subject to update the wishlist count
+      this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+        this.loadWishlist();
+      });
+      this.cartSubscription = this.productService.cartUpdated.subscribe(() => {
+        this.loadCart();
+      });
+    }
   }
 
-  ngOnDestroy(): void {
-    // Unsubscribe from the wishlistSubscription to prevent memory leaks
-    this.wishlistSubscription.unsubscribe();
+  loadCart() {
+    this.productService.getCart().subscribe(
+      res => {
+        this.cart = res.data.cart.products;
+        this.cartCount = this.cart.length;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
-
   loadWishlist() {
     this.productService.getWishlist().subscribe(
       res => {

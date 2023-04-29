@@ -1,0 +1,53 @@
+<div id="top" style="background-size: cover;"></div>
+<!-- section begin -->
+<section class="min-vh-100" style="background-color: #f4f5f7;margin-bottom: 0;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+      <div class="col col-lg-12 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+
+            <ng-container *ngIf="user">
+              <div class="col-md-4 gradient-custom text-center text-white"
+
+                   style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img *ngIf="userImageUrl" [src]="userImageUrl"  alt="Avatar" class="img-fluid my-5"
+                     style="width: 120px; border-radius: 50%">
+                <h3>{{ user.firstName }} {{user.lastName | uppercase}}</h3>
+                <p>{{ user.role |uppercase}}</p>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <h4 style="color: #00b74a" *ngIf="active">Active</h4>
+                  <h4 style="color: #ff0042" *ngIf="!active">Not Active</h4>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{ user.email }}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phone</h6>
+                      <p class="text-muted">{{ getPhoneNumber(user) }}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="mt-0 mb-2" >
+                <div class="spacer-10"></div>
+                <div style="margin-left: 30px;display: flex;justify-content: space-evenly">
+                  <button class="btn-main" [routerLink]="['/editProfile']">Edit Profile</button>
+                  <button (click)="deleteAccount()" style="background-color: #ff0042!important;" class="btn-main">
+                    Delete My Account!
+                  </button>
+                  <!--  <button class="btn-main" [routerLink]="['/myBlogs']">My Blogs</button>-->
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

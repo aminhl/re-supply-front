@@ -21,7 +21,7 @@ export class ProductManagementComponent implements OnInit {
   products: any;
   order: string = 'status';
   reverse: boolean = false;
-  selectedComponent:string="user";
+  currentPage = 1;
   constructor(
     private authService: AuthService,
     private adminService: AdminService,

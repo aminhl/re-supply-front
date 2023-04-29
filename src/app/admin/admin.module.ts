@@ -8,7 +8,7 @@ import {UserManagementComponent} from "./components/dashboard/user-management/us
 import {ProductManagementComponent} from "./components/dashboard/product-management/product-management.component";
 import { ClaimsManagementComponent } from './components/dashboard/claims-management/claims-management.component';
 import { ResourcesManagementComponent } from './components/dashboard/resources-management/resources-management.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { ResourcesManagementComponent } from './components/dashboard/resources-m
         CommonModule,
         AdminRoutingModule,
         OrderModule,
-        FormsModule
+        FormsModule,
+        NgxPaginationModule
     ]
 })
 export class AdminModule {}

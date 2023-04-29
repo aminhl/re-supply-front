@@ -1,25 +1,10 @@
-.gradient-custom {
-  /* fallback for old browsers */
-  background: #f6d365;
+.nav-link{
+  color: #495057;
+  cursor: pointer;
+}
 
-  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-
-  background: linear-gradient(to right bottom, rgba(155, 14, 252, 1), rgba(253, 160, 133, 1))
-}
-.alert-primary {
-  background-image: linear-gradient(to bottom right, #6f42c1, #9b59b6);
-  color: #fff;
-  border-color: #6f42c1;
-}
-.nft__item_wrap {
-  height: 250px; /* Set a fixed height for each product card */
-  overflow: hidden; /* Hide any content that overflows the height */
-}
-.nft__item_wrap img {
-  height: 100%; /* Make the image height 100% of the parent element */
-  object-fit: cover; /* Ensure the image covers the entire space without changing its aspect ratio */
-}
-.nft__item_wrap img:hover {
-  transform: scale(1.1);
-  transition: all 0.5s ease;
+.nav-link.active{
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  border-bottom-color: white;
 }

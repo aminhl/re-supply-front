@@ -18,7 +18,8 @@ export class ProductsComponent implements OnInit {
   selectedFilter = 'name'; // default selected filter option
   selectedOrder = 'asc'; // default selected order
   wishlist: any;
-
+  cart: any;
+  currentPage = 1;
 
   constructor(private productService: ProductService) { }
 
@@ -79,6 +80,33 @@ export class ProductsComponent implements OnInit {
   }
 
 
+  addProductToCart(product: any) {
+    if (this.cart && this.cart.products.includes(product._id)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Product already in cart',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      return;
+    }
 
+    this.productService.addProductToCart(product._id).subscribe(
+      res => {
+        this.cart = res.data.cart;
+        setTimeout(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Product added to the cart!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }, 1000);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
 }

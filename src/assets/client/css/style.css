@@ -976,6 +976,38 @@ header.header-mobile.header-light #menu-btn {
 #de-click-menu-notification {
   position: relative;
 }
+#de-click-menu-cart {
+  position: relative;
+}
+#de-click-menu-cart .d-count{
+  display: inline-block;
+  position: absolute;
+  z-index: 100;
+  background: #8364E2FF;
+  line-height: 1em;
+  padding: 6px;
+  width: 22px;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  top: -10px;
+  right: -10px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 10px;
+}
+.de-menu-cart {
+  cursor: pointer;
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  background: #eeeeee;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 30px;
+  padding-top: 3px;
+  margin-left: 5px;
+}
 
 #de-click-menu-notification .d-count {
   display: inline-block;

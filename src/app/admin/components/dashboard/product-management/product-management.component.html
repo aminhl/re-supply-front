@@ -13,15 +13,16 @@
             <th scope="col">Action</th>
           </tr>
           </thead>
-          <tbody *ngFor="let product of products | orderBy: order: reverse">
+          <tbody *ngFor="let product of products | orderBy: order: reverse| paginate: { itemsPerPage: 5, currentPage: currentPage }; index as i">
           <tr>
             <th scope="row">
               <div class="coll_list_pp">
                 <div class="image-wrapper">
                   <img class="lazy" src="{{ product.images[0] }}" alt="">
+
                 </div>
               </div>
-              {{ product.name}}</th>
+              <a style="color: #000000" [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
             <td>
                       <span class="sr-wrapper" [ngStyle]="{ 'backgroundColor': product.color }">
                         {{ product.status }}
@@ -36,15 +37,16 @@
             </td>
           </tr>
           </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="7">
+              <div class="d-flex justify-content-center">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+              </div>
+            </td>
+          </tr>
+          </tfoot>
         </table>
-
-        <div class="spacer-double"></div>
-
-        <ul class="pagination justify-content-center">
-          <li class="active"><a href="#">1 - 20</a></li>
-          <li><a href="#">21 - 40</a></li>
-          <li><a href="#">41 - 60</a></li>
-        </ul>
       </div>
     </div>
   </div>

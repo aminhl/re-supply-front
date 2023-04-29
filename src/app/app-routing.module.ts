@@ -6,9 +6,7 @@ import {MyProfileComponent} from "./client/components/my-profile/my-profile.comp
 import {EditProfileComponent} from "./client/components/edit-profile/edit-profile.component";
 import {MainCComponent} from "./client/components/main-c/main-c.component";
 import {ForgetPasswordComponent} from './shared/components/forget-password/forget-password.component';
-import {
-  ChangePasswordAfterSubmitEmailComponent
-} from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
+import {ChangePasswordAfterSubmitEmailComponent} from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
 import { AuthGuard } from './shared/authguard/auth.guard';
 import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
@@ -22,14 +20,12 @@ import { DashboardComponent } from "./admin/components/dashboard/dashboard.compo
 import { RoleGuard } from "./shared/roleguard/role.guard";
 import {ProductSubmissionComponent} from "./client/components/products/product-submission/product-submission.component";
 import {ProductDetailsComponent} from "./client/components/products/product-details/product-details.component";
-
 import { ClientBlogsComponent } from './client/components/client-blogs/client-blogs.component';
-
 import {WishlistComponent} from "./client/components/wishlist/wishlist.component";
-
-
-
-
+import { KnowledgeComponent } from "./client/components/knowledge/knowledge.component";
+import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-component/jitsi-component.component";
+import { CartComponent } from "./client/components/cart/cart.component";
+import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
 const routes: Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -87,15 +83,16 @@ const routes: Routes = [
     component: ProductDetailsComponent,
     canActivate: [AuthGuard],
   },
-
   { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, RoleGuard] },
   { path: 'productSubmission', component: ProductSubmissionComponent, canActivate: [AuthGuard] },
   { path: 'productDetails/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-
+  { path: 'knowledge', component: KnowledgeComponent , canActivate: [AuthGuard]},
+  { path: 'knowledge/jitsi/:id', component:JitsiComponentComponent , canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'orderSuccess', component: OrderSuccessComponent, canActivate: [AuthGuard] },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

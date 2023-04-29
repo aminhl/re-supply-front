@@ -25,7 +25,8 @@
               <li class="menu-item"><a [routerLink]="'/products'">Products</a></li>
               <li class="menu-item"><a [routerLink]="'/donation'">Donations</a></li>
               <li class="menu-item"><a [routerLink]="'/community'">Community</a></li>
-              <li class="menu-item"><a href="#">Knowledge</a></li>
+              <li class="menu-item"><a [routerLink]="'/knowledge'">Knowledge</a></li>
+
             </ul>
             <a *ngIf="!authService.isLoggedIn()" [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signup</span></a>
               <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
@@ -33,16 +34,18 @@
                 <div class="de-login-menu" style="background-size: cover;">
 
                 <span id="de-click-menu-notification" class="de-menu-notification" [routerLink]="'/wishlist'">
-  <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
-  <i class="fa fa-heart"></i>
-</span>
-
-
+                <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
+                <i class="fa fa-heart"></i>
+               </span>
+                <span id="de-click-menu-cart" class="de-menu-notification" [routerLink]="'/cart'">
+                <span class="d-count" *ngIf="cart && cart.length > 0">{{cart.length}}</span>
+                <span class="icon_cart"></span>
+               </span>
                   <span id="de-click-menu-profile" class="de-menu-profile">
 
-                                            <img src="./assets/client/images/settings.png"  alt="">
+                    <img src="./assets/client/images/settings.png"  alt="">
 
-                                        </span>
+                </span>
 
 
 

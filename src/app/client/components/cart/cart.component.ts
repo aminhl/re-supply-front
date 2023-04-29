@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../../shared/services/product.service";
-import Swal from "sweetalert2";
 import { AuthService } from "../../../shared/services/auth.service";
+import { ProductService } from "../../../shared/services/product.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-wishlist',
-  templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.css']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class WishlistComponent implements OnInit {
+export class CartComponent implements OnInit {
 
-  wishlist: any;
+  cart: any;
 
   constructor(private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
-
     if (this.authService.isLoggedIn()) {
-      this.loadWishlist();
+      this.loadCart();
     }
   }
 
-  loadWishlist() {
-    this.productService.getWishlist().subscribe(
+  loadCart() {
+    this.productService.getCart().subscribe(
       res => {
-        this.wishlist = res.data.wishlist.products;
+        this.cart = res.data.cart.products;
       },
       error => {
         console.log(error);
@@ -32,9 +31,9 @@ export class WishlistComponent implements OnInit {
     );
   }
 
-  deleteProductFromWishlist(productId: string) {
+  deleteProductFromCart(productId: string) {
     Swal.fire({
-      title: 'Are you sure you want to delete this product from the wishList?',
+      title: 'Are you sure you want to delete this product from the cart?',
       text: 'This action cannot be undone.',
       icon: 'warning',
       showCancelButton: true,
@@ -42,27 +41,27 @@ export class WishlistComponent implements OnInit {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productService.deleteProductFromWishlist(productId).subscribe(
+        this.productService.deleteProductFromCart(productId).subscribe(
           res => {
             // Find the index of the deleted product in the wishlist array
-            const index = this.wishlist.findIndex(product => product._id === productId);
+            const index = this.cart.findIndex(product => product._id === productId);
             if (index !== -1) {
               // If the product is found, remove it from the wishlist array
-              this.wishlist.splice(index, 1);
+              this.cart.splice(index, 1);
               Swal.fire({
                 title: 'Success!',
-                text: 'Product has been removed from your wishlist.',
+                text: 'Product has been removed from your cart.',
                 icon: 'success',
               });
               // Emit the updated wishlist
               // @ts-ignore
-              this.productService.wishlistUpdated.next();
+              this.productService.cartUpdated.next();
             }
           },
           error => {
             Swal.fire({
               title: 'Error!',
-              text: 'Unable to remove product from wishlist.',
+              text: 'Unable to remove product from cart.',
               icon: 'error',
             });
             console.log(error);
@@ -72,6 +71,10 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-
-
+  createOrder(): void {
+    const products = this.cart.map(product => ({ product: product._id }));
+    const requestBody = { products };
+    this.productService.createOrder(requestBody)
+      .subscribe(response => window.location.href = response.data.session_url);
+  }
 }

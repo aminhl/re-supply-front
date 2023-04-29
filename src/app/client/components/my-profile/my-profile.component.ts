@@ -19,6 +19,7 @@ export class MyProfileComponent implements OnInit {
   products: any;
   productImageUrl!: string;
   owner: any;
+  selectedComponent:string="MyProfile";
 
 
   constructor(private authService: AuthService, private productService: ProductService, private http: HttpClient, private router: Router) { }
@@ -40,51 +41,4 @@ export class MyProfileComponent implements OnInit {
       }
     });
   }
-  getPhoneNumber(user: any) {
-    if (user.phoneNumber === '00000000') {
-      return 'Not provided';
-    }
-    return user.phoneNumber;
-  }
-  deleteProduct(productId: string) {
-    Swal.fire({
-      title: 'Are you sure you want to delete this product?',
-      text: 'This action cannot be undone',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.http
-          .delete(`${env.apiRoot}products/${productId}`)
-          .subscribe(() => {
-            this.products = this.products.filter(
-              (product) => product._id !== productId
-            );
-            Swal.fire('Product deleted', '', 'success');
-          });
-      }
-    });
-  }
-
-  deleteAccount(): any{
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You are about to delete your account without verification.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.authService.deleteAccount().subscribe(res => console.log(res));
-        localStorage.removeItem("jwt");
-        this.router.navigate(['/login'])
-      }
-    })
-  }
-
 }

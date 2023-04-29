@@ -24,8 +24,7 @@ export class UserManagementComponent implements OnInit {
   products: any;
   order: string = 'status';
   reverse: boolean = false;
-  donations: any;
-  selectedComponent:string="user";
+  currentPage = 1;
 
   constructor(
     private authService: AuthService,

@@ -1,0 +1,29 @@
+<div id="wrapper">
+  <div class="no-bottom no-top" id="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div id="jitsi-iframe"  ></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+         <h4>Send invitaion link</h4>
+          <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="selectedItems">
+            <option *ngFor="let user of this.users" [value]="user.email">{{ user.email }}</option>
+          </select>
+          <div class="spacer-10"></div>
+          <button class="btn-main btn-lg btn-light" (click)="returnSelectedItems()">Send invitation</button>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
