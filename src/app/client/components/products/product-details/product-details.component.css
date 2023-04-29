@@ -1,0 +1,7 @@
+@media (max-width: 768px) {
+  .image-autosize {
+    max-width: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+}

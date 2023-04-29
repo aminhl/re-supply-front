@@ -24,5 +24,8 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
-
+  createSingleOrder(productId: string): void {
+    this.productService.createSingleOrder(productId)
+      .subscribe(response => window.location.href = response.data.session_url);
+  }
 }

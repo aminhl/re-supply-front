@@ -79,5 +79,9 @@ export class ProductService {
   createOrder(requestBody: any): Observable<any>{
     return this.http.post<any>(env.apiRoot + "orders", requestBody);
   }
+  createSingleOrder(productId: string): Observable<any> {
+    return this.http.post<any>(env.apiRoot + "orders/product", { productId });
+  }
+
 
 }
