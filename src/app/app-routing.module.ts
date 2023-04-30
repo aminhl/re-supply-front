@@ -26,6 +26,7 @@ import { KnowledgeComponent } from "./client/components/knowledge/knowledge.comp
 import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-component/jitsi-component.component";
 import { CartComponent } from "./client/components/cart/cart.component";
 import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
+import { ChatComponent } from './client/components/chat/chat.component';
 const routes: Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
 
   { path: 'myBlogs', component: ClientBlogsComponent, canActivate: [AuthGuard] },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   {
     path: 'updatePassword',
     component: UpdatePasswordComponent,
