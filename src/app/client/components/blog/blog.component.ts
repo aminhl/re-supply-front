@@ -24,6 +24,7 @@ import { BlogService } from 'src/app/shared/services/blogService/blog.service';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CommentsService } from 'src/app/shared/services/commentsService/comments.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog',
@@ -59,7 +60,8 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService,
     private formBuilder: FormBuilder,
     private commentService: CommentsService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public sanitizer: DomSanitizer
   ) {
     this.createForm();
     this.createCommentForm();
@@ -137,17 +139,8 @@ export class BlogComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been Updated',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
 
+          window.location.reload();
         this.isEditMode = false;
       },
       error: (err) => {
@@ -169,16 +162,7 @@ export class BlogComponent implements OnInit {
         this.commentService.deleteComment(id).subscribe((res) => {
           this.comments.splice(i, 1);
         });
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been Deleted',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        window.location.reload();
       }
     });
   }
@@ -187,16 +171,7 @@ export class BlogComponent implements OnInit {
     const a = this.commentsForm.get('content').value;
     this.commentService.addComment(blogId, commenterId, a).subscribe({
       next: (res) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been added',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error adding comment:', err);
@@ -254,7 +229,16 @@ export class BlogComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmit();
-        Swal.fire('Blog Created', '', 'success');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Blog Created',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
       if (result.isDenied) {
         this.confirm2();

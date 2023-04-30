@@ -81,17 +81,8 @@ export class ClientBlogsComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been Updated',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
 
+          window.location.reload();
         this.isEditMode = false;
       },
       error: (err) => {
@@ -113,16 +104,7 @@ export class ClientBlogsComponent implements OnInit {
         this.commentService.deleteComment(id).subscribe((res) => {
           this.comments.splice(i, 1);
         });
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been Deleted',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
           window.location.reload();
-        }, 1500);
       }
     });
   }
@@ -131,16 +113,7 @@ export class ClientBlogsComponent implements OnInit {
     const a = this.commentsForm.get('content').value;
     this.commentService.addComment(blogId, commenterId, a).subscribe({
       next: (res) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Comment Has Been added',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+          window.location.reload()
       },
       error: (err) => {
         console.error('Error adding comment:', err);
@@ -292,7 +265,16 @@ export class ClientBlogsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmitEdit();
-        Swal.fire('Blog Updated', '', 'success');
+       Swal.fire({
+         position: 'center',
+         icon: 'success',
+         title: 'Blog Created',
+         showConfirmButton: false,
+         timer: 1000,
+       });
+       setTimeout(() => {
+         window.location.reload();
+       }, 500);
       }
       if (result.isDenied) {
         this.confirm2();
@@ -310,7 +292,7 @@ export class ClientBlogsComponent implements OnInit {
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('No Modifications', '', 'success');
+
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
@@ -338,11 +320,14 @@ export class ClientBlogsComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: "Blog Created!",
+          title: 'Blog Created!',
           showConfirmButton: false,
+          timer: 1000,
         });
           this.onSubmit();
-
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
       if (result.isDenied) {
         this.confirm2();
