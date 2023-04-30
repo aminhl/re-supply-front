@@ -1,52 +1,49 @@
-
 <section aria-label="section">
-  <div class="container" id="add"style="background-color: whitesmoke; padding:30px;border-radius: 15px">
+  <div class="container">
     <div class="row wow fadeIn">
       <div class="col-lg-7 offset-lg-1">
-        <div> <h1 style="margin: 0px 0px 5px ;font-size:36px;font-family: sans-serif; color: #120f7c">Add Donation Request
-        </h1></div>
-          <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text"
-                     id="title"
-                     formControlName="requestTitle"
-                     class="form-control"
-                     [ngModel]="requestTitle.value"
-                     [ngClass]="{
+        <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div class="spacer-20"></div>
+            <h5>Title</h5>
+            <input
+              id="title"
+              formControlName="requestTitle"
+              class="form-control"
+              placeholder="e.g. 'Support our cause'"
+              [ngModel]="requestTitle.value"
+              [ngClass]="{
                         'input-invalid':
                           requestTitle.invalid &&
                           (requestTitle.dirty || requestTitle.touched),
                         'input-valid':
                           requestTitle.valid && (requestTitle.dirty || requestTitle.touched)
                       }"
-              >
-              <div
-                class="message-invalid"
-                *ngIf="requestTitle.touched && requestTitle.hasError('required')"
-              >
-                Title  is required!
-              </div>
-              <div
-                class="message-invalid"
-                *ngIf="
+            />
+            <div
+              class="message-invalid"
+              *ngIf="requestTitle.touched && requestTitle.hasError('required')"
+            >
+              Title  is required!
+            </div>
+            <div
+              class="message-invalid"
+              *ngIf="
                         requestTitle.touched && requestTitle.hasError('invalidData')
                       "
-              >
-                Title contains only letters!
-              </div>
-              <!--success message-->
-              <div
-                class="message-valid"
-                *ngIf="requestTitle.touched && !requestTitle.errors"
-              >
-                Valid!
-              </div>
-
-
-
+            >
+              Title contains only letters!
+            </div>
+            <!--success message-->
+            <div
+              class="message-valid"
+              *ngIf="requestTitle.touched && !requestTitle.errors"
+            >
+              Valid!
+            </div>
             <div class="form-group">
-              <label for="type">Type</label>
+              <div class="spacer-20"></div>
+              <h5>Type</h5>
               <select  id="type"
                        formControlName="type"
                        class="form-control"
@@ -60,7 +57,7 @@
                           type.valid && (type.dirty || type.touched)
                       }"
               >
-                <option value="Item">Item</option>
+                <option value="Item" selected>Item</option>
                 <option value="Currency">Currency</option>
               </select>
               <div
@@ -80,53 +77,155 @@
 
             </div>
             <div class="form-group" *ngIf="select.value==='Currency';else item" >
-              <label for="targetValue">Target Value</label>
-              <input type="number"
-                     id="targetValue"
-                     formControlName="targetValue"
-                     class="form-control"
-                  >
-
+              <div class="spacer-20"></div>
+              <h5>Target Value</h5>
+              <input
+                type="number"
+                id="targetValue"
+                formControlName="targetValue"
+                class="form-control"
+                placeholder="Enter your desired donation amount (e.g. $50)"
+                [ngModel]="targetValue.value"
+                [ngClass]="{
+                        'input-invalid':
+                          targetValue.invalid &&
+                          (targetValue.dirty || targetValue.touched),
+                        'input-valid':
+                          targetValue.valid && (targetValue.dirty || targetValue.touched)
+                      }"
+              />
+              <div
+                class="message-invalid"
+                *ngIf="targetValue.touched && targetValue.hasError('required')"
+              >
+                TargetValue is required!
+              </div>
+              <div
+                class="message-invalid"
+                *ngIf="targetValue.touched && targetValue.hasError('min')"
+              >
+                TargetValue Must be > 0
+              </div>
+              <!--success message-->
+              <div
+                class="message-valid"
+                *ngIf="targetValue.touched && !targetValue.errors"
+              >
+                Valid!
+              </div>
             </div>
-          <ng-template #item>
-            <div class="form-group" >
-              <label for="typeItem">Type Item </label>
-              <input type="text"
-                     id="typeItem"
-                     formControlName="itemType"
-                     [required]="select.value==='Item'"
-                     class="form-control">
-            </div>
-          </ng-template>
+            <ng-template #item>
+              <div class="form-group" >
+                <div class="spacer-20"></div>
+                <h5>Type Item</h5>
+                <input
+                  type="text"
+                  id="typeItem"
+                  formControlName="itemType"
+                  placeholder="Donation item (e.g. clothing, food, cash)"
+                  [required]="select.value==='Item'"
+                  class="form-control"
+                />
+              </div>
+            </ng-template>
 
             <div class="form-group">
-              <label for="notes">Notes</label>
-              <textarea id="notes" formControlName="notes" class="form-control"></textarea>
+              <div class="spacer-20"></div>
+              <h5>Notes</h5>
+              <textarea id="notes" formControlName="notes" class="form-control" placeholder="'Is there anything else you'd like us to know about your donation?'"></textarea>
             </div>
             <div class="form-group">
-              <label for="requestImage">Request Image</label>
-              <input type="file"
-                     id="requestImage"
-                     formControlName="requestImage"
-                     class="form-control"
-                     (change)="onImageSelected($event)" >
-            </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <button style="margin-top: 15px; align-self: center" type="submit" class="btn btn-primary" [disabled]="requestForm.invalid">Submit</button>
+              <div class="spacer-20"></div>
+              <h5>Request Image</h5>
+              <div class="field-set" style="background-size: cover">
+                <input type="file"
+                       id="requestImage"
+                       formControlName="requestImage"
+                       class="form-control"
+                       (change)="onImageSelected($event)"
+                />
+                <div
+                  class="message-invalid"
+                  *ngIf="requestImage.dirty && requestImage.hasError('required')"
+                >
+                  Image is required!
                 </div>
-                <div class="col-md-6">
-                  <button style="margin-top: 15px; align-self: center" type="button" [routerLink]="['/donation']" class="btn btn-danger" >Cancel</button>
+                <!--success message-->
+                <div
+                  class="message-valid"
+                  *ngIf="requestImage.touched && !requestImage.errors"
+                >
+                  Valid!
                 </div>
               </div>
-
             </div>
-          </form>
+            <div class="row" style="margin-top: 2rem">
+              <div class="col-md-6">
+                  <div
+                    id="submit"
+                    class="pull-left"
+                    style="background-size: cover"
+                  >
+                    <input
+                      type="submit"
+                      id="send_message"
+                      value="Submit"
+                      class="btn btn-main color-2 ripple-surface"
+                      style="border-radius: 5px"
+                      [disabled]="requestForm.invalid"
+                    />
+                    <button type="button" [routerLink]="['/donation']" class="btn-main"
+                    style="margin-left: 1.5rem; background-color: #ff0042!important;">Cancel</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
 
+      <div class="col-lg-3 col-sm-6 col-xs-12">
+        <h5>Preview item</h5>
+        <div class="nft__item">
+          <div class="author_list_pp">
+            <a href="#">
+<!--              <img-->
+<!--                class="lazy"-->
+<!--                [src]="userImageUrl"-->
+<!--                alt=""-->
+<!--              />-->
+              <i class="fa fa-check"></i>
+            </a>
+          </div>
+          <div class="nft__item_wrap">
+            <a href="#">
+              <img alt="" class="lazy nft__item_preview" src="../../../../assets/client/images/logo.svg">
+            </a>
+          </div>
+<!--          <div class="nft__item_info">-->
+<!--            <a href="#">-->
+<!--              <h4>              <div class="nft__item_price">-->
+<!--                <ng-container *ngIf="name.value == ''; else dynamicName">-->
+<!--                  {{'Product name'}}-->
+<!--                </ng-container>-->
+<!--                <ng-template #dynamicName>-->
+<!--                  {{name.value}}-->
+<!--                </ng-template>-->
+<!--              </div></h4>-->
+<!--            </a>-->
+<!--            <div class="nft__item_price">-->
+<!--              <ng-container *ngIf="price.value == ''; else dynamicPrice">-->
+<!--                {{'Ex:  $23.00'}}-->
+<!--              </ng-container>-->
+<!--              <ng-template #dynamicPrice>-->
+<!--                {{price.value | currency}}-->
+<!--              </ng-template>-->
+<!--            </div>-->
+<!--            <div class="nft__item_action">-->
+<!--              <a href="#">Add to cart</a>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-
-

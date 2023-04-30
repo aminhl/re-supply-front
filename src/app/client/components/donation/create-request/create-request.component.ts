@@ -37,7 +37,7 @@ export class CreateRequestComponent implements OnInit {
 
   initform(): void {
     this.type = new FormControl('',[Validators.required] );
-    this.targetValue = new FormControl('',[Validators.min(0)] );
+    this.targetValue = new FormControl('',[Validators.required, Validators.min(0)] );
     this.currentValue = new FormControl('',[Validators.min(0)] );
     this.notes = new FormControl('',[Validators.required]);
     this.itemType = new FormControl('',);
@@ -87,9 +87,6 @@ export class CreateRequestComponent implements OnInit {
     this.requestImage.setValue(file);
     this.requestImage.markAsTouched();
   }
-
-
-
 
 
 }
