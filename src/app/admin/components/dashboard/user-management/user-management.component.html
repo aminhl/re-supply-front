@@ -3,30 +3,23 @@
     <div class="row">
       <div class="col-md-12">
         <div class="items_filter text-center">
-          <div id="filter_by_duration" class="dropdown">
-            <a href="#" class="btn-selector">Last 7 days</a>
-            <ul>
-              <li (click)="getUsersByOneDay()"><span>Last 24 hours</span></li>
-              <li (click)="getUsersByWeek()" ><span>Last 7 days</span></li>
-              <li (click)="getUsersByMonth()"><span>Last 30 days</span></li>
-              <li (click)="getAllUsers()" class="active"><span>All time</span></li>
-            </ul>
-          </div>
+          <select class="me-4" id="filter_by_duration" (change)="selectUsersByDuration()" [(ngModel)]="selectedDuration">
+            <option value="1day">Last 24 hours</option>
+            <option value="1week">Last 7 days</option>
+            <option value="1month">Last 30 days</option>
+            <option value="alltime">All time</option>
+          </select>
 
           <div id="filter_by_category" class="dropdown">
-            <a href="#" class="btn-selector">All categories</a>
-            <ul>
-              <li (click)="getAllUsers()" class="active"><span>All categories</span></li>
-              <li (click)="getUserByRole('admin')"><span>Admin</span></li>
-
-              <li (click)="getUserByRole('member')"><span>Member</span></li>
-
-              <li (click)="getUsersbyStatus(true)"><span>Active</span></li>
-              <li (click)="getUsersbyStatus(false)">
-                <span>Not Active</span>
-              </li>
-            </ul>
+            <select [(ngModel)]="selectedCategory" (ngModelChange)="selectUsersByCategory()">
+              <option value="all">All categories</option>
+              <option value="admin">Admin</option>
+              <option value="member">Member</option>
+              <option value="active">Active</option>
+              <option value="not-active">Not Active</option>
+            </select>
           </div>
+
         </div>
 
         <form

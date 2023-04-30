@@ -37,10 +37,36 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
-
   }
 
+  selectedDuration: string = 'alltime';
 
+  selectUsersByDuration() {
+    if (this.selectedDuration === '1day') {
+      this.getUsersByOneDay();
+    } else if (this.selectedDuration === '1week') {
+      this.getUsersByWeek();
+    } else if (this.selectedDuration === '1month') {
+      this.getUsersByMonth();
+    } else {
+      this.getAllUsers();
+    }
+  }
+
+  selectedCategory: string = 'all';
+  selectUsersByCategory() {
+    if (this.selectedCategory === 'admin') {
+      this.getUserByRole('admin');
+    } else if (this.selectedCategory === 'member') {
+      this.getUserByRole('member');
+    } else if (this.selectedCategory === 'active') {
+      this.getUsersbyStatus(true);
+    } else if (this.selectedCategory === 'not-active') {
+      this.getUsersbyStatus(false);
+    } else {
+      this.getAllUsers();
+    }
+  }
 
 
   getAllUsers() {
