@@ -21,7 +21,7 @@ export class ProfileInfoComponent implements OnInit {
   selectedComponent = 'MyProfile';
 
 
-  constructor(private authService: AuthService, private productService: ProductService, private http: HttpClient, private router: Router) { }
+  constructor(private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((req)=>{
@@ -46,23 +46,6 @@ export class ProfileInfoComponent implements OnInit {
     }
     return user.phoneNumber;
   }
-  deleteAccount(): any{
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You are about to delete your account without verification.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.authService.deleteAccount().subscribe(res => console.log(res));
-        localStorage.removeItem("jwt");
-        this.router.navigate(['/login'])
-      }
-    })
-  }
+
 
 }

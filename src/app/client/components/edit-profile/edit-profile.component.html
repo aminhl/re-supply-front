@@ -1,23 +1,20 @@
-<div class="no-bottom no-top" id="content" style="background-size: cover">
-  <div id="top" style="background-size: cover"></div>
+<div class="no-bottom no-top" id="content">
+  <div id="top"></div>
 
   <!-- section begin -->
   <section
     id="subheader"
     class="text-light"
     data-bgimage="url(assets/client/images/background/subheader.jpg) top"
-    style="
-      background: url('../../../../assets/client/images/background/subheader.jpg')
-        center top / cover;
-    "
+    style="background: url('../../../../assets/client/images/background/subheader.jpg') center top / cover;"
   >
-    <div class="center-y relative text-center" style="background-size: cover">
-      <div class="container" style="background-size: cover">
-        <div class="row" style="background-size: cover">
-          <div class="col-md-12 text-center" style="background-size: cover">
+    <div class="center-y relative text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
             <h1>Edit Profile</h1>
           </div>
-          <div class="clearfix" style="background-size: cover"></div>
+          <div class="clearfix"></div>
         </div>
       </div>
     </div>
@@ -25,142 +22,54 @@
   <!-- section close -->
 
   <!-- section begin -->
-  <section
-    id="section-main"
-    aria-label="section"
-    style="background-size: cover"
-  >
-    <div class="container" style="background-size: cover">
-      <div class="row" style="background-size: cover">
-        <div class="col-lg-8 offset-lg-2" style="background-size: cover">
-          
-          <form
-            [formGroup]="updateForm"
-            (submit)="onSubmit()"
-            id="form-create-item"
-            class="form-border"
-          >
-            <div class="de_tab tab_simple" style="background-size: cover">
-
-
-              <div class="de_tab_content" style="background-size: cover">
-                <div class="tab-1" style="background-size: cover">
-                  <div
-                    class="row wow fadeIn animated"
-                    style="
-                      background-size: cover;
-                      visibility: visible;
-                      animation-name: fadeIn;
-                    "
-                  >
-                    <div
-                      class="col-lg-8 mb-sm-20"
-                      style="background-size: cover"
-                    >
-                      <div class="field-set" style="background-size: cover">
+  <section id="section-main" aria-label="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <form [formGroup]="updateForm" (submit)="onSubmit()" id="form-create-item" class="form-border">
+            <div class="de_tab tab_simple">
+              <div class="de_tab_content">
+                <div class="tab-1">
+                  <div class="row wow fadeIn animated">
+                    <div class="col-md-6 col-lg-8 mb-sm-20">
+                      <div class="field-set">
                         <h5>First Name</h5>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="firstName"
-                          name="firstName"
-                          formControlName="firstName"
-                          placeholder="{{ user.firstName }}"
-                        />
-
-                        <div
-                          class="spacer-20"
-                          style="background-size: cover"
-                        ></div>
+                        <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" placeholder="{{ user.firstName }}" />
+                        <div class="spacer-20"></div>
 
                         <h5>Last Name</h5>
-                        <input
-                          type="text"
-                          name="Last Name"
-                          id="Last Name"
-                          class="form-control"
-                          formControlName="lastName"
-                          placeholder="{{ user.lastName }}"
-                        />
-
-                        <div
-                          class="spacer-20"
-                          style="background-size: cover"
-                        ></div>
+                        <input type="text" name="Last Name" id="Last Name" class="form-control" formControlName="lastName" placeholder="{{ user.lastName }}" />
+                        <div class="spacer-20"></div>
 
                         <h5>Phone Number</h5>
-                        <textarea
-                          name="PhoneNumber"
-                          id="PhoneNumber"
-                          class="form-control"
-                          formControlName="phoneNumber"
-                          placeholder="{{ getPhoneNumber(user) }}"
-                        ></textarea>
-
-                        <div
-                          class="spacer-20"
-                          style="background-size: cover"
-                        ></div>
+                        <textarea name="PhoneNumber" id="PhoneNumber" class="form-control" formControlName="phoneNumber" placeholder="{{ getPhoneNumber(user) }}"></textarea>
+                        <div class="spacer-20"></div>
 
                         <h5>Email</h5>
-                        <input
-                          type="text"
-                          name="email"
-                          id="email"
-                          class="form-control"
-                          formControlName="email"
-                          placeholder="{{ user.email }}"
-                        />
-<div class="toggle-container">
-  <!-- Custom Input Switch Component -->
-  <input type="checkbox"  [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()">
-  <label class="toggle-label">
-    Two-Factor Authentication
-    <span class="toggle-status"> {{ twoFactorAuth ? 'Enabled' : 'Disabled' }}</span>
-  </label>
-</div>
+                        <input type="text" name="email" id="email" class="form-control" formControlName="email" placeholder="{{ user.email }}" />
+                        <div class="toggle-container">
+                          <!-- Custom Input Switch Component -->
+                          <input type="checkbox" [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()" />
+                          <label class="toggle-label">
+                            Two-Factor Authentication
+                            <span class="toggle-status">{{ twoFactorAuth ? "Enabled" : "Disabled" }}</span>
+                          </label>
+                        </div>
 
-
-                        <div
-                          class="spacer-20"
-                          style="background-size: cover"
-                        ></div>
+                        <div class="spacer-20"></div>
                       </div>
                     </div>
 
-                    <div
-                      id="sidebar"
-                      class="col-lg-4"
-                      style="background-size: cover"
-                    >
+                    <div id="sidebar" class="col-md-6 col-lg-4">
                       <h5>
                         Profile image
-                        <i
-                          class="fa fa-info-circle id-color-2"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title=""
-                        ></i>
+                        <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip" data-bs-placement="top" title=""></i>
                       </h5>
-                      <img
-                        *ngIf="userImageUrl"
-                        [src]="userImageUrl"
-                        id="click_profile_img"
-                        class="d-profile-img-edit img-fluid"
-                        alt=""
-                      />
+                      <img *ngIf="userImageUrl" [src]="userImageUrl" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="" />
 
-                        <div class="field-set" style="background-size: cover">
-                          <input type="file"
-                                 name="images"
-                                 id="images"
-                                 class="form-control"
-                                 (change)="onImageSelected($event)"
-                                 formControlName="images"
-                          />
-                        </div>
-
-
+                      <div class="field-set">
+                        <input type="file" name="images" id="images" class="form-control" (change)="onImageSelected($event)" formControlName="images" />
+                      </div>
                       <div
                         class="spacer-30"
                         style="background-size: cover"
@@ -170,16 +79,18 @@
                 </div>
               </div>
             </div>
-
-            <div class="spacer-30" style="background-size: cover"></div>
-
-           <a style="margin: 10px; border-radius: unset; color: #FFFFFF" class="btn-main" [routerLink]="'/updatePassword'"><i class="fa fa-key" aria-hidden="true"></i> Update Password</a>
-            <input
-              type="submit"
-              id="submit"
-              class="btn-main"
-              value="Update profile"
-            />
+            <div class="spacer-20" style="background-size: cover"></div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+              <input type="submit" id="submit" class="btn-main" value="Update Profile" style="flex: 1;border-radius: 10px;">
+              <a class="btn-main" [routerLink]="'/updatePassword'" style="flex: 1;border-radius: 10px;"><i class="fa fa-key" aria-hidden="true"></i> Update Password</a>
+              <button
+                (click)="deleteAccount()"
+                style="background-color: #ff0042 !important; flex: 1;border-radius: 10px;"
+                class="btn-main"
+              >
+                Delete My Account!
+              </button>
+            </div>
           </form>
         </div>
       </div>

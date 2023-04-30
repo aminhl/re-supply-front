@@ -7,44 +7,46 @@
 <section aria-label="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-lg-12">
         <ng-container *ngIf="cart">
-          <table class="table de-table table-rank table-responsive" *ngIf="cart.length > 0; else emptyCart">
-            <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col">Owner</th>
-              <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody *ngFor="let product of cart">
-            <tr>
-              <th scope="row">
-                <div class="coll_list_pp">
-                  <div class="image-wrapper">
-                    <img class="lazy" src="{{ product.images[0] }}" alt="">
+          <div class="table-responsive">
+            <table class="table de-table table-rank" *ngIf="cart.length > 0; else emptyCart">
+              <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Action</th>
+              </tr>
+              </thead>
+              <tbody *ngFor="let product of cart">
+              <tr>
+                <th scope="row">
+                  <div class="coll_list_pp">
+                    <div class="image-wrapper">
+                      <img class="lazy" src="{{ product.images[0] }}" alt="">
+                    </div>
                   </div>
-                </div>
-                <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
-              </th>
-              <td>{{ product.price | currency }}</td>
-              <td>{{ product.owner.firstName + " " + product.owner.lastName}}</td>
-              <td>
-                <a (click)="deleteProductFromCart(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
-              </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-              <td colspan="4" class="text-end">
-                <button class="btn-main" (click)="createOrder()">
-                  Proceed To Checkout
-                </button>
-              </td>
-            </tr>
-            </tfoot>
-          </table>
+                  <a [routerLink]="['/productDetails', product._id]">{{ product.name}}</a>
+                </th>
+                <td>{{ product.price | currency }}</td>
+                <td>{{ product.owner.firstName + " " + product.owner.lastName}}</td>
+                <td>
+                  <a (click)="deleteProductFromCart(product._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt" style="cursor: pointer"></span></a>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="4" class="text-end">
+                  <button class="btn-main" (click)="createOrder()">
+                    Proceed To Checkout
+                  </button>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
         </ng-container>
         <ng-template #emptyCart>
           <div class="container">
@@ -63,4 +65,3 @@
     </div>
   </div>
 </section>
-
