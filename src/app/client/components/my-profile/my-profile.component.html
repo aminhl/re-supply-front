@@ -1,31 +1,30 @@
- <div id="top" style="background-size: cover;"></div>
-  <!-- section begin -->
- <div class="no-bottom no-top" id="content">
-   <div class="container">
-     <div class="row wow fadeIn">
-       <ul class="nav nav-tabs" style="justify-content: left; gap: 20px; padding-top: 20px;margin-left: 12px">
-         <li class="nav-item">
-           <a class="nav-link  " (click)="selectedComponent='MyProfile'"
-              [ngClass]="{'active':selectedComponent==='MyProfile'}"
-           ><i class="fa fa-user"></i> My Profile</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" (click)="selectedComponent='MyProducts'"
-              [ngClass]="{' active':selectedComponent==='MyProducts'}"
-           ><i class="icon_bag"></i> My products</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" routerLink="/myBlogs"
-              [ngClass]="{' active':selectedComponent==='myBlogs'}"
-           ><i class="pi pi-book"></i> My Blogs</a>
-         </li>
-       </ul>
-       <!-- section begin -->
-       <app-profile-info *ngIf="selectedComponent==='MyProfile'"></app-profile-info>
-       <app-profile-products *ngIf="selectedComponent==='MyProducts'"></app-profile-products>
-     </div>
-     <!-- content close -->
-     <a href="#" id="back-to-top" class="show"></a>
-   </div>
- </div>
-
+<div id="top"></div>
+<!-- section begin -->
+<div class="no-bottom no-top" id="content">
+  <div class="container">
+    <div class="row wow fadeIn">
+      <ul class="nav nav-tabs" style="justify-content: left; gap: 20px; padding-top: 20px;margin-left: 12px">
+        <li class="nav-item">
+          <a class="nav-link  " (click)="selectedComponent='MyProfile'" [ngClass]="{'active':selectedComponent==='MyProfile'}"
+          ><i class="fa fa-user"></i> My Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="selectedComponent='MyProducts'" [ngClass]="{' active':selectedComponent==='MyProducts'}"
+          ><i class="icon_bag"></i> My products</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/myBlogs" [ngClass]="{' active':selectedComponent==='myBlogs'}"
+          ><i class="pi pi-book"></i> My Blogs</a
+          >
+        </li>
+      </ul>
+      <!-- section begin -->
+      <app-profile-info *ngIf="selectedComponent==='MyProfile'"></app-profile-info>
+      <app-profile-products *ngIf="selectedComponent==='MyProducts'"></app-profile-products>
+    </div>
+    <!-- content close -->
+    <a href="#" id="back-to-top" class="show"></a>
+  </div>
+</div>

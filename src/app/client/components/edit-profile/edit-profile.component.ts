@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { environment as env } from '../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-edit-profile',
@@ -104,6 +105,27 @@ this.twoFactorAuth = true;
     }
     return user.phoneNumber;
   }
+  deleteAccount(): any{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete your account without verification.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.deleteAccount().subscribe(res => console.log(res));
+        localStorage.removeItem("jwt");
+        this.router.navigate(['/login'])
+      } else {
+        this.router.navigate(['/editProfile'])
+      }
+    })
+  }
+
 
 }
 

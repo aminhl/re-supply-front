@@ -8,3 +8,13 @@
   border-color: var(--secondary-color);
   border-bottom-color: white;
 }
+@media only screen and (max-width: 767px) {
+  .nav-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 0;
+  }
+  .nav-item {
+    margin-bottom: 10px;
+  }
+}

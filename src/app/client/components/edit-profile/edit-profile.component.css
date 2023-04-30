@@ -49,3 +49,14 @@ input[type="checkbox"]:checked:before {
   margin-left: 5px;
   color: #8c66e8;
 }
+.btn-main {
+  display: block;
+  margin: 10px auto;
+  border-radius: unset;
+  color: #ffffff;
+  max-width: 300px;
+}
+
+.btn-main + .btn-main {
+  margin-top: 10px;
+}
