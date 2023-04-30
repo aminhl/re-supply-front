@@ -25,8 +25,8 @@
               {{donation.requester_id.firstName}} </th>
             <td>
 
-              <span *ngIf="!donation.isApproved" style="color:red" class="icon_error-triangle"></span>
-              <span *ngIf="donation.isApproved" style="color:green" class="icon_check"></span>
+              <span *ngIf="!donation.isApproved" style="background-color:#ffe6e6">Not Approuved</span>
+              <span *ngIf="donation.isApproved" style="background-color:#e6ffed">Approuved</span>
             </td>
             <td class="">{{ donation.requestTitle}}</td>
             <td class="">{{ donation.type}}</td>

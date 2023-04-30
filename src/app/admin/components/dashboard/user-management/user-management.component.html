@@ -47,87 +47,73 @@
           </div>
         </form>
 
-        <table class="table de-table table-rank">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Role</th>
-            <th scope="col">Status</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Email</th>
-            <th scope="col">Joined</th>
-            <th scope="col">Action</th>
-          </tr>
-          </thead>
-          <tbody *ngFor="let user of filteredUsers| paginate: { itemsPerPage: 5, currentPage: currentPage }; index as i">
-          <tr>
-            <th scope="row">
-              <div class="coll_list_pp">
-                <img
-                  class="lazy"
-                  src="{{ user.images[0] }}"
-                  alt=""
-                />
-                <i class="fa fa-check"></i>
-              </div>
-              {{ user.firstName + " " + user.lastName }}
-            </th>
-            <td>
-                          <span
-                            class="sr-wrapper"
-                            [ngStyle]="{
-                              backgroundColor:
-                                user.role === 'admin' ? '#d4c1ec' : '#fff9db'
-                            }"
-                          >
-                            {{ user.role }}
-                          </span>
-            </td>
-            <td>
-                          <span
-                            class="sr-wrapper"
-                            [ngStyle]="{
-                              backgroundColor: user.verified
-                                ? '#e6ffed'
-                                : '#ffe6e6'
-                            }"
-                          >
-                            {{ user.verified ? "Active" : "Not Active" }}
-                          </span>
-            </td>
-            <td class="">{{ getPhoneNumber(user) }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.joinedAt | date }}</td>
-            <td>
-              <a
-                (click)="deleteUser(user._id)"
-                class="action-wrapper"
-              ><span
-                aria-hidden="true"
-                class="icon_trash_alt"
-              ></span
-              ></a>
-              <a
-                (click)="upgradeToAdmin(user._id)"
-                class="action-wrapper"
-              ><span
-                aria-hidden="true"
-                class="icon_plus_alt"
-              ></span
-              ></a>
-            </td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td colspan="7">
-              <div class="d-flex justify-content-center">
-                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-              </div>
-            </td>
-          </tr>
-          </tfoot>
-        </table>
+        <div class="table-responsive">
+          <table class="table de-table table-rank table-sm">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Role</th>
+              <th scope="col">Status</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Email</th>
+              <th scope="col">Joined</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let user of filteredUsers| paginate: { itemsPerPage: 5, currentPage: currentPage }; index as i">
+            <tr>
+              <th scope="row">
+                <div class="coll_list_pp">
+                  <img class="lazy" src="{{ user.images[0] }}" alt="" />
+                  <i class="fa fa-check"></i>
+                </div>
+                {{ user.firstName + " " + user.lastName }}
+              </th>
+              <td>
+          <span
+            class="sr-wrapper"
+            [ngStyle]="{
+              backgroundColor:
+                user.role === 'admin' ? '#d4c1ec' : '#fff9db'
+            }"
+          >
+            {{ user.role }}
+          </span>
+              </td>
+              <td>
+          <span
+            class="sr-wrapper"
+            [ngStyle]="{
+              backgroundColor: user.verified ? '#e6ffed' : '#ffe6e6'
+            }"
+          >
+            {{ user.verified ? "Active" : "Not Active" }}
+          </span>
+              </td>
+              <td class="">{{ getPhoneNumber(user) }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.joinedAt | date }}</td>
+              <td>
+                <a (click)="deleteUser(user._id)" class="action-wrapper"
+                ><span aria-hidden="true" class="icon_trash_alt"></span
+                ></a>
+                <a (click)="upgradeToAdmin(user._id)" class="action-wrapper"
+                ><span aria-hidden="true" class="icon_plus_alt"></span
+                ></a>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="7">
+                <div class="d-flex justify-content-center">
+                  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                </div>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </div>
