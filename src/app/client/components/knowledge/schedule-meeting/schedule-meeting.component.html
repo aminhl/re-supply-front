@@ -1,0 +1,57 @@
+
+<div class="container">
+  <!-- calendar.component.html -->
+  <a [routerLink]="['/knowledge']" class="btn-main btn-lg btn-light">Back</a>&nbsp;&nbsp;&nbsp;
+
+  <full-calendar [options]="calendarOptions" (eventClick)="handleEventClick($event)"></full-calendar>
+
+</div>
+<p-dialog class="myMax-dialog" header="Schedule Meeting"
+  [(visible)]="displayMaximizable"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [maximizable]="true"
+  [draggable]="true"
+  [resizable]="true">
+  <form [formGroup]="ScheduleForm" (ngSubmit)="onSubmit()">
+    <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
+        <input id="float-input" type="text" pInputText formControlName="title" />
+        <label for="float-input">Title</label>
+    </span>
+    <label for="float-input">Description</label>
+    <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
+    <textarea id="float-input1" rows="4" pInputTextarea formControlName="description"></textarea>
+</span>
+
+    <label for="float-input">Date</label>
+    <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
+        <input id="float-input1" type="date" pInputText formControlName="date" />
+    </span>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button (click)="confirm2(); displayMaximizable = false" icon="pi pi-times" label="Cancel"></p-button>
+    <p-button (click)="confirm1(); displayMaximizable = false" icon="pi pi-check" label="Create" styleClass="mr-2"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Schedule Meeting Details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}">
+  <div *ngIf="selectedEvent">
+    <h4>Title</h4>
+    <p>{{selectedEvent.title}}</p>
+    <h4>Date</h4>
+    <p>{{selectedEvent.date}}</p>
+    <h4>Description</h4>
+    <p>{{selectedEvent.description}}</p>
+    <ng-container *ngIf="allowparticipate; else participated">
+      <button pButton type="button" label="Participate" class="ui-button-success" (click)="participate(selectedEvent.title, selectedEvent.date, selectedEvent.description)"></button> &nbsp;
+    </ng-container>
+
+    <ng-template #participated>
+      <div class="alert alert-success" role="alert"> You have already participated in this event</div>
+    </ng-template>
+
+    <button pButton type="button" label="Cancel" class="ui-button-secondary" (click)="cancel()"></button>
+  </div>
+</p-dialog>

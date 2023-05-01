@@ -13,7 +13,7 @@
         <div class="col-sm">
          <h4>Send invitaion link</h4>
           <select class="form-select" multiple aria-label="multiple select example" [(ngModel)]="selectedItems">
-            <option *ngFor="let user of this.users" [value]="user.email">{{ user.email }}</option>
+            <option *ngFor="let user of this.users" [value]="user">{{ user }}</option>
           </select>
           <div class="spacer-10"></div>
           <button class="btn-main btn-lg btn-light" (click)="returnSelectedItems()">Send invitation</button>

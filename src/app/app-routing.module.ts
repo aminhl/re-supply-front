@@ -26,6 +26,8 @@ import { KnowledgeComponent } from "./client/components/knowledge/knowledge.comp
 import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-component/jitsi-component.component";
 import { CartComponent } from "./client/components/cart/cart.component";
 import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
+import { ScheduleMeetingComponent } from "./client/components/knowledge/schedule-meeting/schedule-meeting.component";
+import { ListMeetingComponent } from "./client/components/knowledge/list-meeting/list-meeting.component";
 const routes: Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -92,6 +94,8 @@ const routes: Routes = [
   { path: 'knowledge/jitsi/:id', component:JitsiComponentComponent , canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'orderSuccess', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+  { path: 'ScheduleMeeting', component: ScheduleMeetingComponent, canActivate: [AuthGuard] },
+  { path: 'ListMeeting', component: ListMeetingComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
