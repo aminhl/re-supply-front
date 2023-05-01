@@ -27,6 +27,7 @@ import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-com
 import { CartComponent } from "./client/components/cart/cart.component";
 import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
 import { ChatComponent } from './client/components/chat/chat.component';
+import {TarsChatbotComponent} from "./client/components/chatbot/tars-chatbot.component";
 const routes: Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -94,6 +95,7 @@ const routes: Routes = [
   { path: 'knowledge/jitsi/:id', component:JitsiComponentComponent , canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'orderSuccess', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+  { path: 'tars', component: TarsChatbotComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

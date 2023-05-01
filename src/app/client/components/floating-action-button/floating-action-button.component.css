@@ -1,0 +1,27 @@
+.fab {
+  position: fixed;
+  bottom: 20px;
+  left: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #008CBA;
+  color: #FFF;
+  cursor: pointer;
+  text-align: center;
+  line-height: 60px;
+  font-size: 24px;
+  z-index: 9999;
+}
+
+.fab:hover {
+  background-color: #005f7a;
+}
+
+.chatbot-wrapper {
+  position: absolute;
+  bottom: 80px;
+  left: -50px;
+
+}
+
