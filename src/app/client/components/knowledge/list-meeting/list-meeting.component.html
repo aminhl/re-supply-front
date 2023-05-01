@@ -53,51 +53,53 @@
                 </ul>
               </div>
 
-
-
-              <a href="#"  class="btn-main btn-lg btn-light " >Add resource</a>&nbsp;&nbsp;&nbsp;&nbsp;
-              <a [routerLink]="['/ListMeeting']" class="btn-main btn-lg btn-light">List Meeting</a>&nbsp;&nbsp;&nbsp;
-              <a [routerLink]="['/ScheduleMeeting']" class="btn-main btn-lg btn-light">Schedule Meeting</a>
+              <a [routerLink]="['/knowledge']" class="btn-main btn-lg btn-light">Back</a>&nbsp;&nbsp;&nbsp;
             </div>
+
           </div>
 
+
+
           <!-- nft item begin -->
-          <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let meet of Meetingobject">
             <div class="nft__item">
+              <div class="de_countdown" data-year="2023" data-month="3" data-day="16" data-hour="8"></div>
               <div class="author_list_pp">
-                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: ">
-                  <img class="lazy" src="" alt="">
+                <a href="#">
+                  <img class="lazy"  src="{{userconnected.data['user'].images[0]}}" alt="">
                   <i class="fa fa-check"></i>
                 </a>
               </div>
               <div class="nft__item_wrap">
-                <a >
-                  <div class="d-placeholder"></div>
-                  <img src="" class="nft__item_preview" alt="" >
+                <a href="#">
+                  <img src="assets/client/images/meeting.jpg" class="lazy nft__item_preview" alt="">
                 </a>
               </div>
               <div class="nft__item_info">
-                <a href="item-details.html">
-                  <h4></h4>
+                <a href="#">
+                  <h3>{{ meet.title }}</h3>
                 </a>
-
+                <div class="nft__item_click">
+                  <span></span>
+                </div>
                 <div class="nft__item_price">
 
+                  <p>{{ meet.description }}</p>
                 </div>
-                <div class="spacer-10"></div>
-                <div class="nft__item_action d-flex justify-content-between">
-                  <a  style="color: #8c66e8;display: flex;justify-content: right" >
-                    <i class="fa fa-heart " data-bs-toggle="tooltip" data-bs-placement="top" title="Add to WishList" style="cursor: pointer"></i>
-                  </a>
-                  <a  style="color: #8c66e8;display: flex;justify-content: right" >
-                    <i class="fa fa-shopping-cart " data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart" style="cursor: pointer"></i>
-                  </a>
+                <div class="nft__item_action">
+                  <p>Date: {{ meet.date | date:'dd/MM/yyyy' }}</p>
+                </div>
+                <div *ngIf="isToday(meet.date)">
+                  <a (click)="StartMeet(meet.title,meet.description)" class="btn-main btn-lg btn-light">Start Meet</a>
+                </div>
+                <div *ngIf="!isToday(meet.date)">
+                  <div class="alert alert-warning" role="alert">
+                    that day has not yet arrived
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

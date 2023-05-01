@@ -1,8 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../../shared/services/auth.service";
 import * as stream from "stream";
 import * as sgMail from '@sendgrid/mail';
+import { ScheduleMeetingService } from "../../../../shared/services/KnowledgeService/schedule-meeting.service";
+import * as crypto from 'crypto-js';
 
 declare var JitsiMeetExternalAPI: any;
 @Component({
@@ -25,16 +27,30 @@ fullname:any;
   isVideoMuted = false;
   urltoSend: string;
   users: any;
+
+  private readonly secretKey = 'XXAAA32423412396qsdqsdqsdqsdaz&klklbkofdiobjoisdokp2342KSDK?FSO7DFIHJBçè-&éQSDQSJIDHQSJHI'; // Replace with your own secret key
+  encryptedCode: string;
+  title: string;
+  description: string;
   constructor(
     private router: Router,
     private Authservice:AuthService,
+    private ScheduleService:ScheduleMeetingService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.userconnected= this.Authservice.getConnectedUserData();
-    this.Authservice.getUsers(true, "member").subscribe(
+    this.encryptedCode = this.route.snapshot.paramMap.get('id');
+    const decryptedCode = this.decrypt(this.encryptedCode);
+    const codeParts = decryptedCode.split('%');
+    this.title = codeParts[0];
+    this.description = codeParts[1];
+    console.log(this.title,this.description)
+
+    this.ScheduleService.getEmailsForEvent(this.title,this.description ).subscribe(
       (response: any) => {
-        this.users = response.data.users;
+        this.users = response.data.result;
         },
       (error) => console.error(error)
     );
@@ -47,8 +63,8 @@ fullname:any;
     this.room = this.userconnected.firstName+' '+this.userconnected.lastName;
     this.options = {
       roomName: this.room,
-      width: 1400,
-      height: 1200,
+      width: 900,
+      height: 700,
       configOverwrite: { prejoinPageEnabled: false },
       interfaceConfigOverwrite: {
 
@@ -124,7 +140,7 @@ fullname:any;
   }
 
   returnSelectedItems() {
-
+  console.log(this.selectedItems)
     for (let i = 0; i < this.selectedItems.length; i++) {
       this.sendemail(this.selectedItems[i])
     }
@@ -134,5 +150,10 @@ fullname:any;
     return this.Authservice.sendemail("users/Sendmeetlink",this.urltoSend,email).subscribe((res:any)=>{
     console.log("Email sent")
     })
+  }
+
+  decrypt(encryptedText: string): string {
+    const decrypted = crypto.AES.decrypt(encryptedText, this.secretKey);
+    return decrypted.toString(crypto.enc.Utf8);
   }
 }

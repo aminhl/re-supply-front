@@ -16,7 +16,15 @@ import { KnowledgeComponent } from './client/components/knowledge/knowledge.comp
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { JitsiComponentComponent } from './client/components/knowledge/jitsi-component/jitsi-component.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ScheduleMeetingComponent } from './client/components/knowledge/schedule-meeting/schedule-meeting.component';
+import { FullCalendarModule } from "@fullcalendar/angular";
+import { DialogModule } from "primeng/dialog";
+import { ChipsModule } from "primeng/chips";
+import { EditorModule } from "primeng/editor";
+import { ButtonModule } from "primeng/button";
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { ListMeetingComponent } from './client/components/knowledge/list-meeting/list-meeting.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCredentials: true } };
@@ -26,6 +34,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     AppComponent,
     KnowledgeComponent,
     JitsiComponentComponent,
+    ScheduleMeetingComponent,
+    ListMeetingComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +47,15 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     OrderModule,
     SocialLoginModule,
     SocketIoModule.forRoot(config),
-    FormsModule
+    FormsModule,
+    FullCalendarModule,
+    FullCalendarModule,
+    DialogModule,
+    ReactiveFormsModule,
+    ChipsModule,
+    EditorModule,
+    ButtonModule,
+    InputTextareaModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {
