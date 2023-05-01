@@ -41,6 +41,7 @@ import { ProfileProductsComponent } from './components/my-profile/profile-produc
 import { CartComponent } from './components/cart/cart.component';
 import { OrderSuccessComponent } from './components/cart/order-success/order-success.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProfileRequestComponent } from './components/my-profile/profile-request/profile-request.component';
 
 
 
@@ -69,6 +70,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       ProfileProductsComponent,
       CartComponent,
       OrderSuccessComponent,
+      ProfileRequestComponent,
 
 
   ],

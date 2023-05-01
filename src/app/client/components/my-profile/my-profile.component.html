@@ -18,11 +18,17 @@
            <a class="nav-link" routerLink="/myBlogs"
               [ngClass]="{' active':selectedComponent==='myBlogs'}"
            ><i class="pi pi-book"></i> My Blogs</a>
+         </li>    <li class="nav-item">
+           <a class="nav-link"  (click)="selectedComponent='MyRequest'"
+              [ngClass]="{' active':selectedComponent==='MyRequest'}"
+           ><i class="pi pi-dollar"></i> My Donations Request</a>
          </li>
        </ul>
        <!-- section begin -->
        <app-profile-info *ngIf="selectedComponent==='MyProfile'"></app-profile-info>
        <app-profile-products *ngIf="selectedComponent==='MyProducts'"></app-profile-products>
+       <app-profile-request *ngIf="selectedComponent==='MyRequest'"></app-profile-request>
+
      </div>
      <!-- content close -->
      <a href="#" id="back-to-top" class="show"></a>

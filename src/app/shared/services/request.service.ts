@@ -20,6 +20,12 @@ addRequest(data: FormData): Observable<any> {
       withCredentials: true,
   });
   }
+
+  getRequestByOwner(): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/api/v1/requests/owner-requests', {
+      withCredentials: true,
+    });
+  }
   getRequestList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }

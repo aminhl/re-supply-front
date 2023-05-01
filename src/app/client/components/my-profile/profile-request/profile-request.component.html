@@ -1,0 +1,52 @@
+<section class="min-vh-100" style="background-color: #f4f5f7;margin-bottom: 0;">
+  <div class="container">
+    <div class="row wow fadeIn">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center products-title">My Requests</h1>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let request of requests">
+          <div class="nft__item">
+            <div class="author_list_pp">
+              <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{ request.requester_id.lastName }} {{ request.requester.firstName }}">
+                <img class="lazy" src="{{ request.requester_id.images[0] }}" alt="">
+                <i class="fa fa-check"></i>
+              </a>
+            </div>
+            <div class="nft__item_wrap">
+              <a [routerLink]="['/productDetails', request._id]">
+                <div class="d-placeholder"></div>
+                <img src="{{ request.requestImage[0] }}" class="nft__item_preview" alt="">
+              </a>
+            </div>
+            <div class="nft__item_info">
+              <a href="item-details.html">
+                <h4>{{request.requestTitle}}</h4>
+              </a>
+
+              <div class="nft__item_price">
+                {{request.targetValue | currency:'USD':true:'1.2-2'}}
+              </div>
+              <div class="nft__item_action">
+                <a (click)="deleteRequest(request._id)" style="color: #8c66e8;cursor: pointer;display: flex;justify-content: right" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete the request">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="!requests || requests.length === 0">
+    <div class="row wow fadeIn">
+      <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">Quick notice!</h4>
+        <p>You don't have any Request yet.</p>
+        <a [routerLink]="['/createRequest']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+          Add Request
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

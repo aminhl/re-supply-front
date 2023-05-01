@@ -9,6 +9,7 @@ import {RequestService} from "../../../shared/services/request.service";
 export class DonationComponent implements OnInit {
 
   donationList: any = [];
+  selectedComponent: string="Currency";
   constructor(private  service: RequestService   ) { }
 
   ngOnInit(): void {
