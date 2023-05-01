@@ -6,28 +6,30 @@ import {MyProfileComponent} from "./client/components/my-profile/my-profile.comp
 import {EditProfileComponent} from "./client/components/edit-profile/edit-profile.component";
 import {MainCComponent} from "./client/components/main-c/main-c.component";
 import {ForgetPasswordComponent} from './shared/components/forget-password/forget-password.component';
-import {ChangePasswordAfterSubmitEmailComponent} from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
+import {
+  ChangePasswordAfterSubmitEmailComponent
+} from './shared/components/forget-password/change-password-after-submit-email/change-password-after-submit-email.component';
 import {VerifyEmailComponent} from "./shared/components/verify-email/verify-email.component";
-import { AuthGuard } from './shared/authguard/auth.guard';
-import { TwoFactorComponent } from './shared/components/login/two-factor/two-factor.component';
+import {AuthGuard} from './shared/authguard/auth.guard';
+import {TwoFactorComponent} from './shared/components/login/two-factor/two-factor.component';
 import {DonationComponent} from "./client/components/donation/donation.component";
 import {ProductsComponent} from "./client/components/products/products.component";
 import {AddProductComponent} from "./client/components/products/add-product/add-product.component";
 import {CreateRequestComponent} from "./client/components/donation/create-request/create-request.component";
-import { BlogComponent } from './client/components/blog/blog.component';
-import { UpdatePasswordComponent } from "./client/components/update-password/update-password.component";
-import { DashboardComponent } from "./admin/components/dashboard/dashboard.component";
-import { RoleGuard } from "./shared/roleguard/role.guard";
+import {BlogComponent} from './client/components/blog/blog.component';
+import {UpdatePasswordComponent} from "./client/components/update-password/update-password.component";
+import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
+import {RoleGuard} from "./shared/roleguard/role.guard";
 import {ProductSubmissionComponent} from "./client/components/products/product-submission/product-submission.component";
 import {ProductDetailsComponent} from "./client/components/products/product-details/product-details.component";
-import { ClientBlogsComponent } from './client/components/client-blogs/client-blogs.component';
+import {ClientBlogsComponent} from './client/components/client-blogs/client-blogs.component';
 import {WishlistComponent} from "./client/components/wishlist/wishlist.component";
-import { KnowledgeComponent } from "./client/components/knowledge/knowledge.component";
-import { JitsiComponentComponent } from "./client/components/knowledge/jitsi-component/jitsi-component.component";
-import { CartComponent } from "./client/components/cart/cart.component";
-import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
-import { ChatComponent } from './client/components/chat/chat.component';
-import {TarsChatbotComponent} from "./client/components/chatbot/tars-chatbot.component";
+import {KnowledgeComponent} from "./client/components/knowledge/knowledge.component";
+import {JitsiComponentComponent} from "./client/components/knowledge/jitsi-component/jitsi-component.component";
+import {CartComponent} from "./client/components/cart/cart.component";
+import {OrderSuccessComponent} from "./client/components/cart/order-success/order-success.component";
+import {ChatComponent} from './client/components/chat/chat.component';
+
 const routes: Routes = [
   { path: '', component: MainCComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -95,7 +97,6 @@ const routes: Routes = [
   { path: 'knowledge/jitsi/:id', component:JitsiComponentComponent , canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'orderSuccess', component: OrderSuccessComponent, canActivate: [AuthGuard] },
-  { path: 'tars', component: TarsChatbotComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
