@@ -45,7 +45,7 @@ export class DonationManagementComponent implements OnInit {
             this.donations = this.donations.filter(
               (product) => product._id !== id
             );
-            Swal.fire('Product deleted', '', 'success');
+            Swal.fire('Request deleted', '', 'success');
           });
       }
     });

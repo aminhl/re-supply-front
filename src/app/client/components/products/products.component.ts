@@ -81,16 +81,6 @@ export class ProductsComponent implements OnInit {
 
 
   addProductToCart(product: any) {
-    if (this.cart && this.cart.products.includes(product._id)) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Product already in cart',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      return;
-    }
-
     this.productService.addProductToCart(product._id).subscribe(
       res => {
         this.cart = res.data.cart;
@@ -104,9 +94,19 @@ export class ProductsComponent implements OnInit {
         }, 1000);
       },
       error => {
-        console.log(error);
+        if (error.status === 400 && error.error.message === 'Product already in cart') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Product already in cart',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        } else {
+          console.log(error);
+        }
       }
     );
   }
+
 
 }

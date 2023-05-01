@@ -33,15 +33,15 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { ClientBlogsComponent } from './components/client-blogs/client-blogs.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-
 import { CommentsComponent } from './components/comments/comments.component';
-
 import { ProfileInfoComponent } from './components/my-profile/profile-info/profile-info.component';
 import { ProfileProductsComponent } from './components/my-profile/profile-products/profile-products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrderSuccessComponent } from './components/cart/order-success/order-success.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { ChatComponent } from './components/chat/chat.component';
+import { TarsChatbotComponent } from './components/chatbot/tars-chatbot.component';
+import { FloatingActionButtonComponent } from './components/floating-action-button/floating-action-button.component';
 
 
 
@@ -62,19 +62,20 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductDetailsComponent,
     ClientBlogsComponent,
     WishlistComponent,
-
     CommentsComponent,
-
-      ProfileInfoComponent,
-      ProfileProductsComponent,
-      CartComponent,
-      OrderSuccessComponent,
-
-
+    ProfileInfoComponent,
+    ProfileProductsComponent,
+    CartComponent,
+    OrderSuccessComponent,
+    ChatComponent,
+    TarsChatbotComponent,
+    FloatingActionButtonComponent,
   ],
   imports: [
-    CommonModule,GalleriaModule,
-    ClientRoutingModule,InputSwitchModule,
+    CommonModule,
+    GalleriaModule,
+    ClientRoutingModule,
+    InputSwitchModule,
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
@@ -91,7 +92,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FileUploadModule,
     ToggleButtonModule,
     CarouselModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ButtonModule,
   ],
   exports: [
     MyProfileComponent,
@@ -99,6 +101,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HeaderCComponent,
     MainCComponent,
     FooterCComponent,
+    FloatingActionButtonComponent,
+    TarsChatbotComponent,
   ],
 })
 export class ClientModule {}

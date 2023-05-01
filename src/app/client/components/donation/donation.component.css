@@ -20,31 +20,12 @@ body {
   border: none !important;
 }
 
-
-.wrapper{
-  position: relative;
-  overflow: hidden;
+.nft__item_wrap {
+  height: 250px; /* Set a fixed height for each product card */
+  overflow: hidden; /* Hide any content that overflows the height */
 }
-.wrapper img{
-  width: 100%;
-  height: 100%;
-
-  transition: transform 400ms;
-}
-.wrapper:hover img{
-
-  transform: matrix3d(1.2, 0.1,0.1, 0, 0, 1.2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-.container-fluid,
-.container {
-
-width: auto;
-}
-
-
-.btn-main:hover{
-  color: #8364E2;
-  background-color: #FFFFFF;
-  border: 1px solid #8364E2;
+.nft__item_wrap img {
+  height: 100%; /* Make the image height 100% of the parent element */
+  object-fit: cover; /* Ensure the image covers the entire space without changing its aspect ratio */
 }
 

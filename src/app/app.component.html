@@ -1,3 +1,5 @@
 <app-header-c> </app-header-c>
-<router-outlet></router-outlet>
+<router-outlet>
+  <app-floating-action-button *ngIf="authService.isLoggedIn()"></app-floating-action-button>
+</router-outlet>
 <app-footer-c *ngIf="authService.isLoggedIn()"></app-footer-c>
