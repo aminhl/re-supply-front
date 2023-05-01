@@ -1,11 +1,11 @@
 .fab {
   position: fixed;
-  bottom: 20px;
-  left: 40px;
+  bottom: 40px;
+  right: 40px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #008CBA;
+  background-color: var(--secondary-color);
   color: #FFF;
   cursor: pointer;
   text-align: center;
@@ -15,13 +15,13 @@
 }
 
 .fab:hover {
-  background-color: #005f7a;
+  background-color: rgba(126, 101, 219, .7);
 }
 
 .chatbot-wrapper {
   position: absolute;
-  bottom: 80px;
-  left: -50px;
-
+  bottom: 60px;
+  right: -50px;
+  margin-right: 40px!important;
 }
 
