@@ -41,6 +41,7 @@ fullname:any;
 
   ngOnInit(): void {
     this.userconnected= this.Authservice.getConnectedUserData();
+    console.log(this.userconnected.email);
     this.encryptedCode = this.route.snapshot.paramMap.get('id');
     const decryptedCode = this.decrypt(this.encryptedCode);
     const codeParts = decryptedCode.split('%');
@@ -51,7 +52,15 @@ fullname:any;
     this.ScheduleService.getEmailsForEvent(this.title,this.description ).subscribe(
       (response: any) => {
         this.users = response.data.result;
-        },
+        for (let i = 0; i < this.users.length; i++) {
+          if (this.users[i] === this.userconnected.email) {
+            this.users.splice(i, 1); // remove the email at index i
+            break; // exit the loop after removing one email
+          }
+        }
+        console.log(this.users);
+
+      },
       (error) => console.error(error)
     );
 

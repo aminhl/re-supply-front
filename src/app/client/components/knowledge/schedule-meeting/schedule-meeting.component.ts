@@ -173,7 +173,7 @@ export class ScheduleMeetingComponent implements OnInit {
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Blog Deleted', '', 'success');
+        Swal.fire('Meet Deleted', '', 'success');
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
@@ -182,7 +182,7 @@ export class ScheduleMeetingComponent implements OnInit {
   }
   confirm1() {
     Swal.fire({
-      title: 'Are you sure you want to publish this article?',
+      title: 'Are you sure you want to publish this Meet event?',
       text: 'This action cannot be undone',
       icon: 'info',
       showCancelButton: true,
@@ -191,7 +191,7 @@ export class ScheduleMeetingComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmit();
-        Swal.fire('Blog Created', '', 'success');
+        Swal.fire('Meet event created', '', 'success');
       }
       if (result.isDenied) {
         this.confirm2();
