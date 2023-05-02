@@ -1,3 +1,4 @@
+
 <div id="wrapper">
   <div class="no-bottom no-top" id="content">
 
@@ -89,13 +90,31 @@
                 <div class="nft__item_action">
                   <p>Date: {{ meet.date | date:'dd/MM/yyyy' }}</p>
                 </div>
+                <div class="nft__item_action d-flex justify-content-between">
+                  <i class="fa fa-user " data-bs-toggle="tooltip" data-bs-placement="top" title="Number of users" style="cursor: pointer;color: #6d00ff">{{ meet.count }}</i>
+                </div>
+                <div class="spacer-10"></div>
+
                 <div *ngIf="isToday(meet.date)">
-                  <a (click)="StartMeet(meet.title,meet.description)" class="btn-main btn-lg btn-light">Start Meet</a>
+                  <a (click)="StartMeet(meet.title,meet.description)" class="btn-main btn-lg btn-light"style="cursor: pointer;">Start Meet</a>
                 </div>
                 <div *ngIf="!isToday(meet.date)">
                   <div class="alert alert-warning" role="alert">
                     that day has not yet arrived
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="Meetingobject == 0">
+            <div class="container">
+              <div class="row wow fadeIn">
+                <div class="alert alert-primary" role="alert">
+                  <h4 class="alert-heading">Your Meeting list is empty!</h4>
+                  <p>You don't have any Meet in your meeting list</p>
+                  <a [routerLink]="['/ScheduleMeeting']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                    Schedule Meeting
+                  </a>
                 </div>
               </div>
             </div>
