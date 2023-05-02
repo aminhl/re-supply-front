@@ -91,117 +91,61 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngIf="donation.isApproved && donation.type==='Currency'">
-      <div class="nft__item">
-        <div class="author_list_pp">
-          <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
-            <img class="lazy" src="{{donation.requester_id.images[0]}}" alt="">
-            <i class="fa fa-check"></i>
-          </a>
-        </div>
-        <div class="nft__item_wrap">
-          <a href="">
-            <div class="d-placeholder"></div>
-            <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
-          </a>
-        </div>
-        <div class="nft__item_info">
-          <a href="item-details.html">
-            <h4>{{donation.requestTitle}}</h4>
-          </a>
-
-          <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
-            <div style="font-size: 25px ;">Raised
-              <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
-            <div style="font-size: 25px ; text-align: right">GOAL
-              <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
-          </div>
-          <div class="progress" *ngIf="donation.type==='Currency'">
-            <div class="progress-bar " role="progressbar" style.width="{{donation.percentage}}%"
-                 style="background-color: #64a9e2" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div class="row" *ngIf="donation.type==='Item'">
-            <button [ngClass]="{'closed':donation.close}"
-                    [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
-            </button>
-            <button class="btn-main" *ngIf="!donation.close">
-              Make a Donation
-            </button>
-          </div>
-          <ng-container *ngIf="donation.type==='Currency'">
-            <button [ngClass]="{'closed':donation.close}"
-                    [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
-            </button>
-            <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
-              Make a Donation
-            </button>
-          </ng-container>
-          <div class="spacer-10"></div>
-        </div>
-      </div>
-    </div>
     </ng-container>
   </div>
   <div class="row" style="margin-left: 15px;margin-right: 15px" *ngIf="selectedComponent=='Item'">
-        <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngFor="let donation of donationList">
-          <div class="nft__item" *ngIf="donation.isApproved && donation.type==='Item'">
-            <div class="author_list_pp">
+        <ng-container *ngFor="let donation of donationList">
+          <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngIf="donation.isApproved && donation.type==='Item'">
+            <div class="nft__item" >
+              <div class="author_list_pp">
+                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
+                  <img class="lazy" src="{{donation.requester_id.images[0]}}" alt="">
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+              <div class="nft__item_wrap">
+                <a href="">
+                  <div class="d-placeholder"></div>
+                  <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
+                </a>
+              </div>
+              <div class="nft__item_info">
+                <a href="item-details.html">
+                  <h4>{{donation.requestTitle}}</h4>
+                </a>
 
-              <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
-                <img class="lazy" src="{{donation.requester_id.images[0]}}" alt="">
-                <i class="fa fa-check"></i>
-              </a>
-            </div>
-            <div class="nft__item_wrap">
-              <a href="">
-                <div class="d-placeholder"></div>
-                <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
-              </a>
-            </div>
-            <div class="nft__item_info">
-              <a href="item-details.html">
-                <h4>{{donation.requestTitle}}</h4>
-              </a>
-
-              <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
-                <div style="font-size: 25px ;">Raised
-                  <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
-                <div style="font-size: 25px ; text-align: right">GOAL
-                  <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
+                <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
+                  <div style="font-size: 25px ;">Raised
+                    <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
+                  <div style="font-size: 25px ; text-align: right">GOAL
+                    <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
+                </div>
+                <div class="progress" *ngIf="donation.type==='Currency'">
+                  <div class="progress-bar " role="progressbar" style.width="{{donation.percentage}}%"
+                       style="background-color: #64a9e2" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="row" *ngIf="donation.type==='Item'">
+                  <button [ngClass]="{'closed':donation.close}"
+                          [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
+                  </button>
+                  <button class="btn-main" *ngIf="!donation.close">
+                    Make a Donation
+                  </button>
+                </div>
+                <ng-container *ngIf="donation.type==='Currency'">
+                  <button [ngClass]="{'closed':donation.close}"
+                          [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
+                  </button>
+                  <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
+                    Make a Donation
+                  </button>
+                </ng-container>
+                <div class="spacer-10"></div>
               </div>
-              <div class="progress" *ngIf="donation.type==='Currency'">
-                <div class="progress-bar " role="progressbar" style.width="{{donation.percentage}}%"
-                     style="background-color: #64a9e2" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="row" *ngIf="donation.type==='Item'">
-                <button [ngClass]="{'closed':donation.close}"
-                        [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
-                </button>
-                <button class="btn-main" *ngIf="!donation.close">
-                  Make a Donation
-                </button>
-              </div>
-              <ng-container *ngIf="donation.type==='Currency'">
-                <button [ngClass]="{'closed':donation.close}"
-                        [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
-                </button>
-                <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
-                  Make a Donation
-                </button>
-              </ng-container>
-              <div class="spacer-10"></div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
 </section>
   </div>
 </div>
-
-
-
-
-
-
-
-
