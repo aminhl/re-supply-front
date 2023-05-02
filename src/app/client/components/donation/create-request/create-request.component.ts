@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {regexValid} from "../../../../core/validators/signup.validator";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import { AuthService } from "../../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-create-request',
@@ -21,18 +22,27 @@ export class CreateRequestComponent implements OnInit {
   itemType!: FormControl;
   requestTitle!: FormControl;
   requestImage!: FormControl;
+  user: any;
+  userImageUrl!: string;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private service: RequestService,
-    private router :Router
+    private router :Router,
+    private authService: AuthService
   ) {
+    this.initform();
+    this.createForm();
   }
 
   ngOnInit(): void {
-    this.initform();
-    this.createForm();
+    this.authService.getUser().subscribe((req) => {
+      this.user = req.data.user;
+      if (this.user.images.length > 0) {
+        this.userImageUrl = this.user.images[0];
+      }
+    });
   }
 
   initform(): void {
