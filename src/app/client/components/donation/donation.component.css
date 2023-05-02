@@ -29,3 +29,12 @@ body {
   object-fit: cover; /* Ensure the image covers the entire space without changing its aspect ratio */
 }
 
+.nav-link{
+  color: #495057;
+  cursor: pointer;
+}
+
+.nav-link.active{
+  color: var(--secondary-color);
+}
+
