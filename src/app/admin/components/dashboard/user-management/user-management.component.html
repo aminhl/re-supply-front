@@ -3,6 +3,30 @@
     <div class="row">
       <div class="col-md-12">
         <div class="items_filter text-center">
+          <form
+            action="https://gigaland.io/blank.php"
+            class="row form-dark"
+            id="form_quick_search"
+            method="post"
+            name="form_quick_search"
+          >
+            <div class="col text-center">
+              <input
+                class="form-control"
+                [(ngModel)]="searchTerm"
+                [ngModelOptions]="{ standalone: true }"
+                (input)="onInputChange($event)"
+                name=""
+                id=""
+                placeholder="search user here..."
+                type="text"
+              />
+              <a id="btn-submit"
+              ><i class="fa fa-search bg-color-secondary"></i
+              ></a>
+              <div class="clearfix"></div>
+            </div>
+          </form>
           <select class="me-4" id="filter_by_duration" (change)="selectUsersByDuration()" [(ngModel)]="selectedDuration">
             <option value="1day">Last 24 hours</option>
             <option value="1week">Last 7 days</option>
@@ -22,30 +46,7 @@
 
         </div>
 
-        <form
-          action="https://gigaland.io/blank.php"
-          class="row form-dark"
-          id="form_quick_search"
-          method="post"
-          name="form_quick_search"
-        >
-          <div class="col text-center">
-            <input
-              class="form-control"
-              [(ngModel)]="searchTerm"
-              [ngModelOptions]="{ standalone: true }"
-              (input)="onInputChange($event)"
-              name=""
-              id=""
-              placeholder="search user here..."
-              type="text"
-            />
-            <a id="btn-submit"
-            ><i class="fa fa-search bg-color-secondary"></i
-            ></a>
-            <div class="clearfix"></div>
-          </div>
-        </form>
+
 
         <div class="table-responsive">
           <table class="table de-table table-rank table-sm">
