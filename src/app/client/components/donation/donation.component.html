@@ -51,7 +51,7 @@
           </a>
         </div>
         <div class="nft__item_wrap">
-          <a href="">
+          <a  [routerLink]="['/donationDetails', donation._id]">
             <div class="d-placeholder"></div>
             <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
           </a>
@@ -75,9 +75,9 @@
             <button [ngClass]="{'closed':donation.close}"
                     [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
             </button>
-            <button class="btn-main" *ngIf="!donation.close">
-              Make a Donation
-            </button>
+            <a  class="btn-main" *ngIf="!donation.close" [routerLink]="['/donationDetails', donation._id]">
+              More Details...
+            </a>
           </div>
           <ng-container *ngIf="donation.type==='Currency'">
             <button [ngClass]="{'closed':donation.close}"
@@ -104,7 +104,7 @@
                 </a>
               </div>
               <div class="nft__item_wrap">
-                <a href="">
+                <a [routerLink]="['/donationDetails', donation._id]">
                   <div class="d-placeholder"></div>
                   <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
                 </a>
@@ -128,9 +128,9 @@
                   <button [ngClass]="{'closed':donation.close}"
                           [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
                   </button>
-                  <button class="btn-main" *ngIf="!donation.close">
-                    Make a Donation
-                  </button>
+                    <a  class="btn-main" *ngIf="!donation.close" [routerLink]="['/donationDetails', donation._id]">
+                      More Details...
+                    </a>
                 </div>
                 <ng-container *ngIf="donation.type==='Currency'">
                   <button [ngClass]="{'closed':donation.close}"
