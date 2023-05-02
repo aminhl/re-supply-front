@@ -40,3 +40,39 @@ margin-top: -.75rem;
   top: 100px;
 
 }
+li.p-2.border-bottom {
+  list-style-type: none;
+}
+
+
+
+.label-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 700px;
+  margin-bottom: 10px;
+}
+
+.label-container:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  border: 10px solid transparent;
+  border-right: 10px solid black;
+}
+
+.label-container label {
+  display: inline-block;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+
+
+

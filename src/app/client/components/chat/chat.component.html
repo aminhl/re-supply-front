@@ -8,10 +8,10 @@
               <div class="spacer-single" style="background-size: cover"></div>
               <h6
                 class="wow fadeInUp animated"
-                data-wow-delay=".5s"
+                data-wow-delay="0.2s"
                 style="
                   visibility: visible;
-                  animation-delay: 0.5s;
+                  animation-delay: 0.2s;
                   animation-name: fadeInUp;
                 "
               >
@@ -20,10 +20,10 @@
               <div class="spacer-10" style="background-size: cover"></div>
               <h1
                 class="wow fadeInUp animated"
-                data-wow-delay=".5s"
+                data-wow-delay="0.2s"
                 style="
                   visibility: visible;
-                  animation-delay: 0.5s;
+                  animation-delay: 0.2s;
                   animation-name: fadeInUp;
                 "
               >
@@ -31,14 +31,19 @@
               </h1>
               <p
                 class="wow fadeInUp lead animated"
-                data-wow-delay="1s"
+                data-wow-delay="0.2s"
                 style="
                   visibility: visible;
-                  animation-delay: 1s;
+                  animation-delay: 0.2s;
                   animation-name: fadeInUp;
                 "
               >
-               Chatting breaks barriers and unites people from all around the world, creating a sense of belonging and community. It allows us to easily connect and communicate with people from different backgrounds and cultures. Through chat, we share ideas, emotions, and experiences in real-time, opening up new opportunities and possibilities.
+                Chatting breaks barriers and unites people from all around the
+                world, creating a sense of belonging and community. It allows us
+                to easily connect and communicate with people from different
+                backgrounds and cultures. Through chat, we share ideas,
+                emotions, and experiences in real-time, opening up new
+                opportunities and possibilities.
               </p>
               <div class="spacer-10" style="background-size: cover"></div>
               <div class="mb-sm-30" style="background-size: cover"></div>
@@ -62,116 +67,755 @@
           <hr />
         </div>
 
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="de-flex sm-pt10">
-                  <form
-                    action="https://gigaland.io/blank.php"
-                    class="row form-dark"
-                    id="form_quick_search"
-                    method="post"
-                    name="form_quick_search"
-                  >
-                    <div class="col text-center">
-                      <a id="btn-submit"
-                        ><i
-                          class="fa fa-search bg-color-secondary"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasScrolling"
-                          aria-controls="offcanvasScrolling"
-                        ></i
-                      ></a>
-                      <div class="clearfix"></div>
-                    </div>
-                  </form>
-                  <h3>Chat With Friends</h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="de-flex sm-pt10">
+                <form
+                  action=""
+                  class="row form-dark"
+                  id="form_quick_search"
+                  method="post"
+                  name="form_quick_search"
+                >
+                  <div class="col text-center">
+                    <a id="btn-submit"
+                      ><i
+                        class="fa fa-search bg-color-secondary"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasScrolling"
+                        aria-controls="offcanvasScrolling"
+                        style="cursor: pointer"
+                      ></i
+                    ></a>
 
-                  <div
-                    id="de-click-menu-notification"
-                    class="de-menu-notification"
-                  >
-                    <span class="d-count">8</span>
-                    <i class="fa fa-bell"></i>
-                    <div class="dropdown-content" [hidden]="!showDropdown">
-                      <ul>
-                        <li><span>Not Active</span></li>
-                      </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                </form>
+                <div class="label-container">
+                  <label for="btn-submit">Private Chats in Here</label>
+                </div>
+                <h3>Chat With Friends</h3>
+
+
+
+                <div
+                  class="offcanvas offcanvas-start"
+                  data-bs-scroll="true"
+                  data-bs-backdrop="true"
+                  tabindex="-1"
+                  id="offcanvasScrolling"
+                  aria-labelledby="offcanvasScrollingLabel"
+                >
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+                      Search Users In Here
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <div class="input-group">
+                      <input
+                        class="form-control form-control-sm"
+                        placeholder="Search Users By Name Or Email"
+                        type="text"
+                        [(ngModel)]="searchTerm"
+                      />
+                      <p-button
+                        label="Go"
+                        [loading]="loading[3]"
+                        (onClick)="load(3); searchChatUsers()"
+                      ></p-button>
+                    </div>
+                    <div *ngFor="let chatUser of chatUsers; index as i">
+                      <ng-container *ngIf="chatUser">
+                        <div
+                          style="
+                            display: flex;
+                            align-items: center;
+                            position: relative;
+                            z-index: 2;
+                            margin-top: 20px;
+                            cursor: pointer;
+                          "
+                          (click)="accessChat(chatUser._id)"
+                          class="chat-user"
+                          (mouseenter)="onMouseEnter()"
+                          (mouseleave)="onMouseLeave()"
+                        >
+                          <img
+                            [src]="chatUser.images"
+                            style="
+                              width: 50px;
+                              height: 50px;
+                              border-radius: 50%;
+                            "
+                          />
+                          <div
+                            style="
+                              margin-left: 10px;
+                              max-height: 50px;
+                              margin-bottom: 20px;
+                            "
+                          >
+                            <p style="margin-bottom: 0; margin-top: 10px">
+                              {{ chatUser.firstName }}
+                            </p>
+                            <p>{{ chatUser.email }}</p>
+                          </div>
+                        </div>
+                      </ng-container>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                  <div
-                    class="offcanvas offcanvas-start"
-                    data-bs-scroll="true"
-                    data-bs-backdrop="false"
-                    tabindex="-1"
-                    id="offcanvasScrolling"
-                    aria-labelledby="offcanvasScrollingLabel"
+        <section style="background-color: rgba(131, 100, 226, 0.1)">
+          <div class="container py-5">
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+                <div class="card" id="chat3" style="border-radius: 15px">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-8 col-xl-4 mb-4 mb-md-0">
+                        <div class="p-3">
+                          <div class="input-group rounded mb-3">
+                            <button
+                              type="button"
+                              class="btn-main wow fadeInUp lead animated"
+                              data-bs-toggle="modal"
+                              data-bs-target="#addGroupModal"
+                              (click)="openModal()"
+                            >
+                              <i class="fas fa-plus"></i> New Group
+                            </button>
+                          </div>
+                          <h3 style="margin-top: 50px">My Chats</h3>
 
-                  >
-                    <div class="offcanvas-header">
-                      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
-                        Search Users In Here
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="offcanvas-body">
-                      <div class="input-group">
-                        <input
-                          class="form-control form-control-sm"
-                          placeholder="Search Users By Name Or Email"
-                          type="text"
-                          [(ngModel)]="searchTerm"
-                        />
-                        <p-button
-                          label="Go"
-                          [loading]="loading[3]"
-                          (onClick)="load(3); searchChatUsers()"
-                        ></p-button>
+                          <!-- Adding Memebrs modal To Chat Group Start Section  -->
+                          <div
+                            class="modal fade"
+                            id="addGroupModal"
+                            tabindex="-1"
+                            aria-labelledby="addGroupModalLabel"
+                            data-bs-dismiss="offcanvas"
+                            aria-hidden="true"
+                            (hidden.bs.modal)="closeModal()"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="addGroupModalLabel"
+                                  >
+                                    New Group
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="mb-3">
+                                      <label
+                                        for="groupName"
+                                        class="form-label"
+                                        style="font-weight: bold"
+                                        >Group Name</label
+                                      >
+                                      <input
+                                        [(ngModel)]="groupName"
+                                        (input)="groupNameValue($event)"
+                                        type="text"
+                                        class="form-control"
+                                        id="groupName"
+                                        style="border: 1px solid purple"
+                                      />
+                                    </div>
+                                    <div class="mb-3">
+                                      <label
+                                        for="groupDescription1"
+                                        class="form-label"
+                                        style="font-weight: bold"
+                                        >Group Members</label
+                                      >
+                                      <!-- ngFor selectedChatUser array  Starts Here  -->
+                                      <div
+                                        *ngFor="
+                                          let selectedUser of selectedUsers
+                                        "
+                                      >
+                                        <span
+                                          class="badge bg-danger rounded-pill mx-2 mb-2"
+                                          style="font-size: 16px"
+                                        >
+                                          {{ selectedUser.firstName }}
+                                          {{ selectedUser.lastName }}
+                                          <span
+                                            class="badge-close"
+                                            style="
+                                              font-size: 16px;
+                                              cursor: pointer;
+                                            "
+                                            (click)="
+                                              removeFromSelectedUsers(
+                                                selectedUser
+                                              )
+                                            "
+                                            >&times;</span
+                                          >
+                                        </span>
+                                      </div>
+                                      <input
+                                        class="form-control"
+                                        id="groupDescription1"
+                                        rows="3"
+                                        [(ngModel)]="searchTerm"
+                                        style="border: 1px solid purple"
+                                        (input)="onSearchTermChange($event)"
+                                      />
+                                    </div>
+
+                                    <!-- ngFor selectedChatUser array  Ends Here  -->
+
+                                    <!-- ngFor chatUser array  Starts Here  -->
+
+                                    <div
+                                      *ngFor="
+                                        let chatUser of chatUsers;
+                                        index as i
+                                      "
+                                    >
+                                      <li
+                                        class="p-2 border-bottom"
+                                        style="cursor: pointer"
+                                        (click)="addToSelectedUsers(chatUser)"
+                                      >
+                                        <a
+                                          class="d-flex justify-content-between"
+                                        >
+                                          <div class="d-flex flex-row">
+                                            <div>
+                                              <img
+                                                [src]="chatUser.images"
+                                                class="d-flex align-self-center me-3"
+                                                style="
+                                                  width: 50px;
+                                                  height: 50px;
+                                                  border-radius: 50%;
+                                                  list-style-type: nonne;
+                                                "
+                                              />
+                                            </div>
+                                            <div class="pt-1">
+                                              <p class="fw-bold mb-0">
+                                                {{ chatUser.firstName }}
+                                              </p>
+                                              <p class="small text-muted">
+                                                {{ chatUser.email }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div class="pt-1">
+                                            <p class="small text-muted mb-1">
+                                              {{ chatUser.lastMessageTime }}
+                                            </p>
+                                            <span
+                                              class="badge bg-danger rounded-pill float-end"
+                                            ></span>
+                                          </div>
+                                        </a>
+                                      </li>
+                                    </div>
+                                    <!-- ngFor chatUser array  Ends Here  -->
+                                  </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                  <a
+                                    class="btn-main"
+                                    data-wow-delay="1.25s"
+                                    style="
+                                      visibility: visible;
+                                      animation-delay: 1.25s;
+                                      animation-name: fadeInUp;
+                                      cursor: pointer;
+                                      height: 30px;
+                                    "
+                                    data-bs-dismiss="modal"
+                                    >Close</a
+                                  >
+
+                                  <a
+                                    class="btn-main"
+                                    data-wow-delay="1.25s"
+                                    style="
+                                      visibility: visible;
+                                      animation-delay: 1.25s;
+                                      animation-name: fadeInUp;
+                                      cursor: pointer;
+                                      height: 30px;
+                                    "
+                                    (click)="createGroup()"
+                                  >
+                                    Create Group</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Adding Memebrs To Chat Group Modal End Section  -->
+
+                          <!-- myChat Start Section  -->
+                          <div
+                            data-mdb-perfect-scrollbar="true"
+                            style="position: relative; height: 700px"
+                          >
+                            <ul
+                              class="list-unstyled mb-0"
+                              *ngFor="let myChat of myChats; index as i"
+                            >
+                              <li
+                                class="p-2 border-bottom"
+                                style="cursor: pointer"
+                                (click)="
+                                  getSelectedChat(myChat);
+                                  fetchAllMessages(myChat._id)
+                                "
+                              >
+                                <a class="d-flex justify-content-between">
+                                  <div
+                                    class="d-flex flex-row"
+                                    *ngIf="
+                                      myChat.isGroupChat;
+                                      else notGroupChat
+                                    "
+                                  >
+                                    <div>
+                                      <img
+                                        src="../../../../assets/client/images/chatUsers.png"
+                                        alt="avatar"
+                                        class="d-flex align-self-center me-3"
+                                        style="
+                                          width: 50px;
+                                          height: 50px;
+                                          border-radius: 50%;
+                                          cursor: pointer;
+                                        "
+                                      />
+                                      <span
+                                        class="badge bg-success badge-dot"
+                                      ></span>
+                                    </div>
+                                    <div class="pt-1">
+                                      <p class="fw-bold mb-0">
+                                        {{ myChat.chatName }}
+                                      </p>
+                                      <p class="small text-muted">
+                                        {{ myChat.lastMessage }}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ng-template
+                                    #notGroupChat
+                                    (click)="getSelectedChat(myChat)"
+                                  >
+                                    <div class="d-flex flex-row">
+                                      <img
+                                        [src]="
+                                          getSender(
+                                            connectedUserId,
+                                            myChat.users
+                                          ).images
+                                        "
+                                        alt="avatar"
+                                        class="d-flex align-self-center me-3"
+                                        style="
+                                          width: 50px;
+                                          height: 50px;
+                                          border-radius: 50%;
+                                          cursor: pointer;
+                                        "
+                                      />
+                                      <div class="pt-1">
+                                        <p class="fw-bold mb-0">
+                                          {{
+                                            getSender(
+                                              connectedUserId,
+                                              myChat.users
+                                            ).firstName
+                                          }}
+                                        </p>
+                                        <p class="small text-muted">
+                                          {{ myChat.lastMessage }}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </ng-template>
+                                  <div class="pt-1">
+                                    <p class="small text-muted mb-1">
+                                      {{ myChat.lastMessageTime }}
+                                    </p>
+                                    <span
+                                      class="badge bg-danger rounded-pill float-end"
+                                      >{{ myChat.unreadMessageCount }}</span
+                                    >
+                                  </div>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- Mychats End Section  -->
+                        </div>
                       </div>
-                      <div *ngFor="let chatUser of chatUsers; index as i">
-                        <ng-container *ngIf="chatUser">
+
+                      <div class="col-md-6 col-lg-8 col-xl-8">
+                        <div
+                          class="pt-3 pe-3"
+                          data-mdb-perfect-scrollbar="true"
+                          style="position: relative; height: 700px"
+                        >
                           <div
                             style="
                               display: flex;
                               align-items: center;
-                              position: relative;
-                              z-index: 2;
-                              margin-top: 20px;
-                              cursor: pointer;
+                              justify-content: space-between;
+                              margin-bottom: 40px;
                             "
-                            (click)="accessChat(chatUser._id)"
-                            class="chat-user"
-                            (mouseenter)="onMouseEnter()"
-                            (mouseleave)="onMouseLeave()"
                           >
-                            <img
-                              [src]="chatUser.images"
-                              style="
-                                width: 50px;
-                                height: 50px;
-                                border-radius: 50%;
-                              "
-                            />
-                            <div
-                              style="
-                                margin-left: 10px;
-                                max-height: 50px;
-                                margin-bottom: 20px;
-                              "
-                            >
-                              <p style="margin-bottom: 0; margin-top: 10px">
-                                {{ chatUser.firstName }}
-                              </p>
-                              <p>{{ chatUser.email }}</p>
+                            <div style="font-weight: bold; font-size: 50px">
+                              {{ chatName }}
+                            </div>
+                            <i
+                              *ngIf="selecedChatId"
+                              data-bs-toggle="modal"
+                              data-bs-target="#GroupDetailsModal"
+                              class="pi pi-external-link"
+                              style="font-size: 2rem; cursor: pointer"
+                            ></i>
+                          </div>
+                          <!-- Group details Modal Start Here  -->
+                          <div
+                            class="modal fade"
+                            id="GroupDetailsModal"
+                            tabindex="-1"
+                            aria-labelledby="GroupDetailsModalLabel"
+                            data-bs-dismiss="offcanvas"
+                            aria-hidden="true"
+                            (hidden.bs.modal)="closeModal()"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="GroupDetailsModalLabel"
+                                  >
+                                    Group Details
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="mb-3">
+                                      <label
+                                        for="groupName"
+                                        class="form-label"
+                                        style="font-weight: bold"
+                                        >Group Name</label
+                                      >
+                                      <div
+                                        style="
+                                          display: flex;
+                                          align-items: center;
+                                        "
+                                      >
+                                        <input
+                                          [(ngModel)]="groupName"
+                                          (input)="groupNameValue($event)"
+                                          type="text"
+                                          [placeholder]="chatName || ''"
+                                          class="form-control"
+                                          id="groupName"
+                                          style="
+                                            border: 1px solid purple;
+                                            width: 70%;
+                                          "
+                                        />
+                                        <i
+                                          class="pi pi-pencil"
+                                          style="
+                                            font-size: 1.5rem;
+                                            margin-left: 10px;
+                                            cursor: pointer;
+                                          "
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Update Chat Name"
+                                          (click)="
+                                            updateGroupName(
+                                              selecedChatId,
+                                              groupName
+                                            )
+                                          "
+                                        ></i>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label
+                                        for="groupDescription1"
+                                        class="form-label"
+                                        style="font-weight: bold"
+                                        >Group Members</label
+                                      >
+                                      <input
+                                        class="form-control"
+                                        id="groupDescription1"
+                                        rows="3"
+                                        [(ngModel)]="searchTerm"
+                                        style="border: 1px solid purple"
+                                        (input)="onSearchTermChange($event)"
+                                      />
+                                    </div>
+                                    <!-- ngFor selectedUser in Update modal array  Starts Here  -->
+
+                                    <div
+                                      *ngFor="let selectedUser of selectedUsers"
+                                    >
+                                      <span
+                                        class="badge bg-danger rounded-pill mx-2 mb-2"
+                                        style="font-size: 16px"
+                                        (click)="
+                                          removeUserFromGroup(
+                                            selecedChatId,
+                                            selectedUser._id
+                                          )
+                                        "
+                                      >
+                                        {{ selectedUser.firstName }}
+                                        {{ selectedUser.lastName }}
+                                        <span
+                                          class="badge-close"
+                                          style="
+                                            font-size: 16px;
+                                            cursor: pointer;
+                                          "
+                                          (click)="
+                                            removeUserFromGroup(
+                                              selecedChatId,
+                                              selectedUser._id
+                                            )
+                                          "
+                                          >&times;</span
+                                        >
+                                      </span>
+                                    </div>
+
+                                    <!-- ngFor selectedChatUsers array  Ends Here  -->
+
+                                    <!-- ngFor chatUser array  Starts Here  -->
+
+                                    <div
+                                      *ngFor="
+                                        let chatUser of chatUsers;
+                                        index as i
+                                      "
+                                    >
+                                      <li
+                                        class="p-2 border-bottom"
+                                        style="cursor: pointer"
+                                        (click)="
+                                          addUserToGroup(
+                                            selecedChatId,
+                                            chatUser._id
+                                          )
+                                        "
+                                      >
+                                        <a
+                                          class="d-flex justify-content-between"
+                                        >
+                                          <div class="d-flex flex-row">
+                                            <div>
+                                              <img
+                                                [src]="chatUser.images"
+                                                class="d-flex align-self-center me-3"
+                                                style="
+                                                  width: 50px;
+                                                  height: 50px;
+                                                  border-radius: 50%;
+                                                  list-style-type: nonne;
+                                                "
+                                              />
+                                            </div>
+                                            <div class="pt-1">
+                                              <p class="fw-bold mb-0">
+                                                {{ chatUser.firstName }}
+                                              </p>
+                                              <p class="small text-muted">
+                                                {{ chatUser.email }}
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div class="pt-1">
+                                            <p class="small text-muted mb-1">
+                                              {{ chatUser.lastMessageTime }}
+                                            </p>
+                                            <span
+                                              class="badge bg-danger rounded-pill float-end"
+                                              >{{
+                                                chatUser.unreadMessageCount
+                                              }}</span
+                                            >
+                                          </div>
+                                        </a>
+                                      </li>
+                                    </div>
+                                    <!-- ngFor chatUser array  Ends Here  -->
+                                  </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                  <a
+                                    class="btn-main"
+                                    data-wow-delay="1.25s"
+                                    style="
+                                      visibility: visible;
+                                      animation-delay: 1.25s;
+                                      animation-name: fadeInUp;
+                                      cursor: pointer;
+                                      height: 30px;
+                                    "
+                                    data-bs-dismiss="modal"
+                                    >Close</a
+                                  >
+
+                                  <a
+                                    class="btn-main"
+                                    data-wow-delay="1.25s"
+                                    style="
+                                      visibility: visible;
+                                      animation-delay: 1.25s;
+                                      animation-name: fadeInUp;
+                                      cursor: pointer;
+                                      height: 30px;
+                                    "
+                                    (click)="
+                                      leaaveGroupChat(
+                                        selecedChatId,
+                                        connectedUserId
+                                      )
+                                    "
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Leave Group</a
+                                  >
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </ng-container>
+                          <!-- Group details modal footer ends Here  -->
+
+                          <!-- chat box starts here -->
+                          <div *ngIf="selecedChatId">
+                            <div
+                              *ngFor="let chatmsg of allMessages
+                              ;index"
+                              as
+                              i
+                            >
+                              <div *ngIf="chatmsg.sender._id !== connectedUserId"
+                                class="d-flex flex-row justify-content-start"
+                              >
+                                <img
+                                  style="
+                                          width: 50px;
+                                          height: 50px;
+                                          border-radius: 50%;
+                                          cursor: pointer;
+                                        "
+                                  [src]="chatmsg.sender.images"
+                                />
+                                <div>
+                                  <p
+                                   class="small p-2 ms-3 mb-1 rounded-3"
+                                    style="background-color: #f5f6f7"
+                                  >{{chatmsg.content}}</p>
+                                  <p
+                                    class="small ms-3 mb-3 text-muted float-end"
+                                  >{{chatmsg.createdAt |  date:'MMM d, HH:mm'}}</p>
+                                </div>
+                              </div>
+
+                              <div *ngIf="chatmsg.sender._id === connectedUserId" class="d-flex flex-row justify-content-end">
+                                <div>
+                                  <p
+                                    class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"
+                                  >{{chatmsg.content}}</p>
+                                  <p
+                                    class="small me-3 mb-3 rounded-3 text-muted"
+                                  >{{chatmsg.createdAt |  date:'MMM d, HH:mm'}}</p>
+                                </div>
+                                <img style="
+                                          width: 50px;
+                                          height: 50px;
+                                          border-radius: 50%;
+                                          cursor: pointer;
+                                        "
+                                  [src]="chatmsg.sender.images" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="selecedChatId">
+                          <form [formGroup]="sendMessageForm">
+                            <div
+                              class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2"
+                            >
+                              <img style="width: 40px; height: 100%" />
+                              <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="exampleFormControlInput2"
+                                placeholder="Type message"
+                                style="border: 1px solid purple"
+                                formControlName="content"
+                                (keydown.enter)="sendMessage(selecedChatId);fetchAllMessages(selecedChatId)"
+                              />
+                              <a class="ms-1 text-muted"
+                                ><i class="fas fa-paperclip"></i
+                              ></a>
+                              <a class="ms-3 text-muted"
+                                ><i class="fas fa-smile"></i
+                              ></a>
+                              <a
+                                class="ms-3"
+                                (click)="sendMessage(selecedChatId);fetchAllMessages(selecedChatId)"
+                                style="cursor: pointer"
+                                ><i class="fas fa-paper-plane"></i
+                              ></a>
+                            </div>
+                          </form>
+                        </div>
+                        <!-- chatBox ends here -->
                       </div>
                     </div>
                   </div>
@@ -179,219 +823,7 @@
               </div>
             </div>
           </div>
-
-        <section style="background-color: rgba(131, 100, 226, 0.1)">
-  <div class="container py-5">
-
-    <div class="row">
-      <div class="col-md-12">
-
-        <div class="card" id="chat3" style="border-radius: 15px;">
-          <div class="card-body">
-
-            <div class="row">
-              <div class="col-md-6 col-lg-7 col-xl-4 mb-4 mb-md-0">
-
-                <div class="p-3">
-
-                  <div class="input-group rounded mb-3">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                      aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                      <i class="fas fa-search"></i>
-                    </span>
-                  </div>
-
-                  <div data-mdb-perfect-scrollbar="true" style="position: relative; height: 800px ">
-                    <ul class="list-unstyled mb-0">
-                      <li class="p-2 border-bottom">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-success badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Marie Horwitz</p>
-                              <p class="small text-muted">Hello, Are you there?</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">Just now</p>
-                            <span class="badge bg-danger rounded-pill float-end">3</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="p-2 border-bottom">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-warning badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Alexa Chung</p>
-                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">5 mins ago</p>
-                            <span class="badge bg-danger rounded-pill float-end">2</span>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="p-2 border-bottom">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-success badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Danny McChain</p>
-                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">Yesterday</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="p-2 border-bottom">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-danger badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Ashley Olsen</p>
-                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">Yesterday</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="p-2 border-bottom">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-warning badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Kate Moss</p>
-                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">Yesterday</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="p-2">
-                        <a href="#!" class="d-flex justify-content-between">
-                          <div class="d-flex flex-row">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-                                alt="avatar" class="d-flex align-self-center me-3" width="60">
-                              <span class="badge bg-success badge-dot"></span>
-                            </div>
-                            <div class="pt-1">
-                              <p class="fw-bold mb-0">Ben Smith</p>
-                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
-                            </div>
-                          </div>
-                          <div class="pt-1">
-                            <p class="small text-muted mb-1">Yesterday</p>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div class="col-md-6 col-lg-7 col-xl-8">
-
-                <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true"
-                  style="position: relative; height: 800px">
-
-                  <div class="d-flex flex-row justify-content-start">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-                      alt="avatar 1" style="width: 45px; height: 100%;">
-                    <div>
-                      <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Duis aute
-                        irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      </p>
-                      <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row justify-content-end">
-                    <div>
-                      <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Excepteur sint occaecat
-                        cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                      <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
-                    </div>
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                      alt="avatar 1" style="width: 45px; height: 100%;">
-                  </div>
-
-
-                  <div class="d-flex flex-row justify-content-start">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-                      alt="avatar 1" style="width: 45px; height: 100%;">
-                    <div>
-                      <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Neque porro
-                        quisquam
-                        est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-                        numquam
-                        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                      <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-                    alt="avatar 3" style="width: 40px; height: 100%;">
-                  <input type="text" class="form-control form-control-lg" id="exampleFormControlInput2"
-                    placeholder="Type message">
-                  <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
-                  <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
-                  <a class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
+        </section>
       </section>
     </div>
   </div>
