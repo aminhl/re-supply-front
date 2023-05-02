@@ -27,7 +27,7 @@
     </div>
     <section>
   <div class="row" style="margin-left: 15px;margin-right: 15px">
-    <div class="col-lg-4 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngFor="let donation of donationList">
+    <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngFor="let donation of donationList">
       <div class="nft__item">
         <div class="author_list_pp">
           <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
@@ -46,7 +46,7 @@
             <h4>{{donation.requestTitle}}</h4>
           </a>
 
-          <div class="nft__item_price" *ngIf="donation.type==='Currency'">
+          <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
                 <div style="font-size: 25px ;">Raised
                   <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
                 <div style="font-size: 25px ; text-align: right">GOAL
