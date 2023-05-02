@@ -12,31 +12,39 @@ export class ChatService {
 
   searchChatUsers(search: any): Observable<any> {
     let params = new HttpParams();
-    if (search !== undefined) {
-      params = params.append('search', search);
-    }
+    if (search !== undefined) params = params.append('search', search);
+
     return this.http.get(`${env.apiRoot}users/chatUsers/`, {
       params: params,
     });
   }
   accessChat(userId: any): Observable<any> {
-    return this.http.post(`${env.apiRoot}chat/`, {userId});
+    return this.http.post(`${env.apiRoot}chat/`, { userId });
   }
-  fetchUserChats(connectedUserId: any): Observable<any> {
-    return this.http.get(`${env.apiRoot}chat/${connectedUserId}`);
+  createGroup(users: any[], chatName: string): Observable<any> {
+    const data = {
+      chatName: chatName,
+      users: JSON.stringify(users.map((user) => user._id)),
+    };
+    return this.http.post(`${env.apiRoot}chat/createGroup/`, data);
   }
-  getBlogById(id: any): Observable<any> {
-    return this.http.get(`${env.apiRoot}chat/${id}`);
+
+  fetchUserChats(): Observable<any> {
+    return this.http.get(`${env.apiRoot}chat/`);
   }
-  deleteBlog(id: any): Observable<any> {
-    return this.http.delete(`${env.apiRoot}chat/${id}`);
+  addToGroup(chatId: any, userId): Observable<any> {
+    return this.http.put(`${env.apiRoot}chat/addToGroup/`, { chatId, userId });
   }
-  getBlogs(userId: any) {
-    let params = new HttpParams();
-    if (userId !== undefined) {
-      params = params.append('owner', userId);
-      console.log(params);
-    }
-    return this.http.get(`${env.apiRoot}chat`, { params: params });
+  renameGroup(chatId: any, chatName: any): Observable<any> {
+    return this.http.put(`${env.apiRoot}chat/renameGroup/`, {
+      chatId,
+      chatName,
+    });
+  }
+  removeFromGroup(chatId: any, userId): Observable<any> {
+    return this.http.put(`${env.apiRoot}chat/removeFromGroup`, {
+      chatId,
+      userId,
+    });
   }
 }

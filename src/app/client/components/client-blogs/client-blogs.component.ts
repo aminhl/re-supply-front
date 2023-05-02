@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -26,7 +26,8 @@ export class ClientBlogsComponent implements OnInit {
     private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
-    private commentService: CommentsService
+    private commentService: CommentsService,
+    private ngZone: NgZone
   ) {
     this.createForm();
     this.createCommentForm();
@@ -81,8 +82,7 @@ export class ClientBlogsComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-
-          window.location.reload();
+        window.location.reload();
         this.isEditMode = false;
       },
       error: (err) => {
@@ -104,7 +104,9 @@ export class ClientBlogsComponent implements OnInit {
         this.commentService.deleteComment(id).subscribe((res) => {
           this.comments.splice(i, 1);
         });
-          window.location.reload();
+        this.ngZone.run(() => {
+
+        });
       }
     });
   }
@@ -113,7 +115,9 @@ export class ClientBlogsComponent implements OnInit {
     const a = this.commentsForm.get('content').value;
     this.commentService.addComment(blogId, commenterId, a).subscribe({
       next: (res) => {
-          window.location.reload()
+         this.ngZone.run(() => {
+           this.comments.push(res);
+         });
       },
       error: (err) => {
         console.error('Error adding comment:', err);
@@ -265,16 +269,16 @@ export class ClientBlogsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmitEdit();
-       Swal.fire({
-         position: 'center',
-         icon: 'success',
-         title: 'Blog Created',
-         showConfirmButton: false,
-         timer: 1000,
-       });
-       setTimeout(() => {
-         window.location.reload();
-       }, 500);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Blog Created',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
       if (result.isDenied) {
         this.confirm2();
@@ -292,7 +296,6 @@ export class ClientBlogsComponent implements OnInit {
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
@@ -324,7 +327,7 @@ export class ClientBlogsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000,
         });
-          this.onSubmit();
+        this.onSubmit();
         setTimeout(() => {
           window.location.reload();
         }, 500);
@@ -371,7 +374,7 @@ export class ClientBlogsComponent implements OnInit {
           });
           setTimeout((handler) => {
             window.location.reload();
-          },1000)
+          }, 1000);
         });
       }
     });

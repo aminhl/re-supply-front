@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   ChangeDetectorRef,
+  NgZone,
 } from '@angular/core';
 import {
   FormArray,
@@ -61,7 +62,8 @@ export class BlogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private commentService: CommentsService,
     private changeDetectorRef: ChangeDetectorRef,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private ngZone: NgZone
   ) {
     this.createForm();
     this.createCommentForm();
@@ -139,8 +141,9 @@ export class BlogComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
+         this.ngZone.run(() => {
 
-          window.location.reload();
+         });
         this.isEditMode = false;
       },
       error: (err) => {
@@ -162,7 +165,9 @@ export class BlogComponent implements OnInit {
         this.commentService.deleteComment(id).subscribe((res) => {
           this.comments.splice(i, 1);
         });
-        window.location.reload();
+         this.ngZone.run(() => {
+
+         });
       }
     });
   }
@@ -171,7 +176,9 @@ export class BlogComponent implements OnInit {
     const a = this.commentsForm.get('content').value;
     this.commentService.addComment(blogId, commenterId, a).subscribe({
       next: (res) => {
-        window.location.reload();
+         this.ngZone.run(() => {
+           this.comments.push(res);
+         });
       },
       error: (err) => {
         console.error('Error adding comment:', err);
@@ -229,16 +236,10 @@ export class BlogComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmit();
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Blog Created',
-          showConfirmButton: false,
-          timer: 1000,
+       
+        this.ngZone.run(() => {
+
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
       }
       if (result.isDenied) {
         this.confirm2();
