@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getAcceptedProducts().subscribe((req)=>{
       this.products = req.data.products;
       this.owner = req.data.owner;
+
       console.log(this.products)
       if (this.products.images && this.products.images.length > 0) {
         this.productImageUrl = this.products.images[0];

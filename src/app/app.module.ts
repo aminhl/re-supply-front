@@ -25,6 +25,8 @@ import { EditorModule } from "primeng/editor";
 import { ButtonModule } from "primeng/button";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { ListMeetingComponent } from './client/components/knowledge/list-meeting/list-meeting.component';
+import { RessourceDetailsComponent } from './client/components/knowledge/ressource-details/ressource-details.component';
+import { CommonModule } from '@angular/common';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCredentials: true } };
@@ -36,6 +38,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     JitsiComponentComponent,
     ScheduleMeetingComponent,
     ListMeetingComponent,
+    RessourceDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     ChipsModule,
     EditorModule,
     ButtonModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CommonModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {

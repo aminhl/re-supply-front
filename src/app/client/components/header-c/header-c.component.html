@@ -25,11 +25,12 @@
               <li class="menu-item"><a [routerLink]="'/community'" routerLinkActive="active">Community</a></li>
               <li class="menu-item"><a [routerLink]="'/knowledge'" routerLinkActive="active">Knowledge</a></li>
             </ul>
-
             <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
-
               <div class="de-login-menu" style="background-size: cover;">
-
+               <span id="de-click-menu-notification" class="de-menu-notification"  [hidden]="!(authService.isLoggedIn() && authService.getConnectedUserData().role === 'admin')">
+                    <span class="d-count">{{UdemyNotification.length}}</span>
+                    <i class="fa fa-bell"></i>
+                    </span>
                 <span id="de-click-menu-notification" class="de-menu-notification" [routerLink]="'/wishlist'">
                 <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
                 <i class="fa fa-heart"></i>
@@ -39,13 +40,23 @@
                 <span class="icon_cart"></span>
                </span>
                 <span id="de-click-menu-profile" class="de-menu-profile">
-
                     <img src="./assets/client/images/settings.png"  alt="">
-
                 </span>
-
-
-
+                  <div  id="de-submenu-notification" class="de-submenu" >
+                    <div class="de-flex">
+                      <div><h4>Notifications</h4></div>
+                    </div>
+                    <ul>
+                      <li *ngFor="let notif of UdemyNotification">
+                        <a>
+                          <img class="lazy" src="assets/client/images/Udemy_logo.png" alt="">
+                          <div class="d-desc">
+                            <span class="d-name"><b>{{ notif.title }}</b> {{ notif.description }}</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 <div id="de-submenu-profile" class="de-submenu" style="display: none; background-size: cover;">
                   <ul class="de-submenu-profile">
                     <li><a [routerLink]="'/profile'"><i class="fa fa-user"></i> My profile</a></li>
@@ -53,7 +64,6 @@
                     <li><a href="#" (click)="authService.logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
                   </ul>
                 </div>
-
                 <span id="menu-btn"></span>
               </div>
             </div>
