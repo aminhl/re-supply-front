@@ -295,7 +295,7 @@
                                     <div
                                       *ngFor="
                                         let chatUser of chatUsers;
-                                        index as i
+
                                       "
                                     >
                                       <li
@@ -381,7 +381,7 @@
 
                           <!-- myChat Start Section  -->
                           <div
-                            data-mdb-perfect-scrollbar="true"
+
                             style="position: relative; height: 700px"
                           >
                             <ul
@@ -485,7 +485,7 @@
                       <div class="col-md-6 col-lg-8 col-xl-8">
                         <div
                           class="pt-3 pe-3"
-                          data-mdb-perfect-scrollbar="true"
+                          
                           style="position: relative; height: 700px"
                         >
                           <div
@@ -737,9 +737,9 @@
                           <div *ngIf="selecedChatId">
                             <div
                               *ngFor="let chatmsg of allMessages
-                              ;index"
+                              ;index
                               as
-                              i
+                              i"
                             >
                               <div *ngIf="chatmsg.sender._id !== connectedUserId"
                                 class="d-flex flex-row justify-content-start"

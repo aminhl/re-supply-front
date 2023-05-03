@@ -1,10 +1,23 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChatService } from 'src/app/shared/services/chatService/chat.service';
 import { MessagesService } from 'src/app/shared/services/messageService/messages.service';
 import Swal from 'sweetalert2';
+import { io, Socket } from 'socket.io-client';
+import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, fromEventPattern } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -27,6 +40,12 @@ export class ChatComponent implements OnInit {
   sendMessageForm: FormGroup;
   content: FormControl;
   allMessages: any;
+  ENDPOINT: string = 'http://localhost:3000';
+  socket: Socket;
+  selectedChatCompare: any;
+  setSocketConnected: boolean = false;
+  socketConnected: boolean = false;
+  allMessages$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor(
     private chatService: ChatService,
@@ -34,17 +53,62 @@ export class ChatComponent implements OnInit {
     private ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private messageService: MessagesService
+    private messageService: MessagesService,
+    private route: ActivatedRoute
   ) {
     this.searchChatUsers();
-    this.authService.getUser().subscribe((res) => {
-      this.connectedUserId = res.data.user._id;
-      console.log(this.connectedUserId);
-    });
+    this.getConnectedUser();
+
     this.fetchMychats();
     this.createSendMessageForm();
   }
-  ngOnInit(): void {}
+
+  ngOnInit() {
+    this.socket = io(this.ENDPOINT);
+    this.allMessages$.subscribe((allMessages) => {
+      this.allMessages = allMessages;
+      this.cdRef.detectChanges();
+    });
+  }
+
+  sendMessage(chatId: string) {
+    const a = this.sendMessageForm.get('content').value;
+    this.messageService.postMessage(chatId, a).subscribe({
+      next: (res) => {
+        this.sendMessageForm.get('content').setValue('');
+        this.socket.emit('new message', res);
+      },
+      error: (err) => {
+        console.error('Error adding msg:', err);
+      },
+    });
+
+    this.socket.on('message received', (newMsg) => {
+      if (newMsg.chat._id === this.selecedChatId) {
+        const allMessages = this.allMessages$.getValue();
+        if (!allMessages.some((msg) => msg._id === newMsg._id)) {
+          allMessages.push(newMsg);
+          this.allMessages$.next(allMessages);
+        }
+      }
+    });
+  }
+
+  getConnectedUser() {
+    this.authService.getUser().subscribe({
+      next: (res) => {
+        this.ngZone.run(() => {
+          this.connectedUserId = res.data.user._id;
+          console.log('from method', this.connectedUserId);
+          this.socket.emit('setup', this.connectedUserId);
+          this.socket.on('connected', () => (this.setSocketConnected = true));
+        });
+      },
+      error: (err) => {
+        console.error('An error occurred:', err);
+      },
+    });
+  }
 
   fetchMychats() {
     this.chatService.fetchUserChats().subscribe((res) => {
@@ -55,7 +119,6 @@ export class ChatComponent implements OnInit {
   fetchAllMessages(chatId: any) {
     this.messageService.fetchMessages(chatId).subscribe((res) => {
       this.allMessages = res;
-      console.log('my all messages', this.allMessages);
     });
   }
   toggleDropdown() {
@@ -115,7 +178,7 @@ export class ChatComponent implements OnInit {
       });
     });
   }
-  getSender(connectedUserId: any, usersChat) {
+  getSender(connectedUserId: any, usersChat: any) {
     return usersChat[0]._id === connectedUserId ? usersChat[1] : usersChat[0];
   }
 
@@ -128,12 +191,18 @@ export class ChatComponent implements OnInit {
     window.location.reload();
   }
   addToSelectedUsers(chatUser: any) {
-    if (!this.selectedUsers.includes(chatUser)) {
+    if (this.selecTedChat === undefined || this.selecTedChat === null || this.selecTedChat.isGroupChat===true)
       this.selectedUsers.push(chatUser);
-      this.userIsSelected = true;
-      console.log('selectedUsers', this.selectedUsers);
-    }
+
+    else
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You cannot add users to a private chat!',
+      });
+
   }
+
   removeFromSelectedUsers(chatUser: any) {
     const index = this.selectedUsers.indexOf(chatUser);
     if (index > -1) {
@@ -144,18 +213,20 @@ export class ChatComponent implements OnInit {
   }
 
   createGroup() {
-    if (this.selectedUsers.length === 1) {
+    if (this.selectedUsers.length <= 1) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: ' More than 2 users are required to form a group chat',
       });
     } else if (this.groupName === '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: ' Group name is required',
-      });
+     Swal.fire({
+       position: 'top-end',
+       icon: 'success',
+       title: 'Group Created Successfully',
+       showConfirmButton: false,
+       timer: 1000,
+     });
     } else {
       this.chatService
         .createGroup(this.selectedUsers, this.groupName)
@@ -174,7 +245,10 @@ export class ChatComponent implements OnInit {
     this.selectedUsers = selecTedChat.users;
     this.selecedChatId = selecTedChat._id;
     this.selecTedChat = selecTedChat;
+    this.selectedChatCompare = this.selecTedChat;
     console.log('selectedChat', this.selecTedChat);
+    console.log('my all messages', this.allMessages);
+    this.socket.emit('join chat', this.selecedChatId);
   }
 
   updateGroupName(chatId: any, chatName: any) {
@@ -255,20 +329,6 @@ export class ChatComponent implements OnInit {
   createSendMessageForm() {
     this.sendMessageForm = this.formBuilder.group({
       content: new FormControl('', [Validators.required]),
-    });
-  }
-
-  sendMessage(chatId: string) {
-    console.log('ya rab la3mel 3lik');
-    const a = this.sendMessageForm.get('content').value;
-    this.messageService.postMessage(chatId, a).subscribe({
-      next: (res) => {
-        console.log('msgVal', res);
-        this.sendMessageForm.get('content').setValue('');
-      },
-      error: (err) => {
-        console.error('Error adding msg:', err);
-      },
     });
   }
 }
