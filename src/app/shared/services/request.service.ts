@@ -32,4 +32,7 @@ addRequest(data: FormData): Observable<any> {
   modifyRequest(id: number, value: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
+  donateStripe(requestBody: any, requestId: any): Observable<any> {
+    return this.http.post<any>(`${env.apiRoot}orders/donate/${requestId}`, requestBody);
+  }
 }

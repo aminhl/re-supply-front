@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ProductService } from "../../../../shared/services/product.service";
 import { RequestService } from "../../../../shared/services/request.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-donation-details',
@@ -11,7 +12,12 @@ import { RequestService } from "../../../../shared/services/request.service";
 export class DonationDetailsComponent implements OnInit {
   donation: any;
   donationImageUrl!: string;
-  constructor(private route: ActivatedRoute, private requestService: RequestService) { }
+  donationAmount: number = 0;
+
+  constructor(
+    private route: ActivatedRoute,
+    private requestService: RequestService,
+  ) { }
 
   ngOnInit(): void {
     const donationId = this.route.snapshot.paramMap.get('id');
@@ -23,4 +29,13 @@ export class DonationDetailsComponent implements OnInit {
     });
   }
 
+  onSubmit(form: NgForm) {
+    const requestBody = { amount: form.value.amount };
+    const requestId = this.route.snapshot.paramMap.get('id');
+    this.requestService.donateStripe(requestBody, requestId).subscribe(response => window.location.href = response.data.session_url);
+  }
+
+  onSliderChange(value: number) {
+    this.donationAmount = value ;
+  }
 }
