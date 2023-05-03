@@ -1,4 +1,4 @@
-<header class="transparent header-light scroll-light clone smaller">
+<header *ngIf="authService.isLoggedIn()" class="transparent header-light scroll-light clone smaller">
   <div class="container" style="background-size: cover;">
     <div class="row" style="background-size: cover;">
       <div class="col-md-12" style="background-size: cover;">
@@ -14,22 +14,21 @@
               <!-- logo close -->
             </div>
             <div class="de-flex-col" style="background-size: cover;">
-              <input *ngIf="authService.isLoggedIn()" id="quick_search" class="xs-hide" name="quick_search" placeholder="search item here..." type="text">
+              <input  id="quick_search" class="xs-hide" name="quick_search" placeholder="search item here..." type="text">
             </div>
           </div>
           <div class="de-flex-col header-col-mid" style="background-size: cover;">
             <!-- mainmenu begin -->
             <ul id="mainmenu">
-              <li *ngIf="authService.isLoggedIn() && authService.getConnectedUserData().role === 'admin'" class="menu-item">
+              <li *ngIf="authService.getConnectedUserData().role === 'admin'" class="menu-item">
                 <a [routerLink]="'/dashboard'">Dashboard</a></li>
-              <li *ngIf="authService.isLoggedIn()"class="menu-item"><a [routerLink]="'/products'">Products</a></li>
-              <li *ngIf="authService.isLoggedIn()"class="menu-item"><a [routerLink]="'/donation'">Donations</a></li>
-              <li *ngIf="authService.isLoggedIn()"class="menu-item"><a [routerLink]="'/community'">Community</a></li>
-              <li *ngIf="authService.isLoggedIn()"class="menu-item"><a [routerLink]="'/knowledge'">Knowledge</a></li>
+              <li class="menu-item"><a [routerLink]="'/products'">Products</a></li>
+              <li class="menu-item"><a [routerLink]="'/donation'">Donations</a></li>
+              <li class="menu-item"><a [routerLink]="'/community'">Community</a></li>
+              <li class="menu-item"><a [routerLink]="'/knowledge'">Knowledge</a></li>
 
             </ul>
-            <a *ngIf="!authService.isLoggedIn()" [routerLink]="'/signup'" class="btn-main"><i class="fa fa-plus"></i><span>Signup</span></a>
-              <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
+              <div  class="menu_side_area" style="background-size: cover;">
 
                 <div class="de-login-menu" style="background-size: cover;">
 

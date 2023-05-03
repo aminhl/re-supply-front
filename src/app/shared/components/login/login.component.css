@@ -92,3 +92,19 @@
   font-size: 16px;
 }
 
+.btn-main.btn-join-us {
+  display: inline-block;
+  font-size: 18px;
+  padding: 20px 40px;
+  margin-top: 30px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #7e65db;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-main.btn-join-us:hover {
+  background-color: #6c0ba4;
+  cursor: pointer;
+}
