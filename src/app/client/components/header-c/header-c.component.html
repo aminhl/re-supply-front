@@ -24,6 +24,7 @@
               <li class="menu-item"><a [routerLink]="'/donation'" routerLinkActive="active">Donations</a></li>
               <li class="menu-item"><a [routerLink]="'/community'" routerLinkActive="active">Community</a></li>
               <li class="menu-item"><a [routerLink]="'/knowledge'" routerLinkActive="active">Knowledge</a></li>
+              <li *ngIf="authService.getConnectedUserData().role === 'admin'" class="menu-item"> <a [routerLink]="'/dashboard'" routerLinkActive="active">Dashboard</a> </li>
             </ul>
             <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
               <div class="de-login-menu" style="background-size: cover;">
