@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
-import {Subscription} from "rxjs";
+import { filter, Subscription } from "rxjs";
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-header-c',
@@ -16,22 +17,29 @@ export class HeaderCComponent implements OnInit {
   cart: any[] = [];
   cartSubscription: Subscription;
 
-  constructor(public authService: AuthService,private productService: ProductService) {
+  constructor(public authService: AuthService,private productService: ProductService,
+              private cdr: ChangeDetectorRef, private router: Router) {
 
   }
 
+
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()){
-      this.loadWishlist();
-      this.loadCart();
-      // Subscribe to the wishlistUpdated subject to update the wishlist count
-      this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      if (this.authService.isLoggedIn()){
         this.loadWishlist();
-      });
-      this.cartSubscription = this.productService.cartUpdated.subscribe(() => {
         this.loadCart();
-      });
-    }
+        // Subscribe to the wishlistUpdated subject to update the wishlist count
+        this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+          this.loadWishlist();
+        });
+        this.cartSubscription = this.productService.cartUpdated.subscribe(() => {
+          this.loadCart();
+        });
+      }
+      this.cdr.detectChanges();
+    });
   }
 
   loadCart() {
