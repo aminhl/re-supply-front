@@ -23,7 +23,7 @@ addRequest(data: FormData): Observable<any> {
   getRequestList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
-  getRequest(id: number): Observable<any> {
+  getRequest(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
   deleteRequest(id: number): Observable<any> {

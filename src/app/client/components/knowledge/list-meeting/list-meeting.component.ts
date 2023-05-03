@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../../../shared/services/auth.service";
-import { ScheduleMeetingService } from "../../../../shared/services/KnowledgeService/schedule-meeting.service";
-import { v4 as uuidv4 } from 'uuid';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../../../shared/services/auth.service";
+import {ScheduleMeetingService} from "../../../../shared/services/KnowledgeService/schedule-meeting.service";
+import {v4 as uuidv4} from 'uuid';
 import * as crypto from 'crypto-js';
-import { Router } from '@angular/router';
-import { catchError, map, Observable, of } from "rxjs";
+import {Router} from '@angular/router';
+import {catchError, map, Observable, of} from "rxjs";
 
 interface MeetingResponse {
   data: {
     result: Array<any>
   }
 }
+interface EmailResponse {
+  status: string;
+  data: {
+    result: string[];
+  };
+}
+
 @Component({
   selector: 'app-list-meeting',
   templateUrl: './list-meeting.component.html',
@@ -19,6 +26,7 @@ interface MeetingResponse {
 export class ListMeetingComponent implements OnInit {
     userconnected: any;
     Meetingobject:any
+  count:number
   id: string;
   private readonly secretKey = 'XXAAA32423412396qsdqsdqsdqsdaz&klklbkofdiobjoisdokp2342KSDK?FSO7DFIHJBçè-&éQSDQSJIDHQSJHI'; // Replace with your own secret key
 
@@ -34,6 +42,15 @@ export class ListMeetingComponent implements OnInit {
       this.Scheduleservice.getMeetingforUserConnected(this.userconnected.data['user']._id).subscribe((req: MeetingResponse) => {
         this.Meetingobject = req.data.result; // extract the result array from the data object
         console.log(this.Meetingobject);
+        for (let i=0; i<this.Meetingobject.length; i++)
+        {
+          this.Scheduleservice.getEmailsForEvent(this.Meetingobject[i].title, this.Meetingobject[i].description)
+            .subscribe((res: EmailResponse) => {
+              this.Meetingobject[i].count=res.data.result.length-1;
+            });
+
+        }
+
       });
     })
   }

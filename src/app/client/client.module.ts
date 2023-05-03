@@ -42,6 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ChatComponent } from './components/chat/chat.component';
 import { TarsChatbotComponent } from './components/chatbot/tars-chatbot.component';
 import { FloatingActionButtonComponent } from './components/floating-action-button/floating-action-button.component';
+import { DonationDetailsComponent } from './components/donation/donation-details/donation-details.component';
 
 
 
@@ -70,6 +71,7 @@ import { FloatingActionButtonComponent } from './components/floating-action-butt
     ChatComponent,
     TarsChatbotComponent,
     FloatingActionButtonComponent,
+    DonationDetailsComponent,
   ],
   imports: [
     CommonModule,

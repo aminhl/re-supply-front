@@ -172,7 +172,6 @@
                       value="Submit"
                       class="btn btn-main color-2 ripple-surface"
                       style="border-radius: 5px"
-                      [disabled]="requestForm.invalid"
                     />
                     <button type="button" [routerLink]="['/donation']" class="btn-main"
                     style="margin-left: 1.5rem; background-color: #ff0042!important;">Cancel</button>
@@ -188,11 +187,11 @@
         <div class="nft__item">
           <div class="author_list_pp">
             <a href="#">
-<!--              <img-->
-<!--                class="lazy"-->
-<!--                [src]="userImageUrl"-->
-<!--                alt=""-->
-<!--              />-->
+              <img
+                class="lazy"
+                [src]="userImageUrl"
+                alt=""
+              />
               <i class="fa fa-check"></i>
             </a>
           </div>
@@ -201,29 +200,43 @@
               <img alt="" class="lazy nft__item_preview" src="../../../../assets/client/images/logo.svg">
             </a>
           </div>
-<!--          <div class="nft__item_info">-->
-<!--            <a href="#">-->
-<!--              <h4>              <div class="nft__item_price">-->
-<!--                <ng-container *ngIf="name.value == ''; else dynamicName">-->
-<!--                  {{'Product name'}}-->
-<!--                </ng-container>-->
-<!--                <ng-template #dynamicName>-->
-<!--                  {{name.value}}-->
-<!--                </ng-template>-->
-<!--              </div></h4>-->
-<!--            </a>-->
-<!--            <div class="nft__item_price">-->
-<!--              <ng-container *ngIf="price.value == ''; else dynamicPrice">-->
-<!--                {{'Ex:  $23.00'}}-->
-<!--              </ng-container>-->
-<!--              <ng-template #dynamicPrice>-->
-<!--                {{price.value | currency}}-->
-<!--              </ng-template>-->
-<!--            </div>-->
-<!--            <div class="nft__item_action">-->
-<!--              <a href="#">Add to cart</a>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="nft__item_info">
+            <a href="#">
+              <h4>
+                <div class="nft__item_price">
+                <ng-container *ngIf="requestTitle.value == ''; else dynamicName">
+                  {{'Title name'}}
+                </ng-container>
+                <ng-template #dynamicName>
+                  {{requestTitle.value}}
+                </ng-template>
+              </div></h4>
+            </a>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == ''; else dynamicType">
+                {{'Ex:  Item | Currency'}}
+              </ng-container>
+              <ng-template #dynamicType>
+                {{type.value }}
+              </ng-template>
+            </div>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == 'Currency' && targetValue.value == ''; else dynamicPrice">
+                {{'Ex:  $23.00'}}
+              </ng-container>
+              <ng-template #dynamicPrice>
+                {{targetValue.value | currency}}
+              </ng-template>
+            </div>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == 'Item' && itemType.value == ''; else dynamicItemType">
+                {{'Ex:  Tablet'}}
+              </ng-container>
+              <ng-template #dynamicItemType>
+                {{itemType.value }}
+              </ng-template>
+            </div>
+          </div>
         </div>
       </div>
     </div>
