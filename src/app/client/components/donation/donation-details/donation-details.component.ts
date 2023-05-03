@@ -17,6 +17,8 @@ export class DonationDetailsComponent implements OnInit {
   donation: any;
   donationImageUrl!: string;
   donationAmount: number = 0;
+
+
   constructor(private route: ActivatedRoute,
               private requestService: RequestService,
               private donationService: DonationService,
@@ -32,6 +34,7 @@ export class DonationDetailsComponent implements OnInit {
       }
     });
   }
+
 
   // @ts-ignore
   donateWithEthereum = async (requestId: string, toAddress?: string, usdAmount?: number) => {
