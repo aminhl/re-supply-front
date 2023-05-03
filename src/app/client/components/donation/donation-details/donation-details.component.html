@@ -65,14 +65,14 @@
           <span class="input-group-text">{{donationAmount | currency:'USD':true:'1.2-2'}}</span>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn-main">Donate Now</button>
-          <a (click)="donateWithEthereum(
+          <button type="submit" class="btn-main my-3">Donate Now</button>
+          <button (click)="donateWithEthereum(
             donation._id,
             donation.requester_id.walletEth.address,
             donationAmount)"
              class="btn-main btn-lg mx-2" style="cursor: pointer" data-bs-toggle="modal">
             Donate Now Using Ethereum
-          </a>
+          </button>
         </div>
       </form>
     </div>
