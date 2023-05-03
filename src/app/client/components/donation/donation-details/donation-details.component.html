@@ -66,6 +66,13 @@
         </div>
         <div class="text-center">
           <button type="submit" class="btn-main">Donate Now</button>
+          <a (click)="donateWithEthereum(
+            donation._id,
+            donation.requester_id.walletEth.address,
+            donationAmount)"
+             class="btn-main btn-lg mx-2" style="cursor: pointer" data-bs-toggle="modal">
+            Donate Now Using Ethereum
+          </a>
         </div>
       </form>
     </div>

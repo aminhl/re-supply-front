@@ -133,9 +133,10 @@
                     </a>
                 </div>
                 <ng-container *ngIf="donation.type==='Currency'">
-                  <button [ngClass]="{'closed':donation.close}"
-                          [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
+                  <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="donation.close">
+                    Closed
                   </button>
+
                   <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
                     Make a Donation
                   </button>
