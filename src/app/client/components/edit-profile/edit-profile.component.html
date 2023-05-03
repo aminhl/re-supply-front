@@ -34,19 +34,20 @@
                     <div class="col-md-6 col-lg-8 mb-sm-20">
                       <div class="field-set">
                         <h5>First Name</h5>
-                        <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" placeholder="{{ user.firstName }}" />
+                        <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" [placeholder]="user ? user.firstName : ''" />
+
                         <div class="spacer-20"></div>
 
                         <h5>Last Name</h5>
-                        <input type="text" name="Last Name" id="Last Name" class="form-control" formControlName="lastName" placeholder="{{ user.lastName }}" />
+                        <input type="text" name="Last Name" id="Last Name" class="form-control" formControlName="lastName" [placeholder]="user ? user.lastName : ''" />
                         <div class="spacer-20"></div>
 
                         <h5>Phone Number</h5>
-                        <textarea name="PhoneNumber" id="PhoneNumber" class="form-control" formControlName="phoneNumber" placeholder="{{ getPhoneNumber(user) }}"></textarea>
+                        <textarea name="PhoneNumber" id="PhoneNumber" class="form-control" formControlName="phoneNumber" [placeholder]="user ? getPhoneNumber(user) : ''"></textarea>
                         <div class="spacer-20"></div>
 
                         <h5>Email</h5>
-                        <input type="text" name="email" id="email" class="form-control" formControlName="email" placeholder="{{ user.email }}" />
+                        <input type="text" name="email" id="email" class="form-control" formControlName="email" [placeholder]="user ? user.email : ''" />
                         <div class="toggle-container">
                           <!-- Custom Input Switch Component -->
                           <input type="checkbox" [checked]="twoFactorAuth" (change)="onTwoFactorAuthChange()" />

@@ -98,7 +98,7 @@
                 <a (click)="deleteUser(user._id)" class="action-wrapper"
                 ><span aria-hidden="true" class="icon_trash_alt"></span
                 ></a>
-                <a (click)="upgradeToAdmin(user._id)" class="action-wrapper"
+                <a *ngIf="user.role === 'member' " (click)="upgradeToAdmin(user._id)" class="action-wrapper"
                 ><span aria-hidden="true" class="icon_plus_alt"></span
                 ></a>
               </td>
