@@ -62,9 +62,9 @@
           </a>
 
           <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
-                <div style="font-size: 25px ;">Raised
+                <div style="font-size: 20px ;">Raised
                   <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
-                <div style="font-size: 25px ; text-align: right">GOAL
+                <div style="font-size: 20px ; text-align: right">GOAL
                   <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
           </div>
           <div class="progress" *ngIf="donation.type==='Currency'">
@@ -83,9 +83,9 @@
             <button [ngClass]="{'closed':donation.close}"
                     [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
             </button>
-            <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
-              Make a Donation
-            </button>
+            <a [routerLink]="['/donationDetails', donation._id]" style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
+              More Details..
+            </a>
           </ng-container>
           <div class="spacer-10"></div>
         </div>
@@ -133,9 +133,10 @@
                     </a>
                 </div>
                 <ng-container *ngIf="donation.type==='Currency'">
-                  <button [ngClass]="{'closed':donation.close}"
-                          [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
+                  <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="donation.close">
+                    Closed
                   </button>
+
                   <button style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
                     Make a Donation
                   </button>

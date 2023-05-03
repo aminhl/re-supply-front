@@ -5,7 +5,7 @@
            style="height: 100%; border-radius: 10px; box-shadow: 10px 10px 22px #999999" alt="">
     </div>
     <div class="col-md-5 offset-1" style="margin-top: 2rem">
-      <h2>{{ donation.requestTitle }}</h2>
+      <h2 *ngIf="donation.requestTitle">{{ donation.requestTitle }}</h2>
       <table class="table">
         <tbody>
         <tr *ngIf="donation.type">
@@ -45,9 +45,36 @@
         </tbody>
       </table>
       <div class="spacer-30"></div>
-      <a class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#donateNow">
-        Donate Now
-      </a>
+      <form *ngIf="donation.type !=='Item'" #donationForm="ngForm" (ngSubmit)="onSubmit(donationForm)">
+        <input type="hidden" name="requestId" [value]="donation._id">
+        <label for="amount">Target Value :</label>
+        <span style="display: inline;margin-left: 10px;" class="input-group-text">{{donation.targetValue | currency:'USD':true:'1.2-2'}} </span>
+        <div class="input-group mb-3">
+          <input id="amount"
+                 type="range"
+                 class="form-range my-3"
+                 max="{{donation.targetValue}}"
+                 step="1"
+                 name="amount"
+                 [(ngModel)]="donationAmount"
+                 (input)="onSliderChange($event.target['value'])"
+                 required>
+          <label for="amount" style="display: flex;
+                              align-items: center;
+                              margin-right: 10px;">Donation Amount :</label><br>
+          <span class="input-group-text">{{donationAmount | currency:'USD':true:'1.2-2'}}</span>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn-main my-3">Donate Now</button>
+          <button (click)="donateWithEthereum(
+            donation._id,
+            donation.requester_id.walletEth.address,
+            donationAmount)"
+             class="btn-main btn-lg mx-2" style="cursor: pointer" data-bs-toggle="modal">
+            Donate Now Using Ethereum
+          </button>
+        </div>
+      </form>
     </div>
     <div class="spacer-50"></div>
   </div>

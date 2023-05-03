@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
-import {Scheduler, Subscription} from "rxjs";
+import {Scheduler, Subscription,filter} from "rxjs";
 import { ScheduleMeetingService } from "../../../shared/services/KnowledgeService/schedule-meeting.service";
 import { CommonModule } from '@angular/common';
 import { interval } from 'rxjs';
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-header-c',
@@ -20,26 +21,33 @@ export class HeaderCComponent implements OnInit {
   cartSubscription: Subscription;
   UdemyNotification : any;
 
-  constructor(public authService: AuthService,private productService: ProductService,private schedulerservice: ScheduleMeetingService) {
+
+  constructor(public authService: AuthService,private productService: ProductService,
+              private cdr: ChangeDetectorRef, private router: Router
+              ,private schedulerservice: ScheduleMeetingService
+              ) {
 
   }
 
+
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()){
-      this.loadWishlist();
-      this.loadCart();
-      // Subscribe to the wishlistUpdated subject to update the wishlist count
-      this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      if (this.authService.isLoggedIn()){
         this.loadWishlist();
-      });
-      this.cartSubscription = this.productService.cartUpdated.subscribe(() => {
         this.loadCart();
-      });
-    }
-
-   this.getnotification();
-
-
+        // Subscribe to the wishlistUpdated subject to update the wishlist count
+        this.wishlistSubscription = this.productService.wishlistUpdated.subscribe(() => {
+          this.loadWishlist();
+        });
+        this.cartSubscription = this.productService.cartUpdated.subscribe(() => {
+          this.loadCart();
+        });
+      }
+      this.cdr.detectChanges();
+    });
+    this.getnotification();
   }
 getnotification()
 {
