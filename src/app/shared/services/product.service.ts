@@ -19,6 +19,7 @@ export class ProductService {
     return this.http.get<any>(env.apiRoot + 'products/accepted');
   }
   addProduct(target: string, requestBody: FormData){
+    console.log(requestBody)
     return this.http.post(env.apiRoot + target, requestBody, {
       withCredentials: true,
     });

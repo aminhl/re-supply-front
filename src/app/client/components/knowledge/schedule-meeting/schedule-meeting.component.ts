@@ -29,9 +29,9 @@ export class ScheduleMeetingComponent implements OnInit {
       listPlugin,
     ],
     headerToolbar: {
+
       left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right : 'title'
     },
     initialView: 'dayGridMonth',
     initialEvents: this.INITIAL_EVENTS,

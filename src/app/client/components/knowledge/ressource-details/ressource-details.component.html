@@ -1,0 +1,59 @@
+<div class="no-bottom no-top" id="content">
+  <div id="top"></div>
+  <section id="nft-item-details" aria-label="section" class="sm-mt-0">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-md-6 text-center">
+          <div class="nft-image-wrapper">
+            <img src="{{ressource.image}}" class="image-autosize img-fluid img-rounded mb-sm-30" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="tab-1">
+            <h6>Owner</h6>
+            <div class="item_author">
+              <div class="author_list_pp">
+                <a href="author.html">
+                  <img class="lazy" src="{{ressource.user.images}}" alt="">
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+              <div class="author_list_info">
+                <a href="author.html">{{ressource.user.firstName}}&nbsp; {{ressource.user.lastName}}</a>
+              </div>
+            </div>
+            <div class="spacer-30"></div>
+          </div>
+          <div class="item_info">
+            <h2>{{ressource.title}}</h2>
+            <div class="item_info_counts">
+            </div>
+            <p>{{ressource.description}}</p>
+            <div class="de_tab tab_simple">
+              <div class="spacer-10"></div>
+              <!-- Button trigger modal -->
+              <p>Lessons links to download :</p>
+              <div *ngFor="let item of ressource.files; let i = index">
+                <a href="{{item}}" class="btn-main btn-lg" download>
+                  Lesson number {{i + 1}}
+                </a>
+                <div class="spacer-10"></div>
+              </div>
+              &nbsp;
+              <div class="de_tab tab_simple">
+              <a [routerLink]="['/knowledge']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                Back to List
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer-60"></div>
+  <div class="spacer-60"></div>
+  <div class="spacer-60"></div>
+  <div class="spacer-60"></div>
+  <div class="spacer-60"></div>
+</div>

@@ -30,6 +30,7 @@ import { ScheduleMeetingComponent } from "./client/components/knowledge/schedule
 import { ListMeetingComponent } from "./client/components/knowledge/list-meeting/list-meeting.component";
 import {ChatComponent} from './client/components/chat/chat.component';
 import { DonationDetailsComponent } from "./client/components/donation/donation-details/donation-details.component";
+import { RessourceDetailsComponent } from "./client/components/knowledge/ressource-details/ressource-details.component";
 
 
 const routes: Routes = [
@@ -102,6 +103,7 @@ const routes: Routes = [
   { path: 'ScheduleMeeting', component: ScheduleMeetingComponent, canActivate: [AuthGuard] },
   { path: 'ListMeeting', component: ListMeetingComponent, canActivate: [AuthGuard] },
   { path: 'donationDetails/:id', component: DonationDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'RessourceDetails/:id', component: RessourceDetailsComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

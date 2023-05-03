@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProductService} from "../../../shared/services/product.service";
-import {Subscription} from "rxjs";
+import {Scheduler, Subscription} from "rxjs";
+import { ScheduleMeetingService } from "../../../shared/services/KnowledgeService/schedule-meeting.service";
+import { CommonModule } from '@angular/common';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-header-c',
@@ -15,8 +18,9 @@ export class HeaderCComponent implements OnInit {
   cartCount = 0;
   cart: any[] = [];
   cartSubscription: Subscription;
+  UdemyNotification : any;
 
-  constructor(public authService: AuthService,private productService: ProductService) {
+  constructor(public authService: AuthService,private productService: ProductService,private schedulerservice: ScheduleMeetingService) {
 
   }
 
@@ -32,8 +36,18 @@ export class HeaderCComponent implements OnInit {
         this.loadCart();
       });
     }
-  }
 
+   this.getnotification();
+
+
+  }
+getnotification()
+{
+  this.schedulerservice.UdemyNotification().subscribe((res) => {
+    const resArray = Array.from(res as any);
+    this.UdemyNotification = resArray.slice(0, 3);
+  });
+}
   loadCart() {
     this.productService.getCart().subscribe(
       res => {

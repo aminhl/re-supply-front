@@ -1,1 +1,53 @@
-<p>resources-management works!</p>
+<section aria-label="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table de-table table-rank">
+          <thead>
+          <tr>
+            <th scope="col">User</th>
+            <th scope="col">Status</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Posted</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let ressource of ressources | paginate: { itemsPerPage: 5, currentPage: currentPage }; index as i">
+          <tr>
+            <th scope="row">
+              <div class="coll_list_pp">
+                <div class="image-wrapper">
+                  <img class="lazy" src="{{ ressource.image }}" alt="">
+
+                </div>
+              </div>
+              <a style="color: #000000" [routerLink]="['/productDetails', ressource._id]">{{ ressource.name}}</a>
+            <td>
+                      <span class="sr-wrapper" [ngStyle]="{ 'backgroundColor': ressource.color }">
+                        {{ ressource.status }}
+                      </span>
+            </td>
+            <td class="">{{ ressource.user.firstName + " " + ressource.user.lastName}}</td>
+            <td>{{ ressource.description  }}</td>
+            <td>{{ ressource.postedAt | date  }}</td>
+            <td>
+              <a (click)="deleteRessource(ressource._id)" class="action-wrapper"><span aria-hidden="true" class="icon_trash_alt"></span></a>
+              <a (click)="acceptRessource(ressource._id)" class="action-wrapper"><span aria-hidden="true" class="icon_check_alt2"></span></a>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="7">
+              <div class="d-flex justify-content-center">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+              </div>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
