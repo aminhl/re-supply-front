@@ -81,7 +81,7 @@ export class DonationDetailsComponent implements OnInit {
   };
 
   onSubmit(form: NgForm) {
-    const requestBody = { amount: form.value.amount };
+    const requestBody = { amount: this.donationValue.value };
     const requestId = this.route.snapshot.paramMap.get('id');
     this.requestService.donateStripe(requestBody, requestId).subscribe(response => window.location.href = response.data.session_url);
   }
