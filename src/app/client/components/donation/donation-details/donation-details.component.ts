@@ -17,12 +17,14 @@ export class DonationDetailsComponent implements OnInit {
   donation: any;
   donationImageUrl!: string;
   donationAmount: number = 0;
+  donationValue: FormControl;
 
 
   constructor(private route: ActivatedRoute,
               private requestService: RequestService,
               private donationService: DonationService,
               private authService: AuthService) {
+    this.donationValue = new FormControl('');
   }
 
   ngOnInit(): void {
