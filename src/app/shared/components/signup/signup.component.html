@@ -123,6 +123,46 @@
                     </div>
                   </div>
                 </div>
+                <div class="col-md-6" style="background-size: cover">
+                  <div class="field-set" style="background-size: cover">
+                    <label>Annual Income <span style="color: red" class="required">*</span> :</label>
+                    <input
+                      type="text"
+                      name="annualIncome"
+                      id="annualIncome"
+                      class="form-control"
+                      formControlName="annualIncome"
+                      [ngClass]="{
+                        'input-invalid':
+                          annualIncome.invalid &&
+                          (annualIncome.dirty || annualIncome.touched),
+                        'input-valid':
+                          annualIncome.valid && (annualIncome.dirty || annualIncome.touched)
+                      }"
+                    />
+                    <div
+                      class="message-invalid"
+                      *ngIf="annualIncome.touched && annualIncome.hasError('required')"
+                    >
+                      annualIncome is required!
+                    </div>
+                    <div
+                      class="message-invalid"
+                      *ngIf="
+                        annualIncome.touched && annualIncome.hasError('invalidData')
+                      "
+                    >
+                      annualIncome must contains only letters!
+                    </div>
+                    <!--success message-->
+                    <div
+                      class="message-valid"
+                      *ngIf="annualIncome.touched && !annualIncome.errors"
+                    >
+                      Valid!
+                    </div>
+                  </div>
+                </div>
 
                 <div class="col-md-6" style="background-size: cover">
                   <div
@@ -172,87 +212,6 @@
                   </div>
                 </div>
 
-                 <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Phone <span style="color: red" class="required">*</span> :</label>
-
-                    <ngx-intl-tel-input
-                      style="width: 300px"
-                      [enableAutoCountrySelect]="true"
-                      [enablePlaceholder]="true"
-                      [searchCountryFlag]="true"
-                      [separateDialCode]="true"
-                      [searchCountryField]="[
-                        SearchCountryField.Iso2,
-                        SearchCountryField.Name
-                      ]"
-                      [selectFirstCountry]="false"
-                      [selectedCountryISO]="CountryISO.UnitedStates"
-                      [phoneValidation]="true"
-                      [numberFormat]="PhoneNumberFormat.International"
-                      name="phone"
-                      id="phone"
-                      class="form-control"
-                      formControlName="phoneNumber"
-                    >
-                    </ngx-intl-tel-input>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
-                        phoneNumber.touched &&
-                        phoneNumber.hasError('invalidData')
-                      "
-                    >
-                      PhoneNumber must not contain letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="phoneNumber.touched && !phoneNumber.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Password <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      class="form-control"
-                      formControlName="password"
-                      [ngClass]="{
-                        'input-invalid':
-                          password.invalid &&
-                          (password.dirty || password.touched),
-                        'input-valid':
-                          password.valid && (password.dirty || password.touched)
-                      }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="password.touched && password.hasError('required')"
-                    >
-                      Password is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="password.touched && password.hasError('minlength')"
-                    >
-                      Password must contain 8+ letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="password.touched && !password.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
 
                 <div class="col-md-6" style="background-size: cover">
                   <div class="field-set" style="background-size: cover">
@@ -303,6 +262,89 @@
                     <div
                       class="message-valid"
                       *ngIf="confirmPassword.touched && !confirmPassword.errors"
+                    >
+                      Valid!
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-6" style="background-size: cover">
+                  <div class="field-set" style="background-size: cover">
+                    <label>Password <span style="color: red" class="required">*</span> :</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      formControlName="password"
+                      [ngClass]="{
+                        'input-invalid':
+                          password.invalid &&
+                          (password.dirty || password.touched),
+                        'input-valid':
+                          password.valid && (password.dirty || password.touched)
+                      }"
+                    />
+                    <div
+                      class="message-invalid"
+                      *ngIf="password.touched && password.hasError('required')"
+                    >
+                      Password is required!
+                    </div>
+                    <div
+                      class="message-invalid"
+                      *ngIf="password.touched && password.hasError('minlength')"
+                    >
+                      Password must contain 8+ letters!
+                    </div>
+                    <!--success message-->
+                    <div
+                      class="message-valid"
+                      *ngIf="password.touched && !password.errors"
+                    >
+                      Valid!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6" style="background-size: cover">
+                  <div class="field-set" style="background-size: cover">
+                    <label>Phone <span style="color: red" class="required">*</span> :</label>
+
+                    <ngx-intl-tel-input
+                      style="width: 300px"
+                      [enableAutoCountrySelect]="true"
+                      [enablePlaceholder]="true"
+                      [searchCountryFlag]="true"
+                      [separateDialCode]="true"
+                      [searchCountryField]="[
+                        SearchCountryField.Iso2,
+                        SearchCountryField.Name
+                      ]"
+                      [selectFirstCountry]="false"
+                      [selectedCountryISO]="CountryISO.UnitedStates"
+                      [phoneValidation]="true"
+                      [numberFormat]="PhoneNumberFormat.International"
+                      name="phone"
+                      id="phone"
+                      class="form-control"
+                      formControlName="phoneNumber"
+                    >
+                    </ngx-intl-tel-input>
+                    <div
+                      class="message-invalid"
+                      *ngIf="
+                        phoneNumber.touched &&
+                        phoneNumber.hasError('invalidData')
+                      "
+                    >
+                      PhoneNumber must not contain letters!
+                    </div>
+                    <!--success message-->
+                    <div
+                      class="message-valid"
+                      *ngIf="phoneNumber.touched && !phoneNumber.errors"
                     >
                       Valid!
                     </div>

@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
   password!: FormControl;
   confirmPassword!: FormControl;
   phoneNumber!: FormControl;
+  annualIncome!: FormControl;
   images!: FormControl;
   token!: string;
 
@@ -68,6 +69,9 @@ export class SignupComponent implements OnInit {
     this.phoneNumber = new FormControl('', [
       Validators.required,
     ]);
+    this.annualIncome = new FormControl('', [
+      Validators.required,
+    ]);
     this.password = new FormControl('', [
       Validators.required,
       Validators.minLength(8),
@@ -87,6 +91,7 @@ export class SignupComponent implements OnInit {
         email: this.email,
         phoneNumber: this.phoneNumber,
         password: this.password,
+        annualIncome: this.annualIncome,
         confirmPassword: this.confirmPassword,
         images: this.images,
       },
@@ -101,13 +106,14 @@ export class SignupComponent implements OnInit {
     formData.append('email', this.signupForm.value.email);
     formData.append('phoneNumber', this.signupForm.value.phoneNumber.internationalNumber);
     formData.append('password', this.signupForm.value.password);
+    formData.append('country', this.signupForm.value.phoneNumber.countryCode);
+    formData.append('annualIncome', this.signupForm.value.annualIncome);
     formData.append('confirmPassword', this.signupForm.value.confirmPassword);
     const images = this.signupForm.get('images');
 
     if (images && images.valid) {
       formData.append('images', images.value, images.value.name);
     }
-
     this.authService
       .signup('users/signup', formData)
       .subscribe((response: any) => {

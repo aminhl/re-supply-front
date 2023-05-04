@@ -1,0 +1,9 @@
+.nft__item_wrap {
+  height: 250px; /* Set a fixed height for each product card */
+  overflow: hidden; /* Hide any content that overflows the height */
+}
+.nft__item_wrap img {
+  height: 100%; /* Make the image height 100% of the parent element */
+  object-fit: cover; /* Ensure the image covers the entire space without changing its aspect ratio */
+}
+
