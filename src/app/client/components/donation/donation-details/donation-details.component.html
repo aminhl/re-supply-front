@@ -4,8 +4,8 @@
       <img [src]="donationImageUrl" class="image-autosize img-fluid img-rounded mb-sm-30"
            style="height: 100%; border-radius: 10px; box-shadow: 10px 10px 22px #999999" alt="">
     </div>
-    <div class="col-md-5 offset-1" style="margin-top: 2rem">
-      <h2 *ngIf="donation.requestTitle">{{ donation.requestTitle }}</h2>
+    <div *ngIf="donation" class="col-md-5 offset-1" style="margin-top: 2rem">
+      <h2 >{{ donation.requestTitle }}</h2>
       <table class="table">
         <tbody>
         <tr *ngIf="donation.type">

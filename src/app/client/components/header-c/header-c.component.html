@@ -20,6 +20,9 @@
           <div class="de-flex-col header-col-mid" style="background-size: cover;">
             <!-- mainmenu begin -->
             <ul id="mainmenu">
+              <li *ngIf="authService.isLoggedIn() && authService.getConnectedUserData().role === 'admin'" class="menu-item">
+                <a [routerLink]="'/dashboard'" routerLinkActive="active">Dashboard</a>
+              </li>
               <li class="menu-item"><a [routerLink]="'/products'" routerLinkActive="active">Products</a></li>
               <li class="menu-item"><a [routerLink]="'/donation'" routerLinkActive="active">Donations</a></li>
               <li class="menu-item"><a [routerLink]="'/community'" routerLinkActive="active">Community</a></li>
