@@ -18,6 +18,10 @@ export class ResourcesManagementComponent implements OnInit {
   verified: Boolean;
   role: String;
   ressources: any;
+  showingSection1 = true;
+  showingSection2 = false;
+  UdemyNotification : any;
+
   constructor(
     private authService: AuthService,
     private adminService: AdminService,
@@ -28,6 +32,22 @@ export class ResourcesManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllRessources()
+    this.getnotification();
+
+  }
+  getnotification()
+  {
+    this.SchuduleService.UdemyNotification().subscribe(
+      (res) => {
+        const resArray = Array.from(res as any);
+        this.UdemyNotification = resArray.slice(0, 3);
+        // Handle success case here
+      },
+      (error) => {
+        this.UdemyNotification=[]
+      }
+    );
+
   }
   deleteRessource(ressourceid: any) {
     Swal.fire({
@@ -85,5 +105,15 @@ export class ResourcesManagementComponent implements OnInit {
         return product;
       });
     });
+  }
+
+  showSection1() {
+    this.showingSection1 = true;
+    this.showingSection2 = false;
+  }
+
+  showSection2() {
+    this.showingSection1 = false;
+    this.showingSection2 = true;
   }
 }

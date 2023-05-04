@@ -19,7 +19,6 @@ export class HeaderCComponent implements OnInit {
   cartCount = 0;
   cart: any[] = [];
   cartSubscription: Subscription;
-  UdemyNotification : any;
 
 
   constructor(public authService: AuthService,private productService: ProductService,
@@ -47,23 +46,8 @@ export class HeaderCComponent implements OnInit {
       }
       this.cdr.detectChanges();
     });
-    this.getnotification();
   }
-getnotification()
-{
-  this.schedulerservice.UdemyNotification().subscribe(
-    (res) => {
-      const resArray = Array.from(res as any);
-      this.UdemyNotification = resArray.slice(0, 3);
-      // Handle success case here
-    },
-    (error) => {
-      this.UdemyNotification=[]
-      // Handle error case here
-    }
-  );
 
-}
   loadCart() {
     this.productService.getCart().subscribe(
       res => {
