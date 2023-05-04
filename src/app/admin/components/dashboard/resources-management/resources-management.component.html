@@ -1,4 +1,7 @@
-<section aria-label="section">
+<button class="btn-main"(click)="showSection1()">Training Lessons</button>&nbsp;
+<button class="btn-main" (click)="showSection2()">Udemy news</button>
+
+<section aria-label="section" *ngIf="showingSection1">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -51,3 +54,28 @@
     </div>
   </div>
 </section>
+  <section aria-label="section" *ngIf="showingSection2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="activity-list">
+            <li class="act_follow" *ngFor="let notif of UdemyNotification">
+              <img class="lazy" src="assets/client/images/Udemy_logo.png" alt="">
+              <div class="act_list_text">
+                <h4>{{notif.title}}</h4>
+               {{notif.description}}
+                <span class="act_list_date">
+               <a href="{{notif.link}}" >Go to site</a>
+                </span>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </section>
