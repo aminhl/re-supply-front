@@ -63,7 +63,7 @@
 
           <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
                 <div style="font-size: 20px ;">Raised
-                  <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
+                  <p><i class="fa fa-dollar"></i>{{donation.currentValue.toFixed(3)}}</p></div>
                 <div style="font-size: 20px ; text-align: right">GOAL
                   <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
           </div>
@@ -116,7 +116,7 @@
 
                 <div class="nft__item_price d-flex justify-content-between" *ngIf="donation.type==='Currency'">
                   <div style="font-size: 25px ;">Raised
-                    <p><i class="fa fa-dollar"></i>{{donation.currentValue}}</p></div>
+                    <p><i class="fa fa-dollar"></i>{{donation.currentValue.toFixed(3)}}</p></div>
                   <div style="font-size: 25px ; text-align: right">GOAL
                     <p><i class="fa fa-dollar"></i>{{donation.targetValue}}</p></div>
                 </div>
