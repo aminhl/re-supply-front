@@ -51,10 +51,20 @@ export class HeaderCComponent implements OnInit {
   }
 getnotification()
 {
-  this.schedulerservice.UdemyNotification().subscribe((res) => {
-    const resArray = Array.from(res as any);
-    this.UdemyNotification = resArray.slice(0, 3);
-  });
+  this.schedulerservice.UdemyNotification().subscribe(
+    (res) => {
+      const resArray = Array.from(res as any);
+      this.UdemyNotification = resArray.slice(0, 3);
+      console.log(this.UdemyNotification);
+      // Handle success case here
+    },
+    (error) => {
+      console.error('Error fetching Udemy notifications:', error);
+      this.UdemyNotification=[]
+      // Handle error case here
+    }
+  );
+
 }
   loadCart() {
     this.productService.getCart().subscribe(

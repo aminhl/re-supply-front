@@ -15,17 +15,17 @@
   [resizable]="true">
   <form [formGroup]="ScheduleForm" (ngSubmit)="onSubmit()">
     <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
-        <input id="float-input" type="text" pInputText formControlName="title" />
+        <input id="float-input" type="text" pInputText formControlName="title"  class="form-control" />
         <label for="float-input">Title</label>
     </span>
     <label for="float-input">Description</label>
     <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
-    <textarea id="float-input1" rows="4" pInputTextarea formControlName="description"></textarea>
+    <textarea id="float-input1" rows="4" pInputTextarea formControlName="description"  class="form-control"></textarea>
 </span>
 
     <label for="float-input">Date</label>
     <span class="p-float-label custom-input" style="margin: 20px 20px; margin-left: 0">
-        <input id="float-input1" type="date" pInputText formControlName="date" />
+        <input id="float-input1" type="date" pInputText formControlName="date"  class="form-control" />
     </span>
   </form>
 
