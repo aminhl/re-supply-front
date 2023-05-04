@@ -335,12 +335,14 @@
                                   </div>
                                   <!-- input -->
                                   <input
+                                  (input)="onCommentInputChange($event)"
                                     type="text"
                                     class="form-control border-0 rounded-pill bg-gray w-75"
                                     placeholder="Write a comment"
                                     formControlName="content"
+                                    id= 'commentInput'
                                     (keydown.enter)="addComment(blog._id, connectedUser._id);getCommentsByArticle(blog._id)"
-                                    
+
 
                                   />
                                   <i

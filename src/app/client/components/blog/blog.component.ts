@@ -67,10 +67,12 @@ export class BlogComponent implements OnInit {
   attempts = parseInt(localStorage.getItem('attempts')) || 3;
   lastChance = parseInt(localStorage.getItem('lastChance')) || 2;
 
-  onCommentInputChange(comment: string) {
+  onCommentInputChange(event: Event) {
+    const commentInput = event.target as HTMLInputElement;
+    const comment = commentInput.value;
+
     if (this.hasProfanity(comment)) {
       this.attempts--;
-      console.log(this.attempts);
       localStorage.setItem('attempts', this.attempts.toString());
 
       if (this.attempts > 0) {
@@ -79,41 +81,39 @@ export class BlogComponent implements OnInit {
           title: 'Bad Word Detected',
           text: `You still have ${this.attempts} attempts or we will have to kick you out.`,
         });
-      } else if (this.attempts === 0) {
-        if (this.lastChance === 2) {
+      } else {
+        this.lastChance--;
+        localStorage.setItem('lastChance', this.lastChance.toString());
+
+        if (this.lastChance > 0) {
           Swal.fire({
             icon: 'warning',
             title: 'Bad Word Detected',
-            text: `You have been logged out. You have one more chance.`,
+            text: `You have been logged out. You have ${this.lastChance} more chance(s).`,
           });
-          this.attempts = 3; // reset attempts to 3 after user logs out once
-          this.lastChance--;
+          this.attempts = 3;
           localStorage.setItem('attempts', this.attempts.toString());
-          localStorage.setItem('lastChance', this.lastChance.toString());
           this.authService.logout();
-        } else if (this.lastChance === 1) {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Bad Word Detected',
-            text: `You have been logged out. This is your last chance. If you are logged out again, you will be banned permanently.`,
-          });
-          this.attempts = 3; // reset attempts to 3 after user logs out twice
-          this.lastChance--;
-          localStorage.setItem('attempts', this.attempts.toString());
-          localStorage.setItem('lastChance', this.lastChance.toString());
-          this.authService.logout();
-        } else if (this.lastChance === 0) {
-          Swal.fire({
+        } else {
+
+          localStorage.removeItem('attempts');
+          localStorage.removeItem('lastChance');
+          this.authService.deleteAccount().subscribe(() => {
+             Swal.fire({
             icon: 'warning',
             title: 'Bad Word Detected',
             text: `You have been banned permanently.`,
           });
-          localStorage.removeItem('attempts');
-          localStorage.removeItem('lastChance');
-          this.authService.deleteAccount(); // call the deactivateUser() method of authService to ban the user
-          this.authService.logout();
+            this.authService.logout();
+          });
         }
       }
+    } else {
+      // reset attempts and lastChance if there is no profanity in the comment
+      this.attempts = 3;
+      this.lastChance = parseInt(localStorage.getItem('lastChance') ?? '2');
+      localStorage.setItem('attempts', this.attempts.toString());
+      localStorage.setItem('lastChance', this.lastChance.toString());
     }
   }
 
@@ -235,10 +235,8 @@ export class BlogComponent implements OnInit {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.commentService.deleteComment(id).subscribe((res) => {
-
-        });
-         this.getBlogs()
+        this.commentService.deleteComment(id).subscribe((res) => {});
+        this.getBlogs();
       }
     });
   }
