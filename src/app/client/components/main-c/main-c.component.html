@@ -68,180 +68,43 @@
       <div class="row" style="background-size: cover;">
         <div class="col-lg-12" style="background-size: cover;">
           <div class="text-center" style="background-size: cover;">
-            <h2>New school supplies</h2>
+            <h2>Recommended Donation ! </h2>
             <div class="small-border bg-color-2" style="background-size: cover;"></div>
           </div>
         </div>
-        <div id="collection-carousel" class="owl-carousel wow fadeIn animated owl-loaded owl-drag" style="background-size: cover; visibility: visible; animation-name: fadeIn;">
-          <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1321px, 0px, 0px); transition: all 0s ease 0s; width: 4624px;"><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
+        <ng-container *ngFor="let donation of recommanded">
+          <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px">
+            <div class="nft__item">
+              <div class="author_list_pp">
+                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
+                  <img class="lazy" src="{{donation.requester_id.images[0]}}" alt="">
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+              <div class="nft__item_wrap">
+                <a  [routerLink]="['/donationDetails', donation._id]">
+                  <div class="d-placeholder"></div>
+                  <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
+                </a>
+              </div>
+              <div class="nft__item_info">
+                <a href="item-details.html">
+                  <h4>{{donation.requestTitle}}</h4>
+                </a>
+
+                <ng-container >
+                  <button [ngClass]="{'closed':donation.close}"
+                          [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
+                  </button>
+                  <a [routerLink]="['/donationDetails', donation._id]" style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
+                    More Details..
+                  </a>
+                </ng-container>
+                <div class="spacer-10"></div>
+              </div>
             </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Skecthify</h4></a>
-              <span>ERC-126</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Cartoonism</h4></a>
-              <span>ERC-73</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-5.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-5.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Virtuland</h4></a>
-              <span>ERC-85</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-6.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-6.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Papercut</h4></a>
-              <span>ERC-42</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-1.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-1.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Markers</h4></a>
-              <span>By : aymen KHAIROUNE</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-2.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-2.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Notebooks</h4></a>
-              <span>By : nader AYED</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Scientific calculators</h4></a>
-              <span>By : amine Hlel</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>USB drives</h4></a>
-              <span>By : hamza BENMAHMOUD</span>
-            </div>
-          </div></div><div class="owl-item" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-5.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-5.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Virtuland</h4></a>
-              <span>ERC-85</span>
-            </div>
-          </div></div><div class="owl-item" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-6.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-6.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Papercut</h4></a>
-              <span>ERC-42</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-1.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-1.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Abstraction</h4></a>
-              <span>ERC-192</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-2.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-2.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Patternlicious</h4></a>
-              <span>ERC-61</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Skecthify</h4></a>
-              <span>ERC-126</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Cartoonism</h4></a>
-              <span>ERC-73</span>
-            </div>
-          </div></div></div></div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-chevron-left"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-chevron-right"></i></button></div><div class="owl-dots disabled"></div></div>
+          </div>
+        </ng-container>
       </div>
     </div>
   </section>
