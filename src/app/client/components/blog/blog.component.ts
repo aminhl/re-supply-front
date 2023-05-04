@@ -141,6 +141,7 @@ export class BlogComponent implements OnInit {
     this.commentService.getComments().subscribe((res) => {
       this.comments = res['data']['comments'];
     });
+    this.getBlogs()
   }
 
   getBlogs() {
@@ -172,8 +173,8 @@ export class BlogComponent implements OnInit {
     const a = this.commentsForm.get('content').value;
     this.commentService.addComment(blogId, commenterId, a).subscribe(() => {
       this.commentsForm.get('content').setValue('');
-      this.getBlogs();
     });
+     this.getBlogs();
   }
 
   responsiveOptions: any[] = [
@@ -213,15 +214,16 @@ export class BlogComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-        this.ngZone.run(() => {
-          this.getBlogs();
-        });
+
         this.isEditMode = false;
       },
       error: (err) => {
         console.error('Error editing comment:', err);
       },
     });
+     this.ngZone.run(() => {
+       this.getBlogs();
+     });
   }
 
   deleteComment(id: any, i: any) {
@@ -278,6 +280,7 @@ export class BlogComponent implements OnInit {
         console.error('Error:', error);
       }
     );
+    this.getBlogs();
   }
   confirm1() {
     Swal.fire({

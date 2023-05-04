@@ -241,7 +241,8 @@ export class ChatComponent implements OnInit {
   }
 
   createGroup() {
-    this.groupNameValue(event);
+    
+    console.log('selectedUsers', this.selectedUsers);
     if (this.selectedUsers.length <= 1) {
       Swal.fire({
         icon: 'error',
@@ -250,7 +251,7 @@ export class ChatComponent implements OnInit {
       });
     }
 
-    if (this.selectedUsers.length >= 2) {
+  else  {
       this.chatService
         .createGroup(this.selectedUsers, this.groupName)
         .subscribe((res) => {
@@ -347,6 +348,7 @@ export class ChatComponent implements OnInit {
         console.error('An error occurred:', err);
       },
     });
+    this.fetchMychats()
   }
 
   createSendMessageForm() {
