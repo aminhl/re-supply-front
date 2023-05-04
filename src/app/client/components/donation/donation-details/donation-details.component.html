@@ -47,29 +47,30 @@
       <div class="spacer-30"></div>
       <form *ngIf="donation.type !=='Item'" #donationForm="ngForm" (ngSubmit)="onSubmit(donationForm)">
         <input type="hidden" name="requestId" [value]="donation._id">
-        <label for="amount">Target Value :</label>
+        <label>Target Value :</label>
         <span style="display: inline;margin-left: 10px;" class="input-group-text">{{donation.targetValue | currency:'USD':true:'1.2-2'}} </span>
         <div class="input-group mb-3">
-          <input id="amount"
-                 type="range"
-                 class="form-range my-3"
-                 max="{{donation.targetValue - donation.currentValue}}"
-                 step="1"
-                 name="amount"
-                 [(ngModel)]="donationAmount"
-                 (input)="onSliderChange($event.target['value'])"
-                 required>
-          <label for="amount" style="display: flex;
-                              align-items: center;
-                              margin-right: 10px;">Donation Amount :</label><br>
-          <span class="input-group-text">{{donationAmount | currency:'USD':true:'1.2-2'}}</span>
+<!--          <input id="amount"-->
+<!--                 type="range"-->
+<!--                 class="form-range my-3"-->
+<!--                 max="{{donation.targetValue - donation.currentValue}}"-->
+<!--                 step="1"-->
+<!--                 name="amount"-->
+<!--                 [(ngModel)]="donationAmount"-->
+<!--                 (input)="onSliderChange($event.target['value'])"-->
+<!--                 required>-->
+          <input class="form-control mt-3" type="number" [formControl]="this.donationValue"/>
+<!--          <label for="amount" style="display: flex;-->
+<!--                              align-items: center;-->
+<!--                              margin-right: 10px;">Donation Amount :</label><br>-->
+<!--          <span class="input-group-text">{{this.donationValue.value | currency:'USD':true:'1.2-2'}}</span>-->
         </div>
         <div class="text-center">
           <button type="submit" class="btn-main my-3">Donate Now</button>
           <button (click)="donateWithEthereum(
             donation._id,
             donation.requester_id.walletEth.address,
-            donationAmount)"
+            donationValue.value)"
              class="btn-main btn-lg mx-2" style="cursor: pointer" data-bs-toggle="modal">
             Donate Now Using Ethereum
           </button>

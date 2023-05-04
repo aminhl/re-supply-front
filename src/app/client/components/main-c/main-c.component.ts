@@ -21,7 +21,7 @@ export class MainCComponent implements OnInit {
   ngOnInit(): void {
 
     this.getRequestsNumber();
-
+    this.doScoring();
     this.authService.getUser().subscribe(
       res => {
 
