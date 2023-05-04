@@ -1,23 +1,4 @@
-.de-menu-notification {
-        position: relative;
-        display: inline-block;
-    }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        z-index: 1;
-    }
-
-    .dropdown-content ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .de-menu-notification:hover .dropdown-content {
-        display: block;
-    }
 
     #chat3 .form-control {
 border-color: transparent;
@@ -71,8 +52,5 @@ li.p-2.border-bottom {
   text-align: center;
   font-weight: bold;
 }
-
-
-
 
 

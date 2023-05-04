@@ -98,7 +98,6 @@
                 <h3>Chat With Friends</h3>
 
 
-
                 <div
                   class="offcanvas offcanvas-start"
                   data-bs-scroll="true"
@@ -292,12 +291,7 @@
 
                                     <!-- ngFor chatUser array  Starts Here  -->
 
-                                    <div
-                                      *ngFor="
-                                        let chatUser of chatUsers;
-
-                                      "
-                                    >
+                                    <div *ngFor="let chatUser of chatUsers">
                                       <li
                                         class="p-2 border-bottom"
                                         style="cursor: pointer"
@@ -380,10 +374,7 @@
                           <!-- Adding Memebrs To Chat Group Modal End Section  -->
 
                           <!-- myChat Start Section  -->
-                          <div
-
-                            style="position: relative; height: 700px"
-                          >
+                          <div style="position: relative; height: 700px">
                             <ul
                               class="list-unstyled mb-0"
                               *ngFor="let myChat of myChats; index as i"
@@ -484,11 +475,14 @@
 
                       <div class="col-md-6 col-lg-8 col-xl-8">
                         <div
+                         #messagesContainer
                           class="pt-3 pe-3"
-
                           data-mdb-perfect-scrollbar="true"
-                          style="position: relative; height: 700px; overflow-y: auto"
-
+                          style="
+                            position: relative;
+                            height: 700px;
+                            overflow-y: auto;
+                          "
                         >
                           <div
                             style="
@@ -738,50 +732,65 @@
                           <!-- chat box starts here -->
                           <div *ngIf="selecedChatId">
                             <div
-                              *ngFor="let chatmsg of allMessages
-                              ;index
-                              as
-                              i"
+                              *ngFor="let chatmsg of this.allMessages; index as i"
                             >
-                              <div *ngIf="chatmsg.sender._id !== connectedUserId"
+                              <div
+                                *ngIf="chatmsg.sender._id !== connectedUserId"
                                 class="d-flex flex-row justify-content-start"
                               >
                                 <img
                                   style="
-                                          width: 50px;
-                                          height: 50px;
-                                          border-radius: 50%;
-                                          cursor: pointer;
-                                        "
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                  "
                                   [src]="chatmsg.sender.images"
                                 />
                                 <div>
                                   <p
-                                   class="small p-2 ms-3 mb-1 rounded-3"
+                                    class="small p-2 ms-3 mb-1 rounded-3"
                                     style="background-color: #f5f6f7"
-                                  >{{chatmsg.content}}</p>
+                                  >
+                                    {{ chatmsg.content }}
+                                  </p>
                                   <p
                                     class="small ms-3 mb-3 text-muted float-end"
-                                  >{{chatmsg.createdAt |  date:'MMM d, HH:mm'}}</p>
+                                  >
+                                    {{
+                                      chatmsg.createdAt | date : "MMM d, HH:mm"
+                                    }}
+                                  </p>
                                 </div>
                               </div>
 
-                              <div *ngIf="chatmsg.sender._id === connectedUserId" class="d-flex flex-row justify-content-end">
+                              <div
+                                *ngIf="chatmsg.sender._id === connectedUserId"
+                                class="d-flex flex-row justify-content-end"
+                              >
                                 <div>
                                   <p
                                     class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"
-                                  >{{chatmsg.content}}</p>
+                                  >
+                                    {{ chatmsg.content }}
+                                  </p>
                                   <p
                                     class="small me-3 mb-3 rounded-3 text-muted"
-                                  >{{chatmsg.createdAt |  date:'MMM d, HH:mm'}}</p>
+                                  >
+                                    {{
+                                      chatmsg.createdAt | date : "MMM d, HH:mm"
+                                    }}
+                                  </p>
                                 </div>
-                                <img style="
-                                          width: 50px;
-                                          height: 50px;
-                                          border-radius: 50%;
-                                          cursor: pointer;
-                                        "
-                                  [src]="chatmsg.sender.images" />
+                                <img
+                                  style="
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                  "
+                                  [src]="chatmsg.sender.images"
+                                />
                               </div>
                             </div>
                           </div>
@@ -800,7 +809,9 @@
                                 placeholder="Type message"
                                 style="border: 1px solid purple"
                                 formControlName="content"
-                                (keydown.enter)="sendMessage(selecedChatId);fetchAllMessages(selecedChatId)"
+                                (keydown.enter)="
+                                  sendMessage(selecedChatId);fetchAllMessages(selecedChatId)
+                                "
                               />
                               <a class="ms-1 text-muted"
                                 ><i class="fas fa-paperclip"></i
@@ -810,7 +821,10 @@
                               ></a>
                               <a
                                 class="ms-3"
-                                (click)="sendMessage(selecedChatId);fetchAllMessages(selecedChatId)"
+                                (click)="
+                                  sendMessage(selecedChatId);fetchAllMessages(selecedChatId)
+
+                                "
                                 style="cursor: pointer"
                                 ><i class="fas fa-paper-plane"></i
                               ></a>

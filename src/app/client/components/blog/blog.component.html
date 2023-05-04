@@ -318,9 +318,7 @@
                                   *ngIf="!isEditMode"
                                   class="d-flex my-1 position-relative"
                                   [formGroup]="commentsForm"
-                                  (ngSubmit)="
-                                    addComment(blog._id, connectedUser._id)
-                                  "
+
                                 >
                                   <!-- avatar -->
                                   <div>
@@ -341,6 +339,9 @@
                                     class="form-control border-0 rounded-pill bg-gray w-75"
                                     placeholder="Write a comment"
                                     formControlName="content"
+                                    (keydown.enter)="addComment(blog._id, connectedUser._id);getCommentsByArticle(blog._id)"
+                                    
+
                                   />
                                   <i
                                     type="submit"
@@ -353,7 +354,7 @@
                                       top: 9px;
                                     "
                                     (click)="
-                                      addComment(blog._id, connectedUser._id)
+                                      addComment(blog._id, connectedUser._id);getCommentsByArticle(blog._id)
                                     "
                                   ></i>
                                 </form>

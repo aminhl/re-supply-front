@@ -105,6 +105,7 @@ export class SignupComponent implements OnInit {
     formData.append('lastName', this.signupForm.value.lastName);
     formData.append('email', this.signupForm.value.email);
     formData.append('phoneNumber', this.signupForm.value.phoneNumber.internationalNumber);
+    console.log('phoneNumber', this.signupForm.value.phoneNumber);
     formData.append('password', this.signupForm.value.password);
     formData.append('country', this.signupForm.value.phoneNumber.countryCode);
     formData.append('annualIncome', this.signupForm.value.annualIncome);
