@@ -31,7 +31,7 @@
             <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
               <div class="de-login-menu" style="background-size: cover;">
 
-                <span class="de-menu-notification" [routerLink]="'/wishlist'">
+                <span id="de-click-menu-carts" class="de-menu-notification" [routerLink]="'/wishlist'">
                 <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
                 <i class="fa fa-heart"></i>
                </span>
