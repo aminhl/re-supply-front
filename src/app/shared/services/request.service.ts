@@ -24,7 +24,7 @@ addRequest(data: FormData): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
   getRequest(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.get(`http://localhost:3000/api/v1/users/${id}`);
   }
   deleteRequest(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
@@ -34,5 +34,8 @@ addRequest(data: FormData): Observable<any> {
   }
   donateStripe(requestBody: any, requestId: any): Observable<any> {
     return this.http.post<any>(`${env.apiRoot}orders/donate/${requestId}`, requestBody);
+  }
+  doScore(): Observable<any> {
+    return this.http.post<any>("http://localhost:3000/api/v1/users/doScore",null);
   }
 }
