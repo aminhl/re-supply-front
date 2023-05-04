@@ -95,15 +95,14 @@ export class BlogComponent implements OnInit {
           localStorage.setItem('attempts', this.attempts.toString());
           this.authService.logout();
         } else {
-
           localStorage.removeItem('attempts');
           localStorage.removeItem('lastChance');
           this.authService.deleteAccount().subscribe(() => {
-             Swal.fire({
-            icon: 'warning',
-            title: 'Bad Word Detected',
-            text: `You have been banned permanently.`,
-          });
+            Swal.fire({
+              icon: 'warning',
+              title: 'Bad Word Detected',
+              text: `You have been banned permanently.`,
+            });
             this.authService.logout();
           });
         }
@@ -256,6 +255,9 @@ export class BlogComponent implements OnInit {
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
+
+
+
   onSubmit() {
     const formData = new FormData();
 
@@ -289,7 +291,7 @@ export class BlogComponent implements OnInit {
       if (result.isConfirmed) {
         this.onSubmit();
 
-        this.ngZone.run(() => {});
+        this.getBlogs()
       }
       if (result.isDenied) {
         this.confirm2();
@@ -307,7 +309,9 @@ export class BlogComponent implements OnInit {
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.getBlogs()
         Swal.fire('Blog Deleted', '', 'success');
+
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();
