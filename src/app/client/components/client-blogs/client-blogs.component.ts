@@ -101,27 +101,17 @@ export class ClientBlogsComponent implements OnInit {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.commentService.deleteComment(id).subscribe((res) => {
-          this.comments.splice(i, 1);
-        });
-        this.ngZone.run(() => {
-
-        });
+        this.commentService.deleteComment(id).subscribe((res) => {});
+        this.getBlogs();
       }
     });
   }
 
   addComment(blogId: any, commenterId: any) {
     const a = this.commentsForm.get('content').value;
-    this.commentService.addComment(blogId, commenterId, a).subscribe({
-      next: (res) => {
-         this.ngZone.run(() => {
-           this.comments.push(res);
-         });
-      },
-      error: (err) => {
-        console.error('Error adding comment:', err);
-      },
+    this.commentService.addComment(blogId, commenterId, a).subscribe(() => {
+      this.commentsForm.get('content').setValue('');
+      this.getBlogs();
     });
   }
 
