@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {RequestService} from "../../../shared/services/request.service";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-main-c',
@@ -13,8 +14,9 @@ export class MainCComponent implements OnInit {
   nbrOfRequests:number=0;
   scoresList1:any[] = [];
   recommanded :any=[];
+   products: any;
 
-  constructor(private authService:AuthService, private requestService: RequestService ) { }
+  constructor(private authService:AuthService, private requestService: RequestService,private ProductService:ProductService) { }
 
   ngOnInit(): void {
 
@@ -28,16 +30,25 @@ export class MainCComponent implements OnInit {
         for (let i = 0; i < 4; i++) {
           this.requestService.getRequest(this.scoresList1[i].requestId).subscribe(
             res=>{
-              this.recommanded.push(res)
+              if (res.requester_id != null) {
+                this.recommanded.push(res)
+              }
             }
           )
         }
+        console.log(this.recommanded)
       }
     );
 
     //if(this.nbrOfRequests> this.scoresL) {
-    this.doScoring()
+    ///this.doScoring()
     //}
+
+
+    this.ProductService.getAcceptedProducts().subscribe((response)=>
+    {
+      this.products=response
+    })
 
 
   }

@@ -96,7 +96,7 @@
           <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px">
             <div class="nft__item">
               <div class="author_list_pp">
-                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
+                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top">
                   <img class="lazy" src="{{donation.requester_id.images[0]}}" alt="">
 
                   <i class="fa fa-check"></i>
@@ -106,7 +106,7 @@
 
                 <a  [routerLink]="['/donationDetails', donation._id]">
                   <div class="d-placeholder"></div>
-                  <img src="{{ donation.requestImage[0] }}" class="nft__item_preview" alt="" >
+                  <img src="{{ donation.requestImage }}" class="nft__item_preview" alt="" >
 
                 </a>
               </div>
@@ -133,19 +133,7 @@
     </div>
   </section>
 
-  <!--  Start Section Category-->
-  <section id="section-category" class="" style="background-size: cover;">
-    <div class="container" style="background-size: cover;">
-      <div class="row" style="background-size: cover;">
-        <div class="col-lg-12" style="background-size: cover;">
-          <div class="text-center" style="background-size: cover;">
-            <h2>Browse by category</h2>
-            <div class="small-border bg-color-2" style="background-size: cover;"></div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
 </div>

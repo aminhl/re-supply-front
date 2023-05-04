@@ -27,15 +27,15 @@
               <li class="menu-item"><a [routerLink]="'/donation'" routerLinkActive="active">Donations</a></li>
               <li class="menu-item"><a [routerLink]="'/community'" routerLinkActive="active">Community</a></li>
               <li class="menu-item"><a [routerLink]="'/knowledge'" routerLinkActive="active">Knowledge</a></li>
-              <li *ngIf="authService.getConnectedUserData().role === 'admin'" class="menu-item"> <a [routerLink]="'/dashboard'" routerLinkActive="active">Dashboard</a> </li>
+              <li *ngIf="authService.isLoggedIn() &&authService.getConnectedUserData().role === 'admin'" class="menu-item"> <a [routerLink]="'/dashboard'" routerLinkActive="active">Dashboard</a> </li>
             </ul>
             <div [hidden]="!authService.isLoggedIn()" class="menu_side_area" style="background-size: cover;">
               <div class="de-login-menu" style="background-size: cover;">
                <span id="de-click-menu-notification" class="de-menu-notification"  [hidden]="!(authService.isLoggedIn() && authService.getConnectedUserData().role === 'admin')">
-                    <span class="d-count">{{UdemyNotification.length}}</span>
+                    <span class="d-count" *ngIf="UdemyNotification!=null">{{UdemyNotification.length}}</span>
                     <i class="fa fa-bell"></i>
                     </span>
-                <span id="de-click-menu-notification" class="de-menu-notification" [routerLink]="'/wishlist'">
+                <span class="de-menu-notification" [routerLink]="'/wishlist'">
                 <span class="d-count" *ngIf="wishlist && wishlist.length > 0">{{ wishlist.length }}</span>
                 <i class="fa fa-heart"></i>
                </span>
@@ -46,7 +46,7 @@
                 <span id="de-click-menu-profile" class="de-menu-profile">
                     <img src="./assets/client/images/settings.png"  alt="">
                 </span>
-                  <div  id="de-submenu-notification" class="de-submenu" >
+                  <div  id="de-submenu-notification" class="de-submenu"  [hidden]="!(authService.isLoggedIn() && authService.getConnectedUserData().role === 'admin')">
                     <div class="de-flex">
                       <div><h4>Notifications</h4></div>
                     </div>
