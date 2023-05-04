@@ -1,4 +1,5 @@
 pip install selenium //(1)
-json-server --watch coursesUdemy.json --port 8189 // (2)
-python run.py //(3)
+pip install schedule //(2)
+json-server --watch coursesUdemy.json --port 8189 // (3)
+python run.py //(4)
 :)

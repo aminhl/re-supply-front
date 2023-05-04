@@ -27,7 +27,13 @@
   <!--  Start Section Intro-->
   <section id="section-intro" class="no-top no-bottom" style="background-size: cover;">
     <div class="container" style="background-size: cover;">
-      <div class="row" style="background-size: cover;">
+      <div class="row" style="background-size: cover;justify-content: center">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <h2>Our scope</h2>
+            <div class="small-border bg-color-2"></div>
+          </div>
+        </div>
         <div class="col-lg-4 col-md-6 mb-sm-30" style="background-size: cover;">
           <div class="feature-box f-boxed style-3" style="background-size: cover;">
             <i [routerLink]="['/products']" class="wow fadeInUp bg-color-2 i-boxed icon_wallet animated" style="visibility: visible; animation-name: fadeInUp; cursor: pointer"></i>
@@ -48,14 +54,27 @@
             <i class="wm icon_cloud-upload_alt"></i>
           </div>
         </div>
+      </div>
+      <div class="spacer-20"></div>
+      <div class="row" style="background-size: cover;justify-content: center">
         <div class="col-lg-4 col-md-6 mb-sm-30" style="background-size: cover;">
           <div class="feature-box f-boxed style-3" style="background-size: cover;">
-            <i class="wow fadeInUp bg-color-2 i-boxed icon_tags_alt animated" style="visibility: visible; animation-name: fadeInUp;"></i>
+            <i [routerLink]="['/community']" class="wow fadeInUp bg-color-2 i-boxed icon_tags_alt animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer"></i>
             <div class="text" style="background-size: cover;">
-              <h4 class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">Impact the community</h4>
-              <p class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Our blog is updated regularly with stories of success,opportunities and making new contacts.</p>
+              <h4 [routerLink]="['/community']" class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer">Impact the community</h4>
+              <p class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Our blog is updated regularly with stories of success, opportunities, and making new contacts.</p>
             </div>
             <i class="wm icon_tags_alt"></i>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-sm-30" style="background-size: cover;">
+          <div class="feature-box f-boxed style-3" style="background-size: cover;">
+            <i [routerLink]="['/knowledge']" class="wow fadeInUp bg-color-2 i-boxed icon_group animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer"></i>
+            <div class="text" style="background-size: cover;">
+              <h4 [routerLink]="['/knowledge']" class="wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;cursor: pointer">Share your Knowledge</h4>
+              <p class="wow fadeInUp animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Enjoy our comprehensive collection of resources,designed to empower you to become the best version of yourself.</p>
+            </div>
+            <i class="wm icon_group"></i>
           </div>
         </div>
       </div>
@@ -63,237 +82,44 @@
   </section>
   <!--  End Section Intro-->
   <!--  Start Section Collections-->
-  <section id="section-collections" class="no-bottom" style="background-size: cover;">
-    <div class="container" style="background-size: cover;">
-      <div class="row" style="background-size: cover;">
-        <div class="col-lg-12" style="background-size: cover;">
-          <div class="text-center" style="background-size: cover;">
+  <section id="section-items" class="no-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center">
             <h2>New school supplies</h2>
-            <div class="small-border bg-color-2" style="background-size: cover;"></div>
+            <div class="small-border bg-color-2"></div>
           </div>
         </div>
-        <div id="collection-carousel" class="owl-carousel wow fadeIn animated owl-loaded owl-drag" style="background-size: cover; visibility: visible; animation-name: fadeIn;">
-          <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1321px, 0px, 0px); transition: all 0s ease 0s; width: 4624px;"><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
+        <div id="items-carousel" class="owl-carousel wow fadeIn"  >
+          <!-- nft item begin -->
+          <div class="d-item"  >
+            <div class="nft__item" >
+              <div class="author_list_pp">
+                <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: Monica Lucas">
+                  <img class="lazy" src="" alt="">
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+              <div class="nft__item_wrap">
+                <a href="item-details.html">
+                  <div class="d-placeholder"></div>
+                  <img src="images/items/static-1.jpg" class="lazy nft__item_preview" alt="">
+                </a>
+              </div>
+              <div class="nft__item_info">
+                <a href="item-details.html">
+                  <h4>Pinky Ocean</h4>
+                </a>
+                <div class="nft__item_price">
+                  0.08 ETH<span>1/20</span>
+                </div>
+              </div>
             </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Skecthify</h4></a>
-              <span>ERC-126</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Cartoonism</h4></a>
-              <span>ERC-73</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-5.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-5.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Virtuland</h4></a>
-              <span>ERC-85</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-6.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-6.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Papercut</h4></a>
-              <span>ERC-42</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-1.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-1.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Markers</h4></a>
-              <span>By : aymen KHAIROUNE</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-2.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-2.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Notebooks</h4></a>
-              <span>By : nader AYED</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Scientific calculators</h4></a>
-              <span>By : amine Hlel</span>
-            </div>
-          </div></div><div class="owl-item active" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>USB drives</h4></a>
-              <span>By : hamza BENMAHMOUD</span>
-            </div>
-          </div></div><div class="owl-item" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-5.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-5.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Virtuland</h4></a>
-              <span>ERC-85</span>
-            </div>
-          </div></div><div class="owl-item" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-6.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-6.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Papercut</h4></a>
-              <span>ERC-42</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-1.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-1.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Abstraction</h4></a>
-              <span>ERC-192</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-2.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-2.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Patternlicious</h4></a>
-              <span>ERC-61</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-3.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-3.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Skecthify</h4></a>
-              <span>ERC-126</span>
-            </div>
-          </div></div><div class="owl-item cloned" style="width: 305.25px; margin-right: 25px;"><div class="nft_coll" style="background-size: cover;">
-            <div class="nft_wrap" style="background-size: cover;">
-              <a href="collection.html"><img src="../../../../assets/client/images/collections/coll-4.jpg" class="lazy img-fluid" alt=""></a>
-            </div>
-            <div class="nft_coll_pp" style="background-size: cover;">
-              <a href="collection.html"><img class="lazy pp-coll" src="../../../../assets/client/images/author/author-4.jpg" alt=""></a>
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="nft_coll_info" style="background-size: cover;">
-              <a href="collection.html"><h4>Cartoonism</h4></a>
-              <span>ERC-73</span>
-            </div>
-          </div></div></div></div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-chevron-left"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-chevron-right"></i></button></div><div class="owl-dots disabled"></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!--  Start Section Category-->
-  <section id="section-category" class="" style="background-size: cover;">
-    <div class="container" style="background-size: cover;">
-      <div class="row" style="background-size: cover;">
-        <div class="col-lg-12" style="background-size: cover;">
-          <div class="text-center" style="background-size: cover;">
-            <h2>Browse by category</h2>
-            <div class="small-border bg-color-2" style="background-size: cover;"></div>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".1s" style="background-size: cover; visibility: visible; animation-delay: 0.1s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-image"></i>
-            <span>Writing Supplies</span>
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".2s" style="background-size: cover; visibility: visible; animation-delay: 0.2s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-music"></i>
-            <span>Paper Products</span>
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".3s" style="background-size: cover; visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-search"></i>
-            <span>Binders and Folders</span>
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".4s" style="background-size: cover; visibility: visible; animation-delay: 0.4s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-globe"></i>
-            <span>Classroom Supplies</span>
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".5s" style="background-size: cover; visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-vcard"></i>
-            <span>Backpacks and Bags</span>
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-6 mb-sm-30 wow fadeInRight animated" data-wow-delay=".6s" style="background-size: cover; visibility: visible; animation-delay: 0.6s; animation-name: fadeInRight;">
-          <a href="explore.html" class="icon-box style-2 rounded">
-            <i class="fa fa-th"></i>
-            <span>Technology Supplies</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--  End Section Category-->
 </div>
