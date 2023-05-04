@@ -4,6 +4,8 @@ import {
   NgZone,
   OnInit,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -17,7 +19,17 @@ import { ChatService } from 'src/app/shared/services/chatService/chat.service';
 import { MessagesService } from 'src/app/shared/services/messageService/messages.service';
 import Swal from 'sweetalert2';
 import { io, Socket } from 'socket.io-client';
-import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, fromEventPattern } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  from,
+  fromEvent,
+  fromEventPattern,
+  switchMap,
+} from 'rxjs';
+import { ApplicationRef } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -39,14 +51,20 @@ export class ChatComponent implements OnInit {
   chatName: string;
   sendMessageForm: FormGroup;
   content: FormControl;
-  allMessages: any;
+  allMessages: any[] = [];
   ENDPOINT: string = 'http://localhost:3000';
   socket: Socket;
   selectedChatCompare: any;
   setSocketConnected: boolean = false;
   socketConnected: boolean = false;
-  allMessages$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
+  allMessages$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  messageReceivedSubscription: Subscription;
+  private _refreshNeeded = new Subject<void>();
+  @ViewChild('messagesContainer', { static: false })
+  get refreshNeeded() {
+    return this._refreshNeeded;
+  }
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
@@ -54,7 +72,8 @@ export class ChatComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private messageService: MessagesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appRef: ApplicationRef
   ) {
     this.searchChatUsers();
     this.getConnectedUser();
@@ -65,10 +84,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.socket = io(this.ENDPOINT);
-    this.allMessages$.subscribe((allMessages) => {
-      this.allMessages = allMessages;
-      this.cdRef.detectChanges();
-    });
+
+    this.fetchMychats();
   }
 
   sendMessage(chatId: string) {
@@ -77,20 +94,41 @@ export class ChatComponent implements OnInit {
       next: (res) => {
         this.sendMessageForm.get('content').setValue('');
         this.socket.emit('new message', res);
+        this.fetchAllMessages(chatId);
       },
       error: (err) => {
         console.error('Error adding msg:', err);
       },
     });
 
-    this.socket.on('message received', (newMsg) => {
-      if (newMsg.chat._id === this.selecedChatId) {
+    this.ngZone.runOutsideAngular(() => {
+      this.socket.on('message received', (newMsg) => {
         const allMessages = this.allMessages$.getValue();
         if (!allMessages.some((msg) => msg._id === newMsg._id)) {
           allMessages.push(newMsg);
-          this.allMessages$.next(allMessages);
+          this.allMessages$.next(allMessages); // Emit the updated array to the BehaviorSubject
+          this.cdRef.markForCheck();
         }
-      }
+      });
+      this.appRef.tick();
+    });
+  }
+
+  fetchAllMessages(chatId: any) {
+    this.messageService.fetchMessages(chatId).subscribe((res) => {
+      this.ngZone.runOutsideAngular(() => {
+        this.allMessages = res;
+        this.allMessages$.next(res);
+        this.appRef.tick();
+      });
+       // Emit the updated array to the BehaviorSubject
+    });
+  }
+
+  fetchMychats() {
+    this.chatService.fetchUserChats().subscribe((res) => {
+      this.myChats = res;
+      console.log('my chats', this.myChats);
     });
   }
 
@@ -107,18 +145,6 @@ export class ChatComponent implements OnInit {
       error: (err) => {
         console.error('An error occurred:', err);
       },
-    });
-  }
-
-  fetchMychats() {
-    this.chatService.fetchUserChats().subscribe((res) => {
-      this.myChats = res;
-      console.log('my chats', this.myChats);
-    });
-  }
-  fetchAllMessages(chatId: any) {
-    this.messageService.fetchMessages(chatId).subscribe((res) => {
-      this.allMessages = res;
     });
   }
   toggleDropdown() {
@@ -191,16 +217,18 @@ export class ChatComponent implements OnInit {
     window.location.reload();
   }
   addToSelectedUsers(chatUser: any) {
-    if (this.selecTedChat === undefined || this.selecTedChat === null || this.selecTedChat.isGroupChat===true)
+    if (
+      this.selecTedChat === undefined ||
+      this.selecTedChat === null ||
+      this.selecTedChat.isGroupChat === true
+    )
       this.selectedUsers.push(chatUser);
-
     else
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'You cannot add users to a private chat!',
       });
-
   }
 
   removeFromSelectedUsers(chatUser: any) {
@@ -213,21 +241,16 @@ export class ChatComponent implements OnInit {
   }
 
   createGroup() {
+    this.groupNameValue(event);
     if (this.selectedUsers.length <= 1) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: ' More than 2 users are required to form a group chat',
       });
-    } else if (this.groupName === '') {
-     Swal.fire({
-       position: 'top-end',
-       icon: 'success',
-       title: 'Group Created Successfully',
-       showConfirmButton: false,
-       timer: 1000,
-     });
-    } else {
+    }
+
+    if (this.selectedUsers.length >= 2) {
       this.chatService
         .createGroup(this.selectedUsers, this.groupName)
         .subscribe((res) => {

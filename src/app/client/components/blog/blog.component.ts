@@ -51,6 +51,71 @@ export class BlogComponent implements OnInit {
   commentsByArticle: any[];
   targetCount: number;
   isEditMode = false;
+  chanches: number;
+
+  hasProfanity(text: string): boolean {
+    const profanityList = ['idiot', 'stupid', 'kill', 'dead'];
+
+    for (let i = 0; i < profanityList.length; i++) {
+      if (text.includes(profanityList[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  attempts = parseInt(localStorage.getItem('attempts')) || 3;
+  lastChance = parseInt(localStorage.getItem('lastChance')) || 2;
+
+  onCommentInputChange(comment: string) {
+    if (this.hasProfanity(comment)) {
+      this.attempts--;
+      console.log(this.attempts);
+      localStorage.setItem('attempts', this.attempts.toString());
+
+      if (this.attempts > 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Bad Word Detected',
+          text: `You still have ${this.attempts} attempts or we will have to kick you out.`,
+        });
+      } else if (this.attempts === 0) {
+        if (this.lastChance === 2) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Bad Word Detected',
+            text: `You have been logged out. You have one more chance.`,
+          });
+          this.attempts = 3; // reset attempts to 3 after user logs out once
+          this.lastChance--;
+          localStorage.setItem('attempts', this.attempts.toString());
+          localStorage.setItem('lastChance', this.lastChance.toString());
+          this.authService.logout();
+        } else if (this.lastChance === 1) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Bad Word Detected',
+            text: `You have been logged out. This is your last chance. If you are logged out again, you will be banned permanently.`,
+          });
+          this.attempts = 3; // reset attempts to 3 after user logs out twice
+          this.lastChance--;
+          localStorage.setItem('attempts', this.attempts.toString());
+          localStorage.setItem('lastChance', this.lastChance.toString());
+          this.authService.logout();
+        } else if (this.lastChance === 0) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Bad Word Detected',
+            text: `You have been banned permanently.`,
+          });
+          localStorage.removeItem('attempts');
+          localStorage.removeItem('lastChance');
+          this.authService.deleteAccount(); // call the deactivateUser() method of authService to ban the user
+          this.authService.logout();
+        }
+      }
+    }
+  }
 
   updateCommentsForm = this.formBuilder.group({
     content: '',
@@ -97,10 +162,18 @@ export class BlogComponent implements OnInit {
   }
   getCommentsByArticle(articleId: any) {
     return this.commentService.getCommentsByArticle(articleId).subscribe({
-      next: (res) => {},
+      next: () => {},
       error: (err) => {
         console.error('Error adding comment:', err);
       },
+    });
+  }
+
+  addComment(blogId: any, commenterId: any) {
+    const a = this.commentsForm.get('content').value;
+    this.commentService.addComment(blogId, commenterId, a).subscribe(() => {
+      this.commentsForm.get('content').setValue('');
+      this.getBlogs();
     });
   }
 
@@ -141,9 +214,9 @@ export class BlogComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-         this.ngZone.run(() => {
-
-         });
+        this.ngZone.run(() => {
+          this.getBlogs();
+        });
         this.isEditMode = false;
       },
       error: (err) => {
@@ -163,26 +236,10 @@ export class BlogComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.commentService.deleteComment(id).subscribe((res) => {
-          this.comments.splice(i, 1);
+
         });
-         this.ngZone.run(() => {
-
-         });
+         this.getBlogs()
       }
-    });
-  }
-
-  addComment(blogId: any, commenterId: any) {
-    const a = this.commentsForm.get('content').value;
-    this.commentService.addComment(blogId, commenterId, a).subscribe({
-      next: (res) => {
-         this.ngZone.run(() => {
-           this.comments.push(res);
-         });
-      },
-      error: (err) => {
-        console.error('Error adding comment:', err);
-      },
     });
   }
 
@@ -196,9 +253,6 @@ export class BlogComponent implements OnInit {
       this.uploadedFiles = event.target.files;
       this.targetCount = this.uploadedFiles.length;
     }
-  }
-  get f() {
-    return this.blogForm.controls;
   }
 
   showMaximizableDialog() {
@@ -236,10 +290,8 @@ export class BlogComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmit();
-       
-        this.ngZone.run(() => {
 
-        });
+        this.ngZone.run(() => {});
       }
       if (result.isDenied) {
         this.confirm2();
