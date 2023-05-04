@@ -55,11 +55,9 @@ getnotification()
     (res) => {
       const resArray = Array.from(res as any);
       this.UdemyNotification = resArray.slice(0, 3);
-      console.log(this.UdemyNotification);
       // Handle success case here
     },
     (error) => {
-      console.error('Error fetching Udemy notifications:', error);
       this.UdemyNotification=[]
       // Handle error case here
     }
