@@ -27,4 +27,6 @@ select:hover{
   height: 100%; /* Make the image height 100% of the parent element */
   object-fit: cover; /* Ensure the image covers the entire space without changing its aspect ratio */
 }
-
+.select-sm {
+  width: 40px;
+}
