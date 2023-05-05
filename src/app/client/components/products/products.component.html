@@ -32,44 +32,45 @@
 
 
             <div class="sorting">
-              <div class="row" >
-                <div class="col-md-3 col-sm-3">
+              <div class="row align-items-center">
+                <div class="col-md-12 col-sm-12 col-12 mb-3">
                   <form class="row form-dark" id="form_quick_search" method="post" name="form_quick_search">
                     <div class="col text-center">
-                      <input class="form-control" id="name_1" name="name_1" placeholder="search item here..." type="text" [(ngModel)]="searchTerm" /> <a href="#" id="btn-submit"><i class="fa fa-search bg-color-secondary"></i></a>
+                      <input class="form-control" id="name_1" name="name_1" placeholder="search item here..." type="text" [(ngModel)]="searchTerm" />
+                      <a href="#" id="btn-submit"><i class="fa fa-search bg-color-secondary"></i></a>
                       <div class="clearfix"></div>
                     </div>
                   </form>
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-4 col-sm-12 col-12 mb-3">
                   <div>
                     <label>Sort by:</label>
-                    <select [(ngModel)]="selectedFilter" (change)="sortProducts()">
+                    <select [(ngModel)]="selectedFilter" (change)="sortProducts()" class="form-select select-sm">
                       <option value="name">Name</option>
                       <option value="price">Price</option>
                       <option value="date">Latest Posted</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-4 col-sm-12 col-12 mb-3">
                   <div>
                     <label>Order:</label>
-                    <select [(ngModel)]="selectedOrder" (change)="sortProducts()">
+                    <select [(ngModel)]="selectedOrder" (change)="sortProducts()" class="form-select select-sm">
                       <option value="asc">Ascending</option>
                       <option value="desc">Descending</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3 col-sm-3"  >
+                <div class="col-md-4 col-sm-12 col-12 mb-3 text-md-end">
                   <div>
-                  <a  [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light " data-bs-toggle="modal" data-bs-target="#place_a_bid">
-                    Add Product
-                  </a>
+                    <a [routerLink]="['/addProduct']" class="btn-main btn-lg btn-light" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                      Add Product
+                    </a>
                   </div>
-
                 </div>
               </div>
             </div>
+
 
 
           </div>

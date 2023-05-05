@@ -1,3 +1,36 @@
 .active{
   color: var(--secondary-color);
 }
+/* Adjustments for mobile devices */
+@media (max-width: 768px) {
+  /* Hide the search input */
+  #quick_search {
+    display: none;
+  }
+
+  /* Center the logo and buttons */
+  .de-flex-sm {
+    justify-content: center;
+  }
+
+  /* Move the hamburger menu button to the right */
+  .menu_side_area {
+    margin-left: auto;
+  }
+
+  /* Adjust the width of the buttons */
+  .menu-item {
+    width: 20%;
+  }
+
+  /* Adjust the font size of the buttons */
+  .menu-item a {
+    font-size: 14px;
+  }
+
+  /* Add padding to the top and bottom of the buttons */
+  #mainmenu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
