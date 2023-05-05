@@ -58,10 +58,8 @@ export class ChatComponent implements OnInit {
   setSocketConnected: boolean = false;
   socketConnected: boolean = false;
 
-  allMessages$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  messageReceivedSubscription: Subscription;
   private _refreshNeeded = new Subject<void>();
-  @ViewChild('messagesContainer', { static: false })
+
   get refreshNeeded() {
     return this._refreshNeeded;
   }
@@ -77,51 +75,42 @@ export class ChatComponent implements OnInit {
   ) {
     this.searchChatUsers();
     this.getConnectedUser();
-
-    this.fetchMychats();
     this.createSendMessageForm();
+    this.fetchMychats();
   }
 
   ngOnInit() {
     this.socket = io(this.ENDPOINT);
-
-    this.fetchMychats();
+    this.socket.on('getMsg', (getMsg) => {
+      console.log('getMsg', getMsg);
+      this.allMessages.push(getMsg);
+      console.log('mymsgsArray', this.allMessages);
+    });
   }
-
-  sendMessage(chatId: string) {
-    const a = this.sendMessageForm.get('content').value;
-    this.messageService.postMessage(chatId, a).subscribe({
-      next: (res) => {
-        this.sendMessageForm.get('content').setValue('');
-        this.socket.emit('new message', res);
-        this.fetchAllMessages(chatId);
-      },
-      error: (err) => {
-        console.error('Error adding msg:', err);
-      },
-    });
-
-    this.ngZone.runOutsideAngular(() => {
-      this.socket.on('message received', (newMsg) => {
-        const allMessages = this.allMessages$.getValue();
-        if (!allMessages.some((msg) => msg._id === newMsg._id)) {
-          allMessages.push(newMsg);
-          this.allMessages$.next(allMessages); // Emit the updated array to the BehaviorSubject
-          this.cdRef.markForCheck();
-        }
+  listen(eventname: string): Observable<any> {
+    return new Observable((subscriber) => {
+      this.socket.on(eventname, (data) => {
+        subscriber.next(data);
       });
-      this.appRef.tick();
     });
+  }
+  async sendMessage(chatId: string) {
+    const a = this.sendMessageForm.get('content').value;
+    try {
+      const res = await this.messageService.postMessage(chatId, a).toPromise();
+      this.sendMessageForm.get('content').setValue('');
+      this.socket.emit('new message', res);
+      console.log('msg sent', res);
+    } catch (err) {
+      console.error('Error adding msg:', err);
+    }
+    this.fetchAllMessages(chatId);
+    console.log('mymsgsArray', this.allMessages);
   }
 
   fetchAllMessages(chatId: any) {
     this.messageService.fetchMessages(chatId).subscribe((res) => {
-      this.ngZone.runOutsideAngular(() => {
-        this.allMessages = res;
-        this.allMessages$.next(res);
-        this.appRef.tick();
-      });
-       // Emit the updated array to the BehaviorSubject
+      this.allMessages = res;
     });
   }
 
@@ -214,12 +203,12 @@ export class ChatComponent implements OnInit {
   closeModal() {
     this.chatUsers = []; // Clear the chatUsers array when the modal is closed
     this.searchTerm = ''; // Clear the search term when the modal is closed
-    window.location.reload();
+    this.fetchMychats();
   }
   addToSelectedUsers(chatUser: any) {
     if (
-      this.selecTedChat === undefined ||
-      this.selecTedChat === null ||
+      this.selecTedChat !== undefined ||
+      this.selecTedChat !== null ||
       this.selecTedChat.isGroupChat === true
     )
       this.selectedUsers.push(chatUser);
@@ -241,7 +230,6 @@ export class ChatComponent implements OnInit {
   }
 
   createGroup() {
-    
     console.log('selectedUsers', this.selectedUsers);
     if (this.selectedUsers.length <= 1) {
       Swal.fire({
@@ -249,9 +237,7 @@ export class ChatComponent implements OnInit {
         title: 'Oops...',
         text: ' More than 2 users are required to form a group chat',
       });
-    }
-
-  else  {
+    } else {
       this.chatService
         .createGroup(this.selectedUsers, this.groupName)
         .subscribe((res) => {
@@ -261,6 +247,7 @@ export class ChatComponent implements OnInit {
             console.log('myChats after ngZone', this.myChats);
           });
         });
+      this.fetchMychats();
     }
   }
 
@@ -332,23 +319,21 @@ export class ChatComponent implements OnInit {
   leaaveGroupChat(chatId: any, userId: any) {
     this.chatService.removeFromGroup(chatId, userId).subscribe({
       next: (res) => {
-        this.ngZone.run(() => {
-          console.log('res', res.users);
-          this.fetchMychats();
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'You Left The Group',
-            showConfirmButton: false,
-            timer: 1000,
-          });
+        console.log('res', res.users);
+        this.fetchMychats();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'You Left The Group',
+          showConfirmButton: false,
+          timer: 1000,
         });
       },
       error: (err) => {
         console.error('An error occurred:', err);
       },
     });
-    this.fetchMychats()
+    this.fetchMychats();
   }
 
   createSendMessageForm() {
