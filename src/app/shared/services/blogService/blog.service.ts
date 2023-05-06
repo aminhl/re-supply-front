@@ -22,11 +22,7 @@ export class BlogService {
     );
   }
   editBlog(id: any, data: any): Observable<any> {
-    return this.http.patch(`${env.apiRoot}articles/${id}`, data).pipe(
-      tap(() => {
-        this._refreshNeeded.next();
-      })
-    );
+    return this.http.patch(`${env.apiRoot}articles/${id}`, {title: data.title, description: data.description});
   }
   approveBlog(id: any): Observable<any> {
     return this.http.put(`${env.apiRoot}articles/${id}`, {}).pipe(

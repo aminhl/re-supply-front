@@ -68,6 +68,11 @@ export class ClientBlogsComponent implements OnInit {
     this.commentService.getComments().subscribe((res) => {
       this.comments = res['data']['comments'];
     });
+    this.updateBlogForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      id: '',
+    });
   }
   getDataComment(content: any, id: any) {
     this.updateCommentsForm.patchValue({
@@ -213,30 +218,22 @@ export class ClientBlogsComponent implements OnInit {
     window.location.reload();
   }
   onSubmitEdit() {
-    const formData = new FormData();
+    const articleId = this.updateBlogForm.get('id').value;
+    const data = {
+      title: this.updateBlogForm.get('title').value,
+      description: this.updateBlogForm.get('description').value,
+    };
 
-    formData.append('title', this.updateBlogForm.get('title').value);
-    formData.append(
-      'description',
-      this.updateBlogForm.get('description').value
-    );
-    formData.append('id', this.updateBlogForm.get('id').value);
-    const blogId = this.updateBlogForm.get('id').value;
-    for (let img of this.uploadedFiles) {
-      formData.append('images', img);
-    }
-    this.blogService.editBlog(blogId, formData).subscribe(
-      (data) => {
-        let index = this.blogs.findIndex(
-          (blog) => blog._id == this.updateBlogForm.get('id').value
-        );
-        this.blogs[index].title = this.updateBlogForm.get('title').value;
-        this.blogs[index].description =
-          this.updateBlogForm.get('description').value;
-        this.blogs[index].images = this.updateBlogForm.get('images').value;
+    this.blogService.editBlog(articleId, data).subscribe(
+      (res) => {
+        const updatedArticle = res.data.article;
+        const index = this.blogs.findIndex((a) => a._id === updatedArticle._id);
+        this.blogs[index] = updatedArticle;
+        this.updateBlogForm.reset();
+        this.isEditMode = false;
       },
       (error) => {
-        console.error('Error:', error);
+        console.error('Error updating blog:', error);
       }
     );
   }
@@ -259,6 +256,7 @@ export class ClientBlogsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.onSubmitEdit();
+        this.getBlogs();
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -266,9 +264,6 @@ export class ClientBlogsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000,
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
       }
       if (result.isDenied) {
         this.confirm2();

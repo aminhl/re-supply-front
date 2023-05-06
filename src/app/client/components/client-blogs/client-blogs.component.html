@@ -459,23 +459,6 @@
         <label for="float-input">Title</label>
       </span>
 
-<div class="container position-relative">
-  <label for="file-upload" class="custom-file-upload">Select Images</label>
-  <input
-    type="file"
-    name="images"
-    id="file-upload"
-    [multiple]="true"
-    (change)="selectMultipleImage($event)"
-    style="display: none"
-  />
-
-  <div id="selected-files-list">
-    <span id="selected-files-msg">Selected Images:</span>
-    <span id="selected-files-count">{{targetCount || 0}}</span>
-  </div>
-</div>
-
       <p-editor
         formControlName="description"
         [style]="{ height: '480px' }"
