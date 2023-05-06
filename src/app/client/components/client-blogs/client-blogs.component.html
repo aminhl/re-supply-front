@@ -1,43 +1,10 @@
-<div id="wrapper">
-<div class="no-bottom no-top" id="content">
-<div class="header-section" style="margin-bottom: 0;">
-    <div class="container">
-      <div class="row align-items-center" style="background-size: cover;">
-        <div class="col-md-6" style="background-size: cover;">
-          <div class="spacer-single" style="background-size: cover;"></div>
-          <h6 class="wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;"><span class="text-uppercase id-color-2">ReSupply</span></h6>
-          <div class="spacer-10" style="background-size: cover;"></div>
-          <h1 class="wow fadeInUp animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeInUp;">Explore our Community</h1>
-          <p class="wow fadeInUp lead animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
-           Interaction and sharing of information through blogging can help African students by providing them with a platform to connect, exchange ideas and learn from each other. This can contribute to their personal growth, academic success, and professional development.</p>
-          <div class="spacer-10" style="background-size: cover;"></div>
-          <div class="mb-sm-30" style="background-size: cover;"></div>
-        </div>
-        <div class="col-md-6 xs-hide" style="background-size: cover;">
-          <img src="../../../../assets/client/images/create-a-blog-on-blogspot.jpg" class="lazy img-fluid wow fadeIn animated" data-wow-delay="1.25s" alt="" style="visibility: visible; animation-delay: 1.25s; animation-name: fadeIn; border-radius: 10px; border: 1px solid #ccc;">
-        </div>
+<section class="min-vh-100" style="background-color: #f4f5f7; margin-bottom: 0;">
+  <div class="container">
+    <div class="row wow fadeIn">
+      <div class="col-12">
+        <h1 class="text-center products-title">My Blogs</h1>
       </div>
-      <hr>
-    </div>
-  </div>
-   <section aria-label="section" style="padding-top: 0;">
-<div class="container-fluid">
-
-  <div class="row justify-content-center">
-
-    <div class="position-relative">
-  <div style="position: absolute; top: 20px; right: 13%">
-    <div class="add-blog-wrapper" (click)="showMaximizableDialog()">
-      <button class="add-blog-button">Add Blog</button>
-      <span class="add-blog-icon"
-        ><i class="fas fa-plus fa-plus" (click)="showMaximizableDialog()"></i
-      ></span>
-    </div>
-  </div>
-</div>
-
-
-    <div class="col-lg-7 col-md-6 col-sm-12">
+    <div class="col-lg-7 col-md-6 col-sm-12" style="">
       <div *ngFor="let blog of blogs ; index as i">
         <div class="bg-white p-4 rounded shadow mt-3">
           <!-- author -->
@@ -480,7 +447,19 @@
       ></p-button>
     </ng-template>
   </p-dialog>
-</div>
+  </div>
+  <div class="container" *ngIf="!blogs || blogs.length === 0">
+    <div class="row wow fadeIn">
+      <div class="col-12">
+        <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading">Quick notice!</h4>
+          <p>You don't have any Blogs in our store yet.</p>
+          <a [routerLink]="['/community']" class="btn-main btn-lg" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+            Explore Community
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-</div>
+

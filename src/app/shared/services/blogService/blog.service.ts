@@ -39,11 +39,7 @@ export class BlogService {
     );
   }
   deleteBlog(id: any): Observable<any> {
-    return this.http.delete(`${env.apiRoot}articles/${id}`).pipe(
-      tap(() => {
-        this._refreshNeeded.next();
-      })
-    );
+    return this.http.delete(`${env.apiRoot}articles/${id}`);
   }
   getBlogs(userId: any) {
     let params = new HttpParams();

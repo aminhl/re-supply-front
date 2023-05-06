@@ -93,7 +93,7 @@
             </div>
             <div class="nft__item_info">
               <a href="item-details.html">
-                <h4>{{product.name}}</h4>
+                <h4 [routerLink]="['/productDetails', product._id]" >{{product.name}}</h4>
               </a>
 
               <div class="nft__item_price">

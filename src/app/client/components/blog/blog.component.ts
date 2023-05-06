@@ -275,12 +275,13 @@ export class BlogComponent implements OnInit {
     this.blogService.addBlog(formData, this.connectedUser._id).subscribe(
       (data) => {
         console.log('Response:', data);
+        this.getBlogs();
       },
       (error) => {
         console.error('Error:', error);
       }
+
     );
-    this.getBlogs();
   }
   confirm1() {
     Swal.fire({

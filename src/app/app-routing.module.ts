@@ -69,7 +69,6 @@ const routes: Routes = [
   },
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
 
-  { path: 'myBlogs', component: ClientBlogsComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   {
     path: 'updatePassword',
