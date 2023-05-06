@@ -15,7 +15,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/myBlogs" [ngClass]="{' active':selectedComponent==='myBlogs'}"
+          <a class="nav-link" (click)="selectedComponent='myBlogs'" [ngClass]="{' active':selectedComponent==='myBlogs'}"
           ><i class="pi pi-book"></i> My Blogs</a
           >
         </li>
@@ -23,6 +23,7 @@
       <!-- section begin -->
       <app-profile-info *ngIf="selectedComponent==='MyProfile'"></app-profile-info>
       <app-profile-products *ngIf="selectedComponent==='MyProducts'"></app-profile-products>
+      <app-client-blogs *ngIf="selectedComponent==='myBlogs'"></app-client-blogs>
     </div>
     <!-- content close -->
     <a href="#" id="back-to-top" class="show"></a>

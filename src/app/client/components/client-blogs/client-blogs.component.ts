@@ -135,7 +135,6 @@ export class ClientBlogsComponent implements OnInit {
           this.blogService.getBlogs(this.userId).subscribe(
             (blogsRes: any) => {
               this.blogs = blogsRes.data.articles; // Store blogs
-              if (this.blogs.length == 0) this.alertInfo();
             },
             (error) => {
               console.log('Error occurred while fetching blogs', error);
@@ -210,6 +209,7 @@ export class ClientBlogsComponent implements OnInit {
     this.blogService.addBlog(formData, this.connectedUser._id).subscribe(
       (data) => {
         console.log('Response:', data);
+        this.updateBlogForm.reset();
       },
       (error) => {
         console.error('Error:', error);
@@ -313,9 +313,8 @@ export class ClientBlogsComponent implements OnInit {
           timer: 1000,
         });
         this.onSubmit();
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        this.getBlogs();
+        this.updateBlogForm.reset();
       }
       if (result.isDenied) {
         this.confirm2();
@@ -351,15 +350,8 @@ export class ClientBlogsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.blogService.deleteBlog(id).subscribe((res) => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Blog Deleted!',
-            showConfirmButton: false,
-          });
-          setTimeout((handler) => {
-            window.location.reload();
-          }, 1000);
+          Swal.fire('Blog deleted', '', 'success');
+          this.getBlogs();
         });
       }
     });
