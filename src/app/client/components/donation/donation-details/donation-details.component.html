@@ -65,17 +65,17 @@
 <!--                              margin-right: 10px;">Donation Amount :</label><br>-->
 <!--          <span class="input-group-text">{{this.donationValue.value | currency:'USD':true:'1.2-2'}}</span>-->
         </div>
-        <div class="text-center col-md-6">
-          <button type="submit" class="btn-main my-3">Donate Now</button>
-        </div>
+        <h4>Donate Via:</h4>
+       <div class="text-center col-md-6">
+         <button style="padding: 6px 8px; cursor: pointer" type="submit" class="btn-main my-2">
+           <svg style="width: 12px; height: 22px; margin-right: 5px; fill: #FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16z"/></svg>Credit Card</button>
+         <a style="padding: 6px 16px; cursor: pointer" *ngIf="donation.requester_id.walletEth.address !== ''" class="btn-main mx-2" (click)="sendEthereum(donation._id,donation.requester_id.walletEth.address,
+         donationValue.value)">
+           <svg style="width: 12px; height: 22px; margin-right: 5px; fill: #FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"/></svg>
+         Ethereum</a>
+       </div>
       </form>
-      <button (click)="donateWithEthereum(
-            donation._id,
-            donation.requester_id.walletEth.address,
-            donationValue.value)"
-              class="btn-main btn-lg mx-2" style="cursor: pointer" data-bs-toggle="modal">
-        Donate Now Using Ethereum
-      </button>
+
     </div>
     <div class="spacer-50"></div>
   </div>

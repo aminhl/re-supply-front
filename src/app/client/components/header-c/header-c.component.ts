@@ -1,11 +1,10 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
-import {ProductService} from "../../../shared/services/product.service";
-import {Scheduler, Subscription,filter} from "rxjs";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { AuthService } from "../../../shared/services/auth.service";
+import { ProductService } from "../../../shared/services/product.service";
+import { filter, Subscription } from "rxjs";
 import { ScheduleMeetingService } from "../../../shared/services/KnowledgeService/schedule-meeting.service";
-import { CommonModule } from '@angular/common';
-import { interval } from 'rxjs';
 import { NavigationEnd, Router } from "@angular/router";
+import Web3 from "web3";
 
 @Component({
   selector: 'app-header-c',
@@ -23,8 +22,8 @@ export class HeaderCComponent implements OnInit {
 
   constructor(public authService: AuthService,private productService: ProductService,
               private cdr: ChangeDetectorRef, private router: Router
-              ,private schedulerservice: ScheduleMeetingService
-              ) {
+    ,private schedulerservice: ScheduleMeetingService
+  ) {
 
   }
 
@@ -70,4 +69,13 @@ export class HeaderCComponent implements OnInit {
       }
     );
   }
+
+  isWalletConnected(){
+    return this.authService.isWalletConnected();
+  }
+
+  connectToWeb3(){
+    return this.authService.connectToWeb3();
+  }
+
 }
