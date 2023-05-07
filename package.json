@@ -51,6 +51,7 @@
     "stream-chat": "^8.6.0",
     "sweetalert2": "^11.4.8",
     "tslib": "^2.3.0",
+    "web3": "^1.9.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

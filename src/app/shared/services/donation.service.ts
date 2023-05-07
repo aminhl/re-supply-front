@@ -13,4 +13,8 @@ export class DonationService {
   donateWithEthereum(requestId, requestBody: any): Observable<any>{
     return this.http.post(env.apiRoot + `donations/sendETH/${requestId}`, requestBody);
   }
+
+  updateDonationRequest(requestId, requestBody: any): Observable<any>{
+    return this.http.post(env.apiRoot + `donations/updateDonationRequest/${requestId}`, requestBody);
+  }
 }

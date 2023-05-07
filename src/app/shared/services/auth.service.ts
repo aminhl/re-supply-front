@@ -15,6 +15,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+import Web3 from "web3";
 
 @Injectable({
   providedIn: 'root',
@@ -188,5 +189,40 @@ export class AuthService {
       email
     };
     return this.http.post(env.apiRoot + target,requestBody);
+  }
+
+  async getWeb3() {
+    return new Promise(async (resolve, reject) => {
+      // @ts-ignore
+      const web3 = new Web3(window.ethereum);
+      try {
+        // @ts-ignore
+        await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        resolve(web3);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async connectToWeb3() {
+    const web3 = await this.getWeb3();
+    // @ts-ignore
+    const walletAddress = await web3.eth.getAccounts();
+    this.http.put(env.apiRoot + "users/setWalletAddress", {walletAddress: walletAddress[0]})
+      .subscribe((response: any) => {
+        localStorage.setItem('jwt', response.token);
+      })
+  }
+
+  isWalletConnected(): boolean {
+    const provider = (window as any).ethereum;
+    if (provider && provider.selectedAddress) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

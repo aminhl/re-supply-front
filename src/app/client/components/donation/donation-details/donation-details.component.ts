@@ -4,9 +4,8 @@ import { RequestService } from "../../../../shared/services/request.service";
 import { FormControl, NgForm } from "@angular/forms";
 import { DonationService } from "../../../../shared/services/donation.service";
 import { AuthService } from "../../../../shared/services/auth.service";
-import axios from "axios";
 import Swal from "sweetalert2";
-import { HttpErrorResponse } from "@angular/common/http";
+import Web3 from "web3";
 
 @Component({
   selector: 'app-donation-details',
@@ -37,49 +36,6 @@ export class DonationDetailsComponent implements OnInit {
     });
   }
 
-
-  // @ts-ignore
-  donateWithEthereum = async (requestId: string, toAddress?: string, usdAmount?: number) => {
-    const loggedUserData = this.authService.getConnectedUserData();
-    try {
-      const response = await axios
-        .get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-      const ethPrice = response.data.ethereum.usd;
-      const ethAmount = usdAmount / ethPrice;
-      return this.donationService.donateWithEthereum(requestId,{
-        fromAddress: loggedUserData.walletEth.address,
-        toAddress: toAddress,
-        privateKey: "0x70f34ac1d4d3e5fb97bc9326ed13533d975901130806664796196eeecbde036d",
-        amount: ethAmount.toFixed(8) // Specify 8 decimal places for ETH amount
-      }).subscribe((data) => {
-        const transactionHash = data.hash
-        setTimeout(() => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Payment Successful',
-            text: 'Thank you for your payment!\n Transaction Hash: ' + transactionHash,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-          });
-        }, 2000)
-      },
-        (error: HttpErrorResponse) => {
-          if (error.status === 500) {
-            // Handle the error here
-            Swal.fire({
-              icon: 'error',
-              title: 'Payment Error',
-              text: 'No enough funds in your wallet',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'OK'
-            });
-          }
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   onSubmit(form: NgForm) {
     const requestBody = { amount: this.donationValue.value };
     const requestId = this.route.snapshot.paramMap.get('id');
@@ -88,6 +44,62 @@ export class DonationDetailsComponent implements OnInit {
 
   onSliderChange(value: number) {
     this.donationAmount = value ;
+  }
+
+
+  async sendEthereum(requestId: string, toAddress: string, amountToSendUSD) {
+    // Initialize Web3 instance
+    // @ts-ignore
+    const web3 = new Web3(window.ethereum);
+
+    // Check if user has authorized access to their accounts
+    const accounts = await web3.eth.getAccounts();
+
+    if (accounts.length === 0) {
+      Swal.fire({
+        title: 'Connect Wallet',
+        text: 'Please connect your wallet to continue.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    const loggedUserData = this.authService.getConnectedUserData();
+    // Set default account to sender's account
+    web3.eth.defaultAccount = loggedUserData.walletEth.address;
+
+    // Get current exchange rate of USD to Ethereum
+    const exchangeRateResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+    const exchangeRateData = await exchangeRateResponse.json();
+    const exchangeRate = exchangeRateData.ethereum.usd;
+
+    // Calculate equivalent amount in Ethereum
+    const amountInEthereum = amountToSendUSD / exchangeRate;
+    const amountInWei = web3.utils.toWei(amountInEthereum.toFixed(18), 'ether');
+
+    // Define transaction parameters
+    const gasPrice = web3.utils.toWei('5', 'gwei');
+    const gasLimit = 21000;
+
+    // Create transaction object
+    const txObject = {
+      from: loggedUserData.walletEth.address,
+      to: toAddress,
+      value: amountInWei,
+      gasPrice: gasPrice,
+      gas: gasLimit,
+    };
+
+    // Send transaction
+    try {
+      const transactionHash = await web3.eth.sendTransaction(txObject);
+      this.donationService.updateDonationRequest(requestId, { amount: amountInEthereum })
+        .subscribe((response) => { console.log(response)})
+      console.log(`Transaction hash: ${transactionHash}`);
+    } catch (error) {
+      console.error(`Transaction error: ${error}`);
+    }
   }
 
 }
