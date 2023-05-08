@@ -34,6 +34,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class BlogComponent implements OnInit {
   @ViewChild('myForm') formRef: ElementRef;
+  upVote: number;
+  downVote:number
   imageUrls: any[] = [];
   connectedUser: any;
   blogForm: FormGroup;
@@ -141,7 +143,7 @@ export class BlogComponent implements OnInit {
     this.commentService.getComments().subscribe((res) => {
       this.comments = res['data']['comments'];
     });
-    this.getBlogs()
+    this.getBlogs();
   }
 
   getBlogs() {
@@ -174,7 +176,7 @@ export class BlogComponent implements OnInit {
     this.commentService.addComment(blogId, commenterId, a).subscribe(() => {
       this.commentsForm.get('content').setValue('');
     });
-     this.getBlogs();
+    this.getBlogs();
   }
 
   responsiveOptions: any[] = [
@@ -214,16 +216,15 @@ export class BlogComponent implements OnInit {
     const cmtId = this.updateCommentsForm.get('id').value;
     this.commentService.editComment(cmtId, content).subscribe({
       next: (res) => {
-
         this.isEditMode = false;
       },
       error: (err) => {
         console.error('Error editing comment:', err);
       },
     });
-     this.ngZone.run(() => {
-       this.getBlogs();
-     });
+    this.ngZone.run(() => {
+      this.getBlogs();
+    });
   }
 
   deleteComment(id: any, i: any) {
@@ -258,8 +259,6 @@ export class BlogComponent implements OnInit {
     this.displayMaximizable = true;
   }
 
-
-
   onSubmit() {
     const formData = new FormData();
 
@@ -280,7 +279,6 @@ export class BlogComponent implements OnInit {
       (error) => {
         console.error('Error:', error);
       }
-
     );
   }
   confirm1() {
@@ -295,7 +293,7 @@ export class BlogComponent implements OnInit {
       if (result.isConfirmed) {
         this.onSubmit();
 
-        this.getBlogs()
+        this.getBlogs();
       }
       if (result.isDenied) {
         this.confirm2();
@@ -313,9 +311,8 @@ export class BlogComponent implements OnInit {
       cancelButtonText: 'Discard',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.getBlogs()
+        this.getBlogs();
         Swal.fire('Blog Deleted', '', 'success');
-
       }
       if (!result.isConfirmed) {
         this.showMaximizableDialog();

@@ -334,9 +334,22 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['']);
           }
         },
-        () => {
-          this.errorMessage = 'Invalid username or password.';
+        (error) => {
+          console.log('error', error.error.message);
+          if (
+            error.error.message ==
+            'Your Account Has Been Banned Check Your Situation With Our Support Client'
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ban Permanently',
+              text: `${error.error.message}`,
+            });
+          } else {
+            this.errorMessage = 'Invalid username or password.';
+          }
           this.router.navigate(['login']);
+
         }
       );
     }
