@@ -28,9 +28,9 @@ import { CartComponent } from "./client/components/cart/cart.component";
 import { OrderSuccessComponent } from "./client/components/cart/order-success/order-success.component";
 import { ScheduleMeetingComponent } from "./client/components/knowledge/schedule-meeting/schedule-meeting.component";
 import { ListMeetingComponent } from "./client/components/knowledge/list-meeting/list-meeting.component";
-import {ChatComponent} from './client/components/chat/chat.component';
 import { DonationDetailsComponent } from "./client/components/donation/donation-details/donation-details.component";
 import { RessourceDetailsComponent } from "./client/components/knowledge/ressource-details/ressource-details.component";
+import { RoomComponent } from './shared/components/room/room.component';
 
 
 const routes: Routes = [
@@ -69,7 +69,7 @@ const routes: Routes = [
   },
   { path: 'community', component: BlogComponent, canActivate: [AuthGuard] },
 
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+  { path: 'chat', component: RoomComponent, canActivate: [AuthGuard] },
   {
     path: 'updatePassword',
     component: UpdatePasswordComponent,

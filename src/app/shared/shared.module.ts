@@ -17,7 +17,21 @@ import { NgxCaptchaModule } from "ngx-captcha";
 import { FilterByNamePipe } from './pipes/filterByName.pipe';
 import { FiltreByTitleRessource } from './pipes/FiltreByTitleRessource.pipe';
 import { ClaimsComponent } from './components/claims/claims.component';
-
+import { RoomComponent } from './components/room/room.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import {} from '@angular/material/form-field';
+import {} from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
+import { DatePipe } from '@angular/common';
+import { DateDisplayPipe } from './pipe/date-display.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +43,9 @@ import { ClaimsComponent } from './components/claims/claims.component';
     TwoFactorComponent,
     FilterByNamePipe,
     ClaimsComponent,
-    FiltreByTitleRessource
+    FiltreByTitleRessource,
+    RoomComponent,
+    DateDisplayPipe,
   ],
   imports: [
     CommonModule,
@@ -38,8 +54,28 @@ import { ClaimsComponent } from './components/claims/claims.component';
     HttpClientModule,
     NgxIntlTelInputModule,
     BrowserAnimationsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    MatToolbarModule,
+    MatIconModule,
+    BrowserModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMenuModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  exports: [SignupComponent, LoginComponent, VerifyEmailComponent, FilterByNamePipe, ClaimsComponent, FiltreByTitleRessource]
+  exports: [
+    SignupComponent,
+    LoginComponent,
+    VerifyEmailComponent,
+    FilterByNamePipe,
+    ClaimsComponent,
+    FiltreByTitleRessource,
+  ],
+  providers: [DatePipe],
 })
 export class SharedModule {}

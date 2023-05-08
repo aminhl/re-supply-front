@@ -14,7 +14,6 @@ import { SocialLoginModule, SocialAuthServiceConfig } from "@abacritt/angularx-s
 import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { KnowledgeComponent } from './client/components/knowledge/knowledge.component';
 
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { JitsiComponentComponent } from './client/components/knowledge/jitsi-component/jitsi-component.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ScheduleMeetingComponent } from './client/components/knowledge/schedule-meeting/schedule-meeting.component';
@@ -27,9 +26,14 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { ListMeetingComponent } from './client/components/knowledge/list-meeting/list-meeting.component';
 import { RessourceDetailsComponent } from './client/components/knowledge/ressource-details/ressource-details.component';
 import { CommonModule } from '@angular/common';
-
-
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCredentials: true } };
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     Ng2SearchPipeModule,
     OrderModule,
     SocialLoginModule,
-    SocketIoModule.forRoot(config),
     FormsModule,
     FullCalendarModule,
     FullCalendarModule,
@@ -59,25 +62,37 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: { withCr
     EditorModule,
     ButtonModule,
     InputTextareaModule,
-    CommonModule
+    CommonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
+  providers: [
     {
-        provide: 'SocialAuthServiceConfig',
-        useValue: {
-          autoLogin: false,
-          providers: [
-
-            {
-              id: FacebookLoginProvider.PROVIDER_ID,
-              provider: new FacebookLoginProvider('759249972475126')
-            }
-          ],
-          onError: (err) => {
-            console.error(err);
-          }
-        } as SocialAuthServiceConfig,
-  }],
-  bootstrap: [AppComponent]
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('759249972475126'),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
