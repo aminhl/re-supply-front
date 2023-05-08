@@ -99,7 +99,7 @@ background: #c5cae9;
 }
 
 .container > .messages .input-area {
-padding-top: 16px;
+padding-top: 0px;
 padding-bottom: 8px;
 }
 
