@@ -39,7 +39,6 @@ import { ProfileProductsComponent } from './components/my-profile/profile-produc
 import { CartComponent } from './components/cart/cart.component';
 import { OrderSuccessComponent } from './components/cart/order-success/order-success.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ChatComponent } from './components/chat/chat.component';
 import { TarsChatbotComponent } from './components/chatbot/tars-chatbot.component';
 import { FloatingActionButtonComponent } from './components/floating-action-button/floating-action-button.component';
 import { DonationDetailsComponent } from './components/donation/donation-details/donation-details.component';
@@ -68,7 +67,6 @@ import { DonationDetailsComponent } from './components/donation/donation-details
     ProfileProductsComponent,
     CartComponent,
     OrderSuccessComponent,
-    ChatComponent,
     TarsChatbotComponent,
     FloatingActionButtonComponent,
     DonationDetailsComponent,
