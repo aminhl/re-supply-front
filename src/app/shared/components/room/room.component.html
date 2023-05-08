@@ -25,7 +25,7 @@
         <img
           matListAvatar
           [src]="
-            chat.chatPic ? chat.chatPic : './../../../../assets/images/chatUser.png'
+            chat.chatPic ? chat.chatPic : './../../../../assets/client/images/chatUsers.png'
           "
         />
         <p mat-line class="chat-title">
@@ -48,7 +48,7 @@
         [src]="
           selectedChat.chatPic
             ? selectedChat.chatPic
-            : 'assets/images/image-placeholder.png'
+            : './../../../../assets/client/images/chatUsers.png'
         "
       />
       <h2>{{ selectedChat.chatName }}</h2>
