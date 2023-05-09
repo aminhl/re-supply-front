@@ -3,6 +3,7 @@ import {AuthService} from "../../../../shared/services/auth.service";
 import {ClaimsService} from "../../../../shared/services/claims.service";
 
 
+
 @Component({
   selector: 'app-claims-management',
   templateUrl: './claims-management.component.html',
@@ -30,4 +31,27 @@ export class ClaimsManagementComponent implements OnInit {
     );
   }
 
+  getPositiveFeedbacks() {
+    this.claimsService.getPositiveFeedbacks().subscribe(
+      (response: any) => {
+        this.feedbacks = response.data.feedbacks;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getNegativeFeedbacks() {
+    this.claimsService.getNegativeFeedbacks().subscribe(
+      (response: any) => {
+        this.feedbacks = response.data.feedbacks;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
 }
+
