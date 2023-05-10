@@ -1,40 +1,29 @@
 <footer class="footer-light">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 col-sm-6 col-xs-6">
+      <div class="col-md-4 col-sm-6 col-xs-6">
         <div class="widget">
           <h5>School Supplies</h5>
           <ul>
-            <li><a href="#">All School supplies</a></li>
-            <li><a href="#">New products</a></li>
-            <li><a href="#">Top products</a></li>
-            <li><a href="#">Categories products</a></li>
+            <li><a [routerLink]="['/products']">All School supplies</a></li>
+            <li><a [routerLink]="['/addProduct']">Add products</a></li>
+            <li><a [routerLink]="['/donation']">Donate</a></li>
+            <li><a [routerLink]="['/createRequest']">Add Donation</a></li>
           </ul>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-6">
-        <div class="widget">
-          <h5>Take action</h5>
-          <ul>
-            <li><a href="#">Donate</a></li>
-            <li><a href="#">Give Monthly</a></li>
-            <li><a href="#">Contact Associations</a></li>
-            <li><a href="#">Volunteers</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-6">
+      <div class="col-md-4 col-sm-6 col-xs-6">
         <div class="widget">
           <h5>Share Knowledge</h5>
           <ul>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Meet people</a></li>
-            <li><a href="#">Ask experts</a></li>
-            <li><a href="#">Forum</a></li>
+            <li><a [routerLink]="['/community']">Community</a></li>
+            <li><a [routerLink]="['/knowledge']">Knowledge</a></li>
+            <li><a [routerLink]="['/community']">Add Blog</a></li>
+            <li><a [routerLink]="['ScheduleMeeting']">Program meeting</a></li>
           </ul>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-6">
+      <div class="col-md-4 col-sm-6 col-xs-6">
         <app-claims></app-claims>
       </div>
     </div>
