@@ -49,9 +49,16 @@
                 </div>
                 <span id="menu-btn"></span>
                 <!--                <button class="btn-main btn-wallet" *ngIf="authService.isLoggedIn()" (click)="connectToWeb3()">Connect Wallet</button>-->
-                <button class="btn-main" style="padding: 8px 11px; margin-left: 20px;"
+                <button class="btn-main hide-this-btn-on-mobile" style="padding: 8px 11px; margin-left: 20px;"
                         *ngIf="authService.isLoggedIn() && !isWalletConnected()" (click)="connectToWeb3()">
                   <i class="icon_wallet_alt me-2"></i><span>Connect Wallet</span></button>
+                <style>
+                  @media(max-width: 767px){
+                    .hide-this-btn-on-mobile{
+                      display: none!important;
+                    }
+                  }
+                </style>
               </div>
             </div>
           </div>
