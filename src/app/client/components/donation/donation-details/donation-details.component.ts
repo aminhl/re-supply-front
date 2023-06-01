@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RequestService } from "../../../../shared/services/request.service";
-import { FormControl, NgForm } from "@angular/forms";
+import { FormControl, NgForm, Validators } from "@angular/forms";
 import { DonationService } from "../../../../shared/services/donation.service";
 import { AuthService } from "../../../../shared/services/auth.service";
 import Swal from "sweetalert2";
@@ -23,7 +23,7 @@ export class DonationDetailsComponent implements OnInit {
               private requestService: RequestService,
               private donationService: DonationService,
               private authService: AuthService) {
-    this.donationValue = new FormControl('');
+    this.donationValue = new FormControl('', Validators.required);
   }
 
   ngOnInit(): void {
@@ -46,59 +46,64 @@ export class DonationDetailsComponent implements OnInit {
     this.donationAmount = value ;
   }
 
+  amountChecker: boolean = true;
+  isSubmitted = false;
 
   async sendEthereum(requestId: string, toAddress: string, amountToSendUSD) {
-    // Initialize Web3 instance
-    // @ts-ignore
-    const web3 = new Web3(window.ethereum);
+    if (this.donationValue.value){
+      this.isSubmitted = true;
+      // Initialize Web3 instance
+      // @ts-ignore
+      const web3 = new Web3(window.ethereum);
 
-    // Check if user has authorized access to their accounts
-    const accounts = await web3.eth.getAccounts();
+      // Check if user has authorized access to their accounts
+      const accounts = await web3.eth.getAccounts();
 
-    if (accounts.length === 0) {
-      Swal.fire({
-        title: 'Connect Wallet',
-        text: 'Please connect your wallet to continue.',
-        icon: 'warning',
-        confirmButtonText: 'OK'
-      });
-      return;
-    }
+      if (accounts.length === 0) {
+        Swal.fire({
+          title: 'Connect Wallet',
+          text: 'Please connect your wallet to continue.',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
 
-    const loggedUserData = this.authService.getConnectedUserData();
-    // Set default account to sender's account
-    web3.eth.defaultAccount = loggedUserData.walletEth.address;
+      const loggedUserData = this.authService.getConnectedUserData();
+      // Set default account to sender's account
+      web3.eth.defaultAccount = loggedUserData.walletEth.address;
 
-    // Get current exchange rate of USD to Ethereum
-    const exchangeRateResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-    const exchangeRateData = await exchangeRateResponse.json();
-    const exchangeRate = exchangeRateData.ethereum.usd;
+      // Get current exchange rate of USD to Ethereum
+      const exchangeRateResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+      const exchangeRateData = await exchangeRateResponse.json();
+      const exchangeRate = exchangeRateData.ethereum.usd;
 
-    // Calculate equivalent amount in Ethereum
-    const amountInEthereum = amountToSendUSD / exchangeRate;
-    const amountInWei = web3.utils.toWei(amountInEthereum.toFixed(18), 'ether');
+      // Calculate equivalent amount in Ethereum
+      const amountInEthereum = amountToSendUSD / exchangeRate;
+      const amountInWei = web3.utils.toWei(amountInEthereum.toFixed(18), 'ether');
 
-    // Define transaction parameters
-    const gasPrice = web3.utils.toWei('5', 'gwei');
-    const gasLimit = 21000;
+      // Define transaction parameters
+      const gasPrice = web3.utils.toWei('5', 'gwei');
+      const gasLimit = 21000;
 
-    // Create transaction object
-    const txObject = {
-      from: loggedUserData.walletEth.address,
-      to: toAddress,
-      value: amountInWei,
-      gasPrice: gasPrice,
-      gas: gasLimit,
-    };
+      // Create transaction object
+      const txObject = {
+        from: loggedUserData.walletEth.address,
+        to: toAddress,
+        value: amountInWei,
+        gasPrice: gasPrice,
+        gas: gasLimit,
+      };
 
-    // Send transaction
-    try {
-      const transactionHash = await web3.eth.sendTransaction(txObject);
-      this.donationService.updateDonationRequest(requestId, { amount: amountInEthereum })
-        .subscribe((response) => { console.log(response)})
-      console.log(`Transaction hash: ${transactionHash}`);
-    } catch (error) {
-      console.error(`Transaction error: ${error}`);
+      // Send transaction
+      try {
+        const transactionHash = await web3.eth.sendTransaction(txObject);
+        this.donationService.updateDonationRequest(requestId, { amount: amountInEthereum })
+          .subscribe((response) => { console.log(response)})
+        console.log(`Transaction hash: ${transactionHash}`);
+      } catch (error) {
+        console.error(`Transaction error: ${error}`);
+      }
     }
   }
 

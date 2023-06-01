@@ -1,5 +1,27 @@
-<button class="btn-main"(click)="showSection1()">Training Lessons</button>&nbsp;
-<button class="btn-main" (click)="showSection2()">Udemy news</button>
+<div class="btns-wrapper">
+  <button class="btn-main"(click)="showSection1()">Training Lessons</button>
+  <button class="udemy-news-btn" class="btn-main" (click)="showSection2()">Udemy news</button>
+</div>
+
+<style>
+    .btns-wrapper {
+      margin-left: 35px;
+      margin-top: 10px
+    }
+    .btns-wrapper{
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      gap: 20px;
+    }
+    @media(min-width: 992px){
+      .btns-wrapper{
+        flex-direction: row;
+        margin-left: 35px;
+      }
+    }
+</style>
 
 <section aria-label="section" *ngIf="showingSection1">
   <div class="container">

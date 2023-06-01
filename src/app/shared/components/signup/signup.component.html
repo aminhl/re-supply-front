@@ -19,36 +19,37 @@
               <h1>Register</h1>
             </div>
             <div class="clearfix" style="background-size: cover"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- section close -->
-
-    <section aria-label="section" style="background-size: cover">
-      <div class="container" style="background-size: cover">
-        <div class="row" style="background-size: cover">
-          <div class="col-md-8 offset-md-2" style="background-size: cover">
-            <div class="spacer-10" style="background-size: cover"></div>
-            <form
-              name="contactForm"
-              id="contact_form"
-              class="form-border"
-              method="post"
-              [formGroup]="signupForm"
-              (ngSubmit)="onSubmit()"
-            >
-              <div class="row" style="background-size: cover">
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>FirstName <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="firstName"
-                      class="form-control"
-                      formControlName="firstName"
-                      [ngClass]="{
+            <section aria-label="section" style="background-size: cover">
+              <div class="container" style="background-size: cover">
+                <div class="row" style="background-size: cover">
+                  <div class="col-md-8 offset-md-2" style="background-size: cover;
+                    background-size: cover;
+                    border: 2px solid #ccc;
+                    padding: 25px 30px;
+                    border-radius: 25px;
+                    background-color: #ffffff;
+                    box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
+">
+                    <div class="spacer-10" style="background-size: cover"></div>
+                    <form
+                      name="contactForm"
+                      id="contact_form"
+                      class="form-border"
+                      method="post"
+                      [formGroup]="signupForm"
+                      (ngSubmit)="onSubmit()"
+                    >
+                      <div class="row" style="background-size: cover">
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>FirstName <span style="color: red" class="required">*</span> :</label>
+                            <input
+                              type="text"
+                              name="name"
+                              id="firstName"
+                              class="form-control"
+                              formControlName="firstName"
+                              [ngClass]="{
                         'input-invalid':
                           firstName.invalid &&
                           (firstName.dirty || firstName.touched),
@@ -56,173 +57,182 @@
                           firstName.valid &&
                           (firstName.dirty || firstName.touched)
                       }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            />
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         firstName.touched && firstName.hasError('required')
                       "
-                    >
-                      FirstName is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            >
+                              FirstName is required!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         firstName.touched && firstName.hasError('invalidData')
                       "
-                    >
-                      FirstName must contains only letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="firstName.touched && !firstName.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                            >
+                              FirstName must contains only letters!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="firstName.touched && !firstName.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
 
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>LastName <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="lastName"
-                      class="form-control"
-                      formControlName="lastName"
-                      [ngClass]="{
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>LastName <span style="color: red" class="required">*</span> :</label>
+                            <input
+                              type="text"
+                              name="name"
+                              id="lastName"
+                              class="form-control"
+                              formControlName="lastName"
+                              [ngClass]="{
                         'input-invalid':
                           lastName.invalid &&
                           (lastName.dirty || lastName.touched),
                         'input-valid':
                           lastName.valid && (lastName.dirty || lastName.touched)
                       }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="lastName.touched && lastName.hasError('required')"
-                    >
-                      LastName is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            />
+                            <div
+                              class="message-invalid"
+                              *ngIf="lastName.touched && lastName.hasError('required')"
+                            >
+                              LastName is required!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         lastName.touched && lastName.hasError('invalidData')
                       "
-                    >
-                      LastName must contains only letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="lastName.touched && !lastName.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Annual Income <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="text"
-                      name="annualIncome"
-                      id="annualIncome"
-                      class="form-control"
-                      formControlName="annualIncome"
-                      [ngClass]="{
-                        'input-invalid':
-                          annualIncome.invalid &&
-                          (annualIncome.dirty || annualIncome.touched),
-                        'input-valid':
-                          annualIncome.valid && (annualIncome.dirty || annualIncome.touched)
-                      }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="annualIncome.touched && annualIncome.hasError('required')"
-                    >
-                      annualIncome is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
-                        annualIncome.touched && annualIncome.hasError('invalidData')
-                      "
-                    >
-                      annualIncome must contains only letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="annualIncome.touched && !annualIncome.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                            >
+                              LastName must contains only letters!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="lastName.touched && !lastName.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>Annual Income <span style="color: red" class="required"></span> :</label>
+                            <input
+                              type="text"
+                              name="annualIncome"
+                              id="annualIncome"
+                              class="form-control"
+                              formControlName="annualIncome"
+                            />
+                          </div>
+                        </div>
 
-                <div class="col-md-6" style="background-size: cover">
-                  <div
-                    class="field-set"
-                    style="background-size: cover; position: relative"
-                  >
-                    <label>Email Address <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="text"
-                      name="email"
-                      id="email"
-                      class="form-control"
-                      formControlName="email"
-                      [ngClass]="{
+                        <div class="col-md-6" style="background-size: cover">
+                          <div
+                            class="field-set"
+                            style="background-size: cover; position: relative"
+                          >
+                            <label>Email Address <span style="color: red" class="required">*</span> :</label>
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              class="form-control"
+                              formControlName="email"
+                              [ngClass]="{
                         'input-invalid':
                           email.invalid && (email.dirty || email.touched),
                         'input-valid':
                           email.valid && (email.dirty || email.touched)
                       }"
-                    />
-                    <div class="load"></div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="email.touched && email.hasError('required')"
-                    >
-                      Email is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="email.touched && email.hasError('email')"
-                    >
-                      Please enter a valid email address!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="email.touched && email.hasError('emailExists')"
-                    >
-                      Email already exists!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="email.touched && !email.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                            />
+                            <div class="load"></div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="email.touched && email.hasError('required')"
+                            >
+                              Email is required!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="email.touched && email.hasError('email')"
+                            >
+                              Please enter a valid email address!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="email.touched && email.hasError('emailExists')"
+                            >
+                              Email already exists!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="email.touched && !email.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
 
-
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Re-enter Password <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="password"
-                      name="re-password"
-                      id="re-password"
-                      class="form-control"
-                      formControlName="confirmPassword"
-                      [ngClass]="{
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>Password <span style="color: red" class="required">*</span> :</label>
+                            <input
+                              type="password"
+                              name="password"
+                              id="password"
+                              class="form-control"
+                              formControlName="password"
+                              [ngClass]="{
+                        'input-invalid':
+                          password.invalid &&
+                          (password.dirty || password.touched),
+                        'input-valid':
+                          password.valid && (password.dirty || password.touched)
+                      }"
+                            />
+                            <div
+                              class="message-invalid"
+                              *ngIf="password.touched && password.hasError('required')"
+                            >
+                              Password is required!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="password.touched && password.hasError('minlength')"
+                            >
+                              Password must contain 8+ letters!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="password.touched && !password.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>Re-enter Password <span style="color: red" class="required">*</span> :</label>
+                            <input
+                              type="password"
+                              name="re-password"
+                              id="re-password"
+                              class="form-control"
+                              formControlName="confirmPassword"
+                              [ngClass]="{
                         'input-invalid':
                           confirmPassword.invalid &&
                           (confirmPassword.dirty || confirmPassword.touched),
@@ -230,185 +240,158 @@
                           confirmPassword.valid &&
                           (confirmPassword.dirty || confirmPassword.touched)
                       }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            />
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         confirmPassword.touched &&
                         confirmPassword.hasError('required')
                       "
-                    >
-                      Re-enter Your password!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            >
+                              Re-enter Your password!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         confirmPassword.touched &&
                         confirmPassword.hasError('minlength')
                       "
-                    >
-                      Password must contain 8+ letters!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                            >
+                              Password must contain 8+ letters!
+                            </div>
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         confirmPassword.touched &&
                         confirmPassword.hasError('wrongPassword')
                       "
-                    >
-                      Passwords are not the same!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="confirmPassword.touched && !confirmPassword.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                            >
+                              Passwords are not the same!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="confirmPassword.touched && !confirmPassword.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
 
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>Phone <span style="color: red" class="required">*</span> :</label>
 
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Password <span style="color: red" class="required">*</span> :</label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      class="form-control"
-                      formControlName="password"
-                      [ngClass]="{
-                        'input-invalid':
-                          password.invalid &&
-                          (password.dirty || password.touched),
-                        'input-valid':
-                          password.valid && (password.dirty || password.touched)
-                      }"
-                    />
-                    <div
-                      class="message-invalid"
-                      *ngIf="password.touched && password.hasError('required')"
-                    >
-                      Password is required!
-                    </div>
-                    <div
-                      class="message-invalid"
-                      *ngIf="password.touched && password.hasError('minlength')"
-                    >
-                      Password must contain 8+ letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="password.touched && !password.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Phone <span style="color: red" class="required">*</span> :</label>
-
-                    <ngx-intl-tel-input
-                      style="width: 300px"
-                      [enableAutoCountrySelect]="true"
-                      [enablePlaceholder]="true"
-                      [searchCountryFlag]="true"
-                      [separateDialCode]="true"
-                      [searchCountryField]="[
-                        SearchCountryField.Iso2,
-                        SearchCountryField.Name
+                            <ngx-intl-tel-input
+                              style="width: 300px"
+                              [enableAutoCountrySelect]="true"
+                              [enablePlaceholder]="true"
+                              [searchCountryFlag]="true"
+                              [separateDialCode]="true"
+                              [searchCountryField]="[
+                              SearchCountryField.Iso2,
+                              SearchCountryField.Name
                       ]"
-                      [selectFirstCountry]="false"
-                      [selectedCountryISO]="CountryISO.UnitedStates"
-                      [phoneValidation]="true"
-                      [numberFormat]="PhoneNumberFormat.International"
-                      name="phone"
-                      id="phone"
-                      class="form-control"
-                      formControlName="phoneNumber"
-                    >
-                    </ngx-intl-tel-input>
-                    <div
-                      class="message-invalid"
-                      *ngIf="
+                              [selectFirstCountry]="false"
+                              [selectedCountryISO]="CountryISO.UnitedStates"
+                              [phoneValidation]="true"
+                              [numberFormat]="PhoneNumberFormat.International"
+                              name="phone"
+                              id="phone"
+                              class="form-control"
+                              formControlName="phoneNumber"
+                            >
+                            </ngx-intl-tel-input>
+                            <div
+                              class="message-invalid"
+                              *ngIf="
                         phoneNumber.touched &&
                         phoneNumber.hasError('invalidData')
                       "
-                    >
-                      PhoneNumber must not contain letters!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="phoneNumber.touched && !phoneNumber.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                            >
+                              PhoneNumber must not contain letters!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="phoneNumber.touched && !phoneNumber.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
 
-                <div class="col-md-6" style="background-size: cover">
-                  <div class="field-set" style="background-size: cover">
-                    <label>Image <span  style="color: red" class="required">*</span> :</label>
-                    <input type="file"
-                      name="images"
-                      id="images"
-                      class="form-control"
-                      (change)="onImageSelected($event)"
-                      formControlName="images"
-                    />
-                    <div class="spacer-10"></div>
-                    <span style="color: red;font-weight: lighter">(*)</span><span style="font-weight: lighter">The indicated fields are mandatory.</span>
-                    <div
-                      class="message-invalid"
-                      *ngIf="images.dirty && images.hasError('required')"
-                    >
-                      Image is required!
-                    </div>
-                    <!--success message-->
-                    <div
-                      class="message-valid"
-                      *ngIf="images.touched && !images.errors"
-                    >
-                      Valid!
-                    </div>
-                  </div>
-                </div>
+                        <div class="col-md-6" style="background-size: cover">
+                          <div class="field-set" style="background-size: cover">
+                            <label>Image <span  style="color: red" class="required">*</span> :</label>
+                            <input type="file"
+                                   name="images"
+                                   id="images"
+                                   class="form-control"
+                                   (change)="onImageSelected($event)"
+                                   formControlName="images"
+                            />
 
-                <div
-                  class="col-md-12"
-                  style="background-size: cover; margin-top: 30px"
-                >
-                  <div
-                    id="submit"
-                    class="pull-left"
-                    style="background-size: cover"
-                  >
-                    <input
-                      type="submit"
-                      id="send_message"
-                      value="Register Now"
-                      class="btn btn-main color-2 ripple-surface"
-                      [disabled]="signupForm.invalid"
-                    />
+                            <div
+                              class="message-invalid"
+                              *ngIf="images.dirty && images.hasError('required')"
+                            >
+                              Image is required!
+                            </div>
+                            <!--success message-->
+                            <div
+                              class="message-valid"
+                              *ngIf="images.touched && !images.errors"
+                            >
+                              Valid!
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="col-md-12"
+                          style="background-size: cover;
+                            margin-top: 30px;
+                            display: flex;
+                            justify-content: center"
+                        >
+                          <div
+                            id="submit"
+                            class="pull-left"
+                            style="background-size: cover"
+                          >
+                            <input
+                              style="display: flex;
+                              width: 100%;
+                              margin-bottom: 5px;"
+                              type="submit"
+                              id="send_message"
+                              value="Register Now"
+                              class="btn btn-main color-2 ripple-surface"
+                              [disabled]="signupForm.invalid"
+                            />
+                          </div>
+                        </div>
+                        <div class="field-set" style="background-size: cover">
+                          <ul class="list s3">
+                            <li>
+                              <a [routerLink]="['/login']">Already have an account?</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <span style="color: red;font-weight: lighter;">(*)</span><span style="color: #000; font-weight: lighter">The indicated fields are mandatory.</span>
+                    </form>
                   </div>
-                </div>
-                <div class="field-set" style="background-size: cover">
-                  <ul class="list s3">
-                    <li>
-                      <a [routerLink]="['/login']">Already have an account?</a>
-                    </li>
-                  </ul>
                 </div>
               </div>
-            </form>
+            </section>
           </div>
         </div>
       </div>
     </section>
+    <!-- section close -->
+
+
   </div>
 </div>

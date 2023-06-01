@@ -1,6 +1,63 @@
 <section aria-label="section">
   <div class="container">
     <div class="row wow fadeIn">
+      <div class="col-lg-3 col-sm-6 col-xs-12">
+        <h5>Preview item</h5>
+        <div class="nft__item">
+          <div class="author_list_pp">
+            <a href="#">
+              <img
+                class="lazy"
+                [src]="userImageUrl"
+                alt=""
+              />
+              <i class="fa fa-check"></i>
+            </a>
+          </div>
+          <div class="nft__item_wrap">
+            <a href="#">
+              <img alt="" class="lazy nft__item_preview" src="../../../../assets/client/images/logo.svg">
+            </a>
+          </div>
+          <div class="nft__item_info">
+            <a href="#">
+              <h4>
+                <div class="nft__item_price">
+                  <ng-container *ngIf="requestTitle.value == ''; else dynamicName">
+                    {{'Title name'}}
+                  </ng-container>
+                  <ng-template #dynamicName>
+                    {{requestTitle.value}}
+                  </ng-template>
+                </div></h4>
+            </a>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == ''; else dynamicType">
+                {{'Ex:  Item | Currency'}}
+              </ng-container>
+              <ng-template #dynamicType>
+                {{type.value }}
+              </ng-template>
+            </div>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == 'Currency' && targetValue.value == ''; else dynamicPrice">
+                {{'Ex:  $23.00'}}
+              </ng-container>
+              <ng-template #dynamicPrice>
+                {{targetValue.value | currency}}
+              </ng-template>
+            </div>
+            <div class="nft__item_price">
+              <ng-container *ngIf="type.value == 'Item' && itemType.value == ''; else dynamicItemType">
+                {{'Ex:  Tablet'}}
+              </ng-container>
+              <ng-template #dynamicItemType>
+                {{itemType.value }}
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-lg-7 offset-lg-1">
         <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
@@ -180,64 +237,6 @@
             </div>
           </div>
         </form>
-      </div>
-
-      <div class="col-lg-3 col-sm-6 col-xs-12">
-        <h5>Preview item</h5>
-        <div class="nft__item">
-          <div class="author_list_pp">
-            <a href="#">
-              <img
-                class="lazy"
-                [src]="userImageUrl"
-                alt=""
-              />
-              <i class="fa fa-check"></i>
-            </a>
-          </div>
-          <div class="nft__item_wrap">
-            <a href="#">
-              <img alt="" class="lazy nft__item_preview" src="../../../../assets/client/images/logo.svg">
-            </a>
-          </div>
-          <div class="nft__item_info">
-            <a href="#">
-              <h4>
-                <div class="nft__item_price">
-                <ng-container *ngIf="requestTitle.value == ''; else dynamicName">
-                  {{'Title name'}}
-                </ng-container>
-                <ng-template #dynamicName>
-                  {{requestTitle.value}}
-                </ng-template>
-              </div></h4>
-            </a>
-            <div class="nft__item_price">
-              <ng-container *ngIf="type.value == ''; else dynamicType">
-                {{'Ex:  Item | Currency'}}
-              </ng-container>
-              <ng-template #dynamicType>
-                {{type.value }}
-              </ng-template>
-            </div>
-            <div class="nft__item_price">
-              <ng-container *ngIf="type.value == 'Currency' && targetValue.value == ''; else dynamicPrice">
-                {{'Ex:  $23.00'}}
-              </ng-container>
-              <ng-template #dynamicPrice>
-                {{targetValue.value | currency}}
-              </ng-template>
-            </div>
-            <div class="nft__item_price">
-              <ng-container *ngIf="type.value == 'Item' && itemType.value == ''; else dynamicItemType">
-                {{'Ex:  Tablet'}}
-              </ng-container>
-              <ng-template #dynamicItemType>
-                {{itemType.value }}
-              </ng-template>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
