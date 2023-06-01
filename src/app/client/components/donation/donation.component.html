@@ -33,16 +33,12 @@
              [ngClass]="{'active':selectedComponent==='Currency'}"
           >Requests Currency Based</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="selectedComponent='Item'"
-             [ngClass]="{'active':selectedComponent==='Item'}"
-          >Request Item Based</a>
-        </li>
       </ul>
       </div>
   <div class="row" style="margin-left: 15px;margin-right: 15px" *ngIf="selectedComponent=='Currency'">
     <ng-container *ngFor="let donation of donationList">
-    <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngIf="donation.isApproved && donation.type==='Currency'">
+    <div class="col-lg-3 col-md-6 col-sm-6" style="margin-bottom: 25px" *ngIf="donation.isApproved && donation.type==='Currency'
+    && donation.targetValue > donation.currentValue">
       <div class="nft__item" >
         <div class="author_list_pp">
           <a href="author.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Creator: {{donation.requester_id.firstName}} {{donation.requester_id.lastName}}">
@@ -80,9 +76,6 @@
             </a>
           </div>
           <ng-container *ngIf="donation.type==='Currency'">
-            <button [ngClass]="{'closed':donation.close}"
-                    [disabled]="true" class="btn-main" *ngIf="donation.close">Donation Closed
-            </button>
             <a [routerLink]="['/donationDetails', donation._id]" style="display: block; margin: 20px auto 0;" class="btn-main" *ngIf="!donation.close">
               More Details..
             </a>

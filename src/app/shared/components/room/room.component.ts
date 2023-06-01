@@ -28,7 +28,7 @@ import { ChatServiceService } from '../../services/fireBase/chat.service';
 export class RoomComponent implements OnInit {
   @ViewChild('endOfChat')
   endOfChat!: ElementRef;
-
+  @ViewChild('chatContainer') chatContainer!: ElementRef;
   user$ = this.usersService.currentUserProfile$;
   myChats$ = this.chatsService.myChats$;
 
@@ -105,9 +105,11 @@ export class RoomComponent implements OnInit {
 
   scrollToBottom() {
     setTimeout(() => {
-      if (this.endOfChat) {
-        this.endOfChat.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      if (this.chatContainer) {
+        this.chatContainer.nativeElement.scrollTop =
+          this.chatContainer.nativeElement.scrollHeight;
       }
     }, 100);
   }
+
 }

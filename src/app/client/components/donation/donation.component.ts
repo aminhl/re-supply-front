@@ -16,7 +16,6 @@ export class DonationComponent implements OnInit {
     this.service.getRequestList().subscribe( (res) => {
       this.donationList = res;
       this.getPercentage()
-      console.log(this.donationList);
     } );
 
     }

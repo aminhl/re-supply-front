@@ -27,13 +27,19 @@
               <div class="clearfix"></div>
             </div>
           </form>
-          <select class="me-4" id="filter_by_duration" (change)="selectUsersByDuration()" [(ngModel)]="selectedDuration">
+          <select class="me-4 select-by-date" id="filter_by_duration" (change)="selectUsersByDuration()" [(ngModel)]="selectedDuration">
             <option value="1day">Last 24 hours</option>
             <option value="1week">Last 7 days</option>
             <option value="1month">Last 30 days</option>
             <option value="alltime">All time</option>
           </select>
-
+          <style>
+            @media(max-width: 767px){
+              .select-by-date {
+                margin: 13px;
+              }
+            }
+          </style>
           <div id="filter_by_category" class="dropdown">
             <select [(ngModel)]="selectedCategory" (ngModelChange)="selectUsersByCategory()">
               <option value="all">All categories</option>

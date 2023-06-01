@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
       [emailExistsValidator(this.authService)]
     );
     this.phoneNumber = new FormControl('', [Validators.required]);
-    this.annualIncome = new FormControl('', [Validators.required]);
+    this.annualIncome = new FormControl('');
     this.password = new FormControl('', [
       Validators.required,
       Validators.minLength(8),

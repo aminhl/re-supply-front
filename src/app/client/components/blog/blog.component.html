@@ -64,35 +64,26 @@
         </div>
         <hr />
       </div>
-
-  <div class="container my-container">
-  <div class="chat-icon">
-    <i class="far fa-comment-dots" routerLink="/chat"></i>
-    <div class="chat-label">Let's chat</div>
-  </div>
-</div>
-
-
-
-
       <section aria-label="section" style="padding-top: 0">
         <div class="container-fluid">
           <div class="row justify-content-center">
             <div class="position-relative">
-              <div style="position: absolute; top: 20px; right: 10%">
-                <div class="add-blog-wrapper" (click)="showMaximizableDialog()">
-                  <button class="add-blog-button">Add Blog</button>
+              <div style="display: flex; justify-content: center; gap: 40px">
+                <div class="add-blog-wrapper">
+                  <button routerLink="/chat" class="add-blog-button">Let's chat</button>
                   <span class="add-blog-icon">
-                    <i
-                      class="fas fa-plus"
-                      (click)="showMaximizableDialog()"
-                    ></i>
-                  </span>
+              <i class="fas fa-plus" routerLink="/chat"></i>
+            </span>
+                </div>
+                <div class="add-blog-wrapper">
+                  <button class="add-blog-button" (click)="showMaximizableDialog()">Add Blog</button>
+                  <span class="add-blog-icon">
+              <i class="fas fa-plus" (click)="showMaximizableDialog()"></i>
+            </span>
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-8 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
               <div *ngFor="let blog of blogs; index as i">
                 <div class="bg-white p-4 rounded shadow mt-3">
                   <!-- author -->
@@ -111,7 +102,7 @@
                         </p>
                         <span class="text-muted fs-7">{{
                           blog.createdAt | date : "M/d/yy, h:mm a"
-                        }}</span>
+                          }}</span>
                       </div>
                     </div>
                     <!-- edit -->
@@ -151,20 +142,7 @@
 
                       <!-- likes & comments -->
                       <div class="post__comment mt-3 position-relative">
-                        <!-- likes -->
-                        <div
-                          class="d-flex align-items-center top-0 start-0 position-absolute"
-                          style="height: 50px; z-index: 5"
-                        >
-                          <div class="me-2">
-                            <i class="text-primary fas fa-thumbs-up"></i>
-                            <i class="text-danger fab fa-gratipay"></i>
-                            <i class="text-warning fas fa-grin-squint"></i>
-                          </div>
-                          <p class="m-0 text-muted fs-7">
-                            Phu, Tuan, and 3 others
-                          </p>
-                        </div>
+
                         <!-- comments start-->
                         <div class="accordion" id="accordionExample">
                           <div class="accordion-item border-0">
@@ -183,18 +161,6 @@
                             <hr />
                             <!-- comment & like bar -->
                             <div class="d-flex justify-content-around">
-                              <div
-                                class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1"
-                              >
-                                <i class="fas fa-arrow-circle-down"></i>
-                                <p class="m-0">{{upVote}}</p>
-                              </div>
-                              <div
-                                class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1"
-                              >
-                                <i class="fas fa-arrow-circle-down"></i>
-                                <p class="m-0">{{downVote}}</p>
-                              </div>
                               <div
                                 class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1"
                                 data-bs-toggle="collapse"
@@ -341,7 +307,7 @@
                                   </div>
                                   <!-- input -->
                                   <input
-                                  (input)="onCommentInputChange($event)"
+                                    (input)="onCommentInputChange($event)"
                                     type="text"
                                     class="form-control border-0 rounded-pill bg-gray w-75"
                                     placeholder="Write a comment"
@@ -452,7 +418,7 @@
 
               <div class="container position-relative">
                 <label for="file-upload" class="custom-file-upload"
-                  >Select Files</label
+                >Select Files</label
                 >
                 <input
                   type="file"
